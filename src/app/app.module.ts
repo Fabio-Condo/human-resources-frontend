@@ -7,6 +7,8 @@ import { MessageService } from 'primeng/api';
 import { AppComponent } from './app.component';
 import { DepartmentRoutingModule } from './departments/department-routing.module';
 import { DepartmentModule } from './departments/department.module';
+import { SkillsRoutingModule } from './skills/skills-routing.module';
+import { SkillsModule } from './skills/skills.module';
 import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module';
 import { WorkplacesModule } from './workplaces/workplaces.module';
 
@@ -20,8 +22,10 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     RouterModule,
     DepartmentRoutingModule,
     WorkplacesRoutingModule,
+    SkillsRoutingModule,
     DepartmentModule,
-    WorkplacesModule
+    WorkplacesModule,
+    SkillsModule,
   ],
   providers: [
     MessageService
