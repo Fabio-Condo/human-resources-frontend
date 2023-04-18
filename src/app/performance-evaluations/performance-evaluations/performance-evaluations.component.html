@@ -1,3 +1,21 @@
-<div class="feed" *ngFor="let pe of performanceEvaluations">
-    <p>ID: {{pe.id}}, Position Name: {{pe.position.name}}, Skill Name: {{pe.skill.name}}, Proficiency Level: {{pe.proficiencyLevel}}</p>
-</div>
+
+<h5>Avaliação de performance</h5>
+
+<p-table [value]="performanceEvaluations" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Nome da posição</th>
+            <th>Competências</th>
+            <th>Nivel de proficiência</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pe>
+        <tr>
+            <td>{{ pe.id }}</td>
+            <td>{{ pe.position.name }}</td>
+            <td>{{ pe.skill.name }}</td>
+            <td>{{ pe.proficiencyLevel }}</td>
+        </tr>
+    </ng-template>
+</p-table>

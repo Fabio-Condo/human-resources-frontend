@@ -1,7 +1,37 @@
-<div class="feed" *ngFor="let p of positions">
-    <p>ID: {{p.id}}, Nome: {{p.name}}, Functional Group: {{p.functionalGroup}}, Mission: {{p.mission}}, 
-        Training: {{p.training}}, Professional Experience: {{p.professionalExperience}}, Age: {{p.age}}, 
-        Language: {{p.language}}, Specific Requirements: {{p.specificRequirements}}, Department name: {{p.department.name}},
-        Workplace: {{p.workplace.name}} , Administrative Cluster: {{p.administrativeCluster.name}}
-    </p>
-</div>
+
+<h5>Posições</h5>
+
+<p-table [value]="positions" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Functional Group</th>
+            <th>Mission</th>
+            <th>Training</th>
+            <th>Professional Experience</th>
+            <th>Age</th>
+            <th>Language</th>
+            <th>Specific Requirements</th>
+            <th>Department name</th>
+            <th>Workplace</th>
+            <th>Administrative Cluster</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-position>
+        <tr>
+            <td>{{ position.id }}</td>
+            <td>{{ position.name }}</td>
+            <td>{{ position.functionalGroup }}</td>
+            <td>{{ position.mission }}</td>
+            <td>{{ position.training }}</td>
+            <td>{{ position.professionalExperience }}</td>
+            <td>{{ position.age }}</td>
+            <td>{{ position.language }}</td>
+            <td>{{ position.specificRequirements }}</td>
+            <td>{{ position.department.name }}</td>
+            <td>{{ position.workplace.name }}</td>
+            <td>{{ position.administrativeCluster.name }}</td>
+        </tr>
+    </ng-template>
+</p-table>

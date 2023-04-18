@@ -1,4 +1,17 @@
 
-<div class="feed" *ngFor="let w of workplaces">
-    <p>ID: {{w.id}}, Nome: {{w.name}}</p>
-</div>
+<h5>Local de trabalho</h5>
+
+<p-table [value]="workplaces" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-workplace>
+        <tr>
+            <td>{{ workplace.id }}</td>
+            <td>{{ workplace.name }}</td>
+        </tr>
+    </ng-template>
+</p-table>
