@@ -1,13 +1,22 @@
 
+
 <h5 style="text-align: center;">Departamentos</h5>
+
+<div class="col-2 p-fluid" style="display:inline; float: right;">
+    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
+</div>
 
 <div class="p-inputgroup">
     <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getDepartments()">        
 </div>
+
 <br>
+
 <button (click)="onAddNewDepartment()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+
 <br>
-<br>
+
 
 <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
     <ng-template pTemplate="header">
