@@ -25,7 +25,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   totalRecords: number = 0
-  departments: IDepartment[] = [] ;
+  departments: IDepartment[] = [];
 
   filter: IDepartmentFilter = {
     page: 0,
@@ -37,8 +37,8 @@ export class DepartmentComponent implements OnInit {
     this.showLoading = true;
     this.departmentService.getDepartments(this.filter).subscribe(
       (data: IApiResponse<IDepartment>) => {
-        this.departments = data.content
-        this.totalRecords = data.totalElements
+        this.departments = data.content;
+        this.totalRecords = data.totalElements;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {

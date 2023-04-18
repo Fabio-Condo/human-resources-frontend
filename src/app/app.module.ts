@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { AppComponent } from './app.component';
 import { DepartmentRoutingModule } from './departments/department-routing.module';
 import { DepartmentModule } from './departments/department.module';
+import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,9 @@ import { DepartmentModule } from './departments/department.module';
     HttpClientModule,
     RouterModule,
     DepartmentRoutingModule,
+    WorkplacesRoutingModule,
     DepartmentModule,
+    WorkplacesRoutingModule
   ],
   providers: [
     MessageService
