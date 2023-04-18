@@ -7,6 +7,7 @@ import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { DepartmentService } from '../department.service';
 import { NgForm } from '@angular/forms';
 import { Department } from 'src/app/model/Department';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-department',
@@ -42,15 +43,17 @@ export class DepartmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private title: Title,
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Departments page');
   }
 
   filter: IDepartmentFilter = {
     page: 0,
     itemsPerPage: 5,
-    sort: ''
+    sort: 'name,asc'
   }
 
   get editing() {
