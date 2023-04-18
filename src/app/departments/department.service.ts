@@ -33,4 +33,16 @@ export class DepartmentService {
 
     return this.http.get<IApiResponse<IDepartment>>(`${this.departmentsUrl}`, { params });
   }
+
+  add(department: IDepartment): Observable<IDepartment> {
+    return this.http.post<IDepartment>(this.departmentsUrl, department, { });
+  }
+
+  update(department: IDepartment): Observable<IDepartment> {
+    return this.http.put<IDepartment>(`${this.departmentsUrl}/${department.id}`, department, { });
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.departmentsUrl}/${id}`, { });
+  }
 }

@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { IDepartmentFilter } from 'src/app/interfaces/IDepartmentFilter';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { DepartmentService } from '../department.service';
+import { NgForm } from '@angular/forms';
+import { Department } from 'src/app/model/Department';
 
 @Component({
   selector: 'app-department',
@@ -13,18 +15,29 @@ import { DepartmentService } from '../department.service';
 })
 export class DepartmentComponent implements OnInit {
 
+  showLoading: boolean = false;
+
   totalRecords: number = 0
   departments: IDepartment[] = [];
 
-  showLoading: boolean = false;
+  department: IDepartment = new Department;
+  displayModalSave: boolean = false;
+
+  sizePage = [
+    { label: '5', value: 5 },
+    { label: '10', value: 10 },
+    { label: '25', value: 25 },
+    { label: '50', value: 50 },
+    { label: '100', value: 100 },
+  ];
 
   constructor(
     private departmentService: DepartmentService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
-    this.getDepartments();
   }
 
   filter: IDepartmentFilter = {
@@ -33,7 +46,53 @@ export class DepartmentComponent implements OnInit {
     sort: ''
   }
 
-  getDepartments(): void {
+  get editing() {
+    return Boolean(this.department.id);
+  }
+
+  @ViewChild('table') grid: any;
+
+  save(departmentForm: NgForm) {
+    if (this.editing) {
+      this.update(departmentForm)
+    } else {
+      this.addNew(departmentForm)
+    }
+  }
+
+  addNew(departmentForm: NgForm) {
+    this.showLoading = true;
+    this.departmentService.add(this.department).subscribe(
+      (departmentAdded) => {
+        this.department = departmentAdded;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Department added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(departmentForm: NgForm) {
+    this.showLoading = true;
+    this.departmentService.update(this.department).subscribe(
+      (department) => {
+        this.department = department;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Title updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getDepartments(page: number = 0): void {
+    this.showLoading = true;
+    this.filter.page = page;
     this.showLoading = true;
     this.departmentService.getDepartments(this.filter).subscribe(
       (data: IApiResponse<IDepartment>) => {
@@ -46,6 +105,48 @@ export class DepartmentComponent implements OnInit {
         this.showLoading = false;
       }
     );   
+  }
+
+  deleteDepartment(department: IDepartment) {
+    this.departmentService.delete(department.id).subscribe(
+      () => {
+        if (this.grid.first === 0) {
+          this.getDepartments();
+        } else {
+          this.grid.reset();
+        }
+        this.messageService.add({ severity: 'success', detail: 'Title deleted succefully!' })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  deletionConfirm(department: IDepartment): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete?',
+      accept: () => {
+          this.deleteDepartment(department);
+      }
+    });
+  }
+
+  onAddNewDepartment(): void {
+    this.department = new Department();
+    this.displayModalSave = true;
+  }
+
+  onEditDepartment(editDepartment: Department): void {
+    this.department = editDepartment;
+    this.department.id = editDepartment.id // Not necessary
+    this.displayModalSave = true;
+  }
+
+  onChangePage(event: LazyLoadEvent) {
+    const page = event!.first! / event!.rows!;  
+    this.getDepartments(page);
   }
 
   private sendErrorNotification(message: string): void {

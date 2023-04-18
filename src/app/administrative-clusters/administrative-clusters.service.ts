@@ -32,4 +32,8 @@ administrativeClusterUrl: string;
 
     return this.http.get<IApiResponse<IAdministrativeCluster>>(`${this.administrativeClusterUrl}`, { params });
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.administrativeClusterUrl}/${id}`, { });
+  }
 }

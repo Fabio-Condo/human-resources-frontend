@@ -1,8 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AdministrativeClustersRoutingModule } from './administrative-clusters/administrative-clusters-routing.module';
 import { AdministrativeClustersModule } from './administrative-clusters/administrative-clusters.module';
 
@@ -24,8 +26,11 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
+    ConfirmDialogModule,
+
     DepartmentRoutingModule,
     WorkplacesRoutingModule,
     SkillsRoutingModule,
@@ -40,7 +45,8 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     PerformanceEvaluationsModule
   ],
   providers: [
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
