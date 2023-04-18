@@ -9,6 +9,8 @@ import { AdministrativeClustersModule } from './administrative-clusters/administ
 import { AppComponent } from './app.component';
 import { DepartmentRoutingModule } from './departments/department-routing.module';
 import { DepartmentModule } from './departments/department.module';
+import { PerformanceEvaluationsRoutingModule } from './performance-evaluations/performance-evaluations-routing.module';
+import { PerformanceEvaluationsModule } from './performance-evaluations/performance-evaluations.module';
 import { PositionsRoutingModule } from './positions/positions-routing.module';
 import { PositionsModule } from './positions/positions.module';
 import { SkillsRoutingModule } from './skills/skills-routing.module';
@@ -29,11 +31,13 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     SkillsRoutingModule,
     AdministrativeClustersRoutingModule,
     PositionsRoutingModule,
+    PerformanceEvaluationsRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
     AdministrativeClustersModule,
-    PositionsModule
+    PositionsModule,
+    PerformanceEvaluationsModule
   ],
   providers: [
     MessageService
