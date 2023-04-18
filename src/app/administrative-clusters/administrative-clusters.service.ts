@@ -2,22 +2,22 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IAdministrativeCluster } from '../interfaces/IAdministrativeCluster';
+import { IAdministrativeClusterFilter } from '../interfaces/IAdministrativeClusterFilter';
 import { IApiResponse } from '../interfaces/IApiResponse';
-import { IWorkplace } from '../interfaces/IWorkplace';
-import { IWorkplaceFilter } from '../interfaces/IWorkplaceFilter';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkplacesService {
+export class AdministrativeClustersService {
 
-  workplacesUrl: string;
+administrativeClusterUrl: string;
 
   constructor(private http: HttpClient) { 
-    this.workplacesUrl = `${environment.apiUrl}/workplaces`;
+    this.administrativeClusterUrl = `${environment.apiUrl}/administrative-clusters`;
   }
 
-  getWorkplaces(filter: IWorkplaceFilter): Observable<IApiResponse<IWorkplace>> {  
+  getAdministrativeClusters(filter: IAdministrativeClusterFilter): Observable<IApiResponse<IAdministrativeCluster>> {  
 
     let params = new HttpParams()  
       .set('page', filter.page)  
@@ -30,6 +30,6 @@ export class WorkplacesService {
 
     console.log(params);
 
-    return this.http.get<IApiResponse<IWorkplace>>(`${this.workplacesUrl}`, { params });
+    return this.http.get<IApiResponse<IAdministrativeCluster>>(`${this.administrativeClusterUrl}`, { params });
   }
 }

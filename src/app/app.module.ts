@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AdministrativeClustersRoutingModule } from './administrative-clusters/administrative-clusters-routing.module';
+import { AdministrativeClustersModule } from './administrative-clusters/administrative-clusters.module';
 
 import { AppComponent } from './app.component';
 import { DepartmentRoutingModule } from './departments/department-routing.module';
@@ -23,9 +25,11 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     DepartmentRoutingModule,
     WorkplacesRoutingModule,
     SkillsRoutingModule,
+    AdministrativeClustersRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
+    AdministrativeClustersModule
   ],
   providers: [
     MessageService

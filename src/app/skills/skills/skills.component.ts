@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { ISkill } from 'src/app/interfaces/ISkill';
-import { ISkillsFilter } from 'src/app/interfaces/SkillsFilter';
+import { ISkillsFilter } from 'src/app/interfaces/ISkillsFilter';
 import { SkillsService } from '../skills.service';
 
 @Component({

@@ -1,43 +1,43 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { IAdministrativeCluster } from 'src/app/interfaces/IAdministrativeCluster';
+import { IAdministrativeClusterFilter } from 'src/app/interfaces/IAdministrativeClusterFilter';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { IWorkplace } from 'src/app/interfaces/IWorkplace';
-import { IWorkplaceFilter } from 'src/app/interfaces/IWorkplaceFilter';
-import { WorkplacesService } from '../workplaces.service';
+import { AdministrativeClustersService } from '../administrative-clusters.service';
 
 @Component({
-  selector: 'app-workplaces',
-  templateUrl: './workplaces.component.html',
-  styleUrls: ['./workplaces.component.css']
+  selector: 'app-administrative-clusters',
+  templateUrl: './administrative-clusters.component.html',
+  styleUrls: ['./administrative-clusters.component.css']
 })
-export class WorkplacesComponent implements OnInit {
+export class AdministrativeClustersComponent implements OnInit {
 
   totalRecords: number = 0
-  workplaces: IWorkplace[] = [];
+  administrativeClusters: IAdministrativeCluster[] = [];
 
   showLoading: boolean = false;
 
   constructor(
-    private workplacesService: WorkplacesService,
+    private administrativeClustersService: AdministrativeClustersService,
     private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
-    this.getWorkplaces();
+    this.getAdministrativeClusters();
   }
 
-  filter: IWorkplaceFilter = {
+  filter: IAdministrativeClusterFilter = {
     page: 0,
     itemsPerPage: 5,
     sort: ''
   }
 
-  getWorkplaces(): void {
+  getAdministrativeClusters(): void {
     this.showLoading = true;
-    this.workplacesService.getWorkplaces(this.filter).subscribe(
-      (data: IApiResponse<IWorkplace>) => {
-        this.workplaces = data.content;
+    this.administrativeClustersService.getAdministrativeClusters(this.filter).subscribe(
+      (data: IApiResponse<IAdministrativeCluster>) => {
+        this.administrativeClusters = data.content;
         this.totalRecords = data.totalElements;
         this.showLoading = false;
       },

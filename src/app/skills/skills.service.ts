@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../interfaces/IApiResponse';
 import { ISkill } from '../interfaces/ISkill';
-import { ISkillsFilter } from '../interfaces/SkillsFilter';
+import { ISkillsFilter } from '../interfaces/ISkillsFilter';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IDepartment } from '../interfaces/IDepartments';
-import { IDepartmentFilter } from '../interfaces/DepartmentFilter';
+import { IDepartmentFilter } from '../interfaces/IDepartmentFilter';
 import { IApiResponse } from '../interfaces/IApiResponse';
 
 @Injectable({

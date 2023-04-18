@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { IDepartmentFilter } from 'src/app/interfaces/DepartmentFilter';
+import { IDepartmentFilter } from 'src/app/interfaces/IDepartmentFilter';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { DepartmentService } from '../department.service';
