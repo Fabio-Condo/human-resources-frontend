@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { DepartmentRoutingModule } from './departments/department-routing.module';
 import { DepartmentModule } from './departments/department.module';
 import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module';
+import { WorkplacesModule } from './workplaces/workplaces.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module'
     DepartmentRoutingModule,
     WorkplacesRoutingModule,
     DepartmentModule,
-    WorkplacesRoutingModule
+    WorkplacesModule
   ],
   providers: [
     MessageService

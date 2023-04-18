@@ -1,4 +1,4 @@
-export interface IDepartmentFilter {
+export interface IWorkplaceFilter {
     name?: string,
     page: number,
     itemsPerPage: number,

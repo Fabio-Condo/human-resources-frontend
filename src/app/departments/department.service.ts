@@ -12,10 +12,10 @@ import { IApiResponse } from '../interfaces/IApiResponse';
 export class DepartmentService {
 
   
-  tecnicosUrl: string;
+  departmentsUrl: string;
 
   constructor(private http: HttpClient) { 
-    this.tecnicosUrl = `${environment.apiUrl}/departments`;
+    this.departmentsUrl = `${environment.apiUrl}/departments`;
   }
 
   getDepartments(filter: IDepartmentFilter): Observable<IApiResponse<IDepartment>> {  
@@ -31,6 +31,6 @@ export class DepartmentService {
 
     console.log(params);
 
-    return this.http.get<IApiResponse<IDepartment>>(`${this.tecnicosUrl}`, { params });
+    return this.http.get<IApiResponse<IDepartment>>(`${this.departmentsUrl}`, { params });
   }
 }

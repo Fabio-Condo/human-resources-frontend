@@ -41,7 +41,6 @@ import { AppRoutingModule } from '../app-routing.module';
     DividerModule,
 
     RouterModule,
-    DepartmentRoutingModule,
     AppRoutingModule
   ]
 })

@@ -13,6 +13,9 @@ import { DepartmentService } from '../department.service';
 })
 export class DepartmentComponent implements OnInit {
 
+  totalRecords: number = 0
+  departments: IDepartment[] = [];
+
   showLoading: boolean = false;
 
   constructor(
@@ -23,9 +26,6 @@ export class DepartmentComponent implements OnInit {
   ngOnInit(): void {
     this.getDepartments();
   }
-
-  totalRecords: number = 0
-  departments: IDepartment[] = [];
 
   filter: IDepartmentFilter = {
     page: 0,
