@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AdministrativeClustersRoutingModule } from './administrative-clusters/administrative-clusters-routing.module';
@@ -30,6 +31,7 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     HttpClientModule,
     RouterModule,
     ConfirmDialogModule,
+    ToastModule,
 
     DepartmentRoutingModule,
     WorkplacesRoutingModule,

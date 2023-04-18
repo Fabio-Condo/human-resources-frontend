@@ -81,7 +81,7 @@ export class DepartmentComponent implements OnInit {
       (department) => {
         this.department = department;
         this.showLoading = false;
-        this.messageService.add({ severity: 'success', detail: 'Title updated successfully!' });
+        this.messageService.add({ severity: 'success', detail: 'Department updated successfully!' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -115,7 +115,7 @@ export class DepartmentComponent implements OnInit {
         } else {
           this.grid.reset();
         }
-        this.messageService.add({ severity: 'success', detail: 'Title deleted succefully!' })
+        this.messageService.add({ severity: 'success', detail: 'Department deleted succefully!' })
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
