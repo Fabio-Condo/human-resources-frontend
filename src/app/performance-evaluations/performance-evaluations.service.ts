@@ -24,12 +24,16 @@ export class PerformanceEvaluationsService {
       .set('sort', filter.sort)
       .set('size', filter.itemsPerPage);  
 
-    if (filter.proficiencyLevel) {  
-      params = params.set('proficiencyLevel', filter.proficiencyLevel); 
+    if (filter.property) {  
+      params = params.set('property', filter.property); 
     }
 
     console.log(params);
 
     return this.http.get<IApiResponse<IPerformanceEvaluation>>(`${this.performanceEvaluationsUrl}`, { params });
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.performanceEvaluationsUrl}/${id}`, { });
   }
 }

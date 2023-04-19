@@ -1,5 +1,5 @@
 export interface IPerformanceEvaluationFilter {
-    proficiencyLevel?: string,
+    property?: string,
     page: number,
     itemsPerPage: number,
     sort: string
