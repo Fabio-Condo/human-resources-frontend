@@ -6,10 +6,8 @@ import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api'
 import { AdministrativeClustersService } from 'src/app/administrative-clusters/administrative-clusters.service';
 import { DepartmentService } from 'src/app/departments/department.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
-import { Department } from 'src/app/model/Department';
 import { Position } from 'src/app/model/Position';
 import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
 import { PositionsService } from '../positions.service';
