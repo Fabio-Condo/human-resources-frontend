@@ -32,4 +32,8 @@ export class SkillsService {
 
     return this.http.get<IApiResponse<ISkill>>(`${this.skillsUrl}`, { params });
   }
+ 
+  findAll() : Observable<IApiResponse<ISkill>> { 
+    return this.http.get<IApiResponse<ISkill>>(`${this.skillsUrl}`, { });
+  }
 }

@@ -7,6 +7,8 @@ import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPerformanceEvaluation } from 'src/app/interfaces/IPerformanceEvaluation';
 import { IPerformanceEvaluationFilter } from 'src/app/interfaces/IPerformanceEvaluationFilter';
 import { PerformanceEvaluation } from 'src/app/model/PerformanceEvaluation';
+import { PositionsService } from 'src/app/positions/positions.service';
+import { SkillsService } from 'src/app/skills/skills.service';
 import { PerformanceEvaluationsService } from '../performance-evaluations.service';
 
 @Component({
@@ -16,13 +18,16 @@ import { PerformanceEvaluationsService } from '../performance-evaluations.servic
 })
 export class PerformanceEvaluationsComponent implements OnInit {
 
+  showLoading: boolean = false;
+
   totalRecords: number = 0
   performanceEvaluations: IPerformanceEvaluation[] = [];
 
   performanceEvaluation: IPerformanceEvaluation = new PerformanceEvaluation;
   displayModalSave: boolean = false;
 
-  showLoading: boolean = false;
+  skills: any[] = [];
+  positions: any[] = [];
 
   sizePage = [
     { label: '5', value: 5 },
@@ -43,11 +48,15 @@ export class PerformanceEvaluationsComponent implements OnInit {
     private performanceEvaluationsService: PerformanceEvaluationsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private skillsService: SkillsService,
+    private positionsService: PositionsService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('Performance Evaluations page');
+    this.getSkills();
+    this.getPositions();
   }
 
   filter: IPerformanceEvaluationFilter = {
@@ -62,8 +71,42 @@ export class PerformanceEvaluationsComponent implements OnInit {
     return Boolean(this.performanceEvaluation.id);
   }
 
-  save(performanceEvaluationForm: NgForm){
+  save(performanceEvaluationForm: NgForm) {
+    if (this.editing) {
+      this.update(performanceEvaluationForm)
+    } else {
+      this.addNew(performanceEvaluationForm)
+    }
+  }
 
+  addNew(performanceEvaluationForm: NgForm) {
+    this.showLoading = true;
+    this.performanceEvaluationsService.add(this.performanceEvaluation).subscribe(
+      (performanceEvaluationAdded) => {
+        this.performanceEvaluation = performanceEvaluationAdded;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Performance Evaluation added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(positionForm: NgForm) {
+    this.showLoading = true;
+    this.performanceEvaluationsService.update(this.performanceEvaluation).subscribe(
+      (position) => {
+        this.performanceEvaluation = position;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Performance Evaluation updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
   }
 
   getPerformanceEvaluations(page: number = 0): void {
@@ -99,6 +142,40 @@ export class PerformanceEvaluationsComponent implements OnInit {
       }
     )
   }
+
+  getSkills() {
+    return this.skillsService.findAll().subscribe(
+      data => {
+        this.skills = data.content.map(skill => {
+          return  {
+            label: skill.name,
+            value: skill.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+  getPositions() {
+    return this.positionsService.findAll().subscribe(
+      data => {
+        this.positions = data.content.map(position => {
+          return  {
+            label: position.name,
+            value: position.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
 
   deletionConfirm(performanceEvaluation: IPerformanceEvaluation): void {
     this.confirmationService.confirm({

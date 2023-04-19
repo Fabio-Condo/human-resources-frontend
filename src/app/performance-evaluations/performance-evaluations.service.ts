@@ -33,6 +33,14 @@ export class PerformanceEvaluationsService {
     return this.http.get<IApiResponse<IPerformanceEvaluation>>(`${this.performanceEvaluationsUrl}`, { params });
   }
 
+  add(performanceEvaluation: IPerformanceEvaluation): Observable<IPerformanceEvaluation> {
+    return this.http.post<IPerformanceEvaluation>(this.performanceEvaluationsUrl, performanceEvaluation, { });
+  }
+
+  update(performanceEvaluation: IPerformanceEvaluation): Observable<IPerformanceEvaluation> {
+    return this.http.put<IPerformanceEvaluation>(`${this.performanceEvaluationsUrl}/${performanceEvaluation.id}`, performanceEvaluation, { });
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.performanceEvaluationsUrl}/${id}`, { });
   }

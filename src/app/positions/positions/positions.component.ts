@@ -8,6 +8,7 @@ import { DepartmentService } from 'src/app/departments/department.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
+import { Department } from 'src/app/model/Department';
 import { Position } from 'src/app/model/Position';
 import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
 import { PositionsService } from '../positions.service';
@@ -150,10 +151,10 @@ export class PositionsComponent implements OnInit {
   getDepartments() {
     return this.departmentService.findAll().subscribe(
       data => {
-        this.departments = data.content.map(data2 => {
+        this.departments = data.content.map(department => {
           return  {
-            label: data2.name,
-            value: data2.id
+            label: department.name,
+            value: department.id
           }
         })
       },
@@ -167,10 +168,10 @@ export class PositionsComponent implements OnInit {
   getAdministrativeClusters() {
     return this.administrativeClustersService.findAll().subscribe(
       data => {
-        this.administrativeClusters = data.content.map(data2 => {
+        this.administrativeClusters = data.content.map(administrativeCluster => {
           return  {
-            label: data2.name,
-            value: data2.id
+            label: administrativeCluster.name,
+            value: administrativeCluster.id
           }
         })
       },
@@ -184,10 +185,10 @@ export class PositionsComponent implements OnInit {
   getWorkplaces() {
     return this.workplacesService.findAll().subscribe(
       data => {
-        this.workplaces = data.content.map(data2 => {
+        this.workplaces = data.content.map(workplace => {
           return  {
-            label: data2.name,
-            value: data2.id
+            label: workplace.name,
+            value: workplace.id
           }
         })
       },

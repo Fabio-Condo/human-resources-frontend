@@ -56,6 +56,18 @@
                     ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
             </div>
 
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Skills</label>
+                <p-dropdown class="p-inputtext-sm" [options]="skills" placeholder="Selecione" [filter]="true"
+                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.skill.id"></p-dropdown>
+            </div>
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Positions</label>
+                <p-dropdown class="p-inputtext-sm" [options]="positions" placeholder="Selecione" [filter]="true"
+                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.position.id"></p-dropdown>
+            </div>
+
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="performanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;

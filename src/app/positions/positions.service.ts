@@ -33,6 +33,10 @@ export class PositionsService {
     return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}`, { params });
   }
 
+  findAll() : Observable<IApiResponse<IPosition>> { 
+    return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}`, { });
+  }
+
   add(position: IPosition): Observable<IPosition> {
     return this.http.post<IPosition>(this.positionsUrl, position, { });
   }
