@@ -32,4 +32,8 @@ export class WorkplacesService {
 
     return this.http.get<IApiResponse<IWorkplace>>(`${this.workplacesUrl}`, { params });
   }
+
+  findAll() : Observable<IApiResponse<IWorkplace>> { 
+    return this.http.get<IApiResponse<IWorkplace>>(`${this.workplacesUrl}`, { });
+  }
 }

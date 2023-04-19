@@ -32,4 +32,16 @@ export class PositionsService {
 
     return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}`, { params });
   }
+
+  add(position: IPosition): Observable<IPosition> {
+    return this.http.post<IPosition>(this.positionsUrl, position, { });
+  }
+
+  update(position: IPosition): Observable<IPosition> {
+    return this.http.put<IPosition>(`${this.positionsUrl}/${position.id}`, position, { });
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.positionsUrl}/${id}`, { });
+  }
 }

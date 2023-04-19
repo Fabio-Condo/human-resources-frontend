@@ -1,7 +1,25 @@
 
-<h5>Posições</h5>
+<h5 style="text-align: center;">Posições</h5>
 
-<p-table [value]="positions" [tableStyle]="{ 'min-width': '50rem' }">
+<div class="p-inputgroup">
+    <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getPositions()">        
+</div>
+
+<br>
+
+<button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+
+<br>
+<br>
+
+<div>
+    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+</div>
+
+<br>
+
+<p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
     <ng-template pTemplate="header">
         <tr>
             <th>ID</th>
@@ -16,6 +34,7 @@
             <th>Department name</th>
             <th>Workplace</th>
             <th>Administrative Cluster</th>
+            <th>Ações</th> 
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-position>
@@ -32,6 +51,89 @@
             <td>{{ position.department.name }}</td>
             <td>{{ position.workplace.name }}</td>
             <td>{{ position.administrativeCluster.name }}</td>
+            <td>
+                <button pButton pTooltip="Edit" (click)="onEditDepartment(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+
+<div style="display:inline; float: left; margin-top: 1%;">
+    <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-selectButton> 
+</div>
+
+<p-dialog header="Posição {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw', height: '70vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
+        <div class="formgrid grid">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Name</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="name"
+                    ngModel #name="ngModel" required minlength="1" [(ngModel)]="position.name">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Functional Group</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="functionalGroup"
+                    ngModel #functionalGroup="ngModel" required minlength="1" [(ngModel)]="position.functionalGroup">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Mission</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="mission"
+                    ngModel #mission="ngModel" required minlength="1" [(ngModel)]="position.mission">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Training</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="training"
+                    ngModel #training="ngModel" required minlength="1" [(ngModel)]="position.training">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Professional Experience</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="professionalExperience"
+                    ngModel #professionalExperience="ngModel" required minlength="1" [(ngModel)]="position.professionalExperience">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Age</label>
+                <input pInputText class="p-inputtext-sm" type="number" name="age"
+                    ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Language</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="language"
+                    ngModel #language="ngModel" required minlength="1" [(ngModel)]="position.language">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Specific Requirements</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="specificRequirements"
+                    ngModel #specificRequirements="ngModel" required minlength="1" [(ngModel)]="position.specificRequirements">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Main Responsibilities</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="mainResponsibilities"
+                    ngModel #mainResponsibilities="ngModel" required minlength="1" [(ngModel)]="position.mainResponsibilities">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Department</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
+                    name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Cluster Administrativo</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="administrativeClusters" placeholder="Selecione" [filter]="true"
+                    name="administrativeCluster" #administrativeCluster ngModel [(ngModel)]="position.administrativeCluster.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Local de trabalho</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
+                    name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="positionForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                  </button>
+              </div>
+        </div>
+      
+    </form>
+</p-dialog>

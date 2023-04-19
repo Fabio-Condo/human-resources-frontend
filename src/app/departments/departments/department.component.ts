@@ -56,11 +56,11 @@ export class DepartmentComponent implements OnInit {
     sort: 'name,asc'
   }
 
+  @ViewChild('table') grid: any;
+
   get editing() {
     return Boolean(this.department.id);
   }
-
-  @ViewChild('table') grid: any;
 
   save(departmentForm: NgForm) {
     if (this.editing) {

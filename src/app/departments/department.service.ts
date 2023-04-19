@@ -34,6 +34,10 @@ export class DepartmentService {
     return this.http.get<IApiResponse<IDepartment>>(`${this.departmentsUrl}`, { params });
   }
 
+  findAll() : Observable<IApiResponse<IDepartment>> { 
+    return this.http.get<IApiResponse<IDepartment>>(`${this.departmentsUrl}`, { });
+  }
+
   add(department: IDepartment): Observable<IDepartment> {
     return this.http.post<IDepartment>(this.departmentsUrl, department, { });
   }
