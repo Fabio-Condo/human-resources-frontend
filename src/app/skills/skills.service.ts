@@ -36,4 +36,16 @@ export class SkillsService {
   findAll() : Observable<IApiResponse<ISkill>> { 
     return this.http.get<IApiResponse<ISkill>>(`${this.skillsUrl}`, { });
   }
+
+  add(skill: ISkill): Observable<ISkill> {
+    return this.http.post<ISkill>(this.skillsUrl, skill, { });
+  }
+
+  update(skill: ISkill): Observable<ISkill> {
+    return this.http.put<ISkill>(`${this.skillsUrl}/${skill.id}`, skill, { });
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.skillsUrl}/${id}`, { });
+  }
 }
