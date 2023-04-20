@@ -36,4 +36,16 @@ export class WorkplacesService {
   findAll() : Observable<IApiResponse<IWorkplace>> { 
     return this.http.get<IApiResponse<IWorkplace>>(`${this.workplacesUrl}`, { });
   }
+
+  add(workplace: IWorkplace): Observable<IWorkplace> {
+    return this.http.post<IWorkplace>(this.workplacesUrl, workplace, { });
+  }
+
+  update(workplace: IWorkplace): Observable<IWorkplace> {
+    return this.http.put<IWorkplace>(`${this.workplacesUrl}/${workplace.id}`, workplace, { });
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.workplacesUrl}/${id}`, { });
+  }
 }

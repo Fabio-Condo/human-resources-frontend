@@ -46,7 +46,7 @@
 </div>
 
 <p-dialog header="Skill {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
+    <form autocomplete="off" #skillForm="ngForm" (ngSubmit)="save(skillForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
@@ -54,7 +54,7 @@
                 ngModel #name="ngModel" required minlength="1" [(ngModel)]="skill.name">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="departmentForm.invalid" class="p-button-sm" style="height: 30px;">
+                <button pButton type="submit" [disabled]="skillForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      

@@ -1,9 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IWorkplace } from 'src/app/interfaces/IWorkplace';
 import { IWorkplaceFilter } from 'src/app/interfaces/IWorkplaceFilter';
+import { Workplace } from 'src/app/model/Workplace';
 import { WorkplacesService } from '../workplaces.service';
 
 @Component({
@@ -13,27 +16,93 @@ import { WorkplacesService } from '../workplaces.service';
 })
 export class WorkplacesComponent implements OnInit {
 
+  showLoading: boolean = false;
+
   totalRecords: number = 0
   workplaces: IWorkplace[] = [];
 
-  showLoading: boolean = false;
+  workplace: IWorkplace = new Workplace;
+  displayModalSave: boolean = false;
+
+  sizePage = [
+    { label: '5', value: 5 },
+    { label: '10', value: 10 },
+    { label: '25', value: 25 },
+    { label: '50', value: 50 },
+    { label: '100', value: 100 },
+  ];
+
+  orderPage = [
+    { label: 'Nome (crescente)', value: 'name,asc' },
+    { label: 'Nome (decrescente)', value: 'name,desc' },
+    { label: 'Id (crescente)', value: 'id,asc' },
+    { label: 'Id (decrescente)', value: 'id,desc' },
+  ];
 
   constructor(
     private workplacesService: WorkplacesService,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private title: Title,
   ) { }
 
   ngOnInit(): void {
-    this.getWorkplaces();
+    this.title.setTitle('Workplaces page');
   }
 
   filter: IWorkplaceFilter = {
     page: 0,
     itemsPerPage: 5,
-    sort: ''
+    sort: 'name,asc'
   }
 
-  getWorkplaces(): void {
+  @ViewChild('table') grid: any;
+
+  get editing() {
+    return Boolean(this.workplace.id);
+  }
+
+  save(workplaceForm: NgForm) {
+    if (this.editing) {
+      this.update(workplaceForm)
+    } else {
+      this.addNew(workplaceForm)
+    }
+  }
+
+  addNew(workplaceForm: NgForm) {
+    this.showLoading = true;
+    this.workplacesService.add(this.workplace).subscribe(
+      (workplaceAdded) => {
+        this.workplace = workplaceAdded;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Workplace added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(workplaceForm: NgForm) {
+    this.showLoading = true;
+    this.workplacesService.update(this.workplace).subscribe(
+      (workplace) => {
+        this.workplace = workplace;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Workplace updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getWorkplaces(page: number = 0): void {
+    this.showLoading = true;
+    this.filter.page = page;
     this.showLoading = true;
     this.workplacesService.getWorkplaces(this.filter).subscribe(
       (data: IApiResponse<IWorkplace>) => {
@@ -48,6 +117,48 @@ export class WorkplacesComponent implements OnInit {
     );   
   }
 
+  deleteWorkplace(workplace: IWorkplace) {
+    this.workplacesService.delete(workplace.id).subscribe(
+      () => {
+        if (this.grid.first === 0) {
+          this.getWorkplaces();
+        } else {
+          this.grid.reset();
+        }
+        this.messageService.add({ severity: 'success', detail: 'Workplace deleted succefully!' })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  onAddNewWorkplace(): void {
+    this.workplace = new Workplace();
+    this.displayModalSave = true;
+  }
+
+  onEditWorkplace(editWorkplace: Workplace): void {
+    this.workplace = editWorkplace;
+    this.workplace.id = editWorkplace.id
+    this.displayModalSave = true;
+  }
+
+  deletionConfirm(workplace: IWorkplace): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete?',
+      accept: () => {
+        this.deleteWorkplace(workplace);
+      }
+    });
+  }
+
+  onChangePage(event: LazyLoadEvent) {
+    const page = event!.first! / event!.rows!;  
+    this.getWorkplaces(page);
+  }
+  
   private sendErrorNotification(message: string): void {
     if (message) {
       this.messageService.add({ severity: 'error', detail: message });
