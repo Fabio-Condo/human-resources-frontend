@@ -85,6 +85,7 @@ export class PerformanceEvaluationsComponent implements OnInit {
       (performanceEvaluationAdded) => {
         this.performanceEvaluation = performanceEvaluationAdded;
         this.showLoading = false;
+        this.getPerformanceEvaluations();
         this.messageService.add({ severity: 'success', detail: 'Performance Evaluation added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {

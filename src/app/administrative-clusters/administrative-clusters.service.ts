@@ -37,6 +37,14 @@ administrativeClusterUrl: string;
     return this.http.get<IApiResponse<IAdministrativeCluster>>(`${this.administrativeClusterUrl}`, { });
   }
 
+  add(administrativeCluster: IAdministrativeCluster): Observable<IAdministrativeCluster> {
+    return this.http.post<IAdministrativeCluster>(this.administrativeClusterUrl, administrativeCluster, { });
+  }
+
+  update(administrativeCluster: IAdministrativeCluster): Observable<IAdministrativeCluster> {
+    return this.http.put<IAdministrativeCluster>(`${this.administrativeClusterUrl}/${administrativeCluster.id}`, administrativeCluster, { });
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.administrativeClusterUrl}/${id}`, { });
   }

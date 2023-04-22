@@ -76,6 +76,7 @@ export class SkillsComponent implements OnInit {
       (skillAdded) => {
         this.skill = skillAdded;
         this.showLoading = false;
+        this.getSkills();
         this.messageService.add({ severity: 'success', detail: 'Skill added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {

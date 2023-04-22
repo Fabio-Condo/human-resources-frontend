@@ -76,6 +76,7 @@ export class DepartmentComponent implements OnInit {
       (departmentAdded) => {
         this.department = departmentAdded;
         this.showLoading = false;
+        this.getDepartments();
         this.messageService.add({ severity: 'success', detail: 'Department added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {

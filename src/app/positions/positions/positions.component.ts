@@ -89,6 +89,7 @@ export class PositionsComponent implements OnInit {
       (positionAdded) => {
         this.position = positionAdded;
         this.showLoading = false;
+        this.getPositions();
         this.messageService.add({ severity: 'success', detail: 'Position added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {

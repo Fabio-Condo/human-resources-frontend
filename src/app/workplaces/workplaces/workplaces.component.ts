@@ -76,6 +76,7 @@ export class WorkplacesComponent implements OnInit {
       (workplaceAdded) => {
         this.workplace = workplaceAdded;
         this.showLoading = false;
+        this.getWorkplaces();
         this.messageService.add({ severity: 'success', detail: 'Workplace added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
