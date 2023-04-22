@@ -104,7 +104,6 @@ export class DepartmentComponent implements OnInit {
   getDepartments(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.showLoading = true;
     this.departmentService.getDepartments(this.filter).subscribe(
       (data: IApiResponse<IDepartment>) => {
         this.departments = data.content;

@@ -104,7 +104,6 @@ export class WorkplacesComponent implements OnInit {
   getWorkplaces(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.showLoading = true;
     this.workplacesService.getWorkplaces(this.filter).subscribe(
       (data: IApiResponse<IWorkplace>) => {
         this.workplaces = data.content;

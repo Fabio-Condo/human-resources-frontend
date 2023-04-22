@@ -113,7 +113,6 @@ export class PerformanceEvaluationsComponent implements OnInit {
   getPerformanceEvaluations(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.showLoading = true;
     this.performanceEvaluationsService.getPerformanceEvaluations(this.filter).subscribe(
       (data: IApiResponse<IPerformanceEvaluation>) => {
         this.performanceEvaluations = data.content;

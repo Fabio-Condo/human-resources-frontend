@@ -104,7 +104,6 @@ export class SkillsComponent implements OnInit {
   getSkills(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.showLoading = true;
     this.skillsService.getSkills(this.filter).subscribe(
       (data: IApiResponse<ISkill>) => {
         this.skills = data.content;

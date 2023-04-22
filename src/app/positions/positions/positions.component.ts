@@ -117,7 +117,6 @@ export class PositionsComponent implements OnInit {
   getPositions(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.showLoading = true;
     this.positionsService.getPositions(this.filter).subscribe(
       (data: IApiResponse<IPosition>) => {
         this.positions = data.content;
