@@ -26,12 +26,8 @@
             <th>Nome</th>
             <th>Grupo Funcional</th>
             <th>Missão</th>
-            <th>Formação</th>
-            <th>Experiência Profissional</th>
             <th>Idade</th>
             <th>Lingua</th>
-            <th>Requisitos especificos</th>
-            <th>Main Responsibilities</th>
             <th>Departamento</th>
             <th>Local de trabalho</th>
             <th>Cluster Administrativo</th>
@@ -44,12 +40,8 @@
             <td>{{ position.name }}</td>
             <td>{{ position.functionalGroup }}</td>
             <td>{{ position.mission }}</td>
-            <td>{{ position.training }}</td>
-            <td>{{ position.professionalExperience }}</td>
             <td>{{ position.age }}</td>
             <td>{{ position.language }}</td>
-            <td>{{ position.specificRequirements }}</td>
-            <td>{{ position.mainResponsibilities }}</td>
             <td>{{ position.department.name }}</td>
             <td>{{ position.workplace.name }}</td>
             <td>{{ position.administrativeCluster.name }}</td>
@@ -84,16 +76,6 @@
                     ngModel #mission="ngModel" required minlength="1" [(ngModel)]="position.mission">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Training</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="training"
-                    ngModel #training="ngModel" required minlength="1" [(ngModel)]="position.training">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Professional Experience</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="professionalExperience"
-                    ngModel #professionalExperience="ngModel" required minlength="1" [(ngModel)]="position.professionalExperience">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Age</label>
                 <input pInputText class="p-inputtext-sm" type="number" name="age"
                     ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
@@ -102,16 +84,6 @@
                 <label>Language</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="language"
                     ngModel #language="ngModel" required minlength="1" [(ngModel)]="position.language">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Specific Requirements</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="specificRequirements"
-                    ngModel #specificRequirements="ngModel" required minlength="1" [(ngModel)]="position.specificRequirements">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Main Responsibilities</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="mainResponsibilities"
-                    ngModel #mainResponsibilities="ngModel" required minlength="1" [(ngModel)]="position.mainResponsibilities">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Department</label>
