@@ -4,6 +4,7 @@ import { AdministrativeCluster } from "./AdministrativeCluster";
 import { Department } from "./Department";
 import { MainResponsibility } from "./MainResponsibility";
 import { SpecificRequirement } from "./SpecificRequirement";
+import { Training } from "./Training";
 import { Workplace } from "./Workplace";
 
 export class Position implements IPosition {
@@ -18,4 +19,5 @@ export class Position implements IPosition {
     administrativeCluster = new AdministrativeCluster;
     mainResponsibilities: MainResponsibility[] = [];
     specificRequirements: SpecificRequirement[] = [];
+    training: Training[] = [];
 }

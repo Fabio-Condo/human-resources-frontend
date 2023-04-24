@@ -11,6 +11,7 @@ import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
 import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
 import { SpecificRequirement } from 'src/app/model/SpecificRequirement';
+import { Training } from 'src/app/model/Training';
 import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
 import { PositionsService } from '../positions.service';
 
@@ -42,6 +43,11 @@ export class PositionsComponent implements OnInit {
   showSpecificRequirementForm = false;
   specificRequirement?: SpecificRequirement;
   specificRequirementIndex?: number;
+
+  trainings: Array<Training> = []
+  showTrainingForm = false;
+  training?: Training;
+  trainingIndex?: number;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -230,6 +236,7 @@ export class PositionsComponent implements OnInit {
     });
   }
 
+  // Main Responsabilities
   openAddNewMainResponsabilityModal() {
     this.showMainResponsibilityForm = true;
     this.mainResponsibility = new MainResponsibility();
@@ -261,7 +268,7 @@ export class PositionsComponent implements OnInit {
     this.mainResponsibilityIndex = index;
   }
 
-  // Requisitos especificos
+  // Specific Requirements
   openAddNewSpecificRequirementModal() {
     this.showSpecificRequirementForm = true;
     this.specificRequirement = new SpecificRequirement();
@@ -291,6 +298,38 @@ export class PositionsComponent implements OnInit {
     this.specificRequirement = this.cloneMainResponsability(specificRequirement);
     this.showSpecificRequirementForm = true;
     this.specificRequirementIndex = index;
+  }
+
+  // Training
+  openAddNewTrainingModal() {
+    this.showTrainingForm = true;
+    this.training = new Training();
+    this.trainingIndex = this.position.training.length;
+  }
+
+  confirmTraining(frm: NgForm) {
+    this.position.training[this.trainingIndex!] = this.cloneTraining(this.training!);
+    this.showTrainingForm = false;
+    frm.reset();
+  }     
+
+  cloneTraining(training: Training): Training {
+    return new Training(training.id, training.designation);
+  }
+
+  get editingTraining() {  // show the title in modal
+    return this.training && this.training?.id;
+  }
+
+  removeTraining(index: number) {
+    this.position.training.splice(index, 1);
+    console.log("removing: " + index);
+  }
+
+  getReadTraining(training: Training, index: number) {
+    this.specificRequirement = this.cloneMainResponsability(training);
+    this.showTrainingForm = true;
+    this.trainingIndex = index;
   }
 
   onChangePage(event: LazyLoadEvent) {

@@ -17,4 +17,5 @@ export interface IPosition {
     administrativeCluster: IAdministrativeCluster,
     mainResponsibilities: IMainResponsibility[];
     specificRequirements: ISpecificRequirement[];
+    training: ISpecificRequirement[];
 }

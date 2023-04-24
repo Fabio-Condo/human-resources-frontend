@@ -101,6 +101,7 @@
                     name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
             </div>
 
+            <!--Main Responsibilities-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Main Responsibilities</label>
                 <p-table [value]="position.mainResponsibilities" selectionMode="single" [responsive]="true" 
@@ -133,10 +134,10 @@
             </div> 
 
             <div class="col-12 p-fluid">
-                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="New main responsibility" (click)="openAddNewMainResponsabilityModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
+                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="Nova responsabilidade" (click)="openAddNewMainResponsabilityModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
             </div>  
 
-
+            <!--Specific Requirements-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Requisitos especificos</label>
                 <p-table [value]="position.specificRequirements" selectionMode="single" [responsive]="true" 
@@ -169,7 +170,43 @@
             </div> 
 
             <div class="col-12 p-fluid">
-                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="New main responsibility" (click)="openAddNewSpecificRequirementModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
+                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="Novo requisito" (click)="openAddNewSpecificRequirementModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
+            </div>
+
+            <!--Training-->
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Formação</label>
+                <p-table [value]="position.training" selectionMode="single" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="background-color: #F4F6F6;">Designation</th>
+                      <th style="background-color: #F4F6F6;" class="col-valor-header"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="training">
+                      <td>{{ training.designation }}</td>
+                      <td class="col-acoes">
+                        <span class="p-buttonset">
+                          <button pButton pTooltip="Editar" (click)="getReadTraining(training, rowIndex)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                          <button pButton pTooltip="Excluir" (click)="removeTraining(rowIndex)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                        </span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="10">
+                          No trainings found
+                        </td>
+                      </tr>
+                  </ng-template>            
+                </p-table>   
+            </div> 
+
+            <div class="col-12 p-fluid">
+                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="Nova formação" (click)="openAddNewTrainingModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
@@ -208,6 +245,20 @@
       </div>
       <div class="col-12 p-fluid">
         <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+      </div>
+    </form>
+</p-dialog>
+
+<!--Training-->
+<p-dialog [header]="editingTraining ? 'Edit mr' : 'New mr'" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)"> 
+      <div class="col-12 p-fluid">
+        <label>Designation</label>
+        <input pInputText type="text" name="designation"
+          required [(ngModel)]="training.designation" #designation="ngModel"/>
+      </div>
+      <div class="col-12 p-fluid">
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmTraining.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
       </div>
     </form>
 </p-dialog>
