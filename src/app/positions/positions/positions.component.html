@@ -57,7 +57,7 @@
     <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-selectButton> 
 </div>
 
-<p-dialog header="Posição {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw', height: '70vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Posição {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '70vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -100,6 +100,78 @@
                 <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
                     name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
             </div>
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Main Responsibilities</label>
+                <p-table [value]="position.mainResponsibilities" selectionMode="single" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="background-color: #F4F6F6;">Designation</th>
+                      <th style="background-color: #F4F6F6;" class="col-valor-header"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="mr">
+                      <td>{{ mr.designation }}</td>
+                      <td class="col-acoes">
+                        <span class="p-buttonset">
+                          <button pButton pTooltip="Editar" (click)="getReadEditintMainResponsability(mr, rowIndex)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                          <button pButton pTooltip="Excluir" (click)="removeMainResponsability(rowIndex)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                        </span>
+                        </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="10">
+                          No main responsibilities found
+                        </td>
+                      </tr>
+                  </ng-template>            
+                </p-table>   
+            </div> 
+
+            <div class="col-12 p-fluid">
+                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="New main responsibility" (click)="openAddNewMainResponsabilityModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
+            </div>  
+
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Requisitos especificos</label>
+                <p-table [value]="position.specificRequirements" selectionMode="single" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="background-color: #F4F6F6;">Designation</th>
+                      <th style="background-color: #F4F6F6;" class="col-valor-header"></th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-sr let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="sr">
+                      <td>{{ sr.designation }}</td>
+                      <td class="col-acoes">
+                        <span class="p-buttonset">
+                          <button pButton pTooltip="Editar" (click)="getReadEditSpecificRequirement(sr, rowIndex)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                          <button pButton pTooltip="Excluir" (click)="removeSpecificRequirement(rowIndex)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                        </span>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan="10">
+                          No specifics requirements found
+                        </td>
+                      </tr>
+                  </ng-template>            
+                </p-table>   
+            </div> 
+
+            <div class="col-12 p-fluid">
+                <button pButton class="p-button-raised p-button-text p-button-sm" type="button" label="New main responsibility" (click)="openAddNewSpecificRequirementModal()" style="height: 30px; margin-top: 1%; color: #6662cf;"></button>
+            </div>
+
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="positionForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
@@ -109,5 +181,33 @@
               </div>
         </div>
       
+    </form>
+</p-dialog>
+
+<!--Modal add main responsibilities-->
+<p-dialog [header]="editingMainResponsability ? 'Edit mr' : 'New mr'" [(visible)]="showMainResponsibilityForm" [modal]="true" *ngIf="mainResponsibility"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmMainResponsibility="ngForm" (ngSubmit)="confirmMainResponsability(frmMainResponsibility)"> 
+      <div class="col-12 p-fluid">
+        <label>Designation</label>
+        <input pInputText type="text" name="designation"
+          required [(ngModel)]="mainResponsibility.designation" #designation="ngModel"/>
+      </div>
+      <div class="col-12 p-fluid">
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmMainResponsibility.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+      </div>
+    </form>
+</p-dialog>
+
+<!--Modal add requirements-->
+<p-dialog [header]="editingSpecificRequirement ? 'Edit mr' : 'New mr'" [(visible)]="showSpecificRequirementForm" [modal]="true" *ngIf="specificRequirement"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmSpecificRequirement="ngForm" (ngSubmit)="confirmSpecificRequirement(frmSpecificRequirement)"> 
+      <div class="col-12 p-fluid">
+        <label>Designation</label>
+        <input pInputText type="text" name="designation"
+          required [(ngModel)]="specificRequirement.designation" #designation="ngModel"/>
+      </div>
+      <div class="col-12 p-fluid">
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+      </div>
     </form>
 </p-dialog>

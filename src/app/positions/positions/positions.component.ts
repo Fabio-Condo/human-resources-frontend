@@ -8,7 +8,9 @@ import { DepartmentService } from 'src/app/departments/department.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
+import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
+import { SpecificRequirement } from 'src/app/model/SpecificRequirement';
 import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
 import { PositionsService } from '../positions.service';
 
@@ -30,6 +32,16 @@ export class PositionsComponent implements OnInit {
   departments: any[] = [] ;
   administrativeClusters: any[] = [] ;
   workplaces: any[] = [] ;
+
+  mainResponsibilities: Array<MainResponsibility> = []
+  showMainResponsibilityForm = false;
+  mainResponsibility?: MainResponsibility;
+  mainResponsibilityIndex?: number;
+
+  specificRequirements: Array<SpecificRequirement> = []
+  showSpecificRequirementForm = false;
+  specificRequirement?: SpecificRequirement;
+  specificRequirementIndex?: number;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -216,6 +228,69 @@ export class PositionsComponent implements OnInit {
         this.deletePosition(position);
       }
     });
+  }
+
+  openAddNewMainResponsabilityModal() {
+    this.showMainResponsibilityForm = true;
+    this.mainResponsibility = new MainResponsibility();
+    this.mainResponsibilityIndex = this.position.mainResponsibilities.length;
+  }
+
+  confirmMainResponsability(frm: NgForm) {
+    this.position.mainResponsibilities[this.mainResponsibilityIndex!] = this.cloneMainResponsability(this.mainResponsibility!);
+    this.showMainResponsibilityForm = false;
+    frm.reset();
+  }     
+
+  cloneMainResponsability(mainResponsability: MainResponsibility): MainResponsibility {
+    return new MainResponsibility(mainResponsability.id, mainResponsability.designation);
+  }
+
+  get editingMainResponsability() {  // show the title in modal
+    return this.mainResponsibility && this.mainResponsibility?.id;
+  }
+
+  removeMainResponsability(index: number) {
+    this.position.mainResponsibilities.splice(index, 1);
+    console.log("removing: " + index);
+  }
+
+  getReadEditintMainResponsability(mainResponsability: MainResponsibility, index: number) {
+    this.mainResponsibility = this.cloneMainResponsability(mainResponsability);
+    this.showMainResponsibilityForm = true;
+    this.mainResponsibilityIndex = index;
+  }
+
+  // Requisitos especificos
+  openAddNewSpecificRequirementModal() {
+    this.showSpecificRequirementForm = true;
+    this.specificRequirement = new SpecificRequirement();
+    this.specificRequirementIndex = this.position.specificRequirements.length;
+  }
+
+  confirmSpecificRequirement(frm: NgForm) {
+    this.position.specificRequirements[this.specificRequirementIndex!] = this.cloneSpecificRequirement(this.specificRequirement!);
+    this.showSpecificRequirementForm = false;
+    frm.reset();
+  }     
+
+  cloneSpecificRequirement(specificRequirement: SpecificRequirement): SpecificRequirement {
+    return new SpecificRequirement(specificRequirement.id, specificRequirement.designation);
+  }
+
+  get editingSpecificRequirement() {  // show the title in modal
+    return this.specificRequirement && this.specificRequirement?.id;
+  }
+
+  removeSpecificRequirement(index: number) {
+    this.position.specificRequirements.splice(index, 1);
+    console.log("removing: " + index);
+  }
+
+  getReadEditSpecificRequirement(specificRequirement: SpecificRequirement, index: number) {
+    this.specificRequirement = this.cloneMainResponsability(specificRequirement);
+    this.showSpecificRequirementForm = true;
+    this.specificRequirementIndex = index;
   }
 
   onChangePage(event: LazyLoadEvent) {
