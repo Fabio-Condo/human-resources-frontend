@@ -3,6 +3,7 @@ import { IPosition } from "../interfaces/IPosition"
 import { AdministrativeCluster } from "./AdministrativeCluster";
 import { Department } from "./Department";
 import { MainResponsibility } from "./MainResponsibility";
+import { ProfessionalExperience } from "./ProfessionalExperience";
 import { SpecificRequirement } from "./SpecificRequirement";
 import { Training } from "./Training";
 import { Workplace } from "./Workplace";
@@ -20,4 +21,5 @@ export class Position implements IPosition {
     mainResponsibilities: MainResponsibility[] = [];
     specificRequirements: SpecificRequirement[] = [];
     training: Training[] = [];
+    professionalExperience: ProfessionalExperience[] = [];
 }

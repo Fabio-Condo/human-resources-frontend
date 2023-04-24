@@ -10,6 +10,7 @@ import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
 import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
+import { ProfessionalExperience } from 'src/app/model/ProfessionalExperience';
 import { SpecificRequirement } from 'src/app/model/SpecificRequirement';
 import { Training } from 'src/app/model/Training';
 import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
@@ -48,6 +49,11 @@ export class PositionsComponent implements OnInit {
   showTrainingForm = false;
   training?: Training;
   trainingIndex?: number;
+
+  professionalExperiences: Array<ProfessionalExperience> = []
+  showProfessionalExperienceForm = false;
+  professionalExperience?: ProfessionalExperience;
+  ProfessionalExperienceIndex?: number;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -327,9 +333,41 @@ export class PositionsComponent implements OnInit {
   }
 
   getReadTraining(training: Training, index: number) {
-    this.specificRequirement = this.cloneMainResponsability(training);
+    this.training = this.cloneTraining(training);
     this.showTrainingForm = true;
     this.trainingIndex = index;
+  }
+
+  // ProfessionalExperience
+  openAddNewProfessionalExperienceModal() {
+    this.showProfessionalExperienceForm = true;
+    this.professionalExperience = new Training();
+    this.ProfessionalExperienceIndex = this.position.professionalExperience.length;
+  }
+  
+  confirmProfessionalExperience(frm: NgForm) {
+    this.position.professionalExperience[this.ProfessionalExperienceIndex!] = this.cloneTraining(this.professionalExperience!);
+    this.showProfessionalExperienceForm = false;
+    frm.reset();
+  }     
+  
+  cloneProfessionalExperience(professionalExperience: ProfessionalExperience): ProfessionalExperience {
+    return new ProfessionalExperience(professionalExperience.id, professionalExperience.designation);
+  }
+  
+  get editingProfessionalExperience() {  // show the title in modal
+    return this.professionalExperience && this.professionalExperience?.id;
+  }
+  
+  removeProfessionalExperience(index: number) {
+    this.position.professionalExperience.splice(index, 1);
+    console.log("removing: " + index);
+  }
+  
+  getReadProfessionalExperience(professionalExperience: ProfessionalExperience, index: number) {
+    this.professionalExperience = this.cloneTraining(professionalExperience);
+    this.showProfessionalExperienceForm = true;
+    this.ProfessionalExperienceIndex = index;
   }
 
   onChangePage(event: LazyLoadEvent) {
