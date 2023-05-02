@@ -1,19 +1,9 @@
 <div class="container">
     <h5 style="text-align: center;">Funcionários</h5>
 
-
-
-    <div class="p-inputgroup">
+    <div class="p-inputgroup" style="width: 40%">
         <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getEmployees()">        
     </div>
-
-    <br>
-
-    <!--
-    <button (click)="onAddNewDepartment()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
-    -->
-    <br>
-    <br>
 
     <div>
         <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
@@ -25,15 +15,17 @@
     <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Ações</th>       
+                <th style="background-color: #fff;">ID</th>
+                <th style="background-color: #fff;">Nome</th>
+                <th style="background-color: #fff;">Genero</th>
+                <th style="background-color: #fff;">Ações</th>       
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee>
             <tr>
                 <td>{{ employee.id }}</td>
                 <td>{{ employee.name }}</td>
+                <td>{{ employee.gender }}</td>
                 <td>
                     <button pButton pTooltip="Edit" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>

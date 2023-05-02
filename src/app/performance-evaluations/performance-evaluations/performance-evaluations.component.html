@@ -23,11 +23,11 @@
     <p-table [value]="performanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th>ID</th>
-                <th>Nome da posição</th>
-                <th>Competências</th>
-                <th>Nivel de proficiência</th>
-                <th>Ações</th>
+                <th style="background-color: #fff;">ID</th>
+                <th style="background-color: #fff;">Nome da posição</th>
+                <th style="background-color: #fff;">Competências</th>
+                <th style="background-color: #fff;">Nivel de proficiência</th>
+                <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-pe>

@@ -24,9 +24,9 @@
     <p-table [value]="administrativeClusters" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Ações</th> 
+                <th style="background-color: #fff;">ID</th>
+                <th style="background-color: #fff;">Nome</th>
+                <th style="background-color: #fff;">Ações</th> 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-ac>

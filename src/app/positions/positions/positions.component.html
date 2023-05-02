@@ -23,14 +23,14 @@
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
       <ng-template pTemplate="header">
           <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Grupo Funcional</th>
-              <th>Missão</th>
-              <th>Departamento</th>
-              <th>Local de trabalho</th>
-              <th>Cluster Administrativo</th>
-              <th>Ações</th> 
+              <th style="background-color: #fff;">ID</th>
+              <th style="background-color: #fff;">Nome</th>
+              <th style="background-color: #fff;">Grupo Funcional</th>
+              <th style="background-color: #fff;">Missão</th>
+              <th style="background-color: #fff;">Departamento</th>
+              <th style="background-color: #fff;">Local de trabalho</th>
+              <th style="background-color: #fff;">Cluster Administrativo</th>
+              <th style="background-color: #fff;">Ações</th> 
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-position>
