@@ -21,6 +21,8 @@ import { SkillsModule } from './skills/skills.module';
 import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module';
 import { WorkplacesModule } from './workplaces/workplaces.module';
 import { CoreModule } from './core/core.module';
+import { EmployeesModule } from './employees/employees.module';
+import { EmployeesRoutingModule } from './employees/employees-routing.module';
 
 @NgModule({
   declarations: [
@@ -40,12 +42,14 @@ import { CoreModule } from './core/core.module';
     AdministrativeClustersRoutingModule,
     PositionsRoutingModule,
     PerformanceEvaluationsRoutingModule,
+    EmployeesRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
     AdministrativeClustersModule,
     PositionsModule,
     PerformanceEvaluationsModule,
+    EmployeesModule,
 
     CoreModule
   ],

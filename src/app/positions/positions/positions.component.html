@@ -8,7 +8,7 @@
 
   <br>
 
-  <button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+  <button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Novo cargo +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
   <br>
   <br>
@@ -56,7 +56,7 @@
 
 </div>
 
-<p-dialog header="Posição {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '70vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '70vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
