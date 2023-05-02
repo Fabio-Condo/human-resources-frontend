@@ -20,6 +20,7 @@ import { SkillsRoutingModule } from './skills/skills-routing.module';
 import { SkillsModule } from './skills/skills.module';
 import { WorkplacesRoutingModule } from './workplaces/workplaces-routing.module';
 import { WorkplacesModule } from './workplaces/workplaces.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
     SkillsModule,
     AdministrativeClustersModule,
     PositionsModule,
-    PerformanceEvaluationsModule
+    PerformanceEvaluationsModule,
+
+    CoreModule
   ],
   providers: [
     MessageService,

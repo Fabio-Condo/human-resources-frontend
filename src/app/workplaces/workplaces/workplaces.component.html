@@ -1,46 +1,49 @@
 
-<h5 style="text-align: center;">Local de trabalho</h5>
+<div class="container">
+    <h5 style="text-align: center;">Local de trabalho</h5>
 
-<div class="p-inputgroup">
-    <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getWorkplaces()">        
-</div>
+    <div class="p-inputgroup">
+        <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getWorkplaces()">        
+    </div>
 
-<br>
+    <br>
 
-<button (click)="onAddNewWorkplace()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+    <button (click)="onAddNewWorkplace()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div>
-    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
-</div>
+    <div>
+        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
+    </div>
 
-<br>
+    <br>
 
-<p-table [value]="workplaces" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ações</th> 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-workplace>
-        <tr>
-            <td>{{ workplace.id }}</td>
-            <td>{{ workplace.name }}</td>
-            <td>
-                <button pButton pTooltip="Edit" (click)="onEditWorkplace(workplace)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                <button pButton (click)="deletionConfirm(workplace)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+    <p-table [value]="workplaces" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th> 
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-workplace>
+            <tr>
+                <td>{{ workplace.id }}</td>
+                <td>{{ workplace.name }}</td>
+                <td>
+                    <button pButton pTooltip="Edit" (click)="onEditWorkplace(workplace)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(workplace)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-<div style="display:inline; float: left; margin-top: 1%;">
-    <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getWorkplaces()"></p-selectButton> 
+    <div style="display:inline; float: left; margin-top: 1%;">
+        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getWorkplaces()"></p-selectButton> 
+    </div>
+
 </div>
 
 <p-dialog header="Workplace {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">

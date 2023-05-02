@@ -1,0 +1,40 @@
+<nav class="navbar">
+
+    <div class="container">
+      <div class="p-grid">
+        <div class="p-col-12" style="display:inline; float: right;">  
+          <a href="javascript:;" class="navbar-toggle" (click)="showMenu = !showMenu;">
+            <i class="pi pi-bars"></i>            
+          </a>
+        </div>
+        <div style="display:inline; ">
+          <img height="20" width="60"  alt="" />
+        </div> 
+      </div>
+    </div>
+
+    <ul class="navbar-menu" [hidden]="!showMenu" style="background: rgba(11, 11, 17, 0.75)">
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/departments" (click)="showMenu = !showMenu" style="margin-left: 10px;">Departamentos</a>
+      </li>
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/skills" (click)="showMenu = !showMenu" style="margin-left: 10px;">Competências</a>
+      </li>
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/administrative-clusters" (click)="showMenu = !showMenu" style="margin-left: 10px;">Clusters administrativos</a>
+      </li>
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/positions" (click)="showMenu = !showMenu" style="margin-left: 10px;">Cargos</a>
+      </li>
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/performance-evaluations" (click)="showMenu = !showMenu" style="margin-left: 10px;">Avaliação de performance</a>
+      </li>
+      <li class="navbar-menuitem"  routerLinkActive="ativo" >
+        <a routerLink="/v1/workplaces" (click)="showMenu = !showMenu" style="margin-left: 10px;">Locais de trabalho</a>
+      </li>
+      <li class="" routerLinkActive="ativo" style="margin-top: 60%;">
+        <a href="javascript:;" (click)="showMenu = !showMenu" class="navbar-toggle" style="position: absolute; width: 100%; text-align: center; color: white;"><i class="pi pi-times"></i></a>
+      </li>
+    </ul>
+
+  </nav>

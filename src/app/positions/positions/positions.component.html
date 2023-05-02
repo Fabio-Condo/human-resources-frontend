@@ -1,60 +1,59 @@
 
-<h5 style="text-align: center;">Posições</h5>
+<div class="container">
+  <h5 style="text-align: center;">Cargos</h5>
 
-<div class="p-inputgroup">
-    <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getPositions()">        
-</div>
+  <div class="p-inputgroup">
+      <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getPositions()">        
+  </div>
 
-<br>
+  <br>
 
-<button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+  <button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
-<br>
-<br>
+  <br>
+  <br>
 
-<div>
-    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
-</div>
+  <div>
+      <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+  </div>
 
-<br>
+  <br>
 
-<p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Grupo Funcional</th>
-            <th>Missão</th>
-            <th>Idade</th>
-            <th>Lingua</th>
-            <th>Departamento</th>
-            <th>Local de trabalho</th>
-            <th>Cluster Administrativo</th>
-            <th>Ações</th> 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-position>
-        <tr>
-            <td>{{ position.id }}</td>
-            <td>{{ position.name }}</td>
-            <td>{{ position.functionalGroup }}</td>
-            <td>{{ position.mission }}</td>
-            <td>{{ position.age }}</td>
-            <td>{{ position.language }}</td>
-            <td>{{ position.department.name }}</td>
-            <td>{{ position.workplace.name }}</td>
-            <td>{{ position.administrativeCluster.name }}</td>
-            <td>
-                <button pButton pTooltip="Edit" (click)="onEditDepartment(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+  <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Grupo Funcional</th>
+              <th>Missão</th>
+              <th>Departamento</th>
+              <th>Local de trabalho</th>
+              <th>Cluster Administrativo</th>
+              <th>Ações</th> 
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-position>
+          <tr>
+              <td>{{ position.id }}</td>
+              <td>{{ position.name }}</td>
+              <td>{{ position.functionalGroup }}</td>
+              <td>{{ position.mission }}</td>
+              <td>{{ position.department.name }}</td>
+              <td>{{ position.workplace.name }}</td>
+              <td>{{ position.administrativeCluster.name }}</td>
+              <td>
+                  <button pButton pTooltip="Edit" (click)="onEditDepartment(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                  <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
 
-<div style="display:inline; float: left; margin-top: 1%;">
-    <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-selectButton> 
+  <div style="display:inline; float: left; margin-top: 1%;">
+      <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-selectButton> 
+  </div>
+
 </div>
 
 <p-dialog header="Posição {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '70vw'}" [draggable]="false" [resizable]="false">
@@ -263,6 +262,7 @@
       
     </form>
 </p-dialog>
+
 
 <!--Modal add main responsibilities-->
 <p-dialog [header]="editingMainResponsability ? 'Editar principais responsabilidades' : 'Nova responsabilidades'" [(visible)]="showMainResponsibilityForm" [modal]="true" *ngIf="mainResponsibility"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->

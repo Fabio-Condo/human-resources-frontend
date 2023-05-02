@@ -1,47 +1,50 @@
 
-<h5 style="text-align: center;">Clulters administrativos</h5>
+<div class="container">
+    <h5 style="text-align: center;">Clulters administrativos</h5>
 
-<div class="p-inputgroup">
-    <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getAdministrativeClusters()">        
-</div>
+    <div class="p-inputgroup">
+        <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getAdministrativeClusters()">        
+    </div>
 
-<br>
+    <br>
 
-<button (click)="onAddNewadministrativeCluster()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+    <button (click)="onAddNewadministrativeCluster()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div>
-    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getAdministrativeClusters()"></p-dropdown>
-</div>
+    <div>
+        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getAdministrativeClusters()"></p-dropdown>
+    </div>
 
-<br>
+    <br>
 
 
-<p-table [value]="administrativeClusters" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ações</th> 
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-ac>
-        <tr>
-            <td>{{ ac.id }}</td>
-            <td>{{ ac.name }}</td>
-            <td>
-                <button pButton pTooltip="Edit" (click)="onEditDepartment(ac)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                <button pButton (click)="deletionConfirm(ac)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+    <p-table [value]="administrativeClusters" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th> 
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ac>
+            <tr>
+                <td>{{ ac.id }}</td>
+                <td>{{ ac.name }}</td>
+                <td>
+                    <button pButton pTooltip="Edit" (click)="onEditDepartment(ac)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(ac)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-<div style="display:inline; float: left; margin-top: 1%;">
-    <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getAdministrativeClusters()"></p-selectButton> 
+    <div style="display:inline; float: left; margin-top: 1%;">
+        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getAdministrativeClusters()"></p-selectButton> 
+    </div>
+
 </div>
 
 

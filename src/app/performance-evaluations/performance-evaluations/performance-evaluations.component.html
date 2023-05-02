@@ -1,50 +1,53 @@
 
-<h5 style="text-align: center;">Avaliação de performance</h5>
+<div class="container">
+    <h5 style="text-align: center;">Avaliação de performance</h5>
 
-<div class="p-inputgroup">
-    <input [(ngModel)]="filter.property" name="property" type="text" pInputText placeholder="Search" (ngModelChange)="getPerformanceEvaluations()">        
-</div>
+    <div class="p-inputgroup">
+        <input [(ngModel)]="filter.property" name="property" type="text" pInputText placeholder="Search" (ngModelChange)="getPerformanceEvaluations()">        
+    </div>
 
-<br>
+    <br>
 
-<button (click)="onAddNewPerformanceEvaluation()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+    <button (click)="onAddNewPerformanceEvaluation()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div>
-    <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-      ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPerformanceEvaluations()"></p-dropdown>
-</div>
+    <div>
+        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPerformanceEvaluations()"></p-dropdown>
+    </div>
 
-<br>
+    <br>
 
-<p-table [value]="performanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
-    <ng-template pTemplate="header">
-        <tr>
-            <th>ID</th>
-            <th>Nome da posição</th>
-            <th>Competências</th>
-            <th>Nivel de proficiência</th>
-            <th>Ações</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-pe>
-        <tr>
-            <td>{{ pe.id }}</td>
-            <td>{{ pe.position.name }}</td>
-            <td>{{ pe.skill.name }}</td>
-            <td>{{ pe.proficiencyLevel }}</td>
-            <td>
-                <button pButton pTooltip="Edit" (click)="onEditPerformanceEvaluation(pe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                <button pButton (click)="deletionConfirm(pe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+    <p-table [value]="performanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nome da posição</th>
+                <th>Competências</th>
+                <th>Nivel de proficiência</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pe>
+            <tr>
+                <td>{{ pe.id }}</td>
+                <td>{{ pe.position.name }}</td>
+                <td>{{ pe.skill.name }}</td>
+                <td>{{ pe.proficiencyLevel }}</td>
+                <td>
+                    <button pButton pTooltip="Edit" (click)="onEditPerformanceEvaluation(pe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(pe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-<div style="display:inline; float: left; margin-top: 1%;">
-    <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPerformanceEvaluations()"></p-selectButton> 
+    <div style="display:inline; float: left; margin-top: 1%;">
+        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPerformanceEvaluations()"></p-selectButton> 
+    </div>
+
 </div>
 
 <p-dialog header="Avaliação de performance {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw', height: '70vw'}" [draggable]="false" [resizable]="false">
