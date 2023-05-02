@@ -1,0 +1,4 @@
+.col-acoes {
+    width: 115px; /*Dando largura a coluna*/
+    text-align: center !important; /*Centralizando o conteudo(buttoes) da coluna accoes*/
+}
