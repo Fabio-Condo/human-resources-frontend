@@ -1,21 +1,11 @@
-
 <div class="container">
     <h5 style="text-align: center;">Avaliação de desenpenho</h5>
 
-    <div class="p-inputgroup" style="width: 40%">
-        <input [(ngModel)]="filter.property" name="property" type="text" pInputText placeholder="Search" (ngModelChange)="getPerformanceEvaluations()">        
-    </div>
-
-    <br>
-
-    <button (click)="onAddNewPerformanceEvaluation()" pButton class="p-button-sm" label="Nova posição +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
-
-    <br>
-    <br>
-
-    <div>
-        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+    <div >
+        <input style="width: 30%" [(ngModel)]="filter.property" name="property" type="text" pInputText placeholder="Search" (ngModelChange)="getPerformanceEvaluations()">    
+        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPerformanceEvaluations()"></p-dropdown>
+        <button (click)="onAddNewPerformanceEvaluation()" pButton label="Nova posição +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>
@@ -24,8 +14,8 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">ID</th>
-                <th style="background-color: #fff;">Nome da posição</th>
-                <th style="background-color: #fff;">Competências</th>
+                <th style="background-color: #fff;">Cargo</th>
+                <th style="background-color: #fff;">Competência</th>
                 <th style="background-color: #fff;">Nivel de proficiência</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
@@ -54,21 +44,20 @@
     <form autocomplete="off" #performanceEvaluationForm="ngForm" (ngSubmit)="save(performanceEvaluationForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Proficiency Level</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="proficiencyLevel"
-                    ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
-            </div>
-
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Skills</label>
+                <label>Compentencia</label>
                 <p-dropdown class="p-inputtext-sm" [options]="skills" placeholder="Selecione" [filter]="true"
                     name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.skill.id"></p-dropdown>
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Positions</label>
+                <label>Cargo</label>
                 <p-dropdown class="p-inputtext-sm" [options]="positions" placeholder="Selecione" [filter]="true"
                     name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.position.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Nivel de proficiencia</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="proficiencyLevel"
+                    ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 

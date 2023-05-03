@@ -2,20 +2,11 @@
 <div class="container">
     <h5 style="text-align: center;">Local de trabalho</h5>
 
-    <div class="p-inputgroup" style="width: 40%">
-        <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getWorkplaces()">        
-    </div>
-
-    <br>
-
-    <button (click)="onAddNewWorkplace()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
-
-    <br>
-    <br>
-
-    <div>
-        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+    <div >
+        <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getWorkplaces()">    
+        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
+        <button (click)="onAddNewWorkplace()" pButton label="Novo local de trabalho +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>
@@ -23,14 +14,12 @@
     <p-table [value]="workplaces" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">ID</th>
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Ações</th> 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-workplace>
             <tr>
-                <td>{{ workplace.id }}</td>
                 <td>{{ workplace.name }}</td>
                 <td>
                     <button pButton pTooltip="Edit" (click)="onEditWorkplace(workplace)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;

@@ -2,24 +2,14 @@
 <div class="container">
     <h5 style="text-align: center;">Clulters administrativos</h5>
 
-    <div class="p-inputgroup" style="width: 40%">
-        <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getAdministrativeClusters()">        
-    </div>
-
-    <br>
-
-    <button (click)="onAddNewadministrativeCluster()" pButton class="p-button-sm" label="Novo departamento +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
-
-    <br>
-    <br>
-
-    <div>
-        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
+    <div >
+        <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getAdministrativeClusters()">    
+        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getAdministrativeClusters()"></p-dropdown>
+        <button (click)="onAddNewadministrativeCluster()" pButton label="Novo cluster +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>
-
 
     <p-table [value]="administrativeClusters" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">

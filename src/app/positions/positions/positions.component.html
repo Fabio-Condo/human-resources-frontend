@@ -2,20 +2,11 @@
 <div class="container">
   <h5 style="text-align: center;">Cargos</h5>
 
-  <div class="p-inputgroup" style="width: 40%">
-      <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getPositions()">        
-  </div>
-
-  <br>
-
-  <button (click)="onAddNewPosition()" pButton class="p-button-sm" label="Novo cargo +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
-
-  <br>
-  <br>
-
-  <div>
-      <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+  <div >
+    <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getPositions()">    
+    <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+    ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+    <button (click)="onAddNewPosition()" pButton label="Novo cargo +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
   </div>
 
   <br>
