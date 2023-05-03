@@ -1,3 +1,5 @@
+import { IProvince } from "./IProvince";
+
 export interface IEmployee {
     id: number,
     name: string,
@@ -6,4 +8,5 @@ export interface IEmployee {
     physicalAddress: string,
     maritalStatus: string,
     spousesName: string,
+    province: IProvince;
 }

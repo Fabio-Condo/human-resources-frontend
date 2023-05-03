@@ -1,4 +1,5 @@
 import { IEmployee } from "../interfaces/IEmployee";
+import { Province } from "./Province";
 
 export class Employee implements IEmployee {
     id!: number;
@@ -8,4 +9,5 @@ export class Employee implements IEmployee {
     physicalAddress!: string;
     maritalStatus!: string;
     spousesName!: string;
+    province = new  Province;
 }

@@ -10,12 +10,14 @@
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
     </div>
 
+    <button (click)="onAddNewEmployee()" pButton class="p-button-sm" label="Novo cargo +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
+
+
     <br>
 
     <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">ID</th>
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Genero</th>
                 <th style="background-color: #fff;">Ações</th>       
@@ -23,7 +25,6 @@
         </ng-template>
         <ng-template pTemplate="body" let-employee>
             <tr>
-                <td>{{ employee.id }}</td>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.gender }}</td>
                 <td>
@@ -70,6 +71,15 @@
                 <input pInputText class="p-inputtext-sm" type="text" name="birthday"
                 ngModel #birthday="ngModel" required minlength="1" [(ngModel)]="employee.birthday">  
             </div>
+            <div class="col-12 md-12 p-fluid">
+                <label>Data de nascimento</label>
+      
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
+                  [inline]="false" [readonlyInput]="false" 
+                  ngModel #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
+
+              </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Endereço fisico</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="physicalAddress"
@@ -85,6 +95,13 @@
                 <input pInputText class="p-inputtext-sm" type="text" name="spousesName"
                 ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
             </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Provincia</label>    
+                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                    [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
+                    #province="ngModel" [required]=true>
+                </p-dropdown>
+              </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;

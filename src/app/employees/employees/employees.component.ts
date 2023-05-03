@@ -7,6 +7,7 @@ import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IEmployee } from 'src/app/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/model/Employee';
+import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
 
 @Component({
@@ -23,6 +24,9 @@ export class EmployeesComponent implements OnInit {
 
   employee: IEmployee = new Employee;
   displayModalSave: boolean = false;
+
+  provinces: any[] = [];
+  //selectedProvince?: number;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -43,11 +47,13 @@ export class EmployeesComponent implements OnInit {
     private employeesService: EmployeesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private provinceService: ProvinceService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('employees page');
+    this.getProvinces();
   }
 
   @ViewChild('table') grid: any;
@@ -77,6 +83,7 @@ export class EmployeesComponent implements OnInit {
         this.employee = employeeAdded;
         this.showLoading = false;
         this.getEmployees();
+        this.convertStringsToDates([employeeAdded]);
         this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -92,6 +99,7 @@ export class EmployeesComponent implements OnInit {
       (employee) => {
         this.employee = employee;
         this.showLoading = false;
+        this.convertStringsToDates([employee]);
         this.messageService.add({ severity: 'success', detail: 'Employee updated successfully!' });
       },
       (errorResponse: HttpErrorResponse) => {
@@ -143,12 +151,26 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  onAddNewEmoployee(): void {
+  getProvinces() {
+    this.provinceService.findAll().then(data => {
+      this.provinces = data.map((province:any) => ({ 
+        label: province.name,
+        value: province.id 
+      }));
+    }),
+    (errorResponse: HttpErrorResponse) => {
+      this.sendErrorNotification(errorResponse.error.message);
+      this.showLoading = false;
+    }
+  } 
+
+  onAddNewEmployee(): void {
     this.employee = new Employee();
     this.displayModalSave = true;
   }
 
   onEditEmployee(editEmployee: Employee): void {
+    this.convertStringsToDates([editEmployee]);
     this.employee = editEmployee;
     this.employee.id = editEmployee.id;
     this.displayModalSave = true;
@@ -157,6 +179,12 @@ export class EmployeesComponent implements OnInit {
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.getEmployees(page);
+  }
+
+  private convertStringsToDates(employees: any[]) {
+    for (const employee of employees) {
+      employee.birthday = new Date(employee.birthday);
+    }
   }
 
   private sendErrorNotification(message: string): void {
