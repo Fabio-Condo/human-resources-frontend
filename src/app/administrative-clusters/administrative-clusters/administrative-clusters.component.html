@@ -14,14 +14,12 @@
     <p-table [value]="administrativeClusters" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">ID</th>
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Ações</th> 
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-ac>
             <tr>
-                <td>{{ ac.id }}</td>
                 <td>{{ ac.name }}</td>
                 <td>
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(ac)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;

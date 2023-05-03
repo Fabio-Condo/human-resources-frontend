@@ -13,7 +13,6 @@
     <p-table [value]="performanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">ID</th>
                 <th style="background-color: #fff;">Cargo</th>
                 <th style="background-color: #fff;">Competência</th>
                 <th style="background-color: #fff;">Nivel de proficiência</th>
@@ -22,7 +21,6 @@
         </ng-template>
         <ng-template pTemplate="body" let-pe>
             <tr>
-                <td>{{ pe.id }}</td>
                 <td>{{ pe.position.name }}</td>
                 <td>{{ pe.skill.name }}</td>
                 <td>{{ pe.proficiencyLevel }}</td>
@@ -43,11 +41,6 @@
 <p-dialog header="Avaliação de performance {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw', height: '40vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #performanceEvaluationForm="ngForm" (ngSubmit)="save(performanceEvaluationForm)">
         <div class="formgrid grid">
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Compentencia</label>
-                <p-dropdown class="p-inputtext-sm" [options]="skills" placeholder="Selecione" [filter]="true"
-                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.skill.id"></p-dropdown>
-            </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Cargo</label>
@@ -58,6 +51,12 @@
                 <label>Nivel de proficiencia</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="proficiencyLevel"
                     ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
+            </div>
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Compentencia</label>
+                <p-dropdown class="p-inputtext-sm" [options]="skills" placeholder="Selecione" [filter]="true"
+                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.skill.id"></p-dropdown>
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
