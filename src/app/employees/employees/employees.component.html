@@ -5,14 +5,19 @@
         <input [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getEmployees()">        
     </div>
 
+    <br>
+
     <div>
         <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
     </div>
 
+    <br>
+
     <button (click)="onAddNewEmployee()" pButton class="p-button-sm" label="Novo cargo +" style="height: 30px; width: 182px; background-color: #63c05a; border-style: none; margin-top: -5%;"></button>
 
 
+    <br>
     <br>
 
     <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
@@ -65,11 +70,6 @@
                 <label>Genero</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="gender"
                 ngModel #gender="ngModel" required minlength="1" [(ngModel)]="employee.gender">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Data de nascimento</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="birthday"
-                ngModel #birthday="ngModel" required minlength="1" [(ngModel)]="employee.birthday">  
             </div>
             <div class="col-12 md-12 p-fluid">
                 <label>Data de nascimento</label>
