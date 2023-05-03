@@ -45,18 +45,40 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Cargo</label>
                 <p-dropdown class="p-inputtext-sm" [options]="positions" placeholder="Selecione" [filter]="true"
-                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.position.id"></p-dropdown>
+                    name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.position.id" (onChange)="getPositionById(performanceEvaluation.position.id)"></p-dropdown>
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Nivel de proficiencia</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="proficiencyLevel"
-                    ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;" >
+                <label>Grupo funcional</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="functionalGroup" disabled
+                    ngModel #functionalGroup="ngModel" required minlength="1" [(ngModel)]="postionById.functionalGroup">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;" >
+                <label>Missão</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="mission" disabled
+                    ngModel #mission="ngModel" required minlength="1" [(ngModel)]="postionById.mission">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;" >
+                <label>Local de trabalho</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="workplace" disabled
+                    ngModel #workplace="ngModel" required minlength="1" [(ngModel)]="postionById.workplace.name">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;" >
+                <label>Reporter Hierarquico</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="hierarchicalReporter" disabled
+                    ngModel #hierarchicalReporter="ngModel" required minlength="1" [(ngModel)]="postionById.hierarchicalReporter.name">  
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Compentencia</label>
                 <p-dropdown class="p-inputtext-sm" [options]="skills" placeholder="Selecione" [filter]="true"
                     name="skill" #skill ngModel [(ngModel)]="performanceEvaluation.skill.id"></p-dropdown>
+            </div>
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Nivel de proficiencia</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="proficiencyLevel"
+                    ngModel #proficiencyLevel="ngModel" required minlength="1" [(ngModel)]="performanceEvaluation.proficiencyLevel">  
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 

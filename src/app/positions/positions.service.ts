@@ -48,4 +48,8 @@ export class PositionsService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.positionsUrl}/${id}`, { });
   }
+
+  getById(id: number): Observable<IPosition> {
+    return this.http.get<IPosition>(`${this.positionsUrl}/${id}`, { });
+  }
 }

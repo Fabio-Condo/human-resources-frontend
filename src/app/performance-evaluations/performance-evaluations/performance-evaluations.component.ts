@@ -6,7 +6,9 @@ import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api'
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPerformanceEvaluation } from 'src/app/interfaces/IPerformanceEvaluation';
 import { IPerformanceEvaluationFilter } from 'src/app/interfaces/IPerformanceEvaluationFilter';
+import { IPosition } from 'src/app/interfaces/IPosition';
 import { PerformanceEvaluation } from 'src/app/model/PerformanceEvaluation';
+import { Position } from 'src/app/model/Position';
 import { PositionsService } from 'src/app/positions/positions.service';
 import { SkillsService } from 'src/app/skills/skills.service';
 import { PerformanceEvaluationsService } from '../performance-evaluations.service';
@@ -28,6 +30,8 @@ export class PerformanceEvaluationsComponent implements OnInit {
 
   skills: any[] = [];
   positions: any[] = [];
+
+  postionById: IPosition = new Position();
 
   sizePage = [
     { label: '5', value: 5 },
@@ -159,6 +163,7 @@ export class PerformanceEvaluationsComponent implements OnInit {
       }
     )
   }
+
   getPositions() {
     return this.positionsService.findAll().subscribe(
       data => {
@@ -174,6 +179,20 @@ export class PerformanceEvaluationsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  getPositionById(id: number) {
+    this.showLoading = true;
+    this.positionsService.getById(id).subscribe(
+      position => {
+        this.postionById = position;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
 
@@ -194,6 +213,7 @@ export class PerformanceEvaluationsComponent implements OnInit {
   onEditPerformanceEvaluation(editPerformanceEvaluation: PerformanceEvaluation): void {
     this.performanceEvaluation = editPerformanceEvaluation;
     this.performanceEvaluation.id = editPerformanceEvaluation.id
+    this.getPositionById(editPerformanceEvaluation.position.id)
     this.displayModalSave = true;
   }
 

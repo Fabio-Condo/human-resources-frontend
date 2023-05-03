@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { AdministrativeClustersService } from 'src/app/administrative-clusters/administrative-clusters.service';
 import { DepartmentService } from 'src/app/departments/department.service';
+import { EmployeesService } from 'src/app/employees/employees.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
@@ -55,6 +56,8 @@ export class PositionsComponent implements OnInit {
   professionalExperience?: ProfessionalExperience;
   ProfessionalExperienceIndex?: number;
 
+  employees: any[] = [];
+
   sizePage = [
     { label: '5', value: 5 },
     { label: '10', value: 10 },
@@ -77,6 +80,7 @@ export class PositionsComponent implements OnInit {
     private workplacesService: WorkplacesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private employeesService: EmployeesService,
     private title: Title,
   ) { }
 
@@ -85,6 +89,7 @@ export class PositionsComponent implements OnInit {
     this.getDepartments();
     this.getAdministrativeClusters();
     this.getWorkplaces();
+    this.getHierarchicalReporter();
   }
 
   filter: IPositionFilter = {
@@ -212,6 +217,23 @@ export class PositionsComponent implements OnInit {
           return  {
             label: workplace.name,
             value: workplace.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getHierarchicalReporter() {
+    return this.employeesService.findAll().subscribe(
+      data => {
+        this.employees = data.content.map(employee => {
+          return  {
+            label: employee.name,
+            value: employee.id
           }
         })
       },

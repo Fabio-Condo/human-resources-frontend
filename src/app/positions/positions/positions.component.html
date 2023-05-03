@@ -84,6 +84,11 @@
                     name="administrativeCluster" #administrativeCluster ngModel [(ngModel)]="position.administrativeCluster.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Reporter hierarquico</label>
+              <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
+                  name="hierarchicalReporter" #hierarchicalReporter ngModel [(ngModel)]="position.hierarchicalReporter.id"></p-dropdown>
+          </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Local de trabalho</label>
                 <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
                     name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
