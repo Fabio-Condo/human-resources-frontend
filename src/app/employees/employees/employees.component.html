@@ -27,7 +27,7 @@
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.gender }}</td>
                 <td>
-                    <button pButton pTooltip="Edit" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
             </tr>
@@ -51,3 +51,48 @@
     </div>
 
 </div>
+
+<p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
+        <div class="formgrid grid">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Nome</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="name"
+                ngModel #name="ngModel" required minlength="1" [(ngModel)]="employee.name">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Genero</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="gender"
+                ngModel #gender="ngModel" required minlength="1" [(ngModel)]="employee.gender">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Data de nascimento</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="birthday"
+                ngModel #birthday="ngModel" required minlength="1" [(ngModel)]="employee.birthday">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Endereço fisico</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="physicalAddress"
+                ngModel #physicalAddress="ngModel" required minlength="1" [(ngModel)]="employee.physicalAddress">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Estado civil</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="maritalStatus"
+                ngModel #maritalStatus="ngModel" required minlength="1" [(ngModel)]="employee.maritalStatus">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Conjugue</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="spousesName"
+                ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                  </button>
+              </div>
+        </div>
+      
+    </form>
+</p-dialog>

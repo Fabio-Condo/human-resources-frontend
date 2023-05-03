@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IEmployee } from 'src/app/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/interfaces/IEmployeeFilter';
+import { Employee } from 'src/app/model/Employee';
 import { EmployeesService } from '../employees.service';
 
 @Component({
@@ -18,6 +20,9 @@ export class EmployeesComponent implements OnInit {
 
   totalRecords: number = 0
   employees: IEmployee[] = [];
+
+  employee: IEmployee = new Employee;
+  displayModalSave: boolean = false;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -51,6 +56,49 @@ export class EmployeesComponent implements OnInit {
     page: 0,
     itemsPerPage: 5,
     sort: 'name,asc'
+  }
+
+  get editing() {
+    return Boolean(this.employee.id);
+  }
+
+  save(employeeForm: NgForm) {
+    if (this.editing) {
+      this.update(employeeForm)
+    } else {
+      this.addNew(employeeForm)
+    }
+  }
+
+  addNew(employeeForm: NgForm) {
+    this.showLoading = true;
+    this.employeesService.add(this.employee).subscribe(
+      (employeeAdded) => {
+        this.employee = employeeAdded;
+        this.showLoading = false;
+        this.getEmployees();
+        this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(employeeForm: NgForm) {
+    this.showLoading = true;
+    this.employeesService.update(this.employee).subscribe(
+      (employee) => {
+        this.employee = employee;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Employee updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
   }
 
   getEmployees(page: number = 0): void {
@@ -93,6 +141,17 @@ export class EmployeesComponent implements OnInit {
           this.deleteEmployee(employee);
       }
     });
+  }
+
+  onAddNewEmoployee(): void {
+    this.employee = new Employee();
+    this.displayModalSave = true;
+  }
+
+  onEditEmployee(editEmployee: Employee): void {
+    this.employee = editEmployee;
+    this.employee.id = editEmployee.id;
+    this.displayModalSave = true;
   }
 
   onChangePage(event: LazyLoadEvent) {
