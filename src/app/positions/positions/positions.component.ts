@@ -35,6 +35,7 @@ export class PositionsComponent implements OnInit {
   departments: any[] = [] ;
   administrativeClusters: any[] = [] ;
   workplaces: any[] = [] ;
+  employees: any[] = [];
 
   mainResponsibilities: Array<MainResponsibility> = []
   showMainResponsibilityForm = false;
@@ -55,8 +56,6 @@ export class PositionsComponent implements OnInit {
   showProfessionalExperienceForm = false;
   professionalExperience?: ProfessionalExperience;
   ProfessionalExperienceIndex?: number;
-
-  employees: any[] = [];
 
   sizePage = [
     { label: '5', value: 5 },
