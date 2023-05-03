@@ -43,11 +43,11 @@
         <ng-template pTemplate="emptymessage">
             <tr>
             <td colspan="10">
-                <span *ngIf="showLoading" style="color:#6662cf;">Loading... </span> 
+                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
                 <span *ngIf="!showLoading">No title found </span> 
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                 <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #6662cf;" (click)="getDepartments(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getDepartments(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
                 </a>                  
             </td>
             </tr>

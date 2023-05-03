@@ -7,4 +7,5 @@ export class Employee implements IEmployee {
     birthday!: Date;
     physicalAddress!: string;
     maritalStatus!: string;
+    spousesName!: string;
 }

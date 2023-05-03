@@ -1,60 +1,59 @@
 .navbar {
-    /*position: absolute;*/
-    padding: 8px 0 3px;  /*Centralizando o icon do menu da nav*/
-    background-color: #53595c;
-    /*background-color: transparent;*/
-  }
-  
-  .navbar-toggle {
-    color: #fff;
-  }
-  
-  /*------Navbar(Menu) lateral----------*/
-  .navbar-menu {
-    position: fixed;  /*Fixando o elemento na pagina, mesmo que exista muito conteudo e tendo usando um scrol(rolagem) da pagina, o menu ficara fixo*/
-    top: 0;
-    bottom: 0; /*Para o menu ficar colodo em baixo*/
-    right: 0; /*Para ficar colodo do lado direito*/
-    width: 210px; /*Largura de 210px*/
-    margin: 0; /*Tirando a margem em cima*/
-    padding: 0; /*Tirando o espacamento interno*/
-    z-index: 9998; /*z-index indica uma prioridade, quem fica em cima do outro. Entao colocaremos um numero muito alto para garantir que o menu fique em cima de todo conteudo da tela principal*/
-  
-    background-color: #35454c;  /*Dancor cinza escuro ao menu lateral*/
-  
-    list-style: none;  /*Tirando as bolinhas da lista de itens*/
-  }
-  
-  .navbar-usuario {  /*Custumizando onde fica o nome do usario no menu*/
-    padding: 15px;  /*Espaçamento interno de 15px (embaixo, cima, esquerda e direita)*/
-    margin-bottom: 15px;  /*Colocando uma margem inferior(em baixo) de 15px*/
-    border-bottom: 1px solid #fff;  /*Colocando uma borda de 5px solido, dando uma cor cinza um pouco mais claroo que a cor do fundo*/
-  
-     /*text-transform: uppercase;  */  /*Letras maiusculas*/
-    font-weight: bold;  /*Dando um peso nas letras(espessura da fonte)*/
-    color: #fff;  /*Dando cor branca*/
-  }
-  
-  .navbar-menuitem {
-    padding: 5px;  /*Dando um espacamento aos itens do menu lateal*/
-    background-color: #6662cf;
-  }
-  
-  .navbar-menuitem a {  /*Estilizando o "a" que é filho do navbar-menuitem */
-    color: #fff;  /*dando uma cor cinza claro*/
-    text-decoration: none;  /*Para tirar o sublinhado dos links*/
-  }
-  
-  .navbar-menuitem a:hover {  /*Estizar quando o mouse passar por cima dos links*/
-    color: black;  /*Dando cor branca quando mouse passar por cima*/
-  }
-  
-  .navbar-menuitem.ativo {  /*Se este link estiver activo coloque cinzenta*/
-    background-color: rgba(196, 196, 245, 0.75);
-    padding-bottom: 5px;
-    padding-top: 5px;  /*Dando um espacamento aos itens do menu lateal*/
-    color: black;
-  }
-  
-  /*--------------------------------------*/
-  
+  /*position: absolute;*/
+  padding: 8px 0 3px;  /*Centralizando o icon do menu da nav*/
+  background-color: #53595c;
+  /*background-color: transparent;*/
+}
+
+.navbar-toggle {
+  color: #fff;
+}
+
+/*------Navbar(Menu) lateral----------*/
+.navbar-menu {
+  position: fixed;  /*Fixando o elemento na pagina, mesmo que exista muito conteudo e tendo usando um scrol(rolagem) da pagina, o menu ficara fixo*/
+  top: 0;
+  bottom: 0; /*Para o menu ficar colodo em baixo*/
+  right: 0; /*Para ficar colodo do lado direito*/
+  width: 210px; /*Largura de 210px*/
+  margin: 0; /*Tirando a margem em cima*/
+  padding: 0; /*Tirando o espacamento interno*/
+  z-index: 9998; /*z-index indica uma prioridade, quem fica em cima do outro. Entao colocaremos um numero muito alto para garantir que o menu fique em cima de todo conteudo da tela principal*/
+
+  background-color: #35454c;  /*Dancor cinza escuro ao menu lateral*/
+
+  list-style: none;  /*Tirando as bolinhas da lista de itens*/
+}
+
+.navbar-usuario {  /*Custumizando onde fica o nome do usario no menu*/
+  padding: 15px;  /*Espaçamento interno de 15px (embaixo, cima, esquerda e direita)*/
+  margin-bottom: 15px;  /*Colocando uma margem inferior(em baixo) de 15px*/
+  border-bottom: 1px solid #fff;  /*Colocando uma borda de 5px solido, dando uma cor cinza um pouco mais claroo que a cor do fundo*/
+
+   /*text-transform: uppercase;  */  /*Letras maiusculas*/
+  font-weight: bold;  /*Dando um peso nas letras(espessura da fonte)*/
+  color: #fff;  /*Dando cor branca*/
+}
+
+.navbar-menuitem {
+  padding: 5px;  /*Dando um espacamento aos itens do menu lateal*/
+  background-color: #1c80cf;
+}
+
+.navbar-menuitem a {  /*Estilizando o "a" que é filho do navbar-menuitem */
+  color: #fff;  /*dando uma cor cinza claro*/
+  text-decoration: none;  /*Para tirar o sublinhado dos links*/
+}
+
+.navbar-menuitem a:hover {  /*Estizar quando o mouse passar por cima dos links*/
+  color: black;  /*Dando cor branca quando mouse passar por cima*/
+}
+
+.navbar-menuitem.ativo {  /*Se este link estiver activo coloque cinzenta*/
+  background-color: rgba(196, 196, 245, 0.75);
+  padding-bottom: 5px;
+  padding-top: 5px;  /*Dando um espacamento aos itens do menu lateal*/
+  color: black;
+}
+
+/*--------------------------------------*/

@@ -23,25 +23,23 @@
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
       <ng-template pTemplate="header">
           <tr>
-              <th style="background-color: #fff;">ID</th>
               <th style="background-color: #fff;">Nome</th>
               <th style="background-color: #fff;">Grupo Funcional</th>
-              <th style="background-color: #fff;">Missão</th>
               <th style="background-color: #fff;">Departamento</th>
               <th style="background-color: #fff;">Local de trabalho</th>
               <th style="background-color: #fff;">Cluster Administrativo</th>
+              <th style="background-color: #fff;">Superior hierarquico</th>
               <th style="background-color: #fff;">Ações</th> 
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-position>
           <tr>
-              <td>{{ position.id }}</td>
               <td>{{ position.name }}</td>
               <td>{{ position.functionalGroup }}</td>
-              <td>{{ position.mission }}</td>
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td>{{ position.administrativeCluster.name }}</td>
+              <td>{{ position.hierarchicalReporter.name }}</td>
               <td>
                   <button pButton pTooltip="Edit" (click)="onEditDepartment(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                   <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
@@ -102,7 +100,7 @@
 
             <!--Main Responsibilities-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Pricipais Responsibilities | </label> <span (click)="openAddNewMainResponsabilityModal()"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Pricipais Responsibilities | </label> <span (click)="openAddNewMainResponsabilityModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.mainResponsibilities" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -118,8 +116,8 @@
                       <td>{{ mr.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span (click)="getReadEditintMainResponsability(mr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeMainResponsability(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="getReadEditintMainResponsability(mr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                            <span (click)="removeMainResponsability(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
                         </span>
                         </td>
                     </tr>
@@ -136,7 +134,7 @@
 
             <!--Specific Requirements-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Requisitos especificos | </label> <span (click)="openAddNewSpecificRequirementModal()"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Requisitos especificos | </label> <span (click)="openAddNewSpecificRequirementModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.specificRequirements" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -152,8 +150,8 @@
                       <td>{{ sr.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span (click)="getReadEditSpecificRequirement(sr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeSpecificRequirement(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="getReadEditSpecificRequirement(sr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                            <span (click)="removeSpecificRequirement(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>
                     </tr>
@@ -170,7 +168,7 @@
 
             <!--Training-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Formação | </label><span (click)="openAddNewTrainingModal()"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Formação | </label><span (click)="openAddNewTrainingModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.training" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -186,8 +184,8 @@
                       <td>{{ training.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span (click)="getReadTraining(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="getReadTraining(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                            <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>
                     </tr>
@@ -204,7 +202,7 @@
 
             <!--Professional Experience-->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Experiencia Professional | </label> <span (click)="openAddNewProfessionalExperienceModal()"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Experiencia Professional | </label> <span (click)="openAddNewProfessionalExperienceModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.professionalExperience" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -220,8 +218,8 @@
                       <td>{{ pf.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span (click)="getReadProfessionalExperience(pf, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                          <span (click)="removeProfessionalExperience(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #6662cf;" tooltipPosition="top"> remover </a></span>
+                          <span (click)="getReadProfessionalExperience(pf, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                          <span (click)="removeProfessionalExperience(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>                     
                     </tr>       
@@ -245,7 +243,7 @@
                             required [(ngModel)]="professionalExperience!.designation" #designation="ngModel"/>
                         </div>
                         <div class="col-12 p-fluid">
-                          <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+                          <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
                         </div>
                     </form>
                   </div>
@@ -273,7 +271,7 @@
           required [(ngModel)]="mainResponsibility.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmMainResponsibility.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmMainResponsibility.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
       </div>
     </form>
 </p-dialog>
@@ -287,7 +285,7 @@
           required [(ngModel)]="specificRequirement.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
       </div>
     </form>
 </p-dialog>
@@ -301,7 +299,7 @@
           required [(ngModel)]="training.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmTraining.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmTraining.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
       </div>
     </form>
 </p-dialog>

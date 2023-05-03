@@ -28,18 +28,18 @@
                 <td>{{ employee.gender }}</td>
                 <td>
                     <button pButton pTooltip="Edit" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                    <button pButton pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
             <td colspan="10">
-                <span *ngIf="showLoading" style="color:#6662cf;">Loading... </span> 
+                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
                 <span *ngIf="!showLoading">No title found </span> 
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                 <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #6662cf;" (click)="getEmployees(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getEmployees(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
                 </a>                  
             </td>
             </tr>

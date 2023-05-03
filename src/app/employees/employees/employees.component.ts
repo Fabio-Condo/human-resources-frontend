@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
@@ -35,7 +35,7 @@ export class EmployeesComponent implements OnInit {
   ];
 
   constructor(
-    private departmentService: EmployeesService,
+    private employeesService: EmployeesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private title: Title,
@@ -43,8 +43,9 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('employees page');
-    this.getEmployees();
   }
+
+  @ViewChild('table') grid: any;
 
   filter: IEmployeeFilter = {
     page: 0,
@@ -55,7 +56,7 @@ export class EmployeesComponent implements OnInit {
   getEmployees(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.departmentService.getEmployees(this.filter).subscribe(
+    this.employeesService.getEmployees(this.filter).subscribe(
       (data: IApiResponse<IEmployee>) => {
         this.employees = data.content;
         this.totalRecords = data.totalElements;
@@ -66,6 +67,32 @@ export class EmployeesComponent implements OnInit {
         this.showLoading = false;
       }
     );   
+  }
+
+  deleteEmployee(employee: IEmployee) {
+    this.employeesService.delete(employee.id).subscribe(
+      () => {
+        if (this.grid.first === 0) {
+          this.getEmployees();
+        } else {
+          this.grid.reset();
+        }
+        this.messageService.add({ severity: 'success', detail: 'Employee deleted succefully!' })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  deletionConfirm(employee: IEmployee): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete?',
+      accept: () => {
+          this.deleteEmployee(employee);
+      }
+    });
   }
 
   onChangePage(event: LazyLoadEvent) {

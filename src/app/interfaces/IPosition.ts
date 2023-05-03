@@ -1,6 +1,7 @@
 import { MainResponsibility } from "../model/MainResponsibility";
 import { IAdministrativeCluster } from "./IAdministrativeCluster";
 import { IDepartment } from "./IDepartments";
+import { IEmployee } from "./IEmployee";
 import { IMainResponsibility } from "./IMainResponsibility";
 import { IProfessionalExperience } from "./IProfessionalExperience";
 import { ISpecificRequirement } from "./ISpecificRequirement";
@@ -13,6 +14,7 @@ export interface IPosition {
     mission: string,
     age: number,
     language: string,
+    hierarchicalReporter: IEmployee,
     department: IDepartment,
     workplace: IWorkplace,
     administrativeCluster: IAdministrativeCluster,

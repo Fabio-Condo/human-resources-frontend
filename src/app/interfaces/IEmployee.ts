@@ -4,5 +4,6 @@ export interface IEmployee {
     gender: string,
     birthday: Date,
     physicalAddress: string,
-    maritalStatus: string
+    maritalStatus: string,
+    spousesName: string,
 }
