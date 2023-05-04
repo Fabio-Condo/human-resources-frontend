@@ -5,7 +5,7 @@
         <input style="width: 30%" [(ngModel)]="filter.property" name="property" type="text" pInputText placeholder="Search" (ngModelChange)="getPerformanceEvaluations()">    
         <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPerformanceEvaluations()"></p-dropdown>
-        <button (click)="onAddNewPerformanceEvaluation()" pButton label="Nova posição +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
+        <button (click)="onAddNewPerformanceEvaluation()" pButton label="Nova +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>

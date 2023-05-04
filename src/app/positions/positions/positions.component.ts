@@ -248,7 +248,7 @@ export class PositionsComponent implements OnInit {
     this.displayModalSave = true;
   }
 
-  onEditDepartment(editPosition: Position): void {
+  onEditPosition(editPosition: Position): void {
     this.position = editPosition;
     this.position.id = editPosition.id
     this.displayModalSave = true;

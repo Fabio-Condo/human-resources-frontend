@@ -6,7 +6,7 @@
         <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getSkills()">    
         <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getSkills()"></p-dropdown>
-        <button (click)="onAddNewSkill()" pButton label="Nova compentencia +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
+        <button (click)="onAddNewSkill()" pButton label="Nova +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>

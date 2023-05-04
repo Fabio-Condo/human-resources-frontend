@@ -6,7 +6,7 @@
         <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getDepartments()">    
         <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
-        <button (click)="onAddNewDepartment()" pButton label="Novo departamentor +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
+        <button (click)="onAddNewDepartment()" pButton label="Novo +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>
@@ -21,7 +21,8 @@
         <ng-template pTemplate="body" let-dep>
             <tr>
                 <td>{{ dep.name }}</td>
-                <td>
+                <td> 
+                    <button pButton pTooltip="Edit" (click)="onSelectDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
@@ -62,7 +63,40 @@
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
                   </button>
               </div>
-        </div>
-      
+        </div>  
     </form>
 </p-dialog>
+
+
+<!--Show -->
+<p-dialog header="{{selectedDepartmentModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    <!--Employees view-->
+    <div class="formgrid grid">
+        <div class="col-12 p-fluid">
+            <label>Funcionários</label>
+            <p-table [value]="selectedDepartmentModal.employees" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+            <ng-template pTemplate="header">
+                <tr>
+                <th style="background-color: #F4F6F6;">Nome</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                <tr>
+                <td>{{ employee.name }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                    Sem funcionários
+                    </td>
+                </tr>
+            </ng-template>            
+            </p-table>   
+        </div> 
+    </div>         
+</p-dialog>
+
+
+            

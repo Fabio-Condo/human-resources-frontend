@@ -32,7 +32,7 @@
               <td>{{ position.administrativeCluster.name }}</td>
               <td>{{ position.hierarchicalReporter.name }}</td>
               <td>
-                  <button pButton pTooltip="Edit" (click)="onEditDepartment(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                  <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                   <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
               </td>
           </tr>
@@ -49,39 +49,24 @@
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Name</label>
+                <label>Nome</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="name"
                     ngModel #name="ngModel" required minlength="1" [(ngModel)]="position.name">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Functional Group</label>
+                <label>Grupo funcional</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="functionalGroup"
                     ngModel #functionalGroup="ngModel" required minlength="1" [(ngModel)]="position.functionalGroup">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Mission</label>
+                <label>Missão</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="mission"
                     ngModel #mission="ngModel" required minlength="1" [(ngModel)]="position.mission">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Age</label>
-                <input pInputText class="p-inputtext-sm" type="number" name="age"
-                    ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Language</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="language"
-                    ngModel #language="ngModel" required minlength="1" [(ngModel)]="position.language">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Department</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
-                    name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Cluster Administrativo</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="administrativeClusters" placeholder="Selecione" [filter]="true"
-                    name="administrativeCluster" #administrativeCluster ngModel [(ngModel)]="position.administrativeCluster.id"></p-dropdown>
+              <label>Department</label>
+              <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
+                  name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Reporter hierarquico</label>
@@ -89,9 +74,24 @@
                   name="hierarchicalReporter" #hierarchicalReporter ngModel [(ngModel)]="position.hierarchicalReporter.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Local de trabalho</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
-                    name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+              <label>Local de trabalho</label>
+              <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
+                  name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Cluster Administrativo</label>
+              <p-dropdown class="p-inputtext-sm"  [options]="administrativeClusters" placeholder="Selecione" [filter]="true"
+                  name="administrativeCluster" #administrativeCluster ngModel [(ngModel)]="position.administrativeCluster.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Idade</label>
+                <input pInputText class="p-inputtext-sm" type="number" name="age"
+                    ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Lingua</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="language"
+                    ngModel #language="ngModel" required minlength="1" [(ngModel)]="position.language">  
             </div>
 
             <!--Main Responsibilities-->
@@ -273,7 +273,7 @@
 </p-dialog>
 
 <!--Modal add requirements-->
-<p-dialog [header]="editingSpecificRequirement ? 'Editar requisito especifico' : 'Novo requisito especifico'" [(visible)]="showSpecificRequirementForm" [modal]="true" *ngIf="specificRequirement"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingSpecificRequirement ? 'Editar requisito especifico' : 'Novo'" [(visible)]="showSpecificRequirementForm" [modal]="true" *ngIf="specificRequirement"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSpecificRequirement="ngForm" (ngSubmit)="confirmSpecificRequirement(frmSpecificRequirement)"> 
       <div class="col-12 p-fluid">
         <label>Designation</label>

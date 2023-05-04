@@ -8,6 +8,8 @@ import { DepartmentService } from '../department.service';
 import { NgForm } from '@angular/forms';
 import { Department } from 'src/app/model/Department';
 import { Title } from '@angular/platform-browser';
+import { Employee } from 'src/app/model/Employee';
+import { IEmployee } from 'src/app/interfaces/IEmployee';
 
 @Component({
   selector: 'app-department',
@@ -23,6 +25,10 @@ export class DepartmentComponent implements OnInit {
 
   department: IDepartment = new Department;
   displayModalSave: boolean = false;
+
+  employees: Array<Employee> = [];
+  selectedDepartmentModal: Department = new Department();
+  displayModal = false;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -152,6 +158,11 @@ export class DepartmentComponent implements OnInit {
     this.department = editDepartment;
     this.department.id = editDepartment.id // Not necessary
     this.displayModalSave = true;
+  }
+
+  onSelectDepartment(selectedDepartment: IDepartment): void {
+    this.selectedDepartmentModal = selectedDepartment;
+    this.displayModal = true;
   }
 
   onChangePage(event: LazyLoadEvent) {
