@@ -1,5 +1,6 @@
 import { MainResponsibility } from "../model/MainResponsibility";
 import { IAdministrativeCluster } from "./IAdministrativeCluster";
+import { IBenefit } from "./IBenefit";
 import { IDepartment } from "./IDepartments";
 import { IEmployee } from "./IEmployee";
 import { IMainResponsibility } from "./IMainResponsibility";
@@ -18,6 +19,7 @@ export interface IPosition {
     department: IDepartment,
     workplace: IWorkplace,
     administrativeCluster: IAdministrativeCluster,
+    benefits: IBenefit[];
     mainResponsibilities: IMainResponsibility[];
     specificRequirements: ISpecificRequirement[];
     training: ISpecificRequirement[];

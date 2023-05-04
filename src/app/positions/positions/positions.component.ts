@@ -9,6 +9,7 @@ import { EmployeesService } from 'src/app/employees/employees.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
+import { Benefit } from 'src/app/model/Benefit';
 import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
 import { ProfessionalExperience } from 'src/app/model/ProfessionalExperience';
@@ -55,7 +56,12 @@ export class PositionsComponent implements OnInit {
   professionalExperiences: Array<ProfessionalExperience> = []
   showProfessionalExperienceForm = false;
   professionalExperience?: ProfessionalExperience;
-  ProfessionalExperienceIndex?: number;
+  professionalExperienceIndex?: number;
+
+  benefits: Array<Benefit> = []
+  showBenefitsForm = false;
+  benefit?: Benefit;
+  benefitIndex?: number;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -363,11 +369,11 @@ export class PositionsComponent implements OnInit {
   openAddNewProfessionalExperienceModal() {
     this.showProfessionalExperienceForm = true;
     this.professionalExperience = new Training();
-    this.ProfessionalExperienceIndex = this.position.professionalExperience.length;
+    this.professionalExperienceIndex = this.position.professionalExperience.length;
   }
   
   confirmProfessionalExperience(frm: NgForm) {
-    this.position.professionalExperience[this.ProfessionalExperienceIndex!] = this.cloneTraining(this.professionalExperience!);
+    this.position.professionalExperience[this.professionalExperienceIndex!] = this.cloneTraining(this.professionalExperience!);
     this.showProfessionalExperienceForm = false;
     frm.reset();
   }     
@@ -388,8 +394,40 @@ export class PositionsComponent implements OnInit {
   getReadProfessionalExperience(professionalExperience: ProfessionalExperience, index: number) {
     this.professionalExperience = this.cloneTraining(professionalExperience);
     this.showProfessionalExperienceForm = true;
-    this.ProfessionalExperienceIndex = index;
+    this.professionalExperienceIndex = index;
   }
+
+  // Benefits
+  openAddNewBenefitModal() {
+    this.showBenefitsForm = true;
+    this.benefit = new Training();
+    this.benefitIndex = this.position.benefits.length;
+  }
+  
+  confirmBenefit(frm: NgForm) {
+    this.position.benefits[this.benefitIndex!] = this.cloneBenefit(this.benefit!);
+    this.showBenefitsForm = false;
+    frm.reset();
+  }     
+  
+  cloneBenefit(benefit: Benefit): Benefit {
+    return new Benefit(benefit.id, benefit.designation);
+  }
+  
+  get editingBenefit() {  // show the title in modal
+    return this.benefit && this.benefit?.id;
+  }
+  
+  removeBenefit(index: number) {
+    this.position.benefits.splice(index, 1);
+    console.log("removing: " + index);
+  }
+  
+  getReadBenefit(benefit: Benefit, index: number) {
+    this.benefit = this.cloneBenefit(benefit);
+    this.showBenefitsForm = true;
+    this.benefitIndex = index;
+  }  
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  

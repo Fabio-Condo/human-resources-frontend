@@ -15,22 +15,16 @@
       <ng-template pTemplate="header">
           <tr>
               <th style="background-color: #fff;">Nome</th>
-              <th style="background-color: #fff;">Grupo Funcional</th>
               <th style="background-color: #fff;">Departamento</th>
               <th style="background-color: #fff;">Local de trabalho</th>
-              <th style="background-color: #fff;">Cluster Administrativo</th>
-              <th style="background-color: #fff;">Superior hierarquico</th>
               <th style="background-color: #fff;">Ações</th> 
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-position>
           <tr>
               <td>{{ position.name }}</td>
-              <td>{{ position.functionalGroup }}</td>
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
-              <td>{{ position.administrativeCluster.name }}</td>
-              <td>{{ position.hierarchicalReporter.name }}</td>
               <td>
                   <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                   <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
@@ -230,20 +224,43 @@
                   </ng-template>   
                  
                 </p-table>   
-
-                <div *ngIf="showProfessionalExperienceForm">
-                    <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)"> 
-                        <div class="col-12 p-fluid">
-                          <label>Designation</label>
-                          <input pInputText type="text" name="designation"
-                            required [(ngModel)]="professionalExperience!.designation" #designation="ngModel"/>
-                        </div>
-                        <div class="col-12 p-fluid">
-                          <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
-                        </div>
-                    </form>
-                  </div>
-            </div>         
+            </div>  
+            
+            <!--Benefits-->
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Beneficios | </label> <span (click)="openAddNewBenefitModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+              <p-table [value]="position.benefits" [responsive]="true" 
+                  styleClass="p-datatable-sm" #tabela >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <!--
+                    <th style="background-color: #F4F6F6;">Designation</th>
+                    <th style="background-color: #F4F6F6;" class="col-valor-header"></th>
+                    -->
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-b let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{ b.designation }}</td>
+                    <td class="col-acoes">
+                      <span class="p-buttonset">
+                        <span (click)="getReadBenefit(b, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                        <span (click)="removeBenefit(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                      </span>
+                    </td>                     
+                  </tr>       
+                  
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="10">
+                        No benefit found
+                      </td>
+                    </tr>
+                </ng-template>   
+               
+              </p-table>   
+            </div> 
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="positionForm.invalid" class="p-button-sm" style="height: 30px;">
@@ -301,8 +318,6 @@
 </p-dialog>
 
 <!--Professional Experience-->
-
-<!--
 <p-dialog [header]="editingProfessionalExperience ? 'Editar experiência profissional' : 'Nova experiência profissional'" [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
     <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)"> 
       <div class="col-12 p-fluid">
@@ -311,8 +326,21 @@
           required [(ngModel)]="professionalExperience.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #6662cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
       </div>
     </form>
 </p-dialog>
--->
+
+<!--Benefits-->
+<p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm" [modal]="true" *ngIf="benefit"> 
+  <form #frmBenefit="ngForm" (ngSubmit)="confirmBenefit(frmBenefit)"> 
+    <div class="col-12 p-fluid">
+      <label>Designation</label>
+      <input pInputText type="text" name="designation"
+        required [(ngModel)]="benefit.designation" #designation="ngModel"/>
+    </div>
+    <div class="col-12 p-fluid">
+      <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmBenefit.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+    </div>
+  </form>
+</p-dialog>

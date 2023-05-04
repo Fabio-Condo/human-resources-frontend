@@ -1,6 +1,7 @@
 import { IMainResponsibility } from "../interfaces/IMainResponsibility";
 import { IPosition } from "../interfaces/IPosition"
 import { AdministrativeCluster } from "./AdministrativeCluster";
+import { Benefit } from "./Benefit";
 import { Department } from "./Department";
 import { Employee } from "./Employee";
 import { MainResponsibility } from "./MainResponsibility";
@@ -20,6 +21,7 @@ export class Position implements IPosition {
     department = new Department;
     workplace = new Workplace;
     administrativeCluster = new AdministrativeCluster;
+    benefits: Benefit[] = [];
     mainResponsibilities: MainResponsibility[] = [];
     specificRequirements: SpecificRequirement[] = [];
     training: Training[] = [];

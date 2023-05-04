@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
+import { DepartmentService } from 'src/app/departments/department.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
+import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { IEmployee } from 'src/app/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/model/Employee';
@@ -24,6 +26,8 @@ export class EmployeesComponent implements OnInit {
 
   employee: IEmployee = new Employee;
   displayModalSave: boolean = false;
+
+  departments: any[] = [] ;
 
   provinces: any[] = [];
   //selectedProvince?: number;
@@ -48,12 +52,14 @@ export class EmployeesComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private provinceService: ProvinceService,
+    private departmentService: DepartmentService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('employees page');
     this.getProvinces();
+    this.getDepartments();
   }
 
   @ViewChild('table') grid: any;
@@ -163,6 +169,23 @@ export class EmployeesComponent implements OnInit {
       this.showLoading = false;
     }
   } 
+
+  getDepartments() {
+    return this.departmentService.findAll().subscribe(
+      data => {
+        this.departments = data.content.map(workplace => {
+          return  {
+            label: workplace.name,
+            value: workplace.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
 
   onAddNewEmployee(): void {
     this.employee = new Employee();

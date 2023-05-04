@@ -91,7 +91,14 @@
                     [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
                     #province="ngModel" [required]=true>
                 </p-dropdown>
-              </div>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Departamento</label>    
+                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                    [filter]="true" [options]="departments" [(ngModel)]="employee.department.id" name="department"
+                    #department="ngModel" [required]=true>
+                </p-dropdown>
+            </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;

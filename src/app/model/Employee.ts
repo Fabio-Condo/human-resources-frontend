@@ -1,4 +1,5 @@
 import { IEmployee } from "../interfaces/IEmployee";
+import { Department } from "./Department";
 import { Province } from "./Province";
 
 export class Employee implements IEmployee {
@@ -10,4 +11,5 @@ export class Employee implements IEmployee {
     maritalStatus!: string;
     spousesName!: string;
     province = new  Province;
+    department = new Department;
 }
