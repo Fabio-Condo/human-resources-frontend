@@ -73,7 +73,7 @@
     <!--Employees view-->
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
-            <label>Funcionários</label>
+            <label>Funcionários</label> <span *ngIf="selectedDepartmentModal.employees.length != 0"> ({{selectedDepartmentModal.employees.length}})</span>
             <p-table [value]="selectedDepartmentModal.employees" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
             <ng-template pTemplate="header">
@@ -95,6 +95,7 @@
             </ng-template>            
             </p-table>   
         </div> 
+        
     </div>         
 </p-dialog>
 
