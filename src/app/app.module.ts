@@ -23,10 +23,12 @@ import { WorkplacesModule } from './workplaces/workplaces.module';
 import { CoreModule } from './core/core.module';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeesRoutingModule } from './employees/employees-routing.module';
+import { EmployeePerformanceEvaluationsModule } from './employee-performance-evaluations/employee-performance-evaluations.module';
+import { EmployeePerformanceEvaluationsRoutingModule } from './employee-performance-evaluations/employee-performance-evaluations-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { EmployeesRoutingModule } from './employees/employees-routing.module';
     PositionsRoutingModule,
     PerformanceEvaluationsRoutingModule,
     EmployeesRoutingModule,
+    EmployeePerformanceEvaluationsRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -50,6 +53,7 @@ import { EmployeesRoutingModule } from './employees/employees-routing.module';
     PositionsModule,
     PerformanceEvaluationsModule,
     EmployeesModule,
+    EmployeePerformanceEvaluationsModule,
 
     CoreModule
   ],

@@ -1,0 +1,30 @@
+<div class="container">
+    <h5 style="text-align: center;">Avaliação de desenpenho dos funcionários</h5>
+
+    <div >
+        <input style="width: 30%" [(ngModel)]="filter.name" name="name" type="text" pInputText placeholder="Search" (ngModelChange)="getEmployeePerformanceEvaluations()">    
+        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
+        <button pButton label="Nova +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
+    </div>
+
+    <br>
+
+    <p-table [value]="employeePerformanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="background-color: #fff;">Funcionário</th>
+                <th style="background-color: #fff;">Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-epe>
+            <tr>
+                <td>{{ epe.employee.name }}</td>
+                <td>
+                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
