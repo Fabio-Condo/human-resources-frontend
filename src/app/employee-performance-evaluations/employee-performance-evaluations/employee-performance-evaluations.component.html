@@ -14,12 +14,18 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Funcionário</th>
+                <th style="background-color: #fff;">Departaento</th>
+                <th style="background-color: #fff;">Data</th>
+                <th style="background-color: #fff;">Categoria</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-epe>
             <tr>
                 <td>{{ epe.employee.name }}</td>
+                <td>{{ epe.employee.department.name }}</td>
+                <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{ epe.category }}</td>
                 <td>
                     <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
