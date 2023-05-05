@@ -18,6 +18,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   totalRecords: number = 0
   employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
+  
 
   sizePage = [
     { label: '5', value: 5 },

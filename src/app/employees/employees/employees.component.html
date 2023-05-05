@@ -23,6 +23,7 @@
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.gender }}</td>
                 <td>
+                    <button pButton pTooltip="Edit" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
@@ -109,4 +110,51 @@
         </div>
       
     </form>
+</p-dialog>
+
+<!--Show -->
+<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '70vw'}" [draggable]="false" [resizable]="false">
+    <!--Employees view-->
+    <div class="formgrid grid">
+        <div class="col-12 p-fluid">
+
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Departamento</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.department.name}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Provincia</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i></li>
+            
+            <br>
+
+            <label>Avaliações de desenpenho</label> <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0"> ({{selectedEmployeeModal.employeePerformanceEvaluations.length}})</span>
+            <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+            <ng-template pTemplate="header">
+                <tr>
+                <th style="background-color: #F4F6F6;">Trabalho em equipe</th>
+                <th style="background-color: #F4F6F6;">Comunicação</th>
+                <th style="background-color: #F4F6F6;">Pensamento estratégico</th>
+                <th style="background-color: #F4F6F6;">Orientação para qualidade</th>
+                <th style="background-color: #F4F6F6;">Categoria</th>
+                <th style="background-color: #F4F6F6;">Data</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-epe let-rowIndex="rowIndex">
+                <tr>
+                <td>{{ epe.teamWork }}</td>
+                <td>{{ epe.communication }}</td>
+                <td>{{ epe.strategicThought }}</td>
+                <td>{{ epe.qualityOrientation }}</td>
+                <td>{{ epe.category }}</td>
+                <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                    Sem Avaliações
+                    </td>
+                </tr>
+            </ng-template>            
+            </p-table>   
+        </div> 
+        
+    </div>         
 </p-dialog>

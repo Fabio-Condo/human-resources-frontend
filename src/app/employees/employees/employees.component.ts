@@ -9,6 +9,7 @@ import { IDepartment } from 'src/app/interfaces/IDepartments';
 import { IEmployee } from 'src/app/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/model/Employee';
+import { EmployeePerformanceEvaluation } from 'src/app/model/EmployeePerformanceEvaluation';
 import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
 
@@ -31,6 +32,10 @@ export class EmployeesComponent implements OnInit {
 
   provinces: any[] = [];
   //selectedProvince?: number;
+
+  employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
+  selectedEmployeeModal: Employee = new Employee();
+  displayModal = false;
 
   sizePage = [
     { label: '5', value: 5 },
@@ -202,6 +207,11 @@ export class EmployeesComponent implements OnInit {
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.getEmployees(page);
+  }
+
+  onSelectEmployee(selectedEmployee: IEmployee): void {
+    this.selectedEmployeeModal = selectedEmployee;
+    this.displayModal = true;
   }
 
   private convertStringsToDates(employees: any[]) {
