@@ -1,5 +1,6 @@
 import { IDepartment } from "./IDepartments";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
+import { IPosition } from "./IPosition";
 import { IProvince } from "./IProvince";
 
 export interface IEmployee {
@@ -11,6 +12,6 @@ export interface IEmployee {
     maritalStatus: string,
     spousesName: string,
     province: IProvince;
-    department: IDepartment;
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
+    position: IPosition;
 }

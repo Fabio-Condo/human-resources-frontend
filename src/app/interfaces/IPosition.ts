@@ -15,7 +15,7 @@ export interface IPosition {
     mission: string,
     age: number,
     language: string,
-    hierarchicalReporter: IEmployee,
+    //hierarchicalReporter: IEmployee,
     department: IDepartment,
     workplace: IWorkplace,
     administrativeCluster: IAdministrativeCluster,
@@ -24,4 +24,5 @@ export interface IPosition {
     specificRequirements: ISpecificRequirement[];
     training: ISpecificRequirement[];
     professionalExperience: IProfessionalExperience[];
+    employees: IEmployee[];
 }

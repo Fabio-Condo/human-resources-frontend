@@ -26,6 +26,7 @@
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td>
+                <button pButton pTooltip="Edit" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                   <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                   <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
               </td>
@@ -62,11 +63,13 @@
               <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
                   name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
             </div>
+            <!--
             <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Reporter hierarquico</label>
               <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
                   name="hierarchicalReporter" #hierarchicalReporter ngModel [(ngModel)]="position.hierarchicalReporter.id"></p-dropdown>
             </div>
+            -->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Local de trabalho</label>
               <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
@@ -344,3 +347,35 @@
     </div>
   </form>
 </p-dialog>
+
+<!--Show -->
+<p-dialog header="{{selectedPositionModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+  <!--Employees view-->
+  <div class="formgrid grid">
+      <div class="col-12 p-fluid">
+          <label>Funcionários</label> <span *ngIf="selectedPositionModal.employees.length != 0"> ({{selectedPositionModal.employees.length}})</span>
+          <p-table [value]="selectedPositionModal.employees" [responsive]="true" 
+              styleClass="p-datatable-sm" #tabela >
+          <ng-template pTemplate="header">
+              <tr>
+              <th style="background-color: #F4F6F6;">Nome</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+              <tr>
+              <td>{{ employee.name }}</td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td colspan="10">
+                  Sem funcionários
+                  </td>
+              </tr>
+          </ng-template>            
+          </p-table>   
+      </div> 
+      
+  </div>         
+</p-dialog>
+

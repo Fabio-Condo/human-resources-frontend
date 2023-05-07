@@ -10,6 +10,7 @@ import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IPosition } from 'src/app/interfaces/IPosition';
 import { IPositionFilter } from 'src/app/interfaces/IPositionFilter';
 import { Benefit } from 'src/app/model/Benefit';
+import { Employee } from 'src/app/model/Employee';
 import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
 import { ProfessionalExperience } from 'src/app/model/ProfessionalExperience';
@@ -63,6 +64,10 @@ export class PositionsComponent implements OnInit {
   benefit?: Benefit;
   benefitIndex?: number;
 
+  positionEmployees: Array<Employee> = [];
+  selectedPositionModal: Position = new Position();
+  displayModal = false;
+
   sizePage = [
     { label: '5', value: 5 },
     { label: '10', value: 10 },
@@ -94,7 +99,7 @@ export class PositionsComponent implements OnInit {
     this.getDepartments();
     this.getAdministrativeClusters();
     this.getWorkplaces();
-    this.getHierarchicalReporter();
+    //this.getHierarchicalReporter();
   }
 
   filter: IPositionFilter = {
@@ -428,6 +433,11 @@ export class PositionsComponent implements OnInit {
     this.showBenefitsForm = true;
     this.benefitIndex = index;
   }  
+
+  onSelectPosition(selectedPosition: IPosition): void {
+    this.selectedPositionModal = selectedPosition;
+    this.displayModal = true;
+  }
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  

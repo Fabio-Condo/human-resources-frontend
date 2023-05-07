@@ -10,6 +10,7 @@ import { IEmployee } from 'src/app/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/model/Employee';
 import { EmployeePerformanceEvaluation } from 'src/app/model/EmployeePerformanceEvaluation';
+import { PositionsService } from 'src/app/positions/positions.service';
 import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
 
@@ -32,6 +33,8 @@ export class EmployeesComponent implements OnInit {
 
   provinces: any[] = [];
   //selectedProvince?: number;
+
+  positions: any[] = [] ;
 
   employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
   selectedEmployeeModal: Employee = new Employee();
@@ -58,6 +61,7 @@ export class EmployeesComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private provinceService: ProvinceService,
     private departmentService: DepartmentService,
+    private positionsService: PositionsService,
     private title: Title,
   ) { }
 
@@ -65,6 +69,7 @@ export class EmployeesComponent implements OnInit {
     this.title.setTitle('employees page');
     this.getProvinces();
     this.getDepartments();
+    this.getPositions();
   }
 
   @ViewChild('table') grid: any;
@@ -178,10 +183,27 @@ export class EmployeesComponent implements OnInit {
   getDepartments() {
     return this.departmentService.findAll().subscribe(
       data => {
-        this.departments = data.content.map(workplace => {
+        this.departments = data.content.map(dep => {
           return  {
-            label: workplace.name,
-            value: workplace.id
+            label: dep.name,
+            value: dep.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getPositions() {
+    return this.positionsService.findAll().subscribe(
+      data => {
+        this.positions = data.content.map(position => {
+          return  {
+            label: position.name,
+            value: position.id
           }
         })
       },

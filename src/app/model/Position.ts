@@ -17,7 +17,7 @@ export class Position implements IPosition {
     mission!: string;
     age!: number;
     language!: string;
-    hierarchicalReporter = new Employee;
+    //hierarchicalReporter = new Employee;
     department = new Department;
     workplace = new Workplace;
     administrativeCluster = new AdministrativeCluster;
@@ -26,4 +26,5 @@ export class Position implements IPosition {
     specificRequirements: SpecificRequirement[] = [];
     training: Training[] = [];
     professionalExperience: ProfessionalExperience[] = [];
+    employees: Employee[] = [];
 }
