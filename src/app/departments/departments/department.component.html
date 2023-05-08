@@ -22,7 +22,6 @@
             <tr>
                 <td>{{ dep.name }}</td>
                 <td> 
-                    <button pButton pTooltip="Edit" (click)="onSelectDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
@@ -73,27 +72,7 @@
     <!--Employees view-->
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
-            <label>Funcionários</label> <span *ngIf="selectedDepartmentModal.employees.length != 0"> ({{selectedDepartmentModal.employees.length}})</span>
-            <p-table [value]="selectedDepartmentModal.employees" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-            <ng-template pTemplate="header">
-                <tr>
-                <th style="background-color: #F4F6F6;">Nome</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                <tr>
-                <td>{{ employee.name }}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="10">
-                    Sem funcionários
-                    </td>
-                </tr>
-            </ng-template>            
-            </p-table>   
+            <label>Nome</label> <span> {{selectedDepartmentModal.name}}</span>  
         </div> 
         
     </div>         

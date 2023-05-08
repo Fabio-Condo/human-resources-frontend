@@ -14,14 +14,16 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
-                <th style="background-color: #fff;">Genero</th>
+                <th style="background-color: #fff;">Cargo</th>
+                <th style="background-color: #fff;">Departamento</th>
                 <th style="background-color: #fff;">Ações</th>       
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee>
             <tr>
                 <td>{{ employee.name }}</td>
-                <td>{{ employee.gender }}</td>
+                <td>{{ employee.position.name }}</td>
+                <td>{{ employee.position.department.name }}</td>
                 <td>
                     <button pButton pTooltip="Edit" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;

@@ -349,21 +349,23 @@
 </p-dialog>
 
 <!--Show -->
-<p-dialog header="{{selectedPositionModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedPositionModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
   <!--Employees view-->
   <div class="formgrid grid">
       <div class="col-12 p-fluid">
-          <label>Funcionários</label> <span *ngIf="selectedPositionModal.employees.length != 0"> ({{selectedPositionModal.employees.length}})</span>
+          <label>Funcionários com este cargo</label> <span *ngIf="selectedPositionModal.employees.length != 0"> ({{selectedPositionModal.employees.length}})</span>
           <p-table [value]="selectedPositionModal.employees" [responsive]="true" 
               styleClass="p-datatable-sm" #tabela >
           <ng-template pTemplate="header">
               <tr>
-              <th style="background-color: #F4F6F6;">Nome</th>
+                <th style="background-color: #F4F6F6;">Nome</th>
+                <th style="background-color: #F4F6F6;">Departamento</th>
               </tr>
           </ng-template>
           <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
               <tr>
-              <td>{{ employee.name }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ selectedPositionModal.department.name }}</td>
               </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
