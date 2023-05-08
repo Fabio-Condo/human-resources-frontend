@@ -5,7 +5,7 @@
         <input style="width: 30%" [(ngModel)]="filter.name" name="name" type="text" pInputText placeholder="Search" (ngModelChange)="getEmployeePerformanceEvaluations()">    
         <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
         ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
-        <button pButton label="Nova +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
+        <button pButton (click)="onAddNewEmployeePerformanceEvaluation()" label="Nova +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
     </div>
 
     <br>
@@ -27,11 +27,75 @@
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ epe.category }}</td>
                 <td>
-                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
+
+    <div style="display:inline; float: left; margin-top: 1%;">
+        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-selectButton> 
+    </div>
+
 </div>
+
+<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
+        <div class="formgrid grid">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Funcionário</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
+                    name="employee" #employee ngModel [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Categoria</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione" [filter]="true"
+                    name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Teamwork</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="teamWork"
+                ngModel #teamWork="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.teamWork">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>communication</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="communication"
+                ngModel #communication="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.communication">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>strategicThought</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="strategicThought"
+                ngModel #strategicThought="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.strategicThought">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>qualityOrientation</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="qualityOrientation"
+                ngModel #qualityOrientation="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.qualityOrientation">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>forEmployeeImprovement</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="forEmployeeImprovement"
+                ngModel #forEmployeeImprovement="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>evaluatorsComments</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="evaluatorsComments"
+                ngModel #evaluatorsComments="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.evaluatorsComments">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>evaluatorsRecommendations</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="evaluatorsRecommendations"
+                ngModel #evaluatorsRecommendations="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.evaluatorsRecommendations">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                  </button>
+              </div>
+        </div>  
+    </form>
+</p-dialog>
 

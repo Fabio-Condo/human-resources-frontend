@@ -61,8 +61,8 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Genero</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="gender"
-                ngModel #gender="ngModel" required minlength="1" [(ngModel)]="employee.gender">  
+                <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione" [filter]="true"
+                    name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid">
                 <label>Data de nascimento</label>
@@ -80,8 +80,8 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Estado civil</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="maritalStatus"
-                ngModel #maritalStatus="ngModel" required minlength="1" [(ngModel)]="employee.maritalStatus">  
+                <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione" [filter]="true"
+                    name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Conjugue</label>

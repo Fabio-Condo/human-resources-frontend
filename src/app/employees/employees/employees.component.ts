@@ -40,6 +40,18 @@ export class EmployeesComponent implements OnInit {
   selectedEmployeeModal: Employee = new Employee();
   displayModal = false;
 
+  maritalStatuses = [
+    { label: 'Solteiro', value: 'SINGLE' },
+    { label: 'Casado', value: 'MARRIED' },
+    { label: 'Divorciado', value: 'DIVORCED' },
+    { label: 'Viuvo', value: 'WIDOWER' },
+  ];
+
+  genders = [
+    { label: 'Masculino', value: 'MASCULINE' },
+    { label: 'Feminino', value: 'FEMININE' },
+  ];
+
   sizePage = [
     { label: '5', value: 5 },
     { label: '10', value: 10 },

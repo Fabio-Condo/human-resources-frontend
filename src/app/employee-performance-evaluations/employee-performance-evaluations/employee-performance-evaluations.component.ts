@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
+import { EmployeesService } from 'src/app/employees/employees.service';
 import { IApiResponse } from 'src/app/interfaces/IApiResponse';
 import { IEmployeePerformanceEvaluation } from 'src/app/interfaces/IEmployeePerformanceEvaluation';
 import { IEmployeePerformanceEvaluationFilter } from 'src/app/interfaces/IEmployeePerformanceEvaluationFilter';
@@ -17,9 +19,18 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   showLoading: boolean = false;
 
   totalRecords: number = 0
-  employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
-  
+  employeePerformanceEvaluations: IEmployeePerformanceEvaluation[] = [];
 
+  employeePerformanceEvaluation: IEmployeePerformanceEvaluation = new EmployeePerformanceEvaluation;
+  displayModalSave: boolean = false;
+
+  employees: any[] = [] ;
+
+  categories = [
+    { label: 'Anualmente', value: 'YEARLY' },
+    { label: 'Mensalmente', value: 'MONTHLY' },
+  ];
+  
   sizePage = [
     { label: '5', value: 5 },
     { label: '10', value: 10 },
@@ -38,11 +49,12 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   constructor(
     private employeePerformanceEvaluationsService: EmployeePerformanceEvaluationsService,
     private messageService: MessageService,
+    private employeesService: EmployeesService,
     private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit(): void {
-
+    this.getEmployees();
   }
 
   @ViewChild('table') grid: any;
@@ -51,6 +63,50 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     page: 0,
     itemsPerPage: 5,
     sort: 'employee.name,asc'
+  }
+
+  get editing() {
+    return Boolean(this.employeePerformanceEvaluation.id);
+  }
+
+  
+  save(departmentForm: NgForm) {
+    if (this.editing) {
+      this.update(departmentForm)
+    } else {
+      this.addNew(departmentForm)
+    }
+  }
+
+  addNew(employeePerformanceEvaluationForm: NgForm) {
+    this.showLoading = true;
+    this.employeePerformanceEvaluationsService.add(this.employeePerformanceEvaluation).subscribe(
+      (employeePerformanceEvaluationAdded) => {
+        this.employeePerformanceEvaluation = employeePerformanceEvaluationAdded;
+        this.showLoading = false;
+        this.getEmployeePerformanceEvaluations();
+        this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(employeePerformanceEvaluationForm: NgForm) {
+    this.showLoading = true;
+    this.employeePerformanceEvaluationsService.update(this.employeePerformanceEvaluation).subscribe(
+      (employeePerformanceEvaluation) => {
+        this.employeePerformanceEvaluation = employeePerformanceEvaluation;
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
   }
 
   getEmployeePerformanceEvaluations(page: number = 0): void {
@@ -86,6 +142,23 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     )
   }
 
+  getEmployees() {
+    return this.employeesService.findAll().subscribe(
+      data => {
+        this.employees = data.content.map(employee => {
+          return  {
+            label: employee.name,
+            value: employee.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
   deletionConfirm(employeePerformanceEvaluation: IEmployeePerformanceEvaluation): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
@@ -93,6 +166,17 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.deleteEmployeePerformanceEvaluations(employeePerformanceEvaluation);
       }
     });
+  }
+
+  onAddNewEmployeePerformanceEvaluation(): void {
+    this.employeePerformanceEvaluation = new EmployeePerformanceEvaluation();
+    this.displayModalSave = true;
+  }
+
+  onEditEmployeePerformanceEvaluation(editEmployeePerformanceEvaluation: EmployeePerformanceEvaluation): void {
+    this.employeePerformanceEvaluation = editEmployeePerformanceEvaluation;
+    this.employeePerformanceEvaluation.id = editEmployeePerformanceEvaluation.id;
+    this.displayModalSave = true;
   }
 
   onChangePage(event: LazyLoadEvent) {

@@ -1,10 +1,10 @@
 import { IEmployee } from "../interfaces/IEmployee";
 import { IEmployeePerformanceEvaluation } from "../interfaces/IEmployeePerformanceEvaluation";
+import { Employee } from "./Employee";
 
 export class EmployeePerformanceEvaluation implements IEmployeePerformanceEvaluation {
     id!: number;
     category!: string;
-    employee!: IEmployee;
     date!: Date;
     teamWork!: string;
     communication!: string;
@@ -13,4 +13,5 @@ export class EmployeePerformanceEvaluation implements IEmployeePerformanceEvalua
     forEmployeeImprovement!: string;
     evaluatorsComments!: string;
     evaluatorsRecommendations!: string;
+    employee = new Employee;
 }
