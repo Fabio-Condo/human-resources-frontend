@@ -12,9 +12,11 @@ export class Employee implements IEmployee {
     physicalAddress!: string;
     maritalStatus!: string;
     spousesName!: string;
+    status!: boolean;
     province = new  Province;
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
+
 }
 
 

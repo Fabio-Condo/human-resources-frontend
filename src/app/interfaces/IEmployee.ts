@@ -11,6 +11,7 @@ export interface IEmployee {
     physicalAddress: string,
     maritalStatus: string,
     spousesName: string,
+    status: boolean,
     province: IProvince;
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
     position: IPosition;
