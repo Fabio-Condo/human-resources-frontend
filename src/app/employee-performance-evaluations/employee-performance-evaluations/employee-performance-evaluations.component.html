@@ -22,7 +22,9 @@
         </ng-template>
         <ng-template pTemplate="body" let-epe>
             <tr>
-                <td>{{ epe.employee.name }}</td>
+                <td>
+                    {{ epe.employee.name }}
+                </td>
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>
@@ -30,8 +32,8 @@
                     <span *ngIf="epe.category==='YEARLY'" style="background-color: #e3975d; color:#fff; border-radius: 4%;">&nbsp; Anualmente &nbsp;</span>
                 </td>
                 <td>
-                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
                 </td>
             </tr>
         </ng-template>

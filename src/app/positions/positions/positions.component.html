@@ -26,9 +26,9 @@
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td>
-                <button pButton pTooltip="Edit" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                  <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>&nbsp;
-                  <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #5b6063; border-color: #5b6063;"></button>
+                <button pButton pTooltip="Edit" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
+                  <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
+                  <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
               </td>
           </tr>
       </ng-template>
@@ -110,7 +110,7 @@
                       <td class="col-acoes">
                         <span class="p-buttonset">
                             <span (click)="getReadEditintMainResponsability(mr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeMainResponsability(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="removeMainResponsability(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                         </td>
                     </tr>
@@ -144,7 +144,7 @@
                       <td class="col-acoes">
                         <span class="p-buttonset">
                             <span (click)="getReadEditSpecificRequirement(sr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeSpecificRequirement(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="removeSpecificRequirement(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>
                     </tr>
@@ -178,7 +178,7 @@
                       <td class="col-acoes">
                         <span class="p-buttonset">
                             <span (click)="getReadTraining(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                            <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>
                     </tr>
@@ -212,7 +212,7 @@
                       <td class="col-acoes">
                         <span class="p-buttonset">
                           <span (click)="getReadProfessionalExperience(pf, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                          <span (click)="removeProfessionalExperience(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                          <span (click)="removeProfessionalExperience(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>                     
                     </tr>       
@@ -248,7 +248,7 @@
                     <td class="col-acoes">
                       <span class="p-buttonset">
                         <span (click)="getReadBenefit(b, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                        <span (click)="removeBenefit(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> remover </a></span>
+                        <span (click)="removeBenefit(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                       </span>
                     </td>                     
                   </tr>       
