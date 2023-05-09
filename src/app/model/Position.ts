@@ -5,6 +5,7 @@ import { Benefit } from "./Benefit";
 import { Department } from "./Department";
 import { Employee } from "./Employee";
 import { MainResponsibility } from "./MainResponsibility";
+import { PositionLanguages } from "./PositionLanguages";
 import { ProfessionalExperience } from "./ProfessionalExperience";
 import { SpecificRequirement } from "./SpecificRequirement";
 import { Training } from "./Training";
@@ -16,7 +17,6 @@ export class Position implements IPosition {
     functionalGroup!: string;
     mission!: string;
     age!: number;
-    language!: string;
     //hierarchicalReporter = new Employee;
     department = new Department;
     workplace = new Workplace;
@@ -27,4 +27,5 @@ export class Position implements IPosition {
     training: Training[] = [];
     professionalExperience: ProfessionalExperience[] = [];
     employees: Employee[] = [];
+    languages: PositionLanguages[] = [];
 }

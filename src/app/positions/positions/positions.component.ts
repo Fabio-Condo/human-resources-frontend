@@ -13,6 +13,7 @@ import { Benefit } from 'src/app/model/Benefit';
 import { Employee } from 'src/app/model/Employee';
 import { MainResponsibility } from 'src/app/model/MainResponsibility';
 import { Position } from 'src/app/model/Position';
+import { PositionLanguages } from 'src/app/model/PositionLanguages';
 import { ProfessionalExperience } from 'src/app/model/ProfessionalExperience';
 import { SpecificRequirement } from 'src/app/model/SpecificRequirement';
 import { Training } from 'src/app/model/Training';
@@ -64,9 +65,19 @@ export class PositionsComponent implements OnInit {
   benefit?: Benefit;
   benefitIndex?: number;
 
+  languages: Array<PositionLanguages> = []
+  showLanguagesForm = false;
+  language?: PositionLanguages;
+  languageIndex?: number;
+
   positionEmployees: Array<Employee> = [];
   selectedPositionModal: Position = new Position();
   displayModal = false;
+
+  languageWriteSpeakLevel = [
+    { label: 'Fluente', value: 'FLUENT' },
+    { label: 'Razoável', value: 'REASONABLE' },
+  ];
 
   sizePage = [
     { label: '5', value: 5 },
@@ -333,7 +344,7 @@ export class PositionsComponent implements OnInit {
   }
 
   getReadEditSpecificRequirement(specificRequirement: SpecificRequirement, index: number) {
-    this.specificRequirement = this.cloneMainResponsability(specificRequirement);
+    this.specificRequirement = this.cloneSpecificRequirement(specificRequirement);
     this.showSpecificRequirementForm = true;
     this.specificRequirementIndex = index;
   }
@@ -378,7 +389,7 @@ export class PositionsComponent implements OnInit {
   }
   
   confirmProfessionalExperience(frm: NgForm) {
-    this.position.professionalExperience[this.professionalExperienceIndex!] = this.cloneTraining(this.professionalExperience!);
+    this.position.professionalExperience[this.professionalExperienceIndex!] = this.cloneProfessionalExperience(this.professionalExperience!);
     this.showProfessionalExperienceForm = false;
     frm.reset();
   }     
@@ -397,7 +408,7 @@ export class PositionsComponent implements OnInit {
   }
   
   getReadProfessionalExperience(professionalExperience: ProfessionalExperience, index: number) {
-    this.professionalExperience = this.cloneTraining(professionalExperience);
+    this.professionalExperience = this.cloneProfessionalExperience(professionalExperience);
     this.showProfessionalExperienceForm = true;
     this.professionalExperienceIndex = index;
   }
@@ -405,7 +416,7 @@ export class PositionsComponent implements OnInit {
   // Benefits
   openAddNewBenefitModal() {
     this.showBenefitsForm = true;
-    this.benefit = new Training();
+    this.benefit = new Benefit();
     this.benefitIndex = this.position.benefits.length;
   }
   
@@ -434,6 +445,39 @@ export class PositionsComponent implements OnInit {
     this.benefitIndex = index;
   }  
 
+  // languages
+  openAddNewLanguageModal() {
+    this.showLanguagesForm = true;
+    this.language = new PositionLanguages();
+    this.languageIndex = this.position.languages.length;
+  }
+  
+  confirmLanguage(frm: NgForm) {
+    this.position.languages[this.languageIndex!] = this.cloneLanguage(this.language!);
+    this.showLanguagesForm = false;
+    frm.reset();
+  }     
+  
+  cloneLanguage(language: PositionLanguages): PositionLanguages {
+    return new PositionLanguages(language.id, language.name, language.readLevel, language.writeLevel);
+  }
+  
+  get editingLanguage() {  // show the title in modal
+    return this.language && this.language?.id;
+  }
+  
+  removeLanguage(index: number) {
+    this.position.languages.splice(index, 1);
+    console.log("removing: " + index);
+  }
+  
+  getReadLanguage(language: PositionLanguages, index: number) {
+    this.language = this.cloneLanguage(language);
+    this.showLanguagesForm = true;
+    this.languageIndex = index;
+  }      
+
+  //
   onSelectPosition(selectedPosition: IPosition): void {
     this.selectedPositionModal = selectedPosition;
     this.displayModal = true;

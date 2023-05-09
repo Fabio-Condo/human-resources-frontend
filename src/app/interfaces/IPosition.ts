@@ -4,6 +4,7 @@ import { IBenefit } from "./IBenefit";
 import { IDepartment } from "./IDepartments";
 import { IEmployee } from "./IEmployee";
 import { IMainResponsibility } from "./IMainResponsibility";
+import { IPositionLanguages } from "./IPositionLanguages";
 import { IProfessionalExperience } from "./IProfessionalExperience";
 import { ISpecificRequirement } from "./ISpecificRequirement";
 import { IWorkplace } from "./IWorkplace";
@@ -14,7 +15,6 @@ export interface IPosition {
     functionalGroup: string,
     mission: string,
     age: number,
-    language: string,
     //hierarchicalReporter: IEmployee,
     department: IDepartment,
     workplace: IWorkplace,
@@ -25,4 +25,5 @@ export interface IPosition {
     training: ISpecificRequirement[];
     professionalExperience: IProfessionalExperience[];
     employees: IEmployee[];
+    languages: IPositionLanguages[];
 }

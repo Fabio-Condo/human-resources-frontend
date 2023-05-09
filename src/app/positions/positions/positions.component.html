@@ -40,7 +40,7 @@
 
 </div>
 
-<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -84,11 +84,6 @@
                 <label>Idade</label>
                 <input pInputText class="p-inputtext-sm" type="number" name="age"
                     ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Lingua</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="language"
-                    ngModel #language="ngModel" required minlength="1" [(ngModel)]="position.language">  
             </div>
 
             <!--Main Responsibilities-->
@@ -265,6 +260,50 @@
               </p-table>   
             </div> 
 
+            <!--Languages-->
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Linguas | </label> <span (click)="openAddNewLanguageModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+              <p-table [value]="position.languages" [responsive]="true" 
+                  styleClass="p-datatable-sm" #tabela >
+                <ng-template pTemplate="header">
+                  <tr *ngIf="position.languages.length > 0">
+                    <th style="background-color: #FFF;">Nome</th>
+                    <th style="background-color: #FFF;">Escrita</th>
+                    <th style="background-color: #FFF;">Leitura</th>
+                    <th style="background-color: #FFF;" class="col-valor-header"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-l let-rowIndex="rowIndex">
+                  <tr >
+                    <td>{{ l.name }}</td>
+                    <td>
+                      <span *ngIf="l.writeLevel == 'FLUENT'"> Fluente </span>
+                      <span *ngIf="l.writeLevel == 'REASONABLE'"> Razoável </span>
+                    </td>
+                    <td>
+                      <span *ngIf="l.readLevel == 'FLUENT'"> Fluente </span>
+                      <span *ngIf="l.readLevel == 'REASONABLE'"> Razoável </span>
+                    </td>
+                    <td class="col-acoes">
+                      <span class="p-buttonset">
+                        <span (click)="getReadLanguage(l, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                        <span (click)="removeLanguage(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                      </span>
+                    </td>                     
+                  </tr>       
+                  
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="10">
+                        No language found
+                      </td>
+                    </tr>
+                </ng-template>   
+               
+              </p-table>   
+            </div> 
+
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="positionForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
@@ -344,6 +383,30 @@
     </div>
     <div class="col-12 p-fluid">
       <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmBenefit.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+    </div>
+  </form>
+</p-dialog>
+
+<!--languages-->
+<p-dialog [header]="editingLanguage ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showLanguagesForm" [modal]="true" *ngIf="language"> 
+  <form #frmLanguage="ngForm" (ngSubmit)="confirmLanguage(frmLanguage)"> 
+    <div class="col-12 p-fluid">
+      <label>Designation</label>
+      <input pInputText type="text" name="name"
+        required [(ngModel)]="language.name" #name="ngModel"/>
+    </div>
+    <div class="col-12 p-fluid" style="margin-top: 2%;">
+      <label>Escrita</label>
+      <p-dropdown class="p-inputtext-sm" [options]="languageWriteSpeakLevel" placeholder="Selecione" [filter]="true"
+          name="writeLevel" #writeLevel ngModel [(ngModel)]="language.writeLevel"></p-dropdown>
+    </div>
+    <div class="col-12 p-fluid" style="margin-top: 2%;">
+      <label>Leitura</label>
+      <p-dropdown class="p-inputtext-sm"  [options]="languageWriteSpeakLevel" placeholder="Selecione" [filter]="true"
+          name="readLevel" #readLevel ngModel [(ngModel)]="language.readLevel"></p-dropdown>
+    </div>
+    <div class="col-12 p-fluid">
+      <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmLanguage.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
     </div>
   </form>
 </p-dialog>
