@@ -17,6 +17,8 @@ export class Position implements IPosition {
     functionalGroup!: string;
     mission!: string;
     age!: number;
+    minimumWage!: number;
+    maximumWage!: number;
     //hierarchicalReporter = new Employee;
     department = new Department;
     workplace = new Workplace;

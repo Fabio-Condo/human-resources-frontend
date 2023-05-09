@@ -15,6 +15,8 @@ export interface IPosition {
     functionalGroup: string,
     mission: string,
     age: number,
+    maximumWage: number,
+    minimumWage: number,
     //hierarchicalReporter: IEmployee,
     department: IDepartment,
     workplace: IWorkplace,

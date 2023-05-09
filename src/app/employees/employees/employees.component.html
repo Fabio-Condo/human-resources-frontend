@@ -104,6 +104,11 @@
                 ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Salário</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="wage"
+                ngModel #wage="ngModel" required minlength="1" [(ngModel)]="employee.wage">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Provincia</label>    
                 <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
                     [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"

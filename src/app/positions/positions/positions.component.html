@@ -59,6 +59,16 @@
                     ngModel #mission="ngModel" required minlength="1" [(ngModel)]="position.mission">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Salário Minimo</label>
+              <input pInputText class="p-inputtext-sm" type="number" name="minimumWage"
+                  ngModel #minimumWage="ngModel" required minlength="1" [(ngModel)]="position.minimumWage">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Salário Máximo</label>
+              <input pInputText class="p-inputtext-sm" type="number" name="maximumWage"
+                  ngModel #maximumWage="ngModel" required minlength="1" [(ngModel)]="position.maximumWage">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Department</label>
               <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
                   name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
