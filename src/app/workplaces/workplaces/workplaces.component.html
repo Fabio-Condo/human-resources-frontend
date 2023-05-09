@@ -2,16 +2,20 @@
 <div class="container">
     <h5 style="text-align: center;">Local de trabalho</h5>
 
-    <div >
-        <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getWorkplaces()">    
-        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
-        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
-        <button (click)="onAddNewWorkplace()" pButton label="Novo +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
-    </div>
-
     <br>
 
     <p-table [value]="workplaces" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getWorkplaces()"/>
+                </span>
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
+                <button (click)="onAddNewWorkplace()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
