@@ -36,7 +36,7 @@
                     <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; Mensalmente &nbsp;</span>
                     <span *ngIf="epe.category==='YEARLY'" style="background-color: #e3975d; color:#fff; border-radius: 4%;">&nbsp; Anualmente &nbsp;</span>
                 </td>
-                <td>
+                <td style="width: 180px;">
                     <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
                 </td>

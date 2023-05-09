@@ -25,7 +25,7 @@
         <ng-template pTemplate="body" let-ac>
             <tr>
                 <td>{{ ac.name }}</td>
-                <td>
+                <td style="width: 180px;">
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(ac)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(ac)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
                 </td>
