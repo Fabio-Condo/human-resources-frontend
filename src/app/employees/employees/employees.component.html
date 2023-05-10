@@ -103,12 +103,14 @@
                   [inline]="false" [readonlyInput]="false" 
                   ngModel #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
 
-              </div>
+            </div>
+            <!--
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Endereço fisico</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="physicalAddress"
                 ngModel #physicalAddress="ngModel" required minlength="1" [(ngModel)]="employee.physicalAddress">  
             </div>
+            -->
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Estado civil</label>
                 <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione" [filter]="true"

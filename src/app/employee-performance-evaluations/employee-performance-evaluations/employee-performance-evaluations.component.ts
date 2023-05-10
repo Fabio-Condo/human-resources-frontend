@@ -27,8 +27,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   employees: any[] = [] ;
 
   categories = [
-    { label: 'Anualmente', value: 'YEARLY' },
-    { label: 'Mensalmente', value: 'MONTHLY' },
+    { label: 'Anual', value: 'YEARLY' },
+    { label: 'Mensal', value: 'MONTHLY' },
   ];
   
   sizePage = [

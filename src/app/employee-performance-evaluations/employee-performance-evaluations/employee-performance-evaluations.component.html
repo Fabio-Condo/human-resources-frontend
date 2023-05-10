@@ -33,8 +33,8 @@
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; Mensalmente &nbsp;</span>
-                    <span *ngIf="epe.category==='YEARLY'" style="background-color: #e3975d; color:#fff; border-radius: 4%;">&nbsp; Anualmente &nbsp;</span>
+                    <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; Mensal &nbsp;</span>
+                    <span *ngIf="epe.category==='YEARLY'" style="background-color: #e3975d; color:#fff; border-radius: 4%;">&nbsp; Anual &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
@@ -64,32 +64,32 @@
                     name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Teamwork</label>
+                <label>Trabalho em equipe</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="teamWork"
                 ngModel #teamWork="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.teamWork">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>communication</label>
+                <label>Comunicação</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="communication"
                 ngModel #communication="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.communication">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>strategicThought</label>
+                <label>Pensamento estratégico</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="strategicThought"
                 ngModel #strategicThought="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.strategicThought">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>qualityOrientation</label>
+                <label>Orientação para qualidade</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="qualityOrientation"
                 ngModel #qualityOrientation="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.qualityOrientation">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>forEmployeeImprovement</label>
+                <label>Comentário / Recomendações do avaliador</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="forEmployeeImprovement"
                 ngModel #forEmployeeImprovement="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>evaluatorsComments</label>
+                <label>Comentários do avaliador</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="evaluatorsComments"
                 ngModel #evaluatorsComments="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.evaluatorsComments">  
             </div>
