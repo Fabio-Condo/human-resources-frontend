@@ -52,7 +52,7 @@
 
 <p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
-        <div class="formgrid grid">
+        <div class="formgrid grid">   
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Funcionário</label>
                 <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
