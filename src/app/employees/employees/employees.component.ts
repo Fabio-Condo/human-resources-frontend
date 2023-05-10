@@ -36,6 +36,9 @@ export class EmployeesComponent implements OnInit {
 
   positions: any[] = [] ;
 
+  showWageHistory: boolean = false;
+  showEmployeePerformanceEvaluationHistory: boolean = false;
+
   employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
   selectedEmployeeModal: Employee = new Employee();
   displayModal = false;

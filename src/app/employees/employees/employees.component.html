@@ -123,8 +123,8 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Salário</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="wage"
-                ngModel #wage="ngModel" required minlength="1" [(ngModel)]="employee.wage">  
+                <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
+                ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Provincia</label>    
@@ -166,47 +166,83 @@
 </p-dialog>
 
 <!--Show -->
-<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '70vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
     <!--Employees view-->
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
 
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Departamento</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Cargo</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Departamento</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.position.department.name}}</span></i></li>
             <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Provincia</span>: <span style="color:#3f393371;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i></li>
-            
+
             <br>
 
-            <label>Avaliações de desenpenho</label> <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0"> ({{selectedEmployeeModal.employeePerformanceEvaluations.length}})</span>
-            <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-            <ng-template pTemplate="header">
-                <tr>
-                <th style="background-color: #F4F6F6;">Trabalho em equipe</th>
-                <th style="background-color: #F4F6F6;">Comunicação</th>
-                <th style="background-color: #F4F6F6;">Pensamento estratégico</th>
-                <th style="background-color: #F4F6F6;">Orientação para qualidade</th>
-                <th style="background-color: #F4F6F6;">Categoria</th>
-                <th style="background-color: #F4F6F6;">Data</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-epe let-rowIndex="rowIndex">
-                <tr>
-                <td>{{ epe.teamWork }}</td>
-                <td>{{ epe.communication }}</td>
-                <td>{{ epe.strategicThought }}</td>
-                <td>{{ epe.qualityOrientation }}</td>
-                <td>{{ epe.category }}</td>
-                <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="10">
-                    Sem Avaliações
-                    </td>
-                </tr>
-            </ng-template>            
+            <label>Histórico de salário</label> <span *ngIf="selectedEmployeeModal.wageHistories.length != 0"> ({{selectedEmployeeModal.wageHistories.length}}) | </span> 
+            
+            <span (click)="showWageHistory =! showWageHistory ">
+                <a *ngIf="!showWageHistory" href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> mostrar </a>
+                <a *ngIf="showWageHistory" href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> fechar </a>
+            </span>
+
+            <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela *ngIf="showWageHistory">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="background-color: #F4F6F6;">Valor</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-wage let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{ wage.value }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                        Sem Avaliações
+                        </td>
+                    </tr>
+                </ng-template>            
             </p-table>   
+
+            <br>
+
+            <label>Histórico de avaliação de desenpenho</label> <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0"> ({{selectedEmployeeModal.employeePerformanceEvaluations.length}}) | </span>
+            <span (click)="showEmployeePerformanceEvaluationHistory =! showEmployeePerformanceEvaluationHistory ">
+                <a *ngIf="!showEmployeePerformanceEvaluationHistory" href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> mostrar </a>
+                <a *ngIf="showEmployeePerformanceEvaluationHistory" href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> fechar </a>
+            </span>
+
+            <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela *ngIf="showEmployeePerformanceEvaluationHistory">
+                <ng-template pTemplate="header">
+                    <tr>
+                    <th style="background-color: #F4F6F6;">Trabalho em equipe</th>
+                    <th style="background-color: #F4F6F6;">Comunicação</th>
+                    <th style="background-color: #F4F6F6;">Pensamento estratégico</th>
+                    <th style="background-color: #F4F6F6;">Orientação para qualidade</th>
+                    <th style="background-color: #F4F6F6;">Categoria</th>
+                    <th style="background-color: #F4F6F6;">Data</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-epe let-rowIndex="rowIndex">
+                    <tr>
+                    <td>{{ epe.teamWork }}</td>
+                    <td>{{ epe.communication }}</td>
+                    <td>{{ epe.strategicThought }}</td>
+                    <td>{{ epe.qualityOrientation }}</td>
+                    <td>{{ epe.category }}</td>
+                    <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                        Sem Avaliações
+                        </td>
+                    </tr>
+                </ng-template>            
+            </p-table> 
         </div> 
         
     </div>         
