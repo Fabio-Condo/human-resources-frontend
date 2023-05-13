@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IAdministrativeCluster } from '../interfaces/IAdministrativeCluster';
-import { IAdministrativeClusterFilter } from '../interfaces/IAdministrativeClusterFilter';
-import { IApiResponse } from '../interfaces/IApiResponse';
+import { IAdministrativeCluster } from '../core/interfaces/IAdministrativeCluster';
+import { IAdministrativeClusterFilter } from '../core/interfaces/IAdministrativeClusterFilter';
+import { IApiResponse } from '../core/interfaces/IApiResponse';
 
 @Injectable({
   providedIn: 'root'

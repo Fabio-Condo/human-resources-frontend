@@ -189,11 +189,13 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th style="background-color: #F4F6F6;">Valor</th>
+                        <th style="background-color: #F4F6F6;">Data</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-wage let-rowIndex="rowIndex">
                     <tr>
                         <td>{{ wage.value }}</td>
+                        <td>{{ wage.date | date: 'dd/MM/yyyy'}}</td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">

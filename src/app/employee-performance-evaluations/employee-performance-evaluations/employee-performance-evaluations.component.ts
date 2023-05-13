@@ -3,10 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { EmployeesService } from 'src/app/employees/employees.service';
-import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { IEmployeePerformanceEvaluation } from 'src/app/interfaces/IEmployeePerformanceEvaluation';
-import { IEmployeePerformanceEvaluationFilter } from 'src/app/interfaces/IEmployeePerformanceEvaluationFilter';
-import { EmployeePerformanceEvaluation } from 'src/app/model/EmployeePerformanceEvaluation';
+import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
+import { IEmployeePerformanceEvaluation } from 'src/app/core/interfaces/IEmployeePerformanceEvaluation';
+import { IEmployeePerformanceEvaluationFilter } from 'src/app/core/interfaces/IEmployeePerformanceEvaluationFilter';
+import { EmployeePerformanceEvaluation } from 'src/app/core/model/EmployeePerformanceEvaluation';
 import { EmployeePerformanceEvaluationsService } from '../employee-performance-evaluations.service';
 
 @Component({

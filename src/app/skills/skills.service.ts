@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IApiResponse } from '../interfaces/IApiResponse';
-import { ISkill } from '../interfaces/ISkill';
-import { ISkillsFilter } from '../interfaces/ISkillsFilter';
+import { IApiResponse } from '../core/interfaces/IApiResponse';
+import { ISkill } from '../core/interfaces/ISkill';
+import { ISkillsFilter } from '../core/interfaces/ISkillsFilter';
 
 @Injectable({
   providedIn: 'root'

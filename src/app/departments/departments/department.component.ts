@@ -1,15 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
-import { IDepartmentFilter } from 'src/app/interfaces/IDepartmentFilter';
-import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { IDepartment } from 'src/app/interfaces/IDepartments';
+import { IDepartmentFilter } from 'src/app/core/interfaces/IDepartmentFilter';
+import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
+import { IDepartment } from 'src/app/core/interfaces/IDepartments';
 import { DepartmentService } from '../department.service';
 import { NgForm } from '@angular/forms';
-import { Department } from 'src/app/model/Department';
+import { Department } from 'src/app/core/model/Department';
 import { Title } from '@angular/platform-browser';
-import { Employee } from 'src/app/model/Employee';
-import { IEmployee } from 'src/app/interfaces/IEmployee';
+import { Employee } from 'src/app/core/model/Employee';
+import { IEmployee } from 'src/app/core/interfaces/IEmployee';
 
 @Component({
   selector: 'app-department',

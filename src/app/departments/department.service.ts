@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { IDepartment } from '../interfaces/IDepartments';
-import { IDepartmentFilter } from '../interfaces/IDepartmentFilter';
-import { IApiResponse } from '../interfaces/IApiResponse';
+import { IDepartment } from '../core/interfaces/IDepartments';
+import { IDepartmentFilter } from '../core/interfaces/IDepartmentFilter';
+import { IApiResponse } from '../core/interfaces/IApiResponse';
 
 @Injectable({
   providedIn: 'root'

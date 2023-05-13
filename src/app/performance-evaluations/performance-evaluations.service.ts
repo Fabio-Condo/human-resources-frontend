@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IApiResponse } from '../interfaces/IApiResponse';
-import { IPerformanceEvaluation } from '../interfaces/IPerformanceEvaluation';
-import { IPerformanceEvaluationFilter } from '../interfaces/IPerformanceEvaluationFilter';
+import { IApiResponse } from '../core/interfaces/IApiResponse';
+import { IPerformanceEvaluation } from '../core/interfaces/IPerformanceEvaluation';
+import { IPerformanceEvaluationFilter } from '../core/interfaces/IPerformanceEvaluationFilter';
 
 @Injectable({
   providedIn: 'root'

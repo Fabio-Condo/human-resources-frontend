@@ -3,10 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
-import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { ISkill } from 'src/app/interfaces/ISkill';
-import { ISkillsFilter } from 'src/app/interfaces/ISkillsFilter';
-import { Skill } from 'src/app/model/Skill';
+import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
+import { ISkill } from 'src/app/core/interfaces/ISkill';
+import { ISkillsFilter } from 'src/app/core/interfaces/ISkillsFilter';
+import { Skill } from 'src/app/core/model/Skill';
 import { SkillsService } from '../skills.service';
 
 @Component({

@@ -3,10 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
-import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { IWorkplace } from 'src/app/interfaces/IWorkplace';
-import { IWorkplaceFilter } from 'src/app/interfaces/IWorkplaceFilter';
-import { Workplace } from 'src/app/model/Workplace';
+import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
+import { IWorkplace } from 'src/app/core/interfaces/IWorkplace';
+import { IWorkplaceFilter } from 'src/app/core/interfaces/IWorkplaceFilter';
+import { Workplace } from 'src/app/core/model/Workplace';
 import { WorkplacesService } from '../workplaces.service';
 
 @Component({

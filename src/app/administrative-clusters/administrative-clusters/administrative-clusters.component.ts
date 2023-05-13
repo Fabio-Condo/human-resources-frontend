@@ -3,10 +3,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
-import { IAdministrativeCluster } from 'src/app/interfaces/IAdministrativeCluster';
-import { IAdministrativeClusterFilter } from 'src/app/interfaces/IAdministrativeClusterFilter';
-import { IApiResponse } from 'src/app/interfaces/IApiResponse';
-import { AdministrativeCluster } from 'src/app/model/AdministrativeCluster';
+import { IAdministrativeCluster } from 'src/app/core/interfaces/IAdministrativeCluster';
+import { IAdministrativeClusterFilter } from 'src/app/core/interfaces/IAdministrativeClusterFilter';
+import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
+import { AdministrativeCluster } from 'src/app/core/model/AdministrativeCluster';
 import { AdministrativeClustersService } from '../administrative-clusters.service';
 
 @Component({

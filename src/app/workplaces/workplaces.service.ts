@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IApiResponse } from '../interfaces/IApiResponse';
-import { IWorkplace } from '../interfaces/IWorkplace';
-import { IWorkplaceFilter } from '../interfaces/IWorkplaceFilter';
+import { IApiResponse } from '../core/interfaces/IApiResponse';
+import { IWorkplace } from '../core/interfaces/IWorkplace';
+import { IWorkplaceFilter } from '../core/interfaces/IWorkplaceFilter';
 
 @Injectable({
   providedIn: 'root'
