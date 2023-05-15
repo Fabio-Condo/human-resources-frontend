@@ -10,9 +10,8 @@
     </div>
     -->
 
-    <br>
 
-    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         
         <ng-template pTemplate="caption">
             <div class="flex">

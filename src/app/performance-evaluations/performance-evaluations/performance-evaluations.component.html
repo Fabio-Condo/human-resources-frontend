@@ -10,7 +10,7 @@
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.property" name="property" pInputText type="text" placeholder="Search" (ngModelChange)="getPerformanceEvaluations()"/>
                 </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPerformanceEvaluations()"></p-dropdown>
                 <button (click)="onAddNewPerformanceEvaluation()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
             </div>

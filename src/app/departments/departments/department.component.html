@@ -2,16 +2,14 @@
 <div class="container">
     <h5 style="text-align: center;">Departamentos</h5>
 
-    <br>
-
-    <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+    <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getDepartments()"/>
                 </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getDepartments()"></p-dropdown>

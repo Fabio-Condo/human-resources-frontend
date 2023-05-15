@@ -11,7 +11,7 @@
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getSkills()"/>
                 </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getSkills()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getSkills()"></p-dropdown>

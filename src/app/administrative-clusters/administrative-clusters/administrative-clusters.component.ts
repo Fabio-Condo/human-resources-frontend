@@ -26,7 +26,7 @@ export class AdministrativeClustersComponent implements OnInit {
   displayModalSave: boolean = false;
 
   sizePage = [
-    { label: '5 por página', value: 5 },
+    { label: '8 por página', value: 8 },
     { label: '10 por página', value: 10 },
     { label: '25 por página', value: 25 },
     { label: '50 por página', value: 50 },
@@ -53,7 +53,7 @@ export class AdministrativeClustersComponent implements OnInit {
 
   filter: IAdministrativeClusterFilter = {
     page: 0,
-    itemsPerPage: 5,
+    itemsPerPage: 8,
     sort: 'name,asc'
   }
 

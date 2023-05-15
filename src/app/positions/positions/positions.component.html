@@ -2,16 +2,14 @@
 <div class="container">
   <h5 style="text-align: center;">Cargos</h5>
 
-  <br>
-
-  <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" #table>
+  <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getPositions()"/>
           </span>
-          <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
+          <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
           ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
           <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
           ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
@@ -43,7 +41,7 @@
 
 </div>
 
-<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '39vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '39vw'}" [draggable]="false" [resizable]="false" >
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
 
         <div class="formgrid grid">
