@@ -13,6 +13,8 @@
                 </span>
                 <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getSkills()"></p-dropdown>
+                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getSkills()"></p-dropdown>
                 <button (click)="onAddNewSkill()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
             </div>
         </ng-template>
@@ -32,10 +34,6 @@
             </tr>
         </ng-template>
     </p-table>
-
-    <div style="display:inline; float: left; margin-top: 1%;">
-        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getSkills()"></p-selectButton> 
-    </div>
 
 </div>
 

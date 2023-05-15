@@ -56,11 +56,11 @@ export class EmployeesComponent implements OnInit {
   ];
 
   sizePage = [
-    { label: '5', value: 5 },
-    { label: '10', value: 10 },
-    { label: '25', value: 25 },
-    { label: '50', value: 50 },
-    { label: '100', value: 100 },
+    { label: '5 por página', value: 5 },
+    { label: '10 por página', value: 10 },
+    { label: '25 por página', value: 25 },
+    { label: '50 por página', value: 50 },
+    { label: '100 por página', value: 100 },
   ];
 
   orderPage = [

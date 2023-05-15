@@ -13,6 +13,8 @@
           </span>
           <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
           ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+          <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
+          ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
           <button (click)="onAddNewPosition()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
           <button type="button" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
@@ -39,16 +41,12 @@
       </ng-template>
   </p-table>
 
-  <div style="display:inline; float: left; margin-top: 1%;">
-      <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-selectButton> 
-  </div>
-
 </div>
 
 <p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
 
-        <div class="formgrid grid" style="background-color: #F4F6F6;">
+        <div class="formgrid grid">
           <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid">
               <label>Nome</label>

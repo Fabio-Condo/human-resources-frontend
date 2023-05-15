@@ -12,6 +12,8 @@
                 </span>
                 <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
+                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
                 <button (click)="onAddNewEmployeePerformanceEvaluation()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
                 <button type="button" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -43,10 +45,6 @@
             </tr>
         </ng-template>
     </p-table>
-
-    <div style="display:inline; float: left; margin-top: 1%;">
-        <p-selectButton [options]="sizePage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-selectButton> 
-    </div>
 
 </div>
 
