@@ -1,6 +1,7 @@
 import { IEmployee } from "../interfaces/IEmployee";
-import { Department } from "./Department";
+import { Contact } from "./Contact";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
+import { EmployeeTraining } from "./EmployeeTraining";
 import { EmployeeWage } from "./EmployeeWage";
 import { Position } from "./Position";
 import { Province } from "./Province";
@@ -19,7 +20,8 @@ export class Employee implements IEmployee {
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
     wageHistories: EmployeeWage[] = [];
-
+    employeeTrainings: EmployeeTraining [] = [];
+    contacts: Contact[] = [];
 }
 
 

@@ -13,6 +13,10 @@ import { EmployeePerformanceEvaluation } from 'src/app/core/model/EmployeePerfor
 import { PositionsService } from 'src/app/positions/positions.service';
 import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
+import { Contact } from 'src/app/core/model/Contact';
+import { Training } from 'src/app/core/model/Training';
+import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
+import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 
 @Component({
   selector: 'app-employees',
@@ -36,8 +40,20 @@ export class EmployeesComponent implements OnInit {
 
   positions: any[] = [] ;
 
+  contact?: Contact;
+  contacts: Array<Contact> = []
+  showContactForm = false;
+  contactIndex?: number;
+
+  training?: IEmployeeTraining;
+  trainings: Array<IEmployeeTraining> = []
+  showTrainingForm = false;
+  trainingIndex?: number;
+
   showWageHistory: boolean = false;
   showEmployeePerformanceEvaluationHistory: boolean = false;
+  showTrainings: boolean = false;
+  showContacts: boolean = false;
 
   employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
   selectedEmployeeModal: Employee = new Employee();
@@ -240,6 +256,70 @@ export class EmployeesComponent implements OnInit {
     this.employee.id = editEmployee.id;
     this.displayModalSave = true;
   }
+
+  // Contacts
+  getReadyNewContact() {
+    this.showContactForm = true;
+    this.contact = new Contact();
+    this.contactIndex = this.employee.contacts.length;
+  }
+
+  getReadyContactEdit(contact: Contact, index: number) {
+    this.contact = this.cloneContact(contact);
+    this.showContactForm = true;
+    this.contactIndex = index;
+  }
+
+  confirmContact(frm: NgForm) {
+    this.employee.contacts[this.contactIndex!] = this.cloneContact(this.contact!);
+    this.showContactForm = false;
+    frm.reset();
+  }
+
+  cloneContact(contact: Contact): Contact {
+    return new Contact(contact.id, contact.contactNumber, contact.name);
+  }
+
+  get editingContact() { 
+    return this.contact && this.contact?.id;
+  }
+
+  removeContact(index: number) {
+    this.employee.contacts.splice(index, 1);
+  }
+
+  // Training
+
+  getReadyNewTraining() {
+    this.showTrainingForm = true;
+    this.training = new EmployeeTraining();
+    this.trainingIndex = this.employee.employeeTrainings.length;
+  }
+
+  getReadyTrainingEdit(training: EmployeeTraining, index: number) {
+    this.training = this.cloneTraining(training);
+    this.showTrainingForm = true;
+    this.trainingIndex = index;
+  }
+
+  confirmTraining(frm: NgForm) {
+    this.employee.employeeTrainings[this.trainingIndex!] = this.cloneTraining(this.training!);
+    this.showTrainingForm = false;
+    frm.reset();
+  }
+
+  cloneTraining(training: EmployeeTraining): EmployeeTraining {
+    return new EmployeeTraining(training.id, training.description, training.begin, training.end);
+  }
+
+  get editingTraining() { 
+    return this.training && this.training?.id;
+  }
+
+  removeTraining(index: number) {
+    this.employee.employeeTrainings.splice(index, 1);
+  }
+  //
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  

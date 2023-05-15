@@ -1,5 +1,7 @@
+import { Contact } from "../model/Contact";
 import { IDepartment } from "./IDepartments";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
+import { IEmployeeTraining } from "./IEmployeeTraining";
 import { IEmployeeWage } from "./IEmployeeWage";
 import { IPosition } from "./IPosition";
 import { IProvince } from "./IProvince";
@@ -18,4 +20,6 @@ export interface IEmployee {
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
     position: IPosition;
     wageHistories: IEmployeeWage[];
+    employeeTrainings: IEmployeeTraining[];
+    contacts: Contact[];
 }
