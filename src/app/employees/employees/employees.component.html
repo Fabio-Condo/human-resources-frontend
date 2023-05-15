@@ -38,17 +38,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-employee>
             <tr>
-                <td>
-                    <!--
-                    <div>
-                        <span *ngIf="employee.maritalStatus==='SINGLE'" style="color:#fff; background-color: #e7c9b3; border-radius: 4%; height: 50px;">&nbsp; Solteiro &nbsp;</span>
-                        <span *ngIf="employee.maritalStatus==='MARRIED'" style="background-color: #9ed299; color:#fff; border-radius: 4%;">&nbsp; Casado &nbsp;</span>
-                        <span *ngIf="employee.maritalStatus==='DIVORCED'" style="color:#fff; background-color: #92afc5; border-radius: 4%; height: 50px;">&nbsp; Divorciado &nbsp;</span>
-                        <span *ngIf="employee.maritalStatus==='WIDOWER'" style="background-color: #e0a1a1; color:#fff; border-radius: 4%;">&nbsp; Viúvo &nbsp;</span>
-                    </div>
-                    -->
-                    {{ employee.name }}
-                </td>
+                <td>{{ employee.name }}</td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
                 <td>
