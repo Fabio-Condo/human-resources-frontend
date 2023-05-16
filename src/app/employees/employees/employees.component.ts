@@ -299,6 +299,7 @@ export class EmployeesComponent implements OnInit {
   getReadyTrainingEdit(training: EmployeeTraining, index: number) {
     this.training = this.cloneTraining(training);
     this.showTrainingForm = true;
+    this.convertTrainingStringsToDates([this.training]);
     this.trainingIndex = index;
   }
 
@@ -329,6 +330,15 @@ export class EmployeesComponent implements OnInit {
   onSelectEmployee(selectedEmployee: IEmployee): void {
     this.selectedEmployeeModal = selectedEmployee;
     this.displayModal = true;
+  }
+
+  private convertTrainingStringsToDates(training: any[]) {
+    for (const train of training) {
+      train.begin = new Date(train.begin);
+    }
+    for (const train of training) {
+      train.end = new Date(train.end);
+    }
   }
 
   private convertStringsToDates(employees: any[]) {

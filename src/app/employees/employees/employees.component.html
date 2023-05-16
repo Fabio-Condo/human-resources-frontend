@@ -388,15 +388,15 @@
           required [(ngModel)]="training.description" #contatoNumero="ngModel"/>
       </div>
       <div class="col-12 md-12 p-fluid">
-        <label>Begin</label>
-        <p-calendar class="p-inputtext-sm" name="begin" dateFormat="dd/mm/yy"
+        <label>Início</label>
+        <p-calendar class="p-inputtext-sm" name="begin" dateFormat="MM, yy"
         [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
           [inline]="false" [readonlyInput]="false" 
           ngModel #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
       </div>
       <div class="col-12 md-12 p-fluid">
-        <label>End</label>
-        <p-calendar class="p-inputtext-sm" name="end" dateFormat="dd/mm/yy"
+        <label>Fim</label>
+        <p-calendar class="p-inputtext-sm" name="end" dateFormat="MM, yy"
         [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
           [inline]="false" [readonlyInput]="false" 
           ngModel #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
