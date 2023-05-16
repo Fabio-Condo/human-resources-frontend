@@ -1,16 +1,6 @@
 <div class="container">
     <h5 style="text-align: center;">Funcionários</h5>
 
-    <!--
-    <div >
-        <input style="width: 30%" [(ngModel)]="filter.name" name="designation" type="text" pInputText placeholder="Search" (ngModelChange)="getEmployees()">    
-        <p-dropdown style="margin-left: 2%;" [options]="orderPage" placeholder="Sort by..." [filter]="true"
-        ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
-        <button (click)="onAddNewEmployee()" pButton label="Novo +" style="background-color: #63c05a; border-style: none; margin-left: 2%;"></button>  
-    </div>
-    -->
-
-
     <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         
         <ng-template pTemplate="caption">
@@ -69,7 +59,7 @@
 
 </div>
 
-<p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -140,12 +130,12 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label >Contactos</label> <span (click)="getReadyNewContact()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.contacts" selectionMode="single" [responsive]="true" 
-                     styleClass="p-datatable-sm p-datatable-gridlines" #tabela >
+                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th style="background-color: #F4F6F6;">Número</th>
-                      <th style="background-color: #F4F6F6;">Nome do proprietário</th>
-                      <th style="background-color: #F4F6F6;" class="col-valor-header">Ações</th>
+                      <th style="background-color: #FFF;">Número</th>
+                      <th style="background-color: #FFF;">Nome do proprietário</th>
+                      <th style="background-color: #FFF;" class="col-valor-header">Ações</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
@@ -154,10 +144,10 @@
                       <td>{{ employee.name }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <button pButton pTooltip="Editar" (click)="getReadyContactEdit(employee, rowIndex)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border: none;"></button>
-                          <button pButton pTooltip="Excluir" (click)="removeContact(rowIndex)" tooltipPosition="top" type="button" icon="pi pi-times" class="p-button-danger" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                          <span (click)="getReadyContactEdit(employee, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                          <span (click)="removeContact(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
-                        </td>
+                      </td> 
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -173,14 +163,14 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label >Formação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
-                     styleClass="p-datatable-sm p-datatable-gridlines" #tabela >
+                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th style="background-color: #F4F6F6;">Descrição</th>
-                      <th style="background-color: #F4F6F6;">Início</th>
-                      <th style="background-color: #F4F6F6;">Fim</th>
+                      <th style="background-color: #FFF;">Descrição</th>
+                      <th style="background-color: #FFF;">Início</th>
+                      <th style="background-color: #FFF;">Fim</th>
 
-                      <th style="background-color: #F4F6F6;" class="col-valor-header">Ações</th>
+                      <th style="background-color: #FFF;" class="col-valor-header">Ações</th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
@@ -190,10 +180,10 @@
                       <td>{{ employee.end | date:'MMMM, y'}}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <button pButton pTooltip="Editar" (click)="getReadyTrainingEdit(employee, rowIndex)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #5b6063; border: none;"></button>
-                          <button pButton pTooltip="Excluir" (click)="removeTraining(rowIndex)" tooltipPosition="top" type="button" icon="pi pi-times" class="p-button-danger" style="background-color: #fff; color: #5b6063; border: none;"></button>
+                          <span (click)="getReadyTrainingEdit(employee, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                          <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
-                        </td>
+                      </td>  
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">

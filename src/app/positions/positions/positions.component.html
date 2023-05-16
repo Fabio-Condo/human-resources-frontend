@@ -41,7 +41,7 @@
 
 </div>
 
-<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '39vw'}" [draggable]="false" [resizable]="false" >
+<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false" >
     <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
 
         <div class="formgrid grid">
@@ -145,7 +145,7 @@
 
             <!--Specific Requirements-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Requisitos especificos | </label> <span (click)="openAddNewSpecificRequirementModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Requisitos especificos exigidos | </label> <span (click)="openAddNewSpecificRequirementModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.specificRequirements" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -176,7 +176,7 @@
 
             <!--Training-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Formação | </label><span (click)="openAddNewTrainingModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Formação exigida | </label><span (click)="openAddNewTrainingModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.training" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -207,7 +207,7 @@
 
             <!--Professional Experience-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Experiencia Professional | </label> <span (click)="openAddNewProfessionalExperienceModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Experiencia Professional exigida | </label> <span (click)="openAddNewProfessionalExperienceModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="position.professionalExperience" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -273,7 +273,7 @@
 
             <!--Languages-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-              <label>Linguas | </label> <span (click)="openAddNewLanguageModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+              <label>Linguas exigidas | </label> <span (click)="openAddNewLanguageModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
               <p-table [value]="position.languages" [responsive]="true" 
                   styleClass="p-datatable-sm" #tabela >
                 <ng-template pTemplate="header">
