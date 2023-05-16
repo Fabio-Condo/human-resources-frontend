@@ -127,7 +127,7 @@
                 </p-dropdown>
             </div>
             
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
                 <label >Contactos</label> <span (click)="getReadyNewContact()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.contacts" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
@@ -135,7 +135,7 @@
                     <tr>
                       <th style="background-color: #FFF;">Número</th>
                       <th style="background-color: #FFF;">Nome do proprietário</th>
-                      <th style="background-color: #FFF;" class="col-valor-header">Ações</th>
+                      <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
@@ -157,10 +157,11 @@
                         </td>
                       </tr>
                   </ng-template>            
-                </p-table>        
+                </p-table>     
+                <br>   
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
                 <label >Formação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
@@ -170,7 +171,7 @@
                       <th style="background-color: #FFF;">Início</th>
                       <th style="background-color: #FFF;">Fim</th>
 
-                      <th style="background-color: #FFF;" class="col-valor-header">Ações</th>
+                      <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
@@ -193,7 +194,8 @@
                         </td>
                       </tr>
                   </ng-template>            
-                </p-table>        
+                </p-table>     
+                <br>   
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
