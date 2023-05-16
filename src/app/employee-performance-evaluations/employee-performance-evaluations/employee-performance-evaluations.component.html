@@ -46,7 +46,7 @@
 
 </div>
 
-<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '60vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">   
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -56,7 +56,7 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Categoria</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione" [filter]="true"
+                <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione"
                     name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
