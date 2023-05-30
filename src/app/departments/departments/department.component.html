@@ -54,11 +54,13 @@
     <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
         <div class="formgrid grid">
 
+            <!--
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Responsável</label>
                 <p-dropdown class="p-inputtext-sm"  [options]="employeesForResponsibleSelect" placeholder="Selecione" [filter]="true"
                     name="responsibleEmployee" #responsibleEmployee ngModel [(ngModel)]="department.responsibleEmployee.id"></p-dropdown>
             </div>
+            -->
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>

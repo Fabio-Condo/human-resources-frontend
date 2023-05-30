@@ -15,6 +15,7 @@ import { EmployeesService } from '../employees.service';
 import { Contact } from 'src/app/core/model/Contact';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
+import { Position } from 'src/app/core/model/Position';
 
 @Component({
   selector: 'app-employees',
