@@ -19,14 +19,18 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
+                <!--
                 <th style="background-color: #fff;">Responsável</th>
+                -->
                 <th style="background-color: #fff;">Ações</th>       
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-dep>
             <tr>
                 <td>{{ dep.name }}</td>
+                <!--
                 <td>{{ dep.responsibleEmployee.name }}</td>
+                -->
                 <td style="width: 180px;">
                     <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
@@ -50,7 +54,7 @@
 
 </div>
 
-<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false" *ngIf="department.responsibleEmployee">
+<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
         <div class="formgrid grid">
 
