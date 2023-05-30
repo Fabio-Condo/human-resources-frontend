@@ -4,6 +4,7 @@ import { ISerializedEmployeeExcludePositition } from "./ISerializedEmployeeExclu
 export interface IDepartment {
     id: number,
     name: string,
+    description: string,
     responsibleEmployee: any // responsibleEmployee: IEmployee, mas estava a de "RangeError: Maximum call stack size exceeded" por chamar Employee repetidamente 
     //responsibleEmployee: ISerializedEmployeeExcludePositition // responsibleEmployee: IEmployee, mas estava a de "RangeError: Maximum call stack size exceeded" por chamar Employee repetidamente 
     projects: Project[];
