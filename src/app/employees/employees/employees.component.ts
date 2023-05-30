@@ -5,7 +5,6 @@ import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { DepartmentService } from 'src/app/departments/department.service';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
-import { IDepartment } from 'src/app/core/interfaces/IDepartments';
 import { IEmployee } from 'src/app/core/interfaces/IEmployee';
 import { IEmployeeFilter } from 'src/app/core/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/core/model/Employee';
@@ -14,7 +13,6 @@ import { PositionsService } from 'src/app/positions/positions.service';
 import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
 import { Contact } from 'src/app/core/model/Contact';
-import { Training } from 'src/app/core/model/Training';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 
@@ -32,8 +30,6 @@ export class EmployeesComponent implements OnInit {
 
   employee: IEmployee = new Employee;
   displayModalSave: boolean = false;
-
-  departments: any[] = [] ;
 
   provinces: any[] = [];
   //selectedProvince?: number;
@@ -99,7 +95,6 @@ export class EmployeesComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('employees page');
     this.getProvinces();
-    this.getDepartments();
     this.getPositions();
   }
 
@@ -210,23 +205,6 @@ export class EmployeesComponent implements OnInit {
       this.showLoading = false;
     }
   } 
-
-  getDepartments() {
-    return this.departmentService.findAll().subscribe(
-      data => {
-        this.departments = data.content.map(dep => {
-          return  {
-            label: dep.name,
-            value: dep.id
-          }
-        })
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    )
-  }
 
   getPositions() {
     return this.positionsService.findAll().subscribe(

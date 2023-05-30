@@ -31,9 +31,9 @@
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td style="width: 180px;">
-                <button pButton pTooltip="Edit" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
-                  <button pButton pTooltip="Edit" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
-                  <button pButton (click)="deletionConfirm(position)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
+                <button pButton pTooltip="Visualizar" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf;"></button>&nbsp;
+                <button pButton pTooltip="Editar" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
+                <button pButton pTooltip="Eliminar" (click)="deletionConfirm(position)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
               </td>
           </tr>
       </ng-template>
@@ -42,7 +42,7 @@
 </div>
 
 <p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false" >
-    <form autocomplete="off" #positionForm="ngForm" (ngSubmit)="save(positionForm)">
+    <form autocomplete="off" #positionForm="ngForm"  styleClass="p-datatable-sm" (ngSubmit)="save(positionForm)">
 
         <div class="formgrid grid">
           <div class="field col-12 md:col-6">

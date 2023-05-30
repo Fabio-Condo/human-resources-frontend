@@ -42,6 +42,7 @@ export class EmployeesService {
   }
 
   update(employe: IEmployee): Observable<IEmployee> {
+    console.log(employe)
     return this.http.put<IEmployee>(`${this.employeesUrl}/${employe.id}`, employe, { });
   }
 

@@ -19,13 +19,16 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
+                <th style="background-color: #fff;">Responsável</th>
                 <th style="background-color: #fff;">Ações</th>       
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-dep>
             <tr>
                 <td>{{ dep.name }}</td>
+                <td>{{ dep.responsibleEmployee.name }}</td>
                 <td style="width: 180px;">
+                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
                 </td>
@@ -47,9 +50,16 @@
 
 </div>
 
-<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false" *ngIf="department.responsibleEmployee">
     <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
         <div class="formgrid grid">
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Responsável</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="employeesForResponsibleSelect" placeholder="Selecione" [filter]="true"
+                    name="responsibleEmployee" #responsibleEmployee ngModel [(ngModel)]="department.responsibleEmployee.id"></p-dropdown>
+            </div>
+
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="name"

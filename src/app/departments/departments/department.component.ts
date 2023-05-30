@@ -10,6 +10,9 @@ import { Department } from 'src/app/core/model/Department';
 import { Title } from '@angular/platform-browser';
 import { Employee } from 'src/app/core/model/Employee';
 import { IEmployee } from 'src/app/core/interfaces/IEmployee';
+import { EmployeesService } from 'src/app/employees/employees.service';
+import { SerializedEmployeeExcludePositition } from 'src/app/core/model/SerializedEmployeeExcludePositition';
+import { ISerializedEmployeeExcludePositition } from 'src/app/core/interfaces/ISerializedEmployeeExcludePositition';
 
 @Component({
   selector: 'app-department',
@@ -30,6 +33,8 @@ export class DepartmentComponent implements OnInit {
   selectedDepartmentModal: Department = new Department();
   displayModal = false;
 
+  employeesForResponsibleSelect: any[] = [] ;
+
   sizePage = [
     { label: '8 itens por página', value: 8 },
     { label: '10 itens por página', value: 10 },
@@ -49,11 +54,13 @@ export class DepartmentComponent implements OnInit {
     private departmentService: DepartmentService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private employeesService: EmployeesService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
+    this.getEmployees();
   }
 
   filter: IDepartmentFilter = {
@@ -132,6 +139,23 @@ export class DepartmentComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Department deleted succefully!' })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getEmployees() {
+    return this.employeesService.findAll().subscribe(
+      data => {
+        this.employeesForResponsibleSelect = data.content.map(employee => {
+          return  {
+            label: employee.name,
+            value: employee.id
+          }
+        })
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
