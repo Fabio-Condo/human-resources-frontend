@@ -72,6 +72,11 @@
                 <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
                     name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
             </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Tipo de contrato</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
+                    name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
+            </div>
             <div class="col-12 md-12 p-fluid">
                 <label>Data de nascimento</label>
                 <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
