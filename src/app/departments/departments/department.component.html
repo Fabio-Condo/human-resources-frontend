@@ -56,7 +56,7 @@
 
 </div>
 
-<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
         <div class="formgrid grid">
 
@@ -78,6 +78,43 @@
                 <input pInputText class="p-inputtext-sm" type="text" name="description"
                 ngModel #description="ngModel" required minlength="1" [(ngModel)]="department.description">  
             </div>
+
+           <!--Projets-->
+           <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6;">
+                <label>Projectos | </label> <span (click)="getReadyNewProject()" ><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <p-table [value]="department.projects" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="background-color: #FFF;">Nome</th>
+                            <th style="background-color: #FFF;">Responsável</th>
+                            <th style="background-color: #FFF;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
+                        <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.responsibleEmployee.name }}</td>
+                        <td class="col-acoes">
+                            <span class="p-buttonset">
+                                <span (click)="getReadyProjectEdit(project, rowIndex)" ><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                                <span (click)="removeProject(rowIndex)" ><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                            No main responsibilities found
+                            </td>
+                        </tr>
+                    </ng-template>            
+                </p-table> 
+                <br> 
+            </div> 
+        
+                
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="departmentForm.invalid" class="p-button-sm" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
@@ -100,6 +137,27 @@
         
     </div>         
 </p-dialog>
+
+
+<!--Projects-->
+<p-dialog [header]="editingProject ? 'Edição Projecto' : 'Novo Projecto'" [style]="{width: '30vw', height: '35vw'}" [(visible)]="showProjectForm" [modal]="true" *ngIf="project"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmProject="ngForm" (ngSubmit)="confirmProject(frmProject)">
+      <div class="col-12 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="name"
+          required [(ngModel)]="project.name" #name="ngModel" placeholder="Ex: 841234567"/>
+      </div>
+
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Responsável</label>
+        <p-dropdown class="p-inputtext-sm" [options]="employeesForProjectResponsibleSelect" placeholder="Selecione" [filter]="true"
+            name="responsibleEmployee" #responsibleEmployee ngModel [(ngModel)]="project.responsibleEmployee.id"></p-dropdown>
+      </div>
+      <div class="col-12 p-fluid">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmProject.invalid" style="height: 30px; margin-top: 1%;"></button>
+      </div>
+    </form>
+</p-dialog>  
 
 
             

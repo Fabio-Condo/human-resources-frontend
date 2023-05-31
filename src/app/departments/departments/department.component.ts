@@ -13,6 +13,7 @@ import { IEmployee } from 'src/app/core/interfaces/IEmployee';
 import { EmployeesService } from 'src/app/employees/employees.service';
 import { SerializedEmployeeExcludePositition } from 'src/app/core/model/SerializedEmployeeExcludePositition';
 import { ISerializedEmployeeExcludePositition } from 'src/app/core/interfaces/ISerializedEmployeeExcludePositition';
+import { Project } from 'src/app/core/model/Project';
 
 @Component({
   selector: 'app-department',
@@ -33,7 +34,12 @@ export class DepartmentComponent implements OnInit {
   selectedDepartmentModal: Department = new Department();
   displayModal = false;
 
-  employeesForResponsibleSelect: any[] = [] ;
+  employeesForProjectResponsibleSelect: any[] = [] ;
+
+  project?: Project;
+  projects: Array<Project> = []
+  showProjectForm = false;
+  projectIndex?: number;
 
   sizePage = [
     { label: '8 itens por página', value: 8 },
@@ -150,7 +156,7 @@ export class DepartmentComponent implements OnInit {
   getEmployees() {
     return this.employeesService.findAll().subscribe(
       data => {
-        this.employeesForResponsibleSelect = data.content.map(employee => {
+        this.employeesForProjectResponsibleSelect = data.content.map(employee => {
           return  {
             label: employee.name,
             value: employee.id
@@ -192,6 +198,39 @@ export class DepartmentComponent implements OnInit {
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.getDepartments(page);
+  }
+
+  // Project crud table
+  getReadyNewProject() {
+    this.showProjectForm = true;
+    this.project = new Project();
+    this.projectIndex = this.department.projects.length;
+  }
+
+  getReadyProjectEdit(project: Project, index: number) {
+    this.project = this.cloneProject(project);
+    this.showProjectForm = true;
+    this.projectIndex = index;
+  }
+
+  confirmProject(frm: NgForm) {
+    this.department.projects[this.projectIndex!] = this.cloneProject(this.project!);
+    this.showProjectForm = false;
+    //frm.reset();
+  }
+
+  cloneProject(project: Project): Project {
+    return new Project(project.id, project.name, project.responsibleEmployee);
+  }
+
+  get editingProject() { 
+    return this.project && this.project?.id;
+  }
+  // End project
+
+  removeProject(index: number) {
+    this.department.projects.splice(index, 1);
+    console.log("removing: " + index);
   }
 
   private sendErrorNotification(message: string): void {
