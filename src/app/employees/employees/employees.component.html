@@ -61,29 +61,68 @@
 
 <p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
+
         <div class="formgrid grid">
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Nome</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="name"
-                ngModel #name="ngModel" required minlength="1" [(ngModel)]="employee.name">  
+            <div class="field col-12 md:col-6">
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Nome</label>
+                    <input pInputText class="p-inputtext-sm" type="text" name="name"
+                    ngModel #name="ngModel" required minlength="1" [(ngModel)]="employee.name">  
+                </div>
+                <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+                    <label>Data de nascimento</label>
+                    <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                    [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
+                      [inline]="false" [readonlyInput]="false" 
+                      ngModel #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                    <label>Tipo de contrato</label>
+                    <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
+                        name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Salário</label>
+                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
+                    ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Cargo</label>    
+                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                        [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
+                        #position="ngModel" [required]=true>
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Genero</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
-                    name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
+            <div class="field col-12 md:col-6">
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Genero</label>
+                    <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
+                        name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Estado civil</label>
+                    <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
+                        name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Conjugue</label>
+                    <input pInputText class="p-inputtext-sm" type="text" name="spousesName"
+                    ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Provincia</label>    
+                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                        [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
+                        #province="ngModel" [required]=true>
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Tipo de contrato</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
-                    name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
-            </div>
-            <div class="col-12 md-12 p-fluid">
-                <label>Data de nascimento</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
-            </div>
+        </div>
+
+        <div class="formgrid grid">
+
+
             <!--
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Endereço fisico</label>
@@ -91,28 +130,6 @@
                 ngModel #physicalAddress="ngModel" required minlength="1" [(ngModel)]="employee.physicalAddress">  
             </div>
             -->
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Estado civil</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
-                    name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Conjugue</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="spousesName"
-                ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Salário</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
-                ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Provincia</label>    
-                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                    [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
-                    #province="ngModel" [required]=true>
-                </p-dropdown>
-            </div>
             <!--
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Departamento</label>    
@@ -122,15 +139,6 @@
                 </p-dropdown>
             </div>
             -->
-
-        
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Cargo</label>    
-                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                    [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
-                    #position="ngModel" [required]=true>
-                </p-dropdown>
-            </div>
             
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
                 <label >Contactos</label> <span (click)="getReadyNewContact()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>

@@ -79,6 +79,19 @@ export class PositionsComponent implements OnInit {
     { label: 'Razoável', value: 'REASONABLE' },
   ];
 
+  functionalGroups = [
+    { label: 'Finanças e Contabilidade', value: 'FINANCE' },
+    { label: 'Recursos Humanos', value: 'HUMAN_RESOURCES' },
+    { label: 'Vendas e Marketing', value: 'SALES_MARKETING' },
+    { label: 'Operações e Logística', value: 'LOGISTICS_OPERATIONS' },
+    { label: 'Tecnologia da Informação', value: 'TI' },
+    { label: 'Desenvolvimento de Produtos', value: 'DEVELOPMENT_PRODUCTS' },
+    { label: 'Jurídico e Compliance', value: 'LEGAL_COMPLIANCE' },
+    { label: 'Operações de Atendimento ao Cliente', value: 'CUSTOMER_SERVICE' },
+    { label: 'Administração e Gerenciamento', value: 'ADMINISTRATION_MANAGEMENT' },
+    { label: 'Recursos e Sustentabilidade', value: 'RESOURCES_SUSTAINABILITY' },
+  ];
+
   sizePage = [
     { label: '8 itens por página', value: 8 },
     { label: '10 itens por página', value: 10 },

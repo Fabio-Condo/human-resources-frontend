@@ -47,7 +47,7 @@
 
 </div>
 
-<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '60vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '35vw', width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">   
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -62,38 +62,23 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Trabalho em equipe</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="teamWork"
-                ngModel #teamWork="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.teamWork">  
+                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
+                    name="teamWork" #teamWork ngModel [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comunicação</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="communication"
-                ngModel #communication="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.communication">  
+                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
+                    name="communication" #communication ngModel [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Pensamento estratégico</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="strategicThought"
-                ngModel #strategicThought="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.strategicThought">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Orientação para qualidade</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="qualityOrientation"
-                ngModel #qualityOrientation="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.qualityOrientation">  
+                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
+                    name="strategicThought" #strategicThought ngModel [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comentário / Recomendações do avaliador</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="forEmployeeImprovement"
                 ngModel #forEmployeeImprovement="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Comentários do avaliador</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="evaluatorsComments"
-                ngModel #evaluatorsComments="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.evaluatorsComments">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>evaluatorsRecommendations</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="evaluatorsRecommendations"
-                ngModel #evaluatorsRecommendations="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.evaluatorsRecommendations">  
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">

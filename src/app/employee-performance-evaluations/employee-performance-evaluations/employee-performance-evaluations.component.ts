@@ -30,6 +30,14 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     { label: 'Anual', value: 'YEARLY' },
     { label: 'Mensal', value: 'MONTHLY' },
   ];
+
+  evaluationLevels = [
+    { label: '1 (Um)', value: 'ONE' },
+    { label: '2 (Dois)', value: 'TWO' },
+    { label: '3 (Três)', value: 'THREE' },
+    { label: '4 (Quatro)', value: 'FOUR' },
+    { label: '5 (Cinco)', value: 'FIVE' },
+  ];
   
   sizePage = [
     { label: '8 itens por página', value: 8 },

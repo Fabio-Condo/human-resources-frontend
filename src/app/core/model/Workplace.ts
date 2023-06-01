@@ -2,5 +2,6 @@ import { IWorkplace } from "../interfaces/IWorkplace";
 
 export class Workplace implements IWorkplace{
     id!: number;
-    name!: string
+    name!: string;
+    description!: string;
 }
