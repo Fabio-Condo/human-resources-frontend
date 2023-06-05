@@ -5,6 +5,7 @@
         
         <ng-template pTemplate="caption">
             <div class="flex">
+                <!--
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployees()"/>
@@ -14,8 +15,10 @@
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployees()"></p-dropdown>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf"  class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom" style="color: #e96969; background-color: #fff; border-color: #e96969;"></button>
+                -->
+
                 <button (click)="onAddNewEmployee()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
-                <button type="button" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -33,13 +36,13 @@
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
                 <td>
-                    <span *ngIf="employee.status" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;</span>
-                    <span *ngIf="!employee.status" style="background-color: #e96969; color:#fff; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
+                    <span *ngIf="employee.status" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;</span>
+                    <span *ngIf="!employee.status" style="color:#982F27; background-color: whitesmoke; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Edit" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
-                    <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
+                    <button pButton pTooltip="Edit" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -417,4 +420,71 @@
         <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid" style="height: 30px; margin-top: 1%;"></button>
       </div>
     </form>
+</p-dialog>  
+
+<!--Filtrar-->
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Itens por página</label>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployees()"></p-dropdown>
+            </div>
+        </div>
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Ordenação</label>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="col-12 p-fluid"> 
+          <label>Nome</label>    
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployees()"/>
+            </span>      
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Genero</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
+                name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
+        </div>
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Estado civil</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
+                name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Tipo de contrato</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
+                name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Cargo</label>    
+            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
+                #position="ngModel" [required]=true>
+            </p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Provincia</label>    
+            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
+                [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
+                #province="ngModel" [required]=true>
+            </p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </div> 
+
 </p-dialog>  

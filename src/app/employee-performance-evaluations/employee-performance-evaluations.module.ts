@@ -8,6 +8,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
@@ -36,6 +37,7 @@ import { CalendarModule } from 'primeng/calendar';
     DialogModule,
     DividerModule,
     CalendarModule,
+    InputTextareaModule,
 
     RouterModule,
     AppRoutingModule

@@ -33,13 +33,13 @@
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; Mensal &nbsp;</span>
-                    <span *ngIf="epe.category==='YEARLY'" style="background-color: #e3975d; color:#fff; border-radius: 4%;">&nbsp; Anual &nbsp;</span>
+                    <span *ngIf="epe.category==='MONTHLY'" style="color:#34962b; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Mensal &nbsp;</span>
+                    <span *ngIf="epe.category==='YEARLY'" style="color:#c37438; background-color: whitesmoke; border-radius: 4%;">&nbsp; Anual &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969;"></button>
+                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -47,7 +47,7 @@
 
 </div>
 
-<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '35vw', width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">   
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -61,24 +61,23 @@
                     name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Trabalho em equipe</label>
+                <label>Trabalho em equipe - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
                 <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
                     name="teamWork" #teamWork ngModel [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Comunicação</label>
+                <label>Comunicação - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
                 <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
                     name="communication" #communication ngModel [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Pensamento estratégico</label>
+                <label>Pensamento estratégico - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
                 <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
                     name="strategicThought" #strategicThought ngModel [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comentário / Recomendações do avaliador</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="forEmployeeImprovement"
-                ngModel #forEmployeeImprovement="ngModel" required minlength="1" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement">  
+                <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement" minlength="10" placeholder="Introduza as coordenadas"></textarea>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">

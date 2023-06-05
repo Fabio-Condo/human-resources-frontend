@@ -42,7 +42,7 @@ export class DepartmentComponent implements OnInit {
   projectIndex?: number;
 
   sizePage = [
-    { label: '8 itens por página', value: 8 },
+    { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
     { label: '25 itens por página', value: 25 },
     { label: '50 itens por página', value: 50 },
@@ -71,7 +71,7 @@ export class DepartmentComponent implements OnInit {
 
   filter: IDepartmentFilter = {
     page: 0,
-    itemsPerPage: 8,
+    itemsPerPage: 10,
     sort: 'name,asc'
   }
 

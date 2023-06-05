@@ -32,15 +32,15 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   ];
 
   evaluationLevels = [
-    { label: '1 (Um)', value: 'ONE' },
-    { label: '2 (Dois)', value: 'TWO' },
-    { label: '3 (Três)', value: 'THREE' },
-    { label: '4 (Quatro)', value: 'FOUR' },
-    { label: '5 (Cinco)', value: 'FIVE' },
+    { label: 'Um [1]', value: 'ONE' },
+    { label: 'Dois [2]', value: 'TWO' },
+    { label: 'Três [3]', value: 'THREE' },
+    { label: 'Quatro [4]', value: 'FOUR' },
+    { label: 'Cinco [5]', value: 'FIVE' },
   ];
   
   sizePage = [
-    { label: '8 itens por página', value: 8 },
+    { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
     { label: '25 itens por página', value: 25 },
     { label: '50 itens por página', value: 50 },
@@ -69,7 +69,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
-    itemsPerPage: 8,
+    itemsPerPage: 10,
     sort: 'employee.name,asc'
   }
 
