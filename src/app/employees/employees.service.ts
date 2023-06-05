@@ -17,6 +17,39 @@ export class EmployeesService {
     this.employeesUrl = `${environment.apiUrl}/employees`;
   }
 
+  filter(filter: IEmployeeFilter): Observable<IApiResponse<IEmployee>> {  
+
+    let params = new HttpParams()  
+      .set('page', filter.page)  
+      .set('size', filter.itemsPerPage);  
+
+    if (filter.sort) { 
+      params = params.set('employeeOrderBy', filter.sort); 
+    } 
+
+    if (filter.name) { 
+     params = params.set('name', filter.name); 
+    }
+    if (filter.province) { 
+      params = params.set('province', filter.province); 
+    }
+    if (filter.gender) { 
+      params = params.set('gender', filter.gender); 
+    }
+    if (filter.position) { 
+      params = params.set('position', filter.position); 
+    }
+    if (filter.contractType) { 
+      params = params.set('contractType', filter.contractType); 
+    }
+    if (filter.maritalStatus) { 
+      params = params.set('maritalStatus', filter.maritalStatus); 
+    }
+
+    console.log(params);
+    return this.http.get<IApiResponse<IEmployee>>(`${this.employeesUrl}/filter`, { params });
+  }
+
   getEmployees(filter: IEmployeeFilter): Observable<IApiResponse<IEmployee>> {  
 
     let params = new HttpParams()  
@@ -44,6 +77,10 @@ export class EmployeesService {
   update(employe: IEmployee): Observable<IEmployee> {
     console.log(employe)
     return this.http.put<IEmployee>(`${this.employeesUrl}/${employe.id}`, employe, { });
+  }
+
+  changeStatus(id: number, active: boolean): Observable<void> {
+    return this.http.put<void>(`${this.employeesUrl}/${id}/active`, active, { });
   }
 
   delete(id: number): Observable<void> {

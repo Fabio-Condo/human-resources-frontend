@@ -36,8 +36,14 @@
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
                 <td>
+                    <a href="javascript:;" [pTooltip]="employee.status ? 'Desativar' : 'Ativar'" tooltipPosition="top" (click)="changeStatus(employee)">
+                        <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;&nbsp;</span>
+                        <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
+                    </a>
+                    <!--
                     <span *ngIf="employee.status" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;</span>
                     <span *ngIf="!employee.status" style="color:#982F27; background-color: whitesmoke; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
+                    -->
                 </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="Edit" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
@@ -53,7 +59,7 @@
                 <span *ngIf="!showLoading">No title found </span> 
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                 <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getEmployees(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterEmployees(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
                 </a>                  
             </td>
             </tr>
@@ -430,14 +436,14 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
                 <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployees()"></p-dropdown>
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployees()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
                 <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterEmployees()"></p-dropdown>
             </div>
         </div>
 
@@ -445,40 +451,40 @@
           <label>Nome</label>    
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployees()"/>
+            <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployees()"/>
             </span>      
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Genero</label>
             <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
-                name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
+                name="gender" #gender ngModel [(ngModel)]="filter.gender" (onChange)="filterEmployees()"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Estado civil</label>
             <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
-                name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
+                name="maritalStatus" #maritalStatus ngModel [(ngModel)]="filter.maritalStatus" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de contrato</label>
             <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
-                name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
+                name="contractType" #contractType ngModel [(ngModel)]="filter.contractType" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Cargo</label>    
             <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
-                #position="ngModel" [required]=true>
+                [filter]="true" [options]="positions" [(ngModel)]="filter.position" name="position"
+                #position="ngModel" [required]=true (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Provincia</label>    
             <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
-                #province="ngModel" [required]=true>
+                [filter]="true" [options]="provinces" [(ngModel)]="filter.province" name="province"
+                #province="ngModel" [required]=true (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
