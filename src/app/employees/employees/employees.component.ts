@@ -89,6 +89,10 @@ export class EmployeesComponent implements OnInit {
   orderPage = [
     { label: 'Nome (crescente)', value: 'name,asc' },
     { label: 'Nome (decrescente)', value: 'name,desc' },
+    { label: 'Cargo (crescente)', value: 'position,asc' },
+    { label: 'Cargo (decrescente)', value: 'position,desc' },
+    { label: 'Depart. (crescente)', value: 'department,asc' },
+    { label: 'Depart. (decrescente)', value: 'department,desc' },
     { label: 'Id (crescente)', value: 'id,asc' },
     { label: 'Id (decrescente)', value: 'id,desc' },
   ];
@@ -135,7 +139,6 @@ export class EmployeesComponent implements OnInit {
       (employeeAdded) => {
         this.employee = employeeAdded;
         this.showLoading = false;
-        //this.getEmployees();
         this.filterEmployees();
         this.convertStringsToDates([employeeAdded]);
         this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });      
@@ -163,24 +166,6 @@ export class EmployeesComponent implements OnInit {
     )
   }
 
-  /*
-  getEmployees(page: number = 0): void {
-    this.showLoading = true;
-    this.filter.page = page;
-    this.employeesService.getEmployees(this.filter).subscribe(
-      (data: IApiResponse<IEmployee>) => {
-        this.employees = data.content;
-        this.totalRecords = data.totalElements;
-        this.showLoading = false;
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    );   
-  }
-  */
-
   filterEmployees(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
@@ -201,7 +186,6 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.delete(employee.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          //this.getEmployees();
           this.filterEmployees()
         } else {
           this.grid.reset();
