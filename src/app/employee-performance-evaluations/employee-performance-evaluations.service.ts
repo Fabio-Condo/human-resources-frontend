@@ -17,6 +17,30 @@ export class EmployeePerformanceEvaluationsService {
     this.employeePerformanceEvaluation = `${environment.apiUrl}/employees-performance-evaluations`;
   }
 
+  filter(filter: IEmployeePerformanceEvaluationFilter): Observable<IApiResponse<IEmployeePerformanceEvaluation>> {  
+
+    let params = new HttpParams()  
+      .set('page', filter.page)  
+      .set('size', filter.itemsPerPage);  
+
+    if (filter.sort) { 
+      params = params.set('employeePerformanceEvaluationOrderBy', filter.sort); 
+    } 
+
+    if (filter.name) { 
+     params = params.set('name', filter.name); 
+    }
+    if (filter.category) { 
+      params = params.set('category', filter.category); 
+    }
+    if (filter.employee) { 
+      params = params.set('employee', filter.employee); 
+    }
+
+    console.log(params);
+    return this.http.get<IApiResponse<IEmployeePerformanceEvaluation>>(`${this.employeePerformanceEvaluation}/filter`, { params });
+  }
+
   getEmployeePerformanceEvaluations(filter: IEmployeePerformanceEvaluationFilter): Observable<IApiResponse<IEmployeePerformanceEvaluation>> {  
 
     let params = new HttpParams()  

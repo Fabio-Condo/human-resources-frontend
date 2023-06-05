@@ -102,33 +102,33 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
                 <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
                 <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
             </div>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Funcionário</label>
             <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
+                name="employee" #employee ngModel [(ngModel)]="filter.employee" (ngModelChange)="filterEmployeePerformanceEvaluations()" ></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Categoria</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione"
-                name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione" 
+                name="category" #category ngModel [(ngModel)]="filter.category" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid"> 
             <label>Nome</label>    
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployeePerformanceEvaluations()"/>
+              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployeePerformanceEvaluations()"/>
             </span>      
         </div>
 
@@ -136,7 +136,7 @@
             <label>Nome</label>    
             <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
-              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployeePerformanceEvaluations()"/>
+              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployeePerformanceEvaluations()"/>
               </span>      
         </div>
 

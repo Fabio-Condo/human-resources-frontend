@@ -94,7 +94,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
       (employeePerformanceEvaluationAdded) => {
         this.employeePerformanceEvaluation = employeePerformanceEvaluationAdded;
         this.showLoading = false;
-        this.getEmployeePerformanceEvaluations();
+        this.filterEmployeePerformanceEvaluations();
         this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -119,10 +119,10 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     )
   }
 
-  getEmployeePerformanceEvaluations(page: number = 0): void {
+  filterEmployeePerformanceEvaluations(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.employeePerformanceEvaluationsService.getEmployeePerformanceEvaluations(this.filter).subscribe(
+    this.employeePerformanceEvaluationsService.filter(this.filter).subscribe(
       (data: IApiResponse<IEmployeePerformanceEvaluation>) => {
         this.employeePerformanceEvaluations = data.content;
         this.totalRecords = data.totalElements;
@@ -139,7 +139,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.employeePerformanceEvaluationsService.delete(employeePerformanceEvaluation.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          this.getEmployeePerformanceEvaluations();
+          this.filterEmployeePerformanceEvaluations();
         } else {
           this.grid.reset();
         }
@@ -195,7 +195,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
-    this.getEmployeePerformanceEvaluations(page);
+    this.filterEmployeePerformanceEvaluations(page);
   }
 
   private sendErrorNotification(message: string): void {
