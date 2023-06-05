@@ -5,6 +5,7 @@
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
+        <!--
           <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getPositions()"/>
@@ -13,8 +14,9 @@
           ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
           <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
           ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
+        -->
           <button (click)="onAddNewPosition()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
-          <button type="button" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+          <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
     </ng-template>  
     <ng-template pTemplate="header">
@@ -33,7 +35,7 @@
               <td style="width: 180px;">
                 <button pButton pTooltip="Visualizar" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                 <button pButton pTooltip="Editar" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                <button pButton pTooltip="Eliminar" (click)="deletionConfirm(position)" tooltipPosition="top" type="button" icon="pi pi-times" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                <button pButton pTooltip="Eliminar" (click)="deletionConfirm(position)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
               </td>
           </tr>
       </ng-template>
@@ -457,6 +459,57 @@
       
   </div>         
 </p-dialog>
+
+<!--Filtrar-->
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+
+  <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+          <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Itens por página</label>
+              <p-dropdown [options]="sizePage" placeholder="Sort by..."
+              ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
+          </div>
+      </div>
+      <div class="field col-12 md:col-6">
+          <div class="col-12 p-fluid" style="margin-top: 2%;">
+              <label>Ordenação</label>
+              <p-dropdown [options]="orderPage" placeholder="Sort by..."
+              ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+          </div>
+      </div>
+
+      <div class="col-12 p-fluid"> 
+        <label>Nome</label>    
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getPositions()"/>
+        </span>      
+      </div>
+
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Grupo funcional</label>
+        <p-dropdown class="p-inputtext-sm"  [options]="functionalGroups" placeholder="Selecione"
+            name="functionalGroup" #functionalGroup ngModel [(ngModel)]="position.functionalGroup"></p-dropdown>
+      </div>
+
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Departmento</label>
+        <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
+            name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Local de trabalho</label>
+        <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
+            name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+      </div>
+
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+          <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+      </div>
+  </div> 
+
+</p-dialog>  
 
 
 

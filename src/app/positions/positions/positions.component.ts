@@ -74,6 +74,8 @@ export class PositionsComponent implements OnInit {
   selectedPositionModal: Position = new Position();
   displayModal = false;
 
+  displayModalFilter: boolean = false;
+
   languageWriteSpeakLevel = [
     { label: 'Fluente', value: 'FLUENT' },
     { label: 'Razoável', value: 'REASONABLE' },
@@ -276,6 +278,10 @@ export class PositionsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  onFilter(): void {
+    this.displayModalFilter = true;
   }
 
   onAddNewPosition(): void {

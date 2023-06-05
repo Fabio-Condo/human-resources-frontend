@@ -117,10 +117,6 @@ export class EmployeesComponent implements OnInit {
     sort: 'name,asc'
   }
 
-  onFilter(): void {
-    this.displayModalFilter = true;
-  }
-
   get editing() {
     return Boolean(this.employee.id);
   }
@@ -236,6 +232,10 @@ export class EmployeesComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  onFilter(): void {
+    this.displayModalFilter = true;
   }
 
   onAddNewEmployee(): void {

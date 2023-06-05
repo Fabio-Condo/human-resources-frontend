@@ -26,6 +26,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   employees: any[] = [] ;
 
+  displayModalFilter: boolean = false;
+
   categories = [
     { label: 'Anual', value: 'YEARLY' },
     { label: 'Mensal', value: 'MONTHLY' },
@@ -49,9 +51,9 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   orderPage = [
     { label: 'Funcionário (crescente)', value: 'employee.name,asc' },
-    { label: 'Funcionário Level (decrescente)', value: 'employee.name,desc' },
-    { label: 'Id (crescente)', value: 'id,asc' },
-    { label: 'Id (decrescente)', value: 'id,desc' },
+    { label: 'Funcionário (decrescente)', value: 'employee.name,desc' },
+    { label: 'Depart. (crescente)', value: 'employee.position.department.name,asc' },
+    { label: 'Depart. (decrescente)', value: 'employee.position.department.name,desc' },
   ];
 
   constructor(
@@ -165,6 +167,10 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  onFilter(): void {
+    this.displayModalFilter = true;
   }
 
   deletionConfirm(employeePerformanceEvaluation: IEmployeePerformanceEvaluation): void {
