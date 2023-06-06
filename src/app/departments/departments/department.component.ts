@@ -41,6 +41,16 @@ export class DepartmentComponent implements OnInit {
   showProjectForm = false;
   projectIndex?: number;
 
+  status = [
+    { label: 'IN_PROGRESS', value: 'IN_PROGRESS' },
+    { label: 'CONCLUDED', value: 'CONCLUDED' },
+    { label: 'PENDING', value: 'PENDING' },
+    { label: 'CANCELED', value: 'CANCELED' },
+    { label: 'IN_TEST', value: 'IN_TEST' },
+    { label: 'APPROVED', value: 'APPROVED' },
+    { label: 'SUSPENDED', value: 'SUSPENDED' },
+  ];
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
@@ -220,7 +230,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   cloneProject(project: Project): Project {
-    return new Project(project.id, project.name);
+    return new Project(project.id, project.name, project.projectStatus);
   }
 
   get editingProject() { 

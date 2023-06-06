@@ -87,12 +87,14 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="background-color: #FFF;">Nome</th>
+                            <th style="background-color: #FFF;">Status</th>
                             <th style="background-color: #FFF;"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
                         <tr>
                         <td>{{ project.name }}</td>
+                        <td>{{ project.projectStatus }}</td>
                         <td class="col-acoes">
                             <span class="p-buttonset">
                                 <span (click)="getReadyProjectEdit(project, rowIndex)" ><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
@@ -138,12 +140,17 @@
 
 
 <!--Projects-->
-<p-dialog [header]="editingProject ? 'Edição Projecto' : 'Novo Projecto'" [style]="{width: '30vw', height: '35vw'}" [(visible)]="showProjectForm" [modal]="true" *ngIf="project"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingProject ? 'Edição Projecto' : 'Novo Projecto'" [style]="{width: '30vw'}" [(visible)]="showProjectForm" [modal]="true" *ngIf="project"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmProject="ngForm" (ngSubmit)="confirmProject(frmProject)">
       <div class="col-12 p-fluid">
         <label>Nome</label>
         <input pInputText type="text" name="name"
           required [(ngModel)]="project.name" #name="ngModel" placeholder="Ex: 841234567"/>
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Genero</label>
+        <p-dropdown class="p-inputtext-sm"  [options]="status" placeholder="Selecione"
+            name="projectStatus" #projectStatus ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
       </div>
 
       <div class="col-12 p-fluid">

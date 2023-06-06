@@ -5,9 +5,11 @@ import { Employee } from "./Employee";
 export class Project implements IProject{
     id?: number;
     name?: string;
+    projectStatus?: string;
 
-    constructor(id?: number,name?: string) {
+    constructor(id?: number, name?: string, projectStatus?: string) {
         this.id = id;
         this.name = name;
+        this.projectStatus = projectStatus;
     }
 }

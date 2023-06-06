@@ -401,10 +401,10 @@
 </p-dialog>  
 
 <!--Traning-->
-<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
       <div class="col-12 p-fluid">
-        <label>Número</label>
+        <label>Descrição</label>
         <input pInputText type="text" name="numero"
           required [(ngModel)]="training.description" #contatoNumero="ngModel"/>
       </div>
