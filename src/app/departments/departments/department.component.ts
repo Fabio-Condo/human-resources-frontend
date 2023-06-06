@@ -210,39 +210,6 @@ export class DepartmentComponent implements OnInit {
     this.getDepartments(page);
   }
 
-  // Project crud table
-  getReadyNewProject() {
-    this.showProjectForm = true;
-    this.project = new Project();
-    this.projectIndex = this.department.projects.length;
-  }
-
-  getReadyProjectEdit(project: Project, index: number) {
-    this.project = this.cloneProject(project);
-    this.showProjectForm = true;
-    this.projectIndex = index;
-  }
-
-  confirmProject(frm: NgForm) {
-    this.department.projects[this.projectIndex!] = this.cloneProject(this.project!);
-    this.showProjectForm = false;
-    //frm.reset();
-  }
-
-  cloneProject(project: Project): Project {
-    return new Project(project.id, project.name, project.projectStatus);
-  }
-
-  get editingProject() { 
-    return this.project && this.project?.id;
-  }
-  // End project
-
-  removeProject(index: number) {
-    this.department.projects.splice(index, 1);
-    console.log("removing: " + index);
-  }
-
   private sendErrorNotification(message: string): void {
     if (message) {
       this.messageService.add({ severity: 'error', detail: message });
