@@ -4,5 +4,4 @@ import { Employee } from "../model/Employee";
 export interface IProject {
     id?: number;
     name?: string;
-    responsibleEmployee: Employee;
 }

@@ -87,14 +87,12 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="background-color: #FFF;">Nome</th>
-                            <th style="background-color: #FFF;">Responsável</th>
                             <th style="background-color: #FFF;"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
                         <tr>
                         <td>{{ project.name }}</td>
-                        <td>{{ project.responsibleEmployee.name }}</td>
                         <td class="col-acoes">
                             <span class="p-buttonset">
                                 <span (click)="getReadyProjectEdit(project, rowIndex)" ><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
@@ -148,11 +146,6 @@
           required [(ngModel)]="project.name" #name="ngModel" placeholder="Ex: 841234567"/>
       </div>
 
-      <div class="col-12 p-fluid" style="margin-top: 2%;">
-        <label>Responsável</label>
-        <p-dropdown class="p-inputtext-sm" [options]="employeesForProjectResponsibleSelect" placeholder="Selecione" [filter]="true"
-            name="responsibleEmployee" #responsibleEmployee ngModel [(ngModel)]="project.responsibleEmployee.id"></p-dropdown>
-      </div>
       <div class="col-12 p-fluid">
         <button pButton type="submit" label="Confirmar" [disabled]="frmProject.invalid" style="height: 30px; margin-top: 1%;"></button>
       </div>

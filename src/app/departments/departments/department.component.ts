@@ -220,7 +220,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   cloneProject(project: Project): Project {
-    return new Project(project.id, project.name, project.responsibleEmployee);
+    return new Project(project.id, project.name);
   }
 
   get editingProject() { 
