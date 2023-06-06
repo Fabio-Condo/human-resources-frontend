@@ -468,14 +468,14 @@
           <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Itens por página</label>
               <p-dropdown [options]="sizePage" placeholder="Sort by..."
-              ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
+              ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterPositions()"></p-dropdown>
           </div>
       </div>
       <div class="field col-12 md:col-6">
           <div class="col-12 p-fluid" style="margin-top: 2%;">
               <label>Ordenação</label>
               <p-dropdown [options]="orderPage" placeholder="Sort by..."
-              ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
+              ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterPositions()"></p-dropdown>
           </div>
       </div>
 
@@ -483,25 +483,25 @@
         <label>Nome</label>    
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getPositions()"/>
+          <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterPositions()"/>
         </span>      
       </div>
 
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <label>Grupo funcional</label>
         <p-dropdown class="p-inputtext-sm"  [options]="functionalGroups" placeholder="Selecione"
-            name="functionalGroup" #functionalGroup ngModel [(ngModel)]="position.functionalGroup"></p-dropdown>
+            name="functionalGroup" #functionalGroup ngModel [(ngModel)]="filter.functionalGroup" (ngModelChange)="filterPositions()"></p-dropdown>
       </div>
 
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <label>Departmento</label>
         <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
-            name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
+            name="department" #department ngModel [(ngModel)]="filter.department" (ngModelChange)="filterPositions()"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <label>Local de trabalho</label>
         <p-dropdown class="p-inputtext-sm"  [options]="workplaces" placeholder="Selecione" [filter]="true"
-            name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+            name="workplace" #workplace ngModel [(ngModel)]="filter.workplace" (ngModelChange)="filterPositions()"></p-dropdown>
       </div>
 
       <div class="col-12 p-fluid" style="margin-top: 2%;">

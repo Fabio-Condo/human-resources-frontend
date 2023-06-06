@@ -154,7 +154,7 @@ export class PositionsComponent implements OnInit {
       (positionAdded) => {
         this.position = positionAdded;
         this.showLoading = false;
-        this.getPositions();
+        this.filterPositions();
         this.messageService.add({ severity: 'success', detail: 'Position added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -179,10 +179,10 @@ export class PositionsComponent implements OnInit {
     )
   }
 
-  getPositions(page: number = 0): void {
+  filterPositions(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.positionsService.getPositions(this.filter).subscribe(
+    this.positionsService.filter(this.filter).subscribe(
       (data: IApiResponse<IPosition>) => {
         this.positions = data.content;
         this.totalRecords = data.totalElements;
@@ -199,7 +199,7 @@ export class PositionsComponent implements OnInit {
     this.positionsService.delete(position.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          this.getPositions();
+          this.filterPositions();
         } else {
           this.grid.reset();
         }
@@ -504,7 +504,7 @@ export class PositionsComponent implements OnInit {
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
-    this.getPositions(page);
+    this.filterPositions(page);
   }
 
   private sendErrorNotification(message: string): void {

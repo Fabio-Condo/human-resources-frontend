@@ -17,6 +17,33 @@ export class PositionsService {
     this.positionsUrl = `${environment.apiUrl}/positions`;
   }
 
+  filter(filter: IPositionFilter): Observable<IApiResponse<IPosition>> {  
+
+    let params = new HttpParams()  
+      .set('page', filter.page)  
+      .set('size', filter.itemsPerPage);  
+
+    if (filter.sort) { 
+      params = params.set('positionOrderBy', filter.sort); 
+    } 
+
+    if (filter.name) { 
+     params = params.set('name', filter.name); 
+    }
+    if (filter.department) { 
+      params = params.set('department', filter.department); 
+    }
+    if (filter.workplace) { 
+      params = params.set('workplace', filter.workplace); 
+    }
+    if (filter.functionalGroup) { 
+      params = params.set('functionalGroup', filter.functionalGroup); 
+    }
+
+    console.log(params);
+    return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}/filter`, { params });
+  }
+
   getPositions(filter: IPositionFilter): Observable<IApiResponse<IPosition>> {  
 
     let params = new HttpParams()  
