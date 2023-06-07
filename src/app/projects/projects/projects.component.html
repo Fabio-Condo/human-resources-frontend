@@ -77,15 +77,16 @@
                   <ng-template pTemplate="header">
                     <tr>
                       <th style="background-color: #FFF;">Nome</th>
+                      <th style="background-color: #FFF;">Cargo</th>
                       <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                     <tr [pSelectableRow]="employee">
                       <td>{{ employee.name }}</td>
+                      <td>{{ employee.position.name }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span ><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> visualizar </a></span>&nbsp;
                           <span ><a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td> 
