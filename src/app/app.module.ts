@@ -25,6 +25,8 @@ import { EmployeesModule } from './employees/employees.module';
 import { EmployeesRoutingModule } from './employees/employees-routing.module';
 import { EmployeePerformanceEvaluationsModule } from './employee-performance-evaluations/employee-performance-evaluations.module';
 import { EmployeePerformanceEvaluationsRoutingModule } from './employee-performance-evaluations/employee-performance-evaluations-routing.module';
+import { ProjectsRoutingModule } from './projects/projects-routing.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { EmployeePerformanceEvaluationsRoutingModule } from './employee-performa
     PerformanceEvaluationsRoutingModule,
     EmployeesRoutingModule,
     EmployeePerformanceEvaluationsRoutingModule,
+    ProjectsRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -54,6 +57,7 @@ import { EmployeePerformanceEvaluationsRoutingModule } from './employee-performa
     PerformanceEvaluationsModule,
     EmployeesModule,
     EmployeePerformanceEvaluationsModule,
+    ProjectsModule,
 
     CoreModule
   ],
