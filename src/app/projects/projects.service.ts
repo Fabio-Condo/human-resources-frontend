@@ -17,6 +17,29 @@ export class ProjectsService {
     this.projectsUrl = `${environment.apiUrl}/projects`;
   }
 
+  filter(filter: IProjectFilter): Observable<IApiResponse<IProject>> {  
+
+    let params = new HttpParams()  
+      .set('page', filter.page)  
+      .set('size', filter.itemsPerPage);  
+
+    if (filter.sort) { 
+      params = params.set('projectOrderBy', filter.sort); 
+    } 
+
+    if (filter.name) { 
+     params = params.set('name', filter.name); 
+    }
+    if (filter.department) { 
+      params = params.set('department', filter.department); 
+    }
+    if (filter.projectStatus) { 
+      params = params.set('projectStatus', filter.projectStatus); 
+    }
+    console.log(params);
+    return this.http.get<IApiResponse<IProject>>(`${this.projectsUrl}/filter`, { params });
+  }
+
   getProjects(filter: IProjectFilter): Observable<IApiResponse<IProject>> {  
 
     let params = new HttpParams()  

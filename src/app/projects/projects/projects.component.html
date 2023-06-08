@@ -4,15 +4,8 @@
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getProjects()"/>
-                </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getProjects()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getProjects()"></p-dropdown>
                 <button (click)="onAddNewProject()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -50,7 +43,7 @@
                 <span *ngIf="!showLoading">No title found </span> 
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                 <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getProjects(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterProjects(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
                 </a>                  
             </td>
             </tr>
@@ -141,4 +134,52 @@
         </div>
     </form>
 </p-dialog>
+
+
+<!--Filtrar-->
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Itens por página</label>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterProjects()"></p-dropdown>
+            </div>
+        </div>
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Ordenação</label>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterProjects()"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Status</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="projectStatuses" placeholder="Selecione"
+                name="projectStatus" #projectStatus ngModel [(ngModel)]="filter.projectStatus" (ngModelChange)="filterProjects()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+          <label>Nome</label>    
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterProjects()"/>
+            </span>      
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Departmento</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="departments" placeholder="Selecione" [filter]="true"
+                name="department" #department ngModel [(ngModel)]="filter.department" (ngModelChange)="filterProjects()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+        </div>
+
+    </div> 
+
+</p-dialog>  
 

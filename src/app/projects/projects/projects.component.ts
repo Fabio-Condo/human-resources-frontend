@@ -10,6 +10,7 @@ import { IProject } from 'src/app/core/interfaces/IProject';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from 'src/app/core/model/Project';
 import { NgForm } from '@angular/forms';
+import { IProjectFilter } from 'src/app/core/interfaces/IProjectFilter';
 
 @Component({
   selector: 'app-projects',
@@ -32,6 +33,7 @@ export class ProjectsComponent implements OnInit {
   selectedEmployeeIdToAddasMember: any;
 
   displayModalAddNewMemberIntoProject: boolean = false;
+  displayModalFilter: boolean = false;
 
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
@@ -73,7 +75,7 @@ export class ProjectsComponent implements OnInit {
     this.getEmployees();
   }
 
-  filter: IPositionFilter = {
+  filter: IProjectFilter = {
     page: 0,
     itemsPerPage: 10,
     sort: 'name,asc'
@@ -99,7 +101,7 @@ export class ProjectsComponent implements OnInit {
       (projectAdded) => {
         this.project = projectAdded;
         this.showLoading = false;
-        this.getProjects();
+        this.filterProjects();
         this.messageService.add({ severity: 'success', detail: 'Project added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -125,10 +127,10 @@ export class ProjectsComponent implements OnInit {
   }
 
 
-  getProjects(page: number = 0): void {
+  filterProjects(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.projectSerice.getProjects(this.filter).subscribe(
+    this.projectSerice.filter(this.filter).subscribe(
       (data: IApiResponse<IProject>) => {
         this.projects = data.content;
         this.totalRecords = data.totalElements;
@@ -179,7 +181,7 @@ export class ProjectsComponent implements OnInit {
     this.projectSerice.delete(project.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          this.getProjects();
+          this.filterProjects();
         } else {
           this.grid.reset();
         }
@@ -199,7 +201,7 @@ export class ProjectsComponent implements OnInit {
   addEmployeeToProject(employeeId: number) {
     this.projectSerice.addEmployeeToProject(employeeId, this.project.id).subscribe(
       (project) => {
-        this.getProjects();
+        this.filterProjects();
         this.project = project;
         this.messageService.add({ severity: 'success', detail: 'Employee added successfully!' });
       },
@@ -212,7 +214,7 @@ export class ProjectsComponent implements OnInit {
   removeEmployeeProject(employeeId: number) {
     this.projectSerice.removeEmployeeProject(employeeId, this.project.id).subscribe(
       (project) => {
-        this.getProjects();
+        this.filterProjects();
         this.project = project;
         this.messageService.add({ severity: 'success', detail: 'Employee removed successfully!' });
       },
@@ -229,6 +231,10 @@ export class ProjectsComponent implements OnInit {
         this.removeEmployeeProject(employeeId);
       }
     });
+  }
+
+  onFilter(): void {
+    this.displayModalFilter = true;
   }
 
   onAddNewProject(): void {
@@ -253,7 +259,7 @@ export class ProjectsComponent implements OnInit {
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
-    this.getProjects(page);
+    this.filterProjects(page);
   }
 
   private sendErrorNotification(message: string): void {
