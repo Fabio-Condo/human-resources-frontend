@@ -27,7 +27,15 @@
             <tr>
                 <td>{{ project.name }}</td>
                 <td>{{ project.department.name }}</td>
-                <td>{{ project.projectStatus }}</td>
+                <td>
+                    <span *ngIf="project.projectStatus==='APPROVED'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='CANCELED'" style="color:#fff; background-color: #e96969; border-radius: 4%;">&nbsp; cancelado &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='CONCLUDED'" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; concluído &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: black; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="View"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditProject(project)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
@@ -51,7 +59,7 @@
 </div>
 
 
-<p-dialog header="Projecto {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Projecto {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #projectStatusForm="ngForm" (ngSubmit)="save(projectStatusForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -116,15 +124,15 @@
 </p-dialog>
 
 <!--Show -->
-<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoProject" [modal]="true" [style]="{width: '30vw', height: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoProject" [modal]="true" [style]="{width: '30vw', height: '27vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #AddasMemberForm="ngForm" (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <div class="col-12 p-fluid">
             <label>Funcionário</label>
             <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
                 name="employee" #employee ngModel [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+        <div class="col-12 p-fluid"> 
             <button pButton type="submit" [disabled]="AddasMemberForm.invalid" class="p-button-sm" style="height: 30px;">
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                 <span *ngIf="showLoading">Loading...</span>

@@ -15,7 +15,7 @@
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
                 -->
                 <button (click)="onAddNewEmployeePerformanceEvaluation()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -35,8 +35,8 @@
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <span *ngIf="epe.category==='MONTHLY'" style="color:#34962b; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Mensal &nbsp;</span>
-                    <span *ngIf="epe.category==='YEARLY'" style="color:#c37438; background-color: whitesmoke; border-radius: 4%;">&nbsp; Anual &nbsp; &nbsp;</span>
+                    <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; mensal &nbsp;</span>
+                    <span *ngIf="epe.category==='YEARLY'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%;">&nbsp; anual &nbsp; &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="View"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;

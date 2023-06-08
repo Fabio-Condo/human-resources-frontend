@@ -18,7 +18,7 @@
                 -->
 
                 <button (click)="onAddNewEmployee()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -37,8 +37,8 @@
                 <td>{{ employee.position.department.name }}</td>
                 <td>
                     <a href="javascript:;" [pTooltip]="employee.status ? 'Desativar' : 'Ativar'" tooltipPosition="top" (click)="changeStatus(employee)">
-                        <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;&nbsp;</span>
-                        <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
+                        <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; ativo &nbsp;&nbsp;</span>
+                        <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inativo &nbsp;</span>
                     </a>
                     <!--
                     <span *ngIf="employee.status" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;</span>
@@ -490,7 +490,6 @@
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
-            <button pButton type="submit" label="Salvar configurações" style="height: 30px; margin-top: 1%;"></button>
         </div>
 
     </div> 

@@ -34,13 +34,13 @@ export class ProjectsComponent implements OnInit {
   displayModalAddNewMemberIntoProject: boolean = false;
 
   projectStatuses = [
-    { label: 'IN_PROGRESS', value: 'IN_PROGRESS' },
-    { label: 'CONCLUDED', value: 'CONCLUDED' },
-    { label: 'PENDING', value: 'PENDING' },
-    { label: 'CANCELED', value: 'CANCELED' },
-    { label: 'IN_TEST', value: 'IN_TEST' },
-    { label: 'APPROVED', value: 'APPROVED' },
-    { label: 'SUSPENDED', value: 'SUSPENDED' },
+    { label: 'Em andamento', value: 'IN_PROGRESS' },
+    { label: 'Concluído', value: 'CONCLUDED' },
+    { label: 'Pendente', value: 'PENDING' },
+    { label: 'Cancelado', value: 'CANCELED' },
+    { label: 'Em teste', value: 'IN_TEST' },
+    { label: 'Aprovado', value: 'APPROVED' },
+    { label: 'Suspenso', value: 'SUSPENDED' },
   ];
 
   sizePage = [
