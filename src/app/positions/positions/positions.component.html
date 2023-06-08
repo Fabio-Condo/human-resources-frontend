@@ -429,36 +429,227 @@
   </form>
 </p-dialog>
 
-<!--Show -->
-<p-dialog header="{{selectedPositionModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
-  <!--Employees view-->
-  <div class="formgrid grid">
-      <div class="col-12 p-fluid">
-          <label>Funcionários com este cargo</label> <span *ngIf="selectedPositionModal.employees.length != 0"> ({{selectedPositionModal.employees.length}})</span>
-          <p-table [value]="selectedPositionModal.employees" [responsive]="true" 
-              styleClass="p-datatable-sm" #tabela >
-          <ng-template pTemplate="header">
-              <tr>
-                <th style="background-color: #F4F6F6;">Nome</th>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-              <tr>
-                <td>{{ employee.name }}</td>
-              </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-              <tr>
-                  <td colspan="10">
-                  Sem funcionários
+  <!--Show -->
+  <p-dialog header="{{selectedPositionModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
+    <!--Employees view-->
+    <div class="formgrid grid">
+
+        <div class="col-12 p-fluid">
+
+          <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.name}}</span></i></li>
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Missão</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.mission}}</span></i></li>
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Grupo funcional</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.functionalGroup}}</span></i></li>
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.department.name}}</span></i></li>    
+            </div>
+            <div class="field col-12 md:col-6">
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de trabalho</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.workplace.name}}</span></i></li>
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário Minimo</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.minimumWage}}</span></i></li>
+              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário Máximo</span>: <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.maximumWage}}</span></i></li>
+    
+            </div>
+          </div>
+
+          <!--Main Responsibilities-->
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6;">
+            <label>Pricipais Responsibilidades </label>
+            <p-table [value]="selectedPositionModal.mainResponsibilities" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ mr.designation }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">
+                      No main responsibilities found
+                    </td>
+                  </tr>
+              </ng-template>            
+            </p-table> 
+            <br> 
+          </div> 
+
+          <!--Specific Requirements-->
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Requisitos especificos exigidos</label>
+            <p-table [value]="selectedPositionModal.specificRequirements" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-sr let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ sr.designation }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">
+                      No specifics requirements found
+                    </td>
+                  </tr>
+              </ng-template>            
+            </p-table>  
+            <br> 
+          </div>  
+
+          
+            <!--Training-->
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+              <label>Formação exigida</label>
+              <p-table [value]="selectedPositionModal.training" [responsive]="true" 
+                  styleClass="p-datatable-sm" #tabela >
+                <ng-template pTemplate="header">
+                  <tr>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{ training.designation }}</td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="10">
+                        No trainings found
+                      </td>
+                    </tr>
+                </ng-template>            
+              </p-table>  
+              <br> 
+          </div> 
+          
+          <!--Professional Experience-->
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Experiencia Professional exigida</label>
+            <p-table [value]="selectedPositionModal.professionalExperience" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ pf.designation }}</td>                   
+                </tr>       
+                
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">
+                      No Professional Experience found
+                    </td>
+                  </tr>
+              </ng-template>   
+             
+            </p-table>  
+            <br> 
+          </div> 
+
+          <!--Benefits-->
+          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
+            <label>Beneficios</label>
+            <p-table [value]="selectedPositionModal.benefits" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-b let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ b.designation }}</td>                    
+                </tr>       
+                
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">
+                      No benefit found
+                    </td>
+                  </tr>
+              </ng-template>   
+             
+            </p-table>  
+            <br> 
+          </div> 
+
+          <!--Languages-->
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Linguas exigidas</label>
+            <p-table [value]="selectedPositionModal.languages" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+              <ng-template pTemplate="header">
+                <tr *ngIf="languages.length > 0">
+                  <th style="background-color: #FFF;">Nome</th>
+                  <th style="background-color: #FFF;">Escrita</th>
+                  <th style="background-color: #FFF;">Leitura</th>
+                  <th style="background-color: #FFF;" class="col-valor-header"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-l let-rowIndex="rowIndex">
+                <tr >
+                  <td>{{ l.name }}</td>
+                  <td>
+                    <span *ngIf="l.writeLevel == 'FLUENT'"> Fluente </span>
+                    <span *ngIf="l.writeLevel == 'REASONABLE'"> Razoável </span>
                   </td>
-              </tr>
-          </ng-template>            
-          </p-table>   
-      </div> 
-      
-  </div>         
-</p-dialog>
+                  <td>
+                    <span *ngIf="l.readLevel == 'FLUENT'"> Fluente </span>
+                    <span *ngIf="l.readLevel == 'REASONABLE'"> Razoável </span>
+                  </td>                    
+                </tr>       
+                
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="10">
+                      No language found
+                    </td>
+                  </tr>
+              </ng-template>   
+             
+            </p-table>  
+            <br> 
+          </div> 
+
+          <!--Employees-->
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Funcionários com este cargo</label> <span *ngIf="selectedPositionModal.employees.length != 0"> [{{selectedPositionModal.employees.length}}]</span>
+            <p-table [value]="selectedPositionModal.employees" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela >
+            <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ employee.name }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                    Sem funcionários
+                    </td>
+                </tr>
+            </ng-template>            
+            </p-table>  
+            <br> 
+          </div> 
+
+        </div>  
+    </div>         
+  </p-dialog>
+
 
 <!--Filtrar-->
 <p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 

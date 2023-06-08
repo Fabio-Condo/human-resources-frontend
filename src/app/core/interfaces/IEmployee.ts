@@ -1,4 +1,5 @@
 import { Contact } from "../model/Contact";
+import { Project } from "../model/Project";
 import { IDepartment } from "./IDepartments";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
 import { IEmployeeTraining } from "./IEmployeeTraining";
@@ -23,4 +24,5 @@ export interface IEmployee {
     wageHistories: IEmployeeWage[];
     employeeTrainings: IEmployeeTraining[];
     contacts: Contact[];
+    projects: Project[];
 }

@@ -1,4 +1,5 @@
 import { IEmployee } from "../interfaces/IEmployee";
+import { IProject } from "../interfaces/IProject";
 import { Contact } from "./Contact";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
 import { EmployeeTraining } from "./EmployeeTraining";
@@ -23,6 +24,7 @@ export class Employee implements IEmployee {
     wageHistories: EmployeeWage[] = [];
     employeeTrainings: EmployeeTraining [] = [];
     contacts: Contact[] = [];
+    projects: IProject[] = [];
 }
 
 
