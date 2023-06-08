@@ -28,6 +28,9 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   displayModalFilter: boolean = false;
 
+  selectedEmployeePerformanceEvaluationModal: EmployeePerformanceEvaluation = new EmployeePerformanceEvaluation();
+  displayModal = false;
+
   categories = [
     { label: 'Anual', value: 'YEARLY' },
     { label: 'Mensal', value: 'MONTHLY' },
@@ -79,7 +82,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     return Boolean(this.employeePerformanceEvaluation.id);
   }
 
-  
   save(departmentForm: NgForm) {
     if (this.editing) {
       this.update(departmentForm)
@@ -191,6 +193,11 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.employeePerformanceEvaluation = editEmployeePerformanceEvaluation;
     this.employeePerformanceEvaluation.id = editEmployeePerformanceEvaluation.id;
     this.displayModalSave = true;
+  }
+
+  onSelectEmployeePerformanceEvaluation(selectedEmployeePerformanceEvaluation: IEmployeePerformanceEvaluation): void {
+    this.selectedEmployeePerformanceEvaluationModal = selectedEmployeePerformanceEvaluation;
+    this.displayModal = true;
   }
 
   onChangePage(event: LazyLoadEvent) {

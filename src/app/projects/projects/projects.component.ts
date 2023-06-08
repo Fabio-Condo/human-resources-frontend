@@ -35,6 +35,9 @@ export class ProjectsComponent implements OnInit {
   displayModalAddNewMemberIntoProject: boolean = false;
   displayModalFilter: boolean = false;
 
+  selectedProjectModal: Project = new Project();
+  displayModal = false;
+
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
     { label: 'Concluído', value: 'CONCLUDED' },
@@ -231,6 +234,11 @@ export class ProjectsComponent implements OnInit {
         this.removeEmployeeProject(employeeId);
       }
     });
+  }
+
+  onSelectProject(selectedProject: IProject): void {
+    this.selectedProjectModal = selectedProject;
+    this.displayModal = true;
   }
 
   onFilter(): void {

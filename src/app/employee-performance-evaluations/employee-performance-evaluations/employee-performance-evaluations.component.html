@@ -39,7 +39,7 @@
                     <span *ngIf="epe.category==='YEARLY'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%;">&nbsp; anual &nbsp; &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="View" (click)="onSelectEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -147,3 +147,30 @@
 
 </p-dialog>  
 
+
+<p-dialog header="{{selectedEmployeePerformanceEvaluationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '35vw'}" [draggable]="false" [resizable]="false">
+    <div class="formgrid grid">
+        <div class="col-12 p-fluid">
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Funcionário</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.name}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Cargo</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.name}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.department.name}}</span></i></li>
+
+            <br>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Categoria</span>: 
+                    <span *ngIf="selectedEmployeePerformanceEvaluationModal.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; mensal &nbsp;</span>
+                    <span *ngIf="selectedEmployeePerformanceEvaluationModal.category==='YEARLY'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%;">&nbsp; anual &nbsp; &nbsp;</span>
+                </i>
+            </li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Trabalho em equipe</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.teamWork}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comunicação</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.communication}}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Pensamento estratégico</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.strategicThought}}</span></i></li>
+
+            <br>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário / Recomendações do avaliador</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement}}</span></i></li>
+
+        </div>
+
+    </div> 
+</p-dialog>         
