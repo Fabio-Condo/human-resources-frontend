@@ -30,7 +30,6 @@ export class DepartmentComponent implements OnInit {
   department: IDepartment = new Department;
   displayModalSave: boolean = false;
 
-  employees: Array<Employee> = [];
   selectedDepartmentModal: Department = new Department();
   displayModal = false;
 
@@ -76,7 +75,6 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
-    this.getEmployees();
   }
 
   filter: IDepartmentFilter = {
@@ -161,39 +159,6 @@ export class DepartmentComponent implements OnInit {
         this.showLoading = false;
       }
     )
-  }
-
-  getEmployees() {
-    return this.employeesService.findAll().subscribe(
-      data => {
-        this.employeesForProjectResponsibleSelect = data.content.map(employee => {
-          return  {
-            label: employee.name,
-            value: employee.id
-          }
-        })
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    )
-  }
-
-  filterEmployees(page: number = 0): void {
-    this.showLoading = true;
-    this.filter.page = page;
-    this.employeesService.filter(this.filter).subscribe(
-      (data: IApiResponse<IEmployee>) => {
-        this.employees = data.content
-        this.totalRecords = data.totalElements
-        this.showLoading = false;
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    );   
   }
 
   deletionConfirm(department: IDepartment): void {
