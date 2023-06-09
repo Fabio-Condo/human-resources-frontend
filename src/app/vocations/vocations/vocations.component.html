@@ -33,8 +33,8 @@
                 </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton  pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="Edit" (click)="onEditVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton  pTooltip="Delete" (click)="deletionConfirm(vocation)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -53,3 +53,45 @@
     </p-table>
 
 </div>
+
+<p-dialog header="Pedido {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #vocationForm="ngForm" (ngSubmit)="save(vocationForm)">
+        <div class="formgrid grid">
+
+            <div class="col-12 p-fluid">
+                <label>Funcionário</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
+                    name="employee" #employee ngModel [(ngModel)]="vocation.employee.id"></p-dropdown>
+            </div>
+            <div class="col-12 p-fluid">
+                <label>Status</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="vocationStatuses" placeholder="Selecione" [filter]="true"
+                    name="vocationStatus" #vocationStatus ngModel [(ngModel)]="vocation.vocationStatus"></p-dropdown>
+            </div>
+            <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+                <label>Inicio</label>
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="beginDate"
+                  [inline]="false" [readonlyInput]="false" 
+                  ngModel #beginDate="ngModel" [required]="true" [(ngModel)]="vocation.beginDate"></p-calendar>
+            </div>
+
+            <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+                <label>Fim</label>
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="endDate"
+                  [inline]="false" [readonlyInput]="false" 
+                  ngModel #endDate="ngModel" [required]="true" [(ngModel)]="vocation.endDate"></p-calendar>
+            </div>
+     
+                
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="vocationForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                  </button>
+              </div>
+        </div>  
+    </form>
+</p-dialog>
