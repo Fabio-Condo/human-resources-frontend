@@ -90,16 +90,19 @@
                     <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
                         name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Salário</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
-                    ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
+                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                    <label>Departamento</label>
+                    <p-dropdown placeholder="Selecione..."
+                      [filter]="true" [options]="departments"
+                      [(ngModel)]="selectedDepartment" name="selectedDepartment"
+                      #department="ngModel" (onChange)="getPositionsByDepartmentId()"></p-dropdown>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Cargo</label>    
+        
+                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                    <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento primeiro]</span>    
                     <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
                         [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
-                        #position="ngModel" [required]=true>
+                        #position="ngModel" [required]=true [disabled]="!selectedDepartment">
                     </p-dropdown>
                 </div>
             </div>
@@ -125,6 +128,11 @@
                         [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
                         #province="ngModel" [required]=true>
                     </p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Salário</label>
+                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
+                    ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
                 </div>
             </div>
         </div>
@@ -512,12 +520,12 @@
             </span>      
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Genero</label>
             <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
                 name="gender" #gender ngModel [(ngModel)]="filter.gender" (onChange)="filterEmployees()"></p-dropdown>
         </div>
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Estado civil</label>
             <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
                 name="maritalStatus" #maritalStatus ngModel [(ngModel)]="filter.maritalStatus" (ngModelChange)="filterEmployees()"></p-dropdown>
@@ -529,15 +537,23 @@
                 name="contractType" #contractType ngModel [(ngModel)]="filter.contractType" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <label>Cargo</label>    
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Departamento</label>
+            <p-dropdown placeholder="Selecione..."
+              [filter]="true" [options]="departments"
+              [(ngModel)]="selectedDepartment" [(ngModel)]="filter.department" name="selectedDepartment"
+              #department="ngModel" (onChange)="getPositionsByDepartmentId()" (ngModelChange)="filterEmployees()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento primeiro]</span>    
             <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
                 [filter]="true" [options]="positions" [(ngModel)]="filter.position" name="position"
-                #position="ngModel" [required]=true (ngModelChange)="filterEmployees()">
+                #position="ngModel" [disabled]="!selectedDepartment" (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Provincia</label>    
             <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
                 [filter]="true" [options]="provinces" [(ngModel)]="filter.province" name="province"

@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IPosition } from '../core/interfaces/IPosition';
 import { IPositionFilter } from '../core/interfaces/IPositionFilter';
+import { Position } from '../core/model/Position';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,12 @@ export class PositionsService {
 
   findAll() : Observable<IApiResponse<IPosition>> { 
     return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}`, { });
+  }
+
+  getPositionsByDepartmentId(departmentId: number): Promise<Position[]> {
+    const params = new HttpParams()
+      .set('departmentId', departmentId); 
+    return firstValueFrom(this.http.get<Position[]>(this.positionsUrl+'/byDepartmentId', { params }));
   }
 
   add(position: IPosition): Observable<IPosition> {

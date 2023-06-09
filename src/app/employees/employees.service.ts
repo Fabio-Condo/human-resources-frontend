@@ -36,6 +36,9 @@ export class EmployeesService {
     if (filter.gender) { 
       params = params.set('gender', filter.gender); 
     }
+    if (filter.department) { 
+      params = params.set('department', filter.department); 
+    }
     if (filter.position) { 
       params = params.set('position', filter.position); 
     }

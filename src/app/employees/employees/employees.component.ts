@@ -58,6 +58,9 @@ export class EmployeesComponent implements OnInit {
 
   displayModalFilter: boolean = false;
 
+  departments: any[] = [];
+  selectedDepartment?: number;
+
   maritalStatuses = [
     { label: 'Solteiro', value: 'SINGLE' },
     { label: 'Casado', value: 'MARRIED' },
@@ -102,15 +105,16 @@ export class EmployeesComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private provinceService: ProvinceService,
-    private departmentService: DepartmentService,
     private positionsService: PositionsService,
+    private departmentService: DepartmentService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
     this.title.setTitle('employees page');
     this.getProvinces();
-    this.getPositions();
+    this.getDepartments();
+    //this.getPositions();
   }
 
   @ViewChild('table') grid: any;
@@ -253,6 +257,40 @@ export class EmployeesComponent implements OnInit {
     )
   }
 
+  getPositionsByDepartmentId() {
+    this.positionsService.getPositionsByDepartmentId(this.selectedDepartment!).then(list => {
+      this.positions = list.map(agencia => ({
+        label: agencia.name,
+        value: agencia.id 
+      })); 
+      if (this.selectedDepartment !== this.employee.position.department.id){
+        //this.employee.position.id = 0;  
+        //this.employee.position.id = undefined;         
+      }          
+    }),
+    (errorResponse: HttpErrorResponse) => {
+      this.sendErrorNotification(errorResponse.error.message);
+      this.showLoading = false;
+    }
+  }
+
+  getDepartments() {
+    return this.departmentService.findAll().subscribe(
+      data => {
+        this.departments = data.content.map(department => {
+          return  {
+            label: department.name,
+            value: department.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
   onFilter(): void {
     this.displayModalFilter = true;
   }
@@ -266,6 +304,12 @@ export class EmployeesComponent implements OnInit {
     this.convertStringsToDates([editEmployee]);
     this.employee = editEmployee;
     this.employee.id = editEmployee.id;
+
+    this.selectedDepartment = (this.employee.position) ? this.employee.position.department.id : undefined;  
+    if (this.selectedDepartment) { 
+      this.getPositionsByDepartmentId();
+    }
+
     this.displayModalSave = true;
   }
 

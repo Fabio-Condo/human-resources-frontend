@@ -180,6 +180,22 @@ export class DepartmentComponent implements OnInit {
     )
   }
 
+  filterEmployees(page: number = 0): void {
+    this.showLoading = true;
+    this.filter.page = page;
+    this.employeesService.filter(this.filter).subscribe(
+      (data: IApiResponse<IEmployee>) => {
+        this.employees = data.content
+        this.totalRecords = data.totalElements
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );   
+  }
+
   deletionConfirm(department: IDepartment): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',

@@ -6,6 +6,7 @@ export interface IEmployeeFilter {
     maritalStatus?: string,
     province?: number,
     position?: number,
+    department?: number,
 
     page: number,
     itemsPerPage: number,
