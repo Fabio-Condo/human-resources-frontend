@@ -31,6 +31,8 @@ export class VocationsComponent implements OnInit {
   selectedVocationModal: Vocation = new Vocation();
   displayModal = false;
 
+  displayModalFilter: boolean = false;
+
   vocationStatuses = [
     { label: 'Aprovado', value: 'APPROVED' },
     { label: 'Pendente', value: 'PENDING' },
@@ -175,6 +177,10 @@ export class VocationsComponent implements OnInit {
     });
   }
 
+  onFilter(): void {
+    this.displayModalFilter = true;
+  }
+
   onAddNewVocation(): void {
     this.vocation = new Vocation();
     this.displayModalSave = true;
@@ -187,7 +193,7 @@ export class VocationsComponent implements OnInit {
     this.displayModalSave = true;
   }
 
-  onSelectDepartment(selectedVocation: IVocation): void {
+  onSelectVocation(selectedVocation: IVocation): void {
     this.selectedVocationModal = selectedVocation;
     this.displayModal = true;
   }

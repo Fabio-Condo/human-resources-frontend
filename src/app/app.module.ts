@@ -29,6 +29,7 @@ import { ProjectsRoutingModule } from './projects/projects-routing.module';
 import { ProjectsModule } from './projects/projects.module';
 import { VocationsModule } from './vocations/vocations.module';
 import { VocationsRoutingModule } from './vocations/vocations-routing.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { VocationsRoutingModule } from './vocations/vocations-routing.module';
   ],
   providers: [
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

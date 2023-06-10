@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IVocation } from '../core/interfaces/IVocation';
 import { IVocationFilter } from '../core/interfaces/IVocationFilter';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,19 +14,31 @@ export class VocationsService {
 
   vocationsUrl: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private datePipe: DatePipe) { 
     this.vocationsUrl = `${environment.apiUrl}/vocations`;
   }
 
   findAll(filter: IVocationFilter) : Observable<IApiResponse<IVocation>> { 
     let params = new HttpParams()  
       .set('page', filter.page)  
-      .set('sort', filter.sort)
+      .set('vocationOrderBy', filter.sort)
       .set('size', filter.itemsPerPage); 
 
+      if (filter.vocationStatus) { 
+        params = params.set('vocationStatus', filter.vocationStatus); 
+      }
+      if (filter.employee) { 
+        params = params.set('employee', filter.employee); 
+      }
+      if (filter.beginDate) {
+        params = params.set('beginDate', this.datePipe.transform(filter.beginDate, 'yyyy-MM-dd')!); 
+      }
+      if (filter.endDate) {
+        params = params.set('endDate', this.datePipe.transform(filter.endDate, 'yyyy-MM-dd')!); 
+      }
       console.log(params);
 
-    return this.http.get<IApiResponse<IVocation>>(`${this.vocationsUrl}`, { params });
+    return this.http.get<IApiResponse<IVocation>>(`${this.vocationsUrl}/filter`, { params });
   }
 
   add(vocation: IVocation): Observable<IVocation> {

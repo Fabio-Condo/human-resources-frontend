@@ -27,7 +27,7 @@
                     <span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
                     <span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
                     <span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: black; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                    <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="View" (click)="onSelectProject(project)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
