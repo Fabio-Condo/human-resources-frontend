@@ -1,3 +1,4 @@
+import { CompanyTraining } from "../model/CompanyTraining";
 import { Contact } from "../model/Contact";
 import { Skill } from "../model/Skill";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
@@ -29,4 +30,5 @@ export interface IEmployee {
     projects: IProject[];
     vocations: IVocation[];
     skills: Skill[];
+    companyTrainings: CompanyTraining[];
 }

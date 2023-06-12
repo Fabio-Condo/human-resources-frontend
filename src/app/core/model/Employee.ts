@@ -1,3 +1,4 @@
+import { ICompanyTraining } from "../interfaces/ICompanyTraining";
 import { IEmployee } from "../interfaces/IEmployee";
 import { IProject } from "../interfaces/IProject";
 import { ISkill } from "../interfaces/ISkill";
@@ -32,6 +33,7 @@ export class Employee implements IEmployee {
     projects: Project[] = [];
     vocations: Vocation[] = [];
     skills: Skill[] = [];
+    companyTrainings: ICompanyTraining[] = [];
 }
 
 

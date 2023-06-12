@@ -1,0 +1,38 @@
+
+<div class="container">
+    <h5 style="text-align: center;">Formações e desenvolvimento de carreiras</h5>
+
+    <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterTrainings()"></p-dropdown>
+                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" ></p-dropdown>
+                <button  pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="background-color: #fff;">Nivel</th>
+                <th style="background-color: #fff;">Tipo</th>
+                <th style="background-color: #fff;">Data</th>
+                <th style="background-color: #fff;">Duração</th>
+                <th style="background-color: #fff;">Ações</th> 
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-training>
+            <tr>
+                <td>{{ training.companyTrainingType.level }}</td>
+                <td>{{ training.companyTrainingType.type }}</td>
+                <td>{{ training.date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{ training.duration }}</td>
+                <td style="width: 180px;">
+                    <button pButton pTooltip="View"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(training)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
