@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { ISkill } from '../core/interfaces/ISkill';
 import { ISkillsFilter } from '../core/interfaces/ISkillsFilter';
+import { Skill } from '../core/model/Skill';
 
 @Injectable({
   providedIn: 'root'
@@ -37,12 +38,12 @@ export class SkillsService {
     return this.http.get<IApiResponse<ISkill>>(`${this.skillsUrl}`, { });
   }
 
-  add(skill: ISkill): Observable<ISkill> {
-    return this.http.post<ISkill>(this.skillsUrl, skill, { });
+  add(skill: Skill): Observable<Skill> {
+    return this.http.post<Skill>(this.skillsUrl, skill, { });
   }
 
-  update(skill: ISkill): Observable<ISkill> {
-    return this.http.put<ISkill>(`${this.skillsUrl}/${skill.id}`, skill, { });
+  update(skill: Skill): Observable<Skill> {
+    return this.http.put<Skill>(`${this.skillsUrl}/${skill.id}`, skill, { });
   }
 
   delete(id: number): Observable<void> {

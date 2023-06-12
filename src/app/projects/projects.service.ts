@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IProject } from '../core/interfaces/IProject';
 import { IProjectFilter } from '../core/interfaces/IProjectFilter';
+import { IEmployee } from '../core/interfaces/IEmployee';
 
 @Injectable({
   providedIn: 'root'
@@ -78,5 +79,9 @@ export class ProjectsService {
 
   removeEmployeeProject(employeeId: number, projectId: number): Observable<IProject> {
     return this.http.put<IProject>(`${this.projectsUrl}/${projectId}/employees/${employeeId}`, { });
+  }
+
+  removeAll(projectId: number, listaFolhasSelecionadas: IEmployee[]): Observable<IEmployee[]> {
+    return this.http.put<IEmployee[]>(`${this.projectsUrl}/${projectId}/removeBulkMembers`, listaFolhasSelecionadas, { });
   }
 }

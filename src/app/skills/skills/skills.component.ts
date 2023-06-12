@@ -21,7 +21,7 @@ export class SkillsComponent implements OnInit {
   totalRecords: number = 0
   skills: ISkill[] = [];
 
-  skill: ISkill = new Skill;
+  skill: Skill = new Skill;
   displayModalSave: boolean = false;
 
   sizePage = [

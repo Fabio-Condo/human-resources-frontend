@@ -89,4 +89,8 @@ export class EmployeesService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.employeesUrl}/${id}`, { });
   }
+  
+  findById(id: number): Observable<IEmployee> {
+    return this.http.get<IEmployee>(`${this.employeesUrl}/${id}`, { });
+  }
 }

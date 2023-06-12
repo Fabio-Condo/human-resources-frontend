@@ -11,6 +11,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Project } from 'src/app/core/model/Project';
 import { NgForm } from '@angular/forms';
 import { IProjectFilter } from 'src/app/core/interfaces/IProjectFilter';
+import { IEmployee } from 'src/app/core/interfaces/IEmployee';
+import { Employee } from 'src/app/core/model/Employee';
 
 @Component({
   selector: 'app-projects',
@@ -37,6 +39,10 @@ export class ProjectsComponent implements OnInit {
 
   selectedProjectModal: Project = new Project();
   displayModal = false;
+
+  employeeById: IEmployee = new Employee();
+
+  selectedProjectMembers: IEmployee[] = [];
 
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
@@ -89,6 +95,25 @@ export class ProjectsComponent implements OnInit {
   get editing() {
     return Boolean(this.project.id);
   }
+
+  removeAll(){
+    this.selectedProjectMembers.forEach((employe) => {
+      console.log(employe.name);
+    });
+    this.projectSerice.removeAll(this.project.id, this.selectedProjectMembers).subscribe(
+      () => {
+        this.showLoading = true;
+        this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
+        this.selectedProjectMembers = [];
+        this.showLoading = false;
+        //this.filterProjects();
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);  // Recebendo a reesposta do backend
+        this.showLoading = false;
+      }
+    )
+  }    
 
   save(projectForm: NgForm) {
     if (this.editing) {
@@ -178,6 +203,20 @@ export class ProjectsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  findEmployeeById(id: number) {
+    this.showLoading = true;
+    this.employeesService.findById(id).subscribe(
+      employee => {
+        this.employeeById = employee;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   deleteProject(project: IProject) {

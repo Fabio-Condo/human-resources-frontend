@@ -168,13 +168,13 @@
                       <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                  <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                     <tr [pSelectableRow]="employee">
-                      <td>{{ employee.contactNumber }}</td>
-                      <td>{{ employee.name }}</td>
+                      <td>{{ contact.contactNumber }}</td>
+                      <td>{{ contact.name }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span (click)="getReadyContactEdit(employee, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                          <span (click)="getReadyContactEdit(contact, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
                           <span (click)="removeContact(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td> 
@@ -203,14 +203,14 @@
                       <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="employee">
-                      <td>{{ employee.description }}</td>
-                      <td>{{ employee.begin | date:'MMMM, y'}}</td>
-                      <td>{{ employee.end | date:'MMMM, y'}}</td>
+                  <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="training">
+                      <td>{{ training.description }}</td>
+                      <td>{{ training.begin | date:'MMMM, y'}}</td>
+                      <td>{{ training.end | date:'MMMM, y'}}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span (click)="getReadyTrainingEdit(employee, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                          <span (click)="getReadyTrainingEdit(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
                           <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
                         </span>
                       </td>  
@@ -225,6 +225,38 @@
                   </ng-template>            
                 </p-table>     
                 <br>   
+            </div>
+
+            <!--Skills-->
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+                <label>Habilidades</label> <span (click)="getReadyNewSkill()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <p-table [value]="employee.skills" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Descrição</th>
+                            <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
+                        <tr>
+                          <td>{{ skill.name }}</td>
+                          <td class="col-acoes">
+                            <span class="p-buttonset">
+                              <span (click)="getReadySkillEdit(skill, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                              <span (click)="removeSkill(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            </span>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                              Sem habilidades adicionadas
+                            </td>
+                        </tr>
+                      </ng-template>            
+                </p-table>  
+                <br> 
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
@@ -289,7 +321,7 @@
                                 <span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
                                 <span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
                                 <span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: black; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                                <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
                             </td>
                         </tr>
                     </ng-template>
@@ -304,7 +336,7 @@
                 <br>
             </div>
 
-                        <!--Contacts-->
+            <!--Contacts-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
                 <label>Contactos</label> <span *ngIf="selectedEmployeeModal.contacts.length != 0"> [{{selectedEmployeeModal.contacts.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" 
@@ -314,9 +346,9 @@
                             <th>Número</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
+                    <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ training.contactNumber }}</td>
+                          <td>{{ contact.contactNumber }}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
@@ -353,6 +385,32 @@
                         <tr>
                             <td colspan="10">
                               Sem formações adicionadas
+                            </td>
+                        </tr>
+                      </ng-template>            
+                </p-table>  
+                <br> 
+            </div>
+
+            <!--Skills-->
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+                <label>Habilidades</label> <span *ngIf="selectedEmployeeModal.skills.length != 0"> [{{selectedEmployeeModal.skills.length}}]</span>
+                <p-table [value]="selectedEmployeeModal.skills" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Descrição</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
+                        <tr>
+                          <td>{{ skill.name }}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                              Sem habilidades adicionadas
                             </td>
                         </tr>
                       </ng-template>            
@@ -439,7 +497,41 @@
                     </ng-template>            
                 </p-table>
                 <br> 
-            </div>   
+            </div>  
+            
+            <!--Vocations-->
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+                <label>Férias</label> <span *ngIf="selectedEmployeeModal.vocations.length != 0"> [{{selectedEmployeeModal.vocations.length}}]</span>
+                <p-table [value]="selectedEmployeeModal.vocations" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Inicio</th>
+                            <th>Fim</th>
+                            <th>Status</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-vocation let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
+                            <td>
+                                <span *ngIf="vocation.vocationStatus==='APPROVED'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
+                                <span *ngIf="vocation.vocationStatus==='REJECTED'" style="color:#e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; rejeitado &nbsp;</span>
+                                <span *ngIf="vocation.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                              Sem pedido de férias
+                            </td>
+                        </tr>
+                      </ng-template>            
+                </p-table>  
+                <br> 
+            </div>
 
         </div> 
         
@@ -492,6 +584,20 @@
       </div>
     </form>
 </p-dialog>  
+
+<!--Skills-->
+<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
+      <div class="col-12 p-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="name"
+          required [(ngModel)]="skill.name" #name="ngModel"/>
+      </div>
+      <div class="col-12 p-fluid">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmSkill.invalid" style="height: 30px; margin-top: 1%;"></button>
+      </div>
+    </form>
+</p-dialog> 
 
 <!--Filtrar-->
 <p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 

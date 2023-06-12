@@ -1,11 +1,16 @@
 import { IEmployee } from "../interfaces/IEmployee";
 import { IProject } from "../interfaces/IProject";
+import { ISkill } from "../interfaces/ISkill";
+import { IVocation } from "../interfaces/IVocation";
 import { Contact } from "./Contact";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
 import { EmployeeTraining } from "./EmployeeTraining";
 import { EmployeeWage } from "./EmployeeWage";
 import { Position } from "./Position";
+import { Project } from "./Project";
 import { Province } from "./Province";
+import { Skill } from "./Skill";
+import { Vocation } from "./Vocation";
 
 export class Employee implements IEmployee {
     id!: number;
@@ -24,7 +29,9 @@ export class Employee implements IEmployee {
     wageHistories: EmployeeWage[] = [];
     employeeTrainings: EmployeeTraining [] = [];
     contacts: Contact[] = [];
-    projects: IProject[] = [];
+    projects: Project[] = [];
+    vocations: Vocation[] = [];
+    skills: Skill[] = [];
 }
 
 

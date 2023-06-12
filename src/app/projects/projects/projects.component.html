@@ -72,25 +72,31 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaddEmployeeToProject()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
-                <p-table [value]="project.team" selectionMode="single" [responsive]="true" 
+                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaddEmployeeToProject()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span> <span *ngIf="selectedProjectMembers.length > 0" (click)="removeAll()"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                <p-table [value]="project.team" [(selection)]="selectedProjectMembers" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th style="background-color: #FFF;">Nome</th>
-                      <th style="background-color: #FFF;">Cargo</th>
-                      <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        <th style="background-color: #fff; width: 4rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th style="background-color: #FFF;">Nome</th>
+                        <th style="background-color: #FFF;">Cargo</th>
+                        <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                     <tr [pSelectableRow]="employee">
-                      <td>{{ employee.name }}</td>
-                      <td>{{ employee.position.name }}</td>
-                      <td class="col-acoes">
-                        <span class="p-buttonset">
-                          <span ><a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
-                        </span>
-                      </td> 
+                        <td>
+                            <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+                        </td>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.position.name }}</td>
+                        <td class="col-acoes">
+                            <span class="p-buttonset">
+                            <span ><a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            </span>
+                        </td> 
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -117,12 +123,30 @@
 </p-dialog>
 
 <!--Add New member in project -->
-<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoProject" [modal]="true" [style]="{width: '30vw', height: '27vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoProject" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #AddasMemberForm="ngForm" (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
         <div class="col-12 p-fluid">
             <label>Funcionário</label>
             <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
+                name="employee" #employee ngModel (onChange)="findEmployeeById(selectedEmployeeIdToAddasMember)" [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid">
+            <label>Cargo</label>
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="position"
+            ngModel #position="ngModel" required minlength="1" [(ngModel)]="employeeById.position.name">  
+        </div>
+
+        <div class="col-12 p-fluid">
+            <label>Departamento</label>
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="department"
+            ngModel #department="ngModel" required minlength="1" [(ngModel)]="employeeById.position.department.name">  
+        </div>
+
+        <div class="col-12 p-fluid">
+            <label>Contrato</label>
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="contractType"
+            ngModel #contractType="ngModel" required minlength="1" [(ngModel)]="employeeById.contractType">  
         </div>
 
         <div class="col-12 p-fluid"> 

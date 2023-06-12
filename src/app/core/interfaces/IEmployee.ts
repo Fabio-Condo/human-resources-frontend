@@ -1,11 +1,13 @@
 import { Contact } from "../model/Contact";
-import { Project } from "../model/Project";
-import { IDepartment } from "./IDepartments";
+import { Skill } from "../model/Skill";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
 import { IEmployeeTraining } from "./IEmployeeTraining";
 import { IEmployeeWage } from "./IEmployeeWage";
 import { IPosition } from "./IPosition";
+import { IProject } from "./IProject";
 import { IProvince } from "./IProvince";
+import { ISkill } from "./ISkill";
+import { IVocation } from "./IVocation";
 
 export interface IEmployee {
     id: number,
@@ -24,5 +26,7 @@ export interface IEmployee {
     wageHistories: IEmployeeWage[];
     employeeTrainings: IEmployeeTraining[];
     contacts: Contact[];
-    projects: Project[];
+    projects: IProject[];
+    vocations: IVocation[];
+    skills: Skill[];
 }

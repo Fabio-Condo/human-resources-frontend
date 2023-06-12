@@ -16,6 +16,7 @@ import { Contact } from 'src/app/core/model/Contact';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 import { Position } from 'src/app/core/model/Position';
+import { Skill } from 'src/app/core/model/Skill';
 
 @Component({
   selector: 'app-employees',
@@ -46,6 +47,11 @@ export class EmployeesComponent implements OnInit {
   trainings: Array<IEmployeeTraining> = []
   showTrainingForm = false;
   trainingIndex?: number;
+
+  skill?: Skill;
+  skills: Array<Skill> = []
+  showSkillForm = false;
+  skillIndex?: number;
 
   showWageHistory: boolean = false;
   showEmployeePerformanceEvaluationHistory: boolean = false;
@@ -376,7 +382,37 @@ export class EmployeesComponent implements OnInit {
   removeTraining(index: number) {
     this.employee.employeeTrainings.splice(index, 1);
   }
-  //
+
+  // Skills
+  getReadyNewSkill() {
+    this.showSkillForm = true;
+    this.skill = new Skill();
+    this.skillIndex = this.employee.skills.length;
+  }
+
+  getReadySkillEdit(skill: Skill, index: number) {
+    this.skill = this.cloneContact(skill);
+    this.showSkillForm = true;
+    this.skillIndex = index;
+  }
+
+  confirmSkill(frm: NgForm) {
+    this.employee.skills[this.skillIndex!] = this.cloneSkill(this.skill!);
+    this.showSkillForm = false;
+    frm.reset();
+  }
+
+  cloneSkill(skill: Skill): Skill {
+    return new Skill(skill.id, skill.name);
+  }
+
+  get editingSkill() { 
+    return this.skill && this.skill?.id;
+  }
+
+  removeSkill(index: number) {
+    this.employee.skills.splice(index, 1);
+  }
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
