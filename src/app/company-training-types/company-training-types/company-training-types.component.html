@@ -1,4 +1,125 @@
 
 <div class="container">
     <h5 style="text-align: center;">Tipos de formação</h5>
+
+    <p-table [value]="trainingTypes" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="filterTrainingTypes()"/>
+                </span>
+                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterTrainingTypes()"></p-dropdown>
+                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterTrainingTypes()"></p-dropdown>
+                <button (click)="onAddNewTrainingType()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="background-color: #fff;">Nivel</th>
+                <th style="background-color: #fff;">Tipo</th>
+                <th style="background-color: #fff;">Ações</th>       
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-trainingType>
+            <tr>
+                <td>{{ trainingType.level }}</td>
+                <td>{{ trainingType.type }}</td>
+                <td style="width: 180px;">
+                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditTrainingType(trainingType)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(trainingType)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+            <td colspan="10">
+                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
+                <span *ngIf="!showLoading">No title found </span> 
+                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                <a href="javascript:;">
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterTrainingTypes(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                </a>                  
+            </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
 </div>
+
+
+<p-dialog header="Training Type {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #trainingTypeForm="ngForm" (ngSubmit)="save(trainingTypeForm)">
+        <div class="formgrid grid">
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Nivel</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="name"
+                ngModel #name="ngModel" required minlength="1" [(ngModel)]="trainingType.level">  
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Tipo</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="description"
+                ngModel #description="ngModel" required minlength="1" [(ngModel)]="trainingType.type">  
+            </div> 
+            
+            <!--Goals-->
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+                <label>Objectivos</label> <span (click)="getReadyNewGoal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <p-table [value]="trainingType.companyTrainingTypeGoals" [responsive]="true" 
+                    styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Designação</th>
+                            <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-goal let-rowIndex="rowIndex">
+                        <tr>
+                          <td>{{ goal.designation }}</td>
+                          <td class="col-acoes">
+                            <span class="p-buttonset">
+                                <span (click)="getReadyGoalEdit(goal, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
+                                <span (click)="removeGoal(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            </span>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                              Sem habilidades adicionadas
+                            </td>
+                        </tr>
+                      </ng-template>            
+                </p-table>  
+                <br> 
+            </div>
+                
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="trainingTypeForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                </button>
+            </div>
+        </div>  
+    </form>
+</p-dialog>
+
+<!--Goals-->
+<p-dialog [header]="editingGoal ? 'Edição objectivo' : 'Novo objectivo'" [style]="{width: '30vw'}" [(visible)]="showGoalForm" [modal]="true" *ngIf="goal"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+    <form #frmGoal="ngForm" (ngSubmit)="confirmGoal(frmGoal)">
+      <div class="col-12 p-fluid">
+        <label>Designação</label>
+        <input pInputText type="text" name="name"
+          required [(ngModel)]="goal.designation" #name="ngModel"/>
+      </div>
+      <div class="col-12 p-fluid">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmGoal.invalid" style="height: 30px; margin-top: 1%;"></button>
+      </div>
+    </form>
+</p-dialog> 
+

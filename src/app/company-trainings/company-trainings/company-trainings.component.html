@@ -46,6 +46,31 @@
             <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Data</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.date | date: 'dd/MM/yyyy' }}</span></i></li>
         </div>
 
+                     <!--Goals-->
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Objectivos</label> 
+            <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela>
+                <ng-template pTemplate="header">
+                    <tr>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-goal let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{ goal.designation }};</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                        Sem habilidades adicionadas
+                        </td>
+                    </tr>
+                </ng-template>            
+            </p-table>  
+            <br> 
+        </div>
+
         <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
             <label >Membros envolvidos</label>
             <p-table [value]="selectedCompanyTrainingModal.employees" selectionMode="single" [responsive]="true" 
