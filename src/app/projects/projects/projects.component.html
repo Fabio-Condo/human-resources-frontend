@@ -1,5 +1,5 @@
 <div class="container">
-    <h5 style="text-align: center;">Projectos</h5>
+    <h3>Projectos</h3>
 
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">

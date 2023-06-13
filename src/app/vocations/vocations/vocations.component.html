@@ -1,5 +1,5 @@
 <div class="container">
-    <h5 style="text-align: center;">Pedidos de férias</h5>
+    <h3>Pedidos de férias</h3>
 
     <p-table [value]="vocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">

@@ -1,6 +1,6 @@
 
 <div class="container">
-    <h5 style="text-align: center;">Formações e desenvolvimento de carreiras</h5>
+    <h3>Formações</h3>
 
     <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
@@ -46,7 +46,7 @@
             <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Data</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.date | date: 'dd/MM/yyyy' }}</span></i></li>
         </div>
 
-                     <!--Goals-->
+        <!--Goals-->
         <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
             <label>Objectivos</label> 
             <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals" [responsive]="true" 
