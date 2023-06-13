@@ -32,6 +32,8 @@ import { VocationsRoutingModule } from './vocations/vocations-routing.module';
 import { DatePipe } from '@angular/common';
 import { CompanyTrainingsModule } from './company-trainings/company-trainings.module';
 import { CompanyTrainingsRoutingModule } from './company-trainings/company-trainings-routing.module';
+import { CompanyTrainingTypesModule } from './company-training-types/company-training-types.module';
+import { CompanyTrainingsTypesRoutingModule } from './company-training-types/company-training-types-routing.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { CompanyTrainingsRoutingModule } from './company-trainings/company-train
     ProjectsRoutingModule,
     VocationsRoutingModule,
     CompanyTrainingsRoutingModule,
+    CompanyTrainingsTypesRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -67,6 +70,7 @@ import { CompanyTrainingsRoutingModule } from './company-trainings/company-train
     ProjectsModule,
     VocationsModule,
     CompanyTrainingsModule,
+    CompanyTrainingTypesModule,
 
     CoreModule
   ],

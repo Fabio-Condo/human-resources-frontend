@@ -33,13 +33,13 @@ export class CompanyTrainingsService {
     return this.http.get<IApiResponse<ICompanyTraining>>(`${this.companyTrainingsUrl}`, { });
   }
 
-  add(employe: ICompanyTraining): Observable<ICompanyTraining> {
-    return this.http.post<ICompanyTraining>(this.companyTrainingsUrl, employe, { });
+  add(training: ICompanyTraining): Observable<ICompanyTraining> {
+    return this.http.post<ICompanyTraining>(this.companyTrainingsUrl, training, { });
   }
 
-  update(employe: ICompanyTraining): Observable<ICompanyTraining> {
-    console.log(employe)
-    return this.http.put<ICompanyTraining>(`${this.companyTrainingsUrl}/${employe.id}`, employe, { });
+  update(training: ICompanyTraining): Observable<ICompanyTraining> {
+    console.log(training)
+    return this.http.put<ICompanyTraining>(`${this.companyTrainingsUrl}/${training.id}`, training, { });
   }
 
   delete(id: number): Observable<void> {
@@ -48,5 +48,13 @@ export class CompanyTrainingsService {
   
   findById(id: number): Observable<ICompanyTraining> {
     return this.http.get<ICompanyTraining>(`${this.companyTrainingsUrl}/${id}`, { });
+  }
+
+  addEmployeeToTraining(employeeId: number, traningId: number): Observable<ICompanyTraining> {
+    return this.http.post<ICompanyTraining>(`${this.companyTrainingsUrl}/${traningId}/employees/${employeeId}`, { });
+  }
+
+  removeEmployeeFromTraining(employeeId: number, traningId: number): Observable<ICompanyTraining> {
+    return this.http.put<ICompanyTraining>(`${this.companyTrainingsUrl}/${traningId}/employees/${employeeId}`, { });
   }
 }

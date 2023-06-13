@@ -7,6 +7,13 @@ import { ICompanyTrainingFilter } from 'src/app/core/interfaces/ICompanyTraining
 import { ICompanyTraining } from 'src/app/core/interfaces/ICompanyTraining';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CompanyTraining } from 'src/app/core/model/CompanyTraining';
+import { CompanyTrainingTypesService } from 'src/app/company-training-types/company-training-types.service';
+import { NgForm } from '@angular/forms';
+import { ICompanyTrainingType } from 'src/app/core/interfaces/ICompanyTrainingType';
+import { CompanyTrainingType } from 'src/app/core/model/CompanyTrainingType';
+import { IEmployee } from 'src/app/core/interfaces/IEmployee';
+import { Employee } from 'src/app/core/model/Employee';
 
 @Component({
   selector: 'app-company-trainings',
@@ -19,6 +26,23 @@ export class CompanyTrainingsComponent implements OnInit {
 
   totalRecords: number = 0
   trainings: ICompanyTraining[] = [];
+
+  selectedCompanyTrainingModal: CompanyTraining = new CompanyTraining();
+  displayModal = false;
+
+  companyTrainingTypes: any[] = [] ;
+
+  companyTraining: ICompanyTraining = new CompanyTraining;
+  displayModalSave: boolean = false;
+
+  companyTrainingTypeById: ICompanyTrainingType = new CompanyTrainingType();
+
+  displayModalAddNewMemberIntoTraining: boolean = false;
+
+  employeeById: IEmployee = new Employee();
+  selectedEmployeeIdToAddasMember: any;
+
+  employees: any[] = [] ;
 
   sizePage = [
     { label: '5 itens por página', value: 5 },
@@ -35,6 +59,7 @@ export class CompanyTrainingsComponent implements OnInit {
 
   constructor(
     private companyTrainingsService: CompanyTrainingsService,
+    private companyTrainingTypesService: CompanyTrainingTypesService,
     private employeesService: EmployeesService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -43,6 +68,8 @@ export class CompanyTrainingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Trainings page');
+    this.getCompanyTrainingTypes();
+    this.getEmployees();
   }
 
   @ViewChild('table') grid: any;
@@ -50,7 +77,53 @@ export class CompanyTrainingsComponent implements OnInit {
   filter: ICompanyTrainingFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'name,asc'
+    sort: 'id,asc'
+  }
+
+  get editing() {
+    return Boolean(this.companyTraining.id);
+  }
+
+  save(trainingForm: NgForm) {
+    if (this.editing) {
+      this.update(trainingForm)
+    } else {
+      this.addNew(trainingForm)
+    }
+  }
+
+  addNew(trainingForm: NgForm) {
+    this.showLoading = true;
+    this.companyTrainingsService.add(this.companyTraining).subscribe(
+      (companyTrainingAdded) => {
+        this.companyTraining = companyTrainingAdded;
+        this.showLoading = false;
+        this.filterTrainings();
+        this.convertStringsToDates([companyTrainingAdded]);
+        this.messageService.add({ severity: 'success', detail: 'Training added successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  update(trainingForm: NgForm) {
+    this.showLoading = true;
+    this.companyTrainingsService.update(this.companyTraining).subscribe(
+      (companyTraining) => {
+        this.companyTraining = companyTraining;
+        this.showLoading = false;
+        this.filterTrainings();
+        this.convertStringsToDates([companyTraining]);
+        this.messageService.add({ severity: 'success', detail: 'Training updated successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
   }
 
   filterTrainings(page: number = 0): void {
@@ -73,13 +146,13 @@ export class CompanyTrainingsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteEmployee(training);
+          this.deleteTraining(training);
       }
     });
   }
 
-  deleteEmployee(training: ICompanyTraining) {
-    this.employeesService.delete(training.id).subscribe(
+  deleteTraining(training: ICompanyTraining) {
+    this.companyTrainingsService.delete(training.id).subscribe(
       () => {
         if (this.grid.first === 0) {
           this.filterTrainings()
@@ -95,9 +168,134 @@ export class CompanyTrainingsComponent implements OnInit {
     )
   }
 
+  getCompanyTrainingTypes() {
+    return this.companyTrainingTypesService.findAll().subscribe(
+      data => {
+        this.companyTrainingTypes = data.content.map(trainingType => {
+          return  {
+            label: trainingType.level,
+            value: trainingType.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getEmployees() {
+    return this.employeesService.findAll().subscribe(
+      data => {
+        this.employees = data.content.map(employee => {
+          return  {
+            label: employee.name,
+            value: employee.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  findTrainingById(id: number) {
+    this.showLoading = true;
+    this.companyTrainingTypesService.findById(id).subscribe(
+      companyTrainingType => {
+        this.companyTrainingTypeById = companyTrainingType;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  findEmployeeById(id: number) {
+    this.showLoading = true;
+    this.employeesService.findById(id).subscribe(
+      employee => {
+        this.employeeById = employee;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  onaaddEmployeeToTraining(){
+    this.displayModalAddNewMemberIntoTraining = true;
+  }
+
+  addEmployeeToProject(employeeId: number) {
+    this.companyTrainingsService.addEmployeeToTraining(employeeId, this.companyTraining.id).subscribe(
+      (companyTraining) => {
+        this.filterTrainings();
+        this.companyTraining = companyTraining;
+        this.messageService.add({ severity: 'success', detail: 'Employee added successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+      }
+    )
+  }
+
+  removeEmployeeFromTraining(employeeId: number) {
+    this.companyTrainingsService.removeEmployeeFromTraining(employeeId, this.companyTraining.id).subscribe(
+      (project) => {
+        this.filterTrainings();
+        this.companyTraining = project;
+        this.messageService.add({ severity: 'success', detail: 'Employee removed successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+      }
+    )
+  }
+
+  removeEmployeeFromTrainingConfirm(employeeId: number): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete remove this member?',
+      accept: () => {
+        this.removeEmployeeFromTraining(employeeId);
+      }
+    });
+  }
+
+  onAddNewTraining(): void {
+    this.companyTraining = new CompanyTraining();
+    this.displayModalSave = true;
+  }
+
+  onEditTraining(editTraining: ICompanyTraining): void {
+    this.convertStringsToDates([editTraining]);
+    this.companyTraining = editTraining;
+    this.companyTraining.id = editTraining.id
+    this.findTrainingById(this.companyTraining.companyTrainingType.id)
+    this.displayModalSave = true;
+  }
+
+  onSelectTraining(selectedTraining: ICompanyTraining): void {
+    this.selectedCompanyTrainingModal = selectedTraining;
+    this.displayModal = true;
+  }
+
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.filterTrainings(page);
+  }
+
+  private convertStringsToDates(trainings: any[]) {
+    for (const training of trainings) {
+      training.date = new Date(training.date);
+    }
   }
 
   private sendErrorNotification(message: string): void {

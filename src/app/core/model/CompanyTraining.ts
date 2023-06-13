@@ -1,4 +1,5 @@
 import { ICompanyTraining } from "../interfaces/ICompanyTraining";
+import { IEmployee } from "../interfaces/IEmployee";
 import { CompanyTrainingType } from "./CompanyTrainingType";
 
 export class CompanyTraining implements ICompanyTraining{
@@ -6,4 +7,5 @@ export class CompanyTraining implements ICompanyTraining{
     date!: Date;
     duration!: string;
     companyTrainingType = new CompanyTrainingType;
+    employees: IEmployee[] = [];
 }
