@@ -5,11 +5,8 @@
     <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterTrainings()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" ></p-dropdown>
                 <button (click)="onAddNewTraining()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -193,3 +190,50 @@
         </div>
     </form>
 </p-dialog>
+
+<!--Filtrar-->
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Itens por página</label>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterTrainings()"></p-dropdown>
+            </div>
+        </div>
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Ordenação</label>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterTrainings()"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="col-12 p-fluid">
+            <label>Nivel</label>
+            <p-dropdown class="p-inputtext-sm" [options]="companyTrainingTypes" placeholder="Selecione"
+                name="companyTrainingType" #companyTrainingType ngModel [(ngModel)]="filter.companyTrainingTypeLevel" (onChange)="findTrainingById(filter.companyTrainingTypeLevel)" (onChange)="filterTrainings()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Tipo</label>
+            <input pInputText disabled class="p-inputtext-sm" type="text" name="type"
+            ngModel #type="ngModel" required minlength="1" [(ngModel)]="companyTrainingTypeById.type">  
+        </div>
+
+        <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+            <label>Data</label>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+            [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
+              [inline]="false" [readonlyInput]="false" 
+              ngModel #date="ngModel" [required]="true" [(ngModel)]="filter.date"(ngModelChange)="filterTrainings()" ></p-calendar>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+        </div>
+
+    </div> 
+
+</p-dialog>  

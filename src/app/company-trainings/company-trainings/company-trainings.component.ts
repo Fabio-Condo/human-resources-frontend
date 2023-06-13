@@ -44,6 +44,8 @@ export class CompanyTrainingsComponent implements OnInit {
 
   employees: any[] = [] ;
 
+  displayModalFilter: boolean = false;
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
@@ -202,7 +204,7 @@ export class CompanyTrainingsComponent implements OnInit {
     )
   }
 
-  findTrainingById(id: number) {
+  findTrainingById(id: any ) { // number
     this.showLoading = true;
     this.companyTrainingTypesService.findById(id).subscribe(
       companyTrainingType => {
@@ -285,6 +287,10 @@ export class CompanyTrainingsComponent implements OnInit {
   onSelectTraining(selectedTraining: ICompanyTraining): void {
     this.selectedCompanyTrainingModal = selectedTraining;
     this.displayModal = true;
+  }
+
+  onFilter(): void {
+    this.displayModalFilter = true;
   }
 
   onChangePage(event: LazyLoadEvent) {

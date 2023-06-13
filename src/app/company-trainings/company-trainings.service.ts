@@ -7,6 +7,7 @@ import { IEmployee } from '../core/interfaces/IEmployee';
 import { IEmployeeFilter } from '../core/interfaces/IEmployeeFilter';
 import { ICompanyTrainingFilter } from '../core/interfaces/ICompanyTrainingFilter';
 import { ICompanyTraining } from '../core/interfaces/ICompanyTraining';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CompanyTrainingsService {
 
   companyTrainingsUrl: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private datePipe: DatePipe) { 
     this.companyTrainingsUrl = `${environment.apiUrl}/company-trainings`;
   }
 
@@ -23,10 +24,18 @@ export class CompanyTrainingsService {
 
     let params = new HttpParams()  
       .set('page', filter.page)  
+      .set('trainingOrderBy', filter.sort)
       .set('size', filter.itemsPerPage); 
 
+      if (filter.companyTrainingTypeLevel) { 
+        params = params.set('companyTrainingType', filter.companyTrainingTypeLevel); 
+      }
+      if (filter.date) {
+        params = params.set('date', this.datePipe.transform(filter.date, 'yyyy-MM-dd')!); 
+      }
+
     console.log(params);
-    return this.http.get<IApiResponse<ICompanyTraining>>(`${this.companyTrainingsUrl}`, { params });
+    return this.http.get<IApiResponse<ICompanyTraining>>(`${this.companyTrainingsUrl}/filter`, { params });
   }
 
   findAll() : Observable<IApiResponse<ICompanyTraining>> { 
