@@ -1,0 +1,157 @@
+
+
+<div class="container">
+    <h3>Pagamento de salários</h3>
+
+    <p-table [value]="payrolls" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <button pButton icon="pi pi-plus" (click)="onAddNewVocation()" style="background-color: #63c05a; border-style: none;"></button> 
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Mês de referência</th>
+                <th>Data de lançamento</th>
+                <th>Ações</th>       
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr>
+                <td> 05/2023 </td>
+                <td> 22/05/2023 </td>
+                <td style="width: 180px;">
+                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete"  tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+            <td colspan="10">
+                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
+                <span *ngIf="!showLoading">No title found </span> 
+                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                <a href="javascript:;">
+                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterPayrolls(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                </a>                  
+            </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<p-dialog header="Folha" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #vocationForm="ngForm" (ngSubmit)="save(vocationForm)">
+        <div class="formgrid grid">
+
+            <div class="col-12 md-12 p-fluid">
+                <p-table [value]="payrolls" [(selection)]="selectedPayrolls" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <input pInputText class="p-inputtext-sm" type="text" name="name" placeholder="Descrição Ex: folha de salário do mês de abril"
+                            ngModel #name="ngModel" required minlength="1"> 
+                            <p-calendar class="p-inputtext-sm" name="date" view="month" dateFormat="mm/yy" placeholder="Mês de referênia"
+                            [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="date"
+                              [inline]="false" [readonlyInput]="false" 
+                              ngModel #birthday="ngModel" [required]="true"></p-calendar>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 4rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Salário Bruto</th>
+                            <th>INSS (3%)</th>
+                            <th>Salário liquido</th>     
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-employee>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+                            </td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.position.name }}</td>
+                            <td>{{ employee.wageValue }}</td>
+                            <td>{{ employee.wageValue * 0.03}}</td>
+                            <td>{{ employee.wageValue - employee.wageValue * 0.03 }}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                        <td colspan="10">
+                            <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
+                            <span *ngIf="!showLoading">No title found </span> 
+                            <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                            <a href="javascript:;">
+                            <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterPayrolls(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
+                            </a>                  
+                        </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            
+           
+            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="vocationForm.invalid" class="p-button-sm" style="height: 30px;">
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                </button>
+            </div>
+        </div>  
+    </form>
+</p-dialog>
+
+
+<!--Filtrar-->
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+
+    <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Itens por página</label>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..."
+                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterPayrolls()"></p-dropdown>
+            </div>
+        </div>
+        <div class="field col-12 md:col-6">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Ordenação</label>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..."
+                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterPayrolls()"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+            <label>Mês de referência</label>
+            <p-calendar class="p-inputtext-sm" name="date" view="month" dateFormat="mm/yy" placeholder="Mês de referênia (mês/ano)"
+            [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="date"
+              [inline]="false" [readonlyInput]="false" 
+              ngModel #birthday="ngModel" [required]="true"></p-calendar>
+        </div>
+
+        <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+            <label>Data de lançamento</label>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" placeholder="Data de lançamento (dia/mês/ano)"
+            [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="endDate"
+              [inline]="false" [readonlyInput]="false" [showIcon]="true"
+              ngModel #endDate="ngModel" [required]="true"></p-calendar>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </div> 
+
+</p-dialog>  

@@ -34,6 +34,8 @@ import { CompanyTrainingsModule } from './company-trainings/company-trainings.mo
 import { CompanyTrainingsRoutingModule } from './company-trainings/company-trainings-routing.module';
 import { CompanyTrainingTypesModule } from './company-training-types/company-training-types.module';
 import { CompanyTrainingsTypesRoutingModule } from './company-training-types/company-training-types-routing.module';
+import { PayrollsRoutingModule } from './payrolls/payrolls-routing.module';
+import { PayrollsModule } from './payrolls/payrolls.module';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { CompanyTrainingsTypesRoutingModule } from './company-training-types/com
     VocationsRoutingModule,
     CompanyTrainingsRoutingModule,
     CompanyTrainingsTypesRoutingModule,
+    PayrollsRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -71,6 +74,7 @@ import { CompanyTrainingsTypesRoutingModule } from './company-training-types/com
     VocationsModule,
     CompanyTrainingsModule,
     CompanyTrainingTypesModule,
+    PayrollsModule,
 
     CoreModule
   ],

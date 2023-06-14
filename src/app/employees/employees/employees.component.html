@@ -5,18 +5,6 @@
         
         <ng-template pTemplate="caption">
             <div class="flex">
-                <!--
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployees()"/>
-                </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployees()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployees()"></p-dropdown>
-                <button type="button" pButton pRipple icon="pi pi-file-pdf"  class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom" style="color: #e96969; background-color: #fff; border-color: #e96969;"></button>
-                -->
-
                 <button (click)="onAddNewEmployee()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
