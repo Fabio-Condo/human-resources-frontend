@@ -129,6 +129,7 @@
                             <th>Nome</th>
                             <th>Cargo</th>
                             <th>Salário Bruto</th>
+                            <th>IRPS</th>
                             <th>INSS (3%)</th>
                             <th>Salário liquido</th>     
                         </tr>
@@ -141,6 +142,7 @@
                             <td>{{ payment.employee.name }}</td>
                             <td>{{ payment.employee.position.name }}</td>
                             <td>{{ payment.employee.wageValue }}</td>
+                            <td>{{ 0 }}</td>
                             <td>{{ payment.employee.wageValue * 0.03}}</td>
                             <td>{{ payment.employee.wageValue - payment.employee.wageValue * 0.03 }}</td>
                         </tr>
