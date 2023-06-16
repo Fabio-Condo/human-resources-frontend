@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MegaMenuItem } from 'primeng/api';
 
 @Component({
@@ -12,7 +13,9 @@ export class NavbarComponent implements OnInit {
 
   items!: MegaMenuItem[];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   //ngOnInit(): void {
   //}
@@ -20,6 +23,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.menuItems()
   }
+
+  isActive(url: string): boolean {
+    return this.router.isActive(url, true);
+  }
+
 
   menuItems(){
     this.items = [

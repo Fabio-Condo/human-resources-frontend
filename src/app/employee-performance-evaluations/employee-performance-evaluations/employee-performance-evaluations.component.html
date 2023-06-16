@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Av. Desenpenho</h3>
+    <h3>Avaliação de desenpenho</h3>
 
     <p-table [value]="employeePerformanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">

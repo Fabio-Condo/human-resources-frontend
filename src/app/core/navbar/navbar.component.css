@@ -1,3 +1,58 @@
+/*Mega Menu*/
+.mega-menu {
+  /*background-color: #f1f1f1;*/
+  background-color: #53595c;
+  padding: 9px;
+}
+
+.mega-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega-menu li {
+  display: inline-block;
+  margin-right: 3px;
+  font-size: 11px; /* Tamanho da fonte ajustado para 14 pixels */
+}
+
+.mega-menu li a {
+  /*color: #333;*/
+  color: #eee7e7;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.mega-menu li a:hover {
+  background-color: #eee7e7;
+  color: #53595c;
+}
+
+.mega-menu select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.mega-menu li.active a {
+  /* Estilos para o item de menu ativo */
+  font-weight: bold;
+  background-color: #eee7e7;
+  color: #53595c;
+}
+
+/*Mega Menu FIM*/
+
+
+
+
+
+
+
+
+
+
 .navbar {
   /*position: absolute;*/
   padding: 8px 0 3px;  /*Centralizando o icon do menu da nav*/
@@ -57,3 +112,7 @@
 }
 
 /*--------------------------------------*/
+
+
+
+
