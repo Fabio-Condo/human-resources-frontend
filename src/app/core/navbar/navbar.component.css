@@ -75,7 +75,7 @@
   padding: 0; /*Tirando o espacamento interno*/
   z-index: 9998; /*z-index indica uma prioridade, quem fica em cima do outro. Entao colocaremos um numero muito alto para garantir que o menu fique em cima de todo conteudo da tela principal*/
 
-  background-color: #35454c;  /*Dancor cinza escuro ao menu lateral*/
+  background-color: #323333;  /*Dancor cinza escuro ao menu lateral*/
 
   list-style: none;  /*Tirando as bolinhas da lista de itens*/
 }

@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="card">
+      <h3>Difinições da conta</h3>
+      <div class="formgrid grid">
+  
+        <div  class="field col-12 md:col-3">
+
+            <h5 style="background-color: blue; padding: 0%;">aaaaaaaaaaaaa</h5>
+            <h5 style="background-color: aqua;">aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+            <h5>aaaaaaaaaaaaa</h5>
+
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Funcionários</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Desenpenho</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Projetos</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Cargos</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Férias e ausências</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Formação e desen</a>
+            </li>
+            <li class="menuitem"  routerLinkActive="ativo" >
+                <a style="margin-left: 10px;">Tipos de formação</a>
+            </li>   
+
+        </div>
+  
+        <div style="background-color: #fff;" class="field col-12 md:col-9">
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <div class="col-12 p-fluid">
+                        <label>Primeiro Nome</label>
+                        <input pInputText class="p-inputtext-sm" type="text" name="name"
+                        ngModel #name="ngModel" required minlength="1">  
+                    </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                        <label>Email</label>
+                        <input pInputText class="p-inputtext-sm" type="text" name="email"
+                        ngModel #email="ngModel" required minlength="1">  
+                    </div>
+                </div>
+                <div class="field col-12 md:col-6">
+                    <div class="col-12 p-fluid">
+                        <label>Último Nome</label>
+                        <input pInputText class="p-inputtext-sm" type="text" name="name"
+                        ngModel #name="ngModel" required minlength="1">  
+                    </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                        <label>Número de Telefone</label>
+                        <input pInputText class="p-inputtext-sm" type="text" name="email"
+                        ngModel #email="ngModel" required minlength="1">  
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 1%;">
+                <label>Bio</label>
+                <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="coordinates" minlength="10" placeholder="Bio"></textarea>
+            </div>
+  
+        </div>
+    </div>
+</div>

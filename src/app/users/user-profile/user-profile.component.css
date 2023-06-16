@@ -1,0 +1,26 @@
+h5 {
+    margin: 0;
+  }
+
+
+  .menuitem {
+    padding: 5px;  /*Dando um espacamento aos itens do menu lateal*/
+    background-color: #1c80cf;
+    list-style: none;
+  }
+  
+  .menuitem a {  /*Estilizando o "a" que é filho do navbar-menuitem */
+    color: #fff;  /*dando uma cor cinza claro*/
+    text-decoration: none;  /*Para tirar o sublinhado dos links*/
+  }
+  
+  .menuitem a:hover {  /*Estizar quando o mouse passar por cima dos links*/
+    color: black;  /*Dando cor branca quando mouse passar por cima*/
+  }
+  
+  .menuitem.ativo {  /*Se este link estiver activo coloque cinzenta*/
+    background-color: rgba(196, 196, 245, 0.75);
+    padding-bottom: 5px;
+    padding-top: 5px;  /*Dando um espacamento aos itens do menu lateal*/
+    color: black;
+  }
