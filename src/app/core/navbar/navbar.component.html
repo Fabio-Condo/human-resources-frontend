@@ -1,20 +1,22 @@
 <div class="mega-menu">
   <div class="container">
     <ul>
-      <span style="display:inline;" >
+      <span style="display:inline; float: right;" >
         <li [class.active]="isActive('/v1/employees')"><a routerLink="/v1/employees">Funcionários</a></li>
         <li [class.active]="isActive('/v1/employee-performance-evaluations')"><a routerLink="/v1/employee-performance-evaluations">Desenpenho</a></li>
         <li [class.active]="isActive('/v1/departments')"><a routerLink="/v1/departments">Departamentos</a></li>
         <li [class.active]="isActive('/v1/projects')"><a routerLink="/v1/projects">Projectos</a></li>
         <li [class.active]="isActive('/v1/positions')"><a routerLink="/v1/positions">Cargos</a></li>
+        <li [class.active]="isActive('/v1/vocations')"><a routerLink="/v1/vocations">Férias</a></li>
         <li [class.active]="isActive('/v1/company-trainings')"><a routerLink="/v1/company-trainings">Formação</a></li>
         <li [class.active]="isActive('/v1/company-training-types')"><a routerLink="/v1/company-training-types">T. Formação</a></li>
         <li [class.active]="isActive('/v1/workplaces')"><a routerLink="/v1/workplaces">L. trabalho</a></li>
         <li [class.active]="isActive('/v1/payrolls')"><a routerLink="/v1/payrolls">Pagamentos</a></li>
-        <li [class.active]="isActive('/v1/users')"><a routerLink="/v1/users">Usuários</a></li>
-      </span>
-      <span style="display:inline; float: right;">
+        <li [class.active]="isActive('/v1/users')"><a routerLink="/v1/users">Usuários</a></li>.
         <li [class.active]="isActive('/v1/user-profile')"><a routerLink="/v1/user-profile">fabio</a></li>
+      </span>
+      <span style="display:inline; ">
+        <img height="20" width="60"  alt="" />
       </span>
     </ul>
   </div>

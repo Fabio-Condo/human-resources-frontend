@@ -5,7 +5,7 @@ h5 {
 
   .menuitem {
     padding: 5px;  /*Dando um espacamento aos itens do menu lateal*/
-    background-color: #1c80cf;
+    background-color: whitesmoke;
     list-style: none;
   }
   
@@ -16,6 +16,7 @@ h5 {
   
   .menuitem a:hover {  /*Estizar quando o mouse passar por cima dos links*/
     color: black;  /*Dando cor branca quando mouse passar por cima*/
+    background-color: #a33b3b;
   }
   
   .menuitem.ativo {  /*Se este link estiver activo coloque cinzenta*/
