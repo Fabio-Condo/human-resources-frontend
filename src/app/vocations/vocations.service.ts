@@ -56,4 +56,8 @@ export class VocationsService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.vocationsUrl}/${id}`, { });
   }
+
+  severalDelete(vocationList: IVocation[]): Observable<IVocation[]> {
+    return this.http.post<IVocation[]>(`${this.vocationsUrl}/deleteAll`, vocationList, { });
+  }
 }

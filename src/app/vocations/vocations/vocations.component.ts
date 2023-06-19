@@ -17,6 +17,8 @@ import { NgForm } from '@angular/forms';
 })
 export class VocationsComponent implements OnInit {
 
+  selectedVocations: IVocation[] = [];
+
   showLoading: boolean = false;
 
   totalRecords: number = 0
@@ -184,6 +186,35 @@ export class VocationsComponent implements OnInit {
           this.deleteVocation(vocation);
       }
     });
+  }
+
+  severalDeleteConfirm(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir os items selecionados?',
+      accept: () => {
+          this.severalDelete();
+      }
+    });
+  }
+
+  severalDelete(){
+    this.vocationsService.severalDelete(this.selectedVocations).subscribe(
+      () => {
+        this.showLoading = true;
+        if (this.grid.first === 0) {
+          this.getVocations();
+        } else {
+          this.grid.reset();
+        }
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
+        this.selectedVocations = [];
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
   }
 
   onFilter(): void {

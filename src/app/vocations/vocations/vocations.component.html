@@ -1,15 +1,24 @@
 <div class="container">
     <h3>Pedidos de ausências</h3>
 
-    <p-table [value]="vocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button  pButton icon="pi pi-plus" (click)="onAddNewVocation()" style="background-color: #63c05a; border-style: none;"></button> 
+                <div>
+                    <button (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length" pButton type="button" class="p-button-info" style="background-color: #e96969; border-color: #dee3e6;">
+                      <i style="color: #fff;" *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                      <i style="color: #fff;" *ngIf="!showLoading" class="pi pi-trash"></i> 
+                    </button>
+                </div>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
                 <th style="background-color: #fff;">Funcionário</th>
                 <th style="background-color: #fff;">Tipo</th>
                 <th style="background-color: #fff;">Inicio</th>
@@ -19,7 +28,10 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-vocation>
-            <tr>
+            <tr [pSelectableRow]="vocation">
+                <td>
+                    <p-tableCheckbox [value]="vocation"></p-tableCheckbox>
+                </td>
                 <td>{{ vocation.employee.name }}</td>
                 <td>
                     <span *ngIf="vocation.vocationType==='VOCATIONS'" >Férias</span>

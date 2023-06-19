@@ -68,4 +68,8 @@ export class EmployeePerformanceEvaluationsService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.employeePerformanceEvaluation}/${id}`, { });
   }
+
+  severalDelete(employeePerformanceEvaluationList: IEmployeePerformanceEvaluation[]): Observable<IEmployeePerformanceEvaluation[]> {
+    return this.http.post<IEmployeePerformanceEvaluation[]>(`${this.employeePerformanceEvaluation}/deleteAll`, employeePerformanceEvaluationList, { });
+  }
 }

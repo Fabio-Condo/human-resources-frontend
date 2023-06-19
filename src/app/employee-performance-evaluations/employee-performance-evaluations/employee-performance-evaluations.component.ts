@@ -16,6 +16,8 @@ import { EmployeePerformanceEvaluationsService } from '../employee-performance-e
 })
 export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
+  selectedEmployeePerformanceEvaluations: IEmployeePerformanceEvaluation[] = [];
+
   showLoading: boolean = false;
 
   totalRecords: number = 0
@@ -164,6 +166,35 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: employee.id
           }
         })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  severalDeleteConfirm(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja excluir os items selecionados?',
+      accept: () => {
+          this.severalDelete();
+      }
+    });
+  }
+
+  severalDelete(){
+    this.employeePerformanceEvaluationsService.severalDelete(this.selectedEmployeePerformanceEvaluations).subscribe(
+      () => {
+        this.showLoading = true;
+        if (this.grid.first === 0) {
+          this.filterEmployeePerformanceEvaluations();
+        } else {
+          this.grid.reset();
+        }
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
+        this.selectedEmployeePerformanceEvaluations = [];
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
