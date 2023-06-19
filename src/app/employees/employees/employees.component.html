@@ -222,8 +222,6 @@
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Descrição</th>
-                            <th style="background-color: #FFF;" class="col-valor-header"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
@@ -270,13 +268,30 @@
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.name}}</span></i></li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Cargo</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i></li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.department.name}}</span></i></li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Tipo de contrato</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.contractType}}</span></i></li>
+                    <li class="dialog-info-li">
+                        <i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Tipo de contrato</span>: 
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='INDEFINITE_PERIOD'"> Indeterminado </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='DEFINITE_PERIOD'"> Determinado </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='PART_TIME'"> Tempo parcial </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='TEMPORARY'"> Temporário </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='SERVICE_PROVIDER'"> Prestador de serviços </span>
+                        </i>
+                    </li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.wageValue}}</span></i></li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Provincia</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i></li>
                 </div>
                 <div class="field col-12 md:col-6">
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Genero</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.gender}}</span></i></li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Estado civil</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.maritalStatus}}</span></i></li>
+                    <li class="dialog-info-li">
+                        <i class="dialog-info-i">
+                            <span style="color:#545555;font-weight:bold">Estado civil</span>: 
+                            <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.maritalStatus}}</span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'"> Solteiro </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'"> Casado </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='DIVORCED'"> Divorciado </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='WIDOWER'"> Viúvo </span>
+                        </i>
+                    </li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Conjugue</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.spousesName}}</span></i></li>
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
@@ -419,7 +434,6 @@
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Descrição</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
@@ -587,15 +601,15 @@
       </div>
       <div class="col-12 md-12 p-fluid">
         <label>Início</label>
-        <p-calendar class="p-inputtext-sm" name="begin" dateFormat="MM, yy"
-        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
+        <p-calendar class="p-inputtext-sm" name="begin" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
+        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" 
           [inline]="false" [readonlyInput]="false" 
           ngModel #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
       </div>
       <div class="col-12 md-12 p-fluid">
         <label>Fim</label>
-        <p-calendar class="p-inputtext-sm" name="end" dateFormat="MM, yy"
-        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
+        <p-calendar class="p-inputtext-sm" name="end" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
+        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
           [inline]="false" [readonlyInput]="false" 
           ngModel #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
       </div>
@@ -606,7 +620,7 @@
 </p-dialog>  
 
 <!--Skills-->
-<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [style]="{width: '30vw'}" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>

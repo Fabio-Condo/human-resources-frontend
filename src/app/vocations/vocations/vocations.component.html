@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Pedidos de férias</h3>
+    <h3>Pedidos de ausências</h3>
 
     <p-table [value]="vocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
@@ -11,6 +11,7 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Funcionário</th>
+                <th style="background-color: #fff;">Tipo</th>
                 <th style="background-color: #fff;">Inicio</th>
                 <th style="background-color: #fff;">Fim</th>
                 <th style="background-color: #fff;">Status</th>
@@ -20,6 +21,13 @@
         <ng-template pTemplate="body" let-vocation>
             <tr>
                 <td>{{ vocation.employee.name }}</td>
+                <td>
+                    <span *ngIf="vocation.vocationType==='VOCATIONS'" >Férias</span>
+                    <span *ngIf="vocation.vocationType==='SICK_LEAVE'" >Licença médica</span>
+                    <span *ngIf="vocation.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'" >Licença maternidade/paternidade</span>
+                    <span *ngIf="vocation.vocationType==='PAID_LEAVE'" >Licença remunerada</span>
+                    <span *ngIf="vocation.vocationType==='UNPAID_LEAVE'" >Licença não remunerada</span>
+                </td>
                 <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                 <td>
@@ -28,7 +36,7 @@
                     <span *ngIf="vocation.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="View" (click)="onSelectVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton  pTooltip="Delete" (click)="deletionConfirm(vocation)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -58,6 +66,11 @@
                 <label>Funcionário</label>
                 <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
                     name="employee" #employee ngModel [(ngModel)]="vocation.employee.id"></p-dropdown>
+            </div>
+            <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+                <label>Tipo de ausência</label>
+                <p-dropdown class="p-inputtext-sm"  [options]="vocationTypes" placeholder="Selecione"
+                    name="vocationType" #vocationType ngModel [(ngModel)]="vocation.vocationType"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Status</label>
@@ -117,10 +130,17 @@
             <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
                 name="employee" #employee ngModel [(ngModel)]="filter.employee" (ngModelChange)="getVocations()" ></p-dropdown>
         </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Tipo</label>
+            <p-dropdown class="p-inputtext-sm"  [options]="vocationTypes" placeholder="Selecione" 
+                name="vocationType" #vocationType ngModel [(ngModel)]="filter.vocationType" (ngModelChange)="getVocations()"></p-dropdown>
+        </div>
+
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Status</label>
             <p-dropdown class="p-inputtext-sm"  [options]="vocationStatuses" placeholder="Selecione" 
-                name="category" #category ngModel [(ngModel)]="filter.vocationStatus" (ngModelChange)="getVocations()"></p-dropdown>
+                name="vocationStatus" #vocationStatus ngModel [(ngModel)]="filter.vocationStatus" (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
@@ -145,3 +165,35 @@
     </div> 
 
 </p-dialog>  
+
+<!--Show -->
+<p-dialog header="{{selectedVocationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+    <div class="formgrid grid">
+        <div class="col-12 p-fluid">
+            <label>Funcionário</label>: <span> {{selectedVocationModal.employee.name}}</span>  
+        </div> 
+        <div class="col-12 p-fluid">
+            <label>Cargo</label>: <span> {{selectedVocationModal.employee.position.name}}</span> 
+        </div> 
+        <div class="col-12 p-fluid">
+            <label>Tipo</label>: 
+            <span *ngIf="selectedVocationModal.vocationType==='VOCATIONS'" >Férias</span>
+            <span *ngIf="selectedVocationModal.vocationType==='SICK_LEAVE'" >Licença médica</span>
+            <span *ngIf="selectedVocationModal.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'" >Licença maternidade/paternidade</span>
+            <span *ngIf="selectedVocationModal.vocationType==='PAID_LEAVE'" >Licença remunerada</span>
+            <span *ngIf="selectedVocationModal.vocationType==='UNPAID_LEAVE'" >Licença não remunerada</span>
+        </div> 
+        <div class="col-12 p-fluid">
+            <label>Status</label>: 
+            <span *ngIf="selectedVocationModal.vocationStatus==='APPROVED'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
+            <span *ngIf="selectedVocationModal.vocationStatus==='REJECTED'" style="color:#e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; rejeitado &nbsp;</span>
+            <span *ngIf="selectedVocationModal.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+        </div> 
+        <div class="col-12 p-fluid">
+            <label>Inicio</label>: <span> {{selectedVocationModal.beginDate | date: 'dd/MM/yyyy'}}</span> 
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Fim</label>: <span> {{selectedVocationModal.endDate | date: 'dd/MM/yyyy'}}</span> 
+        </div>
+    </div>         
+</p-dialog>

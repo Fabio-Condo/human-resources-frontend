@@ -27,6 +27,9 @@ export class VocationsService {
       if (filter.vocationStatus) { 
         params = params.set('vocationStatus', filter.vocationStatus); 
       }
+      if (filter.vocationType) { 
+        params = params.set('vocationType', filter.vocationType); 
+      }
       if (filter.employee) { 
         params = params.set('employee', filter.employee); 
       }

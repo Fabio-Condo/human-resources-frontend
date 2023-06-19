@@ -111,6 +111,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.employeePerformanceEvaluationsService.update(this.employeePerformanceEvaluation).subscribe(
       (employeePerformanceEvaluation) => {
         this.employeePerformanceEvaluation = employeePerformanceEvaluation;
+        this.filterEmployeePerformanceEvaluations();
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation updated successfully!' });
       },

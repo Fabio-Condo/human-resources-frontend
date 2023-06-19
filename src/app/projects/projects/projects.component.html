@@ -72,14 +72,11 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaddEmployeeToProject()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span> <span *ngIf="selectedProjectMembers.length > 0" (click)="removeAll()"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
-                <p-table [value]="project.team" [(selection)]="selectedProjectMembers" [responsive]="true" 
+                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaddEmployeeToProject()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <p-table [value]="project.team" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
-                        <th style="background-color: #fff; width: 4rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
                         <th style="background-color: #FFF;">Nome</th>
                         <th style="background-color: #FFF;">Cargo</th>
                         <th style="background-color: #FFF;" class="col-valor-header"></th>
@@ -87,9 +84,6 @@
                   </ng-template>
                   <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                     <tr [pSelectableRow]="employee">
-                        <td>
-                            <p-tableCheckbox [value]="employee"></p-tableCheckbox>
-                        </td>
                         <td>{{ employee.name }}</td>
                         <td>{{ employee.position.name }}</td>
                         <td class="col-acoes">

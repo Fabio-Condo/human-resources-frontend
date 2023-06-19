@@ -6,5 +6,6 @@ export interface IVocation {
     beginDate: Date;
     endDate: Date;
     vocationStatus: string;
+    vocationType: string;
     employee: IEmployee;
 }

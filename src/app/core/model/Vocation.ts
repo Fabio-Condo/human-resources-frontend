@@ -7,5 +7,6 @@ export class Vocation implements IVocation{
     beginDate!: Date;
     endDate!: Date;
     vocationStatus!: string;
+    vocationType!: string;
     employee = new Employee;
 }

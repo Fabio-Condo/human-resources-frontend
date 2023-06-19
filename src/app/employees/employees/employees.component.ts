@@ -71,7 +71,7 @@ export class EmployeesComponent implements OnInit {
     { label: 'Solteiro', value: 'SINGLE' },
     { label: 'Casado', value: 'MARRIED' },
     { label: 'Divorciado', value: 'DIVORCED' },
-    { label: 'Viuvo', value: 'WIDOWER' },
+    { label: 'Viúvo', value: 'WIDOWER' },
   ];
 
   contractTypes = [
@@ -166,6 +166,7 @@ export class EmployeesComponent implements OnInit {
       (employee) => {
         this.employee = employee;
         this.showLoading = false;
+        this.filterEmployees();
         this.convertStringsToDates([employee]);
         this.messageService.add({ severity: 'success', detail: 'Employee updated successfully!' });
       },

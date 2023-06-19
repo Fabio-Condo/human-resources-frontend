@@ -49,7 +49,7 @@
 
 </div>
 
-<p-dialog header=" {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Avaliação {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">   
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -148,7 +148,7 @@
 </p-dialog>  
 
 
-<p-dialog header="{{selectedEmployeePerformanceEvaluationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '35vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedEmployeePerformanceEvaluationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
             <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Funcionário</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.name}}</span></i></li>
@@ -163,13 +163,40 @@
                     <span *ngIf="selectedEmployeePerformanceEvaluationModal.category==='YEARLY'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%;">&nbsp; anual &nbsp; &nbsp;</span>
                 </i>
             </li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Trabalho em equipe</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.teamWork}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comunicação</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.communication}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Pensamento estratégico</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.strategicThought}}</span></i></li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Trabalho em equipe</span>: 
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Comunicação</span>: 
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Pensamento estratégico</span>: 
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
 
             <br>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário / Recomendações do avaliador</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement}}</span></i></li>
-
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário / Recomendações do avaliador</span>: </i></li>
+            <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement" minlength="10" placeholder="Introduza as coordenadas"></textarea>
         </div>
 
     </div> 

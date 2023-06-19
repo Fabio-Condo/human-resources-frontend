@@ -42,8 +42,6 @@ export class ProjectsComponent implements OnInit {
 
   employeeById: IEmployee = new Employee();
 
-  selectedProjectMembers: IEmployee[] = [];
-
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
     { label: 'Concluído', value: 'CONCLUDED' },
@@ -94,26 +92,7 @@ export class ProjectsComponent implements OnInit {
 
   get editing() {
     return Boolean(this.project.id);
-  }
-
-  removeAll(){
-    this.selectedProjectMembers.forEach((employe) => {
-      console.log(employe.name);
-    });
-    this.projectSerice.removeAll(this.project.id, this.selectedProjectMembers).subscribe(
-      () => {
-        this.showLoading = true;
-        this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
-        this.selectedProjectMembers = [];
-        this.showLoading = false;
-        //this.filterProjects();
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);  // Recebendo a reesposta do backend
-        this.showLoading = false;
-      }
-    )
-  }    
+  }   
 
   save(projectForm: NgForm) {
     if (this.editing) {
@@ -144,6 +123,7 @@ export class ProjectsComponent implements OnInit {
     this.projectSerice.update(this.project).subscribe(
       (project) => {
         this.project = project;
+        this.filterProjects();
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Project updated successfully!' });
       },

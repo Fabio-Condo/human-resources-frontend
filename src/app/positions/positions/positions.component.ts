@@ -169,6 +169,7 @@ export class PositionsComponent implements OnInit {
     this.positionsService.update(this.position).subscribe(
       (position) => {
         this.position = position;
+        this.filterPositions();
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Position updated successfully!' });
       },

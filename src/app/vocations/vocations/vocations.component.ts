@@ -33,6 +33,14 @@ export class VocationsComponent implements OnInit {
 
   displayModalFilter: boolean = false;
 
+  vocationTypes = [
+    { label: 'Férias', value: 'VOCATIONS' },
+    { label: 'Licença médica', value: 'SICK_LEAVE' },
+    { label: 'Licença maternidade/paternidade', value: 'MATERNITY_OR_PATERNITY_LEAVE' },
+    { label: 'Licença remunerada', value: 'PAID_LEAVE' },
+    { label: 'Licença não remunerada', value: 'UNPAID_LEAVE' },
+  ];
+
   vocationStatuses = [
     { label: 'Aprovado', value: 'APPROVED' },
     { label: 'Pendente', value: 'PENDING' },
@@ -107,6 +115,7 @@ export class VocationsComponent implements OnInit {
     this.vocationsService.update(this.vocation).subscribe(
       (vocation) => {
         this.vocation = vocation;
+        this.getVocations();
         this.showLoading = false;
         this.convertStringsToDates([vocation]);
         this.messageService.add({ severity: 'success', detail: 'Vocation updated successfully!' });

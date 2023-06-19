@@ -24,6 +24,9 @@ export class WorkplacesComponent implements OnInit {
   workplace: IWorkplace = new Workplace;
   displayModalSave: boolean = false;
 
+  selectedWorkplaceModal: Workplace = new Workplace();
+  displayModal = false;
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
@@ -143,6 +146,11 @@ export class WorkplacesComponent implements OnInit {
     this.workplace = editWorkplace;
     this.workplace.id = editWorkplace.id
     this.displayModalSave = true;
+  }
+
+  onSelectWorkplace(selectedWorkplace: Workplace): void {
+    this.selectedWorkplaceModal = selectedWorkplace;
+    this.displayModal = true;
   }
 
   deletionConfirm(workplace: IWorkplace): void {

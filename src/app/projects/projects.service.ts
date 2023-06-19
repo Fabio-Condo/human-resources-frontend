@@ -81,7 +81,4 @@ export class ProjectsService {
     return this.http.put<IProject>(`${this.projectsUrl}/${projectId}/employees/${employeeId}`, { });
   }
 
-  removeAll(projectId: number, listaFolhasSelecionadas: IEmployee[]): Observable<IEmployee[]> {
-    return this.http.put<IEmployee[]>(`${this.projectsUrl}/${projectId}/removeBulkMembers`, listaFolhasSelecionadas, { });
-  }
 }

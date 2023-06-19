@@ -28,7 +28,7 @@
                 <td>{{ trainingType.level }}</td>
                 <td>{{ trainingType.type }}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Edit"  tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onSelectTrainingType(trainingType)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditTrainingType(trainingType)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Delete" (click)="deletionConfirm(trainingType)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -73,13 +73,11 @@
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Designação</th>
-                            <th style="background-color: #FFF;" class="col-valor-header"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-goal let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ goal.designation }}</td>
+                          <td> - {{ goal.designation }}</td>
                           <td class="col-acoes">
                             <span class="p-buttonset">
                                 <span (click)="getReadyGoalEdit(goal, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
@@ -109,8 +107,45 @@
     </form>
 </p-dialog>
 
+<!--Show -->
+<p-dialog header="{{selectedTrainingTypeModal.level}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
+    <div class="formgrid grid">
+        <div class="col-12 p-fluid">
+            <label>Nivel</label>: <span> {{selectedTrainingTypeModal.level}}</span>  
+        </div> 
+        <div class="col-12 p-fluid">
+            <label>Tipo</label>: <span> {{selectedTrainingTypeModal.type}}</span>  
+        </div> 
+
+        <!--Goals-->
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <label>Objectivos</label>
+            <p-table [value]="selectedTrainingTypeModal.companyTrainingTypeGoals" [responsive]="true" 
+                styleClass="p-datatable-sm" #tabela>
+                <ng-template pTemplate="header">
+                    <tr>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-goal let-rowIndex="rowIndex">
+                    <tr>
+                      <td> - {{ goal.designation }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                          Sem habilidades adicionadas
+                        </td>
+                    </tr>
+                  </ng-template>            
+            </p-table>  
+            <br> 
+        </div>
+    </div>         
+</p-dialog>
+
 <!--Goals-->
-<p-dialog [header]="editingGoal ? 'Edição objectivo' : 'Novo objectivo'" [style]="{width: '30vw'}" [(visible)]="showGoalForm" [modal]="true" *ngIf="goal"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingGoal ? 'Edição objectivo' : 'Novo objectivo'" [style]="{width: '45vw'}" [(visible)]="showGoalForm" [modal]="true" *ngIf="goal"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmGoal="ngForm" (ngSubmit)="confirmGoal(frmGoal)">
       <div class="col-12 p-fluid">
         <label>Designação</label>
@@ -122,4 +157,5 @@
       </div>
     </form>
 </p-dialog> 
+
 
