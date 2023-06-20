@@ -37,7 +37,9 @@ import { CompanyTrainingsTypesRoutingModule } from './company-training-types/com
 import { PayrollsRoutingModule } from './payrolls/payrolls-routing.module';
 import { PayrollsModule } from './payrolls/payrolls.module';
 import { UsersModule } from './users/users.module';
-import { UserProfileRoutingModule } from './users/user-profile-routing.module';
+import { UserProfileRoutingModule } from './users/users-routing.module';
+import { JobsModule } from './jobs/jobs.module';
+import { JobsRoutingModule } from './jobs/jobs-routing.module';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { UserProfileRoutingModule } from './users/user-profile-routing.module';
     CompanyTrainingsTypesRoutingModule,
     PayrollsRoutingModule,
     UserProfileRoutingModule,
+    JobsRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -79,6 +82,7 @@ import { UserProfileRoutingModule } from './users/user-profile-routing.module';
     CompanyTrainingTypesModule,
     PayrollsModule,
     UsersModule,
+    JobsModule,
 
     CoreModule
   ],

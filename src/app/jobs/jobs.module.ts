@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { JobsComponent } from './jobs/jobs.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
@@ -13,15 +14,14 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { UsersComponent } from './users/users.component';
+import { JobsPageComponent } from './jobs-page/jobs-page.component';
 
 
 
 @NgModule({
   declarations: [
-    UserProfileComponent,
-    UsersComponent
+    JobsComponent,
+    JobsPageComponent
   ],
   imports: [
     CommonModule,
@@ -37,10 +37,10 @@ import { UsersComponent } from './users/users.component';
     SelectButtonModule,
     DialogModule,
     DividerModule,
-    InputTextareaModule,
+    CalendarModule,
 
     RouterModule,
     AppRoutingModule
   ]
 })
-export class UsersModule { }
+export class JobsModule { }
