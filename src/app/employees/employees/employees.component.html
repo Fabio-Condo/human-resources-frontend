@@ -180,7 +180,7 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label >Formação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label >Educação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -207,7 +207,7 @@
                   <ng-template pTemplate="emptymessage">
                       <tr>
                         <td colspan="10">
-                          Sem contactos
+                          Sem educação adicionada
                         </td>
                       </tr>
                   </ng-template>            
@@ -281,11 +281,16 @@
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Provincia</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i></li>
                 </div>
                 <div class="field col-12 md:col-6">
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Genero</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.gender}}</span></i></li>
+                    <li class="dialog-info-li">
+                        <i class="dialog-info-i">
+                            <span style="color:#545555;font-weight:bold">Genero</span>: 
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.gender==='MASCULINE'"> Masculino </span>
+                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.gender==='FEMININE'"> Feminino </span>
+                        </i>
+                    </li>
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
                             <span style="color:#545555;font-weight:bold">Estado civil</span>: 
-                            <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.maritalStatus}}</span>
                             <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'"> Solteiro </span>
                             <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'"> Casado </span>
                             <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='DIVORCED'"> Divorciado </span>
@@ -367,7 +372,7 @@
 
             <!--Training-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Formação própria</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
+                <label>Educação</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -387,7 +392,7 @@
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem formações adicionadas
+                              Sem educação adicionada
                             </td>
                         </tr>
                       </ng-template>            
