@@ -4,7 +4,7 @@
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button (click)="onAddNewProject()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+                <button pButton (click)="onAddNewProject()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>

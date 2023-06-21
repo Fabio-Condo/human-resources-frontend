@@ -13,7 +13,7 @@
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterJobs()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterJobs()"></p-dropdown>
-                <button (click)="onAddNewJob()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
+                <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">

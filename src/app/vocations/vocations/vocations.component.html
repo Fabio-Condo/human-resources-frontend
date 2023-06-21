@@ -4,7 +4,7 @@
     <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button  pButton icon="pi pi-plus" (click)="onAddNewVocation()" style="background-color: #63c05a; border-style: none;"></button> 
+                <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
                 <button (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length" pButton type="button" class="p-button-info" style="background-color: #e96969; border-color: #dee3e6;">
                     <i style="color: #fff;" *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                     <i style="color: #fff;" *ngIf="!showLoading" class="pi pi-trash"></i> 
