@@ -9,6 +9,8 @@ import { MegaMenuItem } from 'primeng/api';
 })
 export class NavbarComponent implements OnInit {
 
+  imagePath = './assets/meta.jpg'
+
   showMenu: boolean = false;
 
   items!: MegaMenuItem[];

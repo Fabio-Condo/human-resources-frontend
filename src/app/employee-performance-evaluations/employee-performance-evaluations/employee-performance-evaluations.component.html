@@ -4,23 +4,8 @@
     <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <!--
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getEmployeePerformanceEvaluations()"/>
-                </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getEmployeePerformanceEvaluations()"></p-dropdown>
-                -->
-                <button (click)="onAddNewEmployeePerformanceEvaluation()" pButton icon="pi pi-plus" style="background-color: #63c05a; border-style: none;"></button> 
-                <div>
-                    <button (click)="severalDeleteConfirm()" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length" pButton type="button" class="p-button-info" style="background-color: #e96969; border-color: #dee3e6;">
-                      <i style="color: #fff;" *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                      <i style="color: #fff;" *ngIf="!showLoading" class="pi pi-trash"></i> 
-                    </button>
-                </div>
+                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" (click)="onAddNewEmployeePerformanceEvaluation()"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"  style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>

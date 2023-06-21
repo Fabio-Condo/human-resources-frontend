@@ -5,12 +5,10 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button  pButton icon="pi pi-plus" (click)="onAddNewVocation()" style="background-color: #63c05a; border-style: none;"></button> 
-                <div>
-                    <button (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length" pButton type="button" class="p-button-info" style="background-color: #e96969; border-color: #dee3e6;">
-                      <i style="color: #fff;" *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                      <i style="color: #fff;" *ngIf="!showLoading" class="pi pi-trash"></i> 
-                    </button>
-                </div>
+                <button (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length" pButton type="button" class="p-button-info" style="background-color: #e96969; border-color: #dee3e6;">
+                    <i style="color: #fff;" *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                    <i style="color: #fff;" *ngIf="!showLoading" class="pi pi-trash"></i> 
+                </button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
