@@ -42,4 +42,8 @@ export class JobsService {
     return this.http.delete<void>(`${this.jobsUrl}/${id}`, { });
   }
 
+  findById(id: number): Observable<IJob>{
+    return this.http.get<IJob>(`${this.jobsUrl}/${id}`, { });
+  }
+
 }

@@ -16,13 +16,15 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { JobViewComponent } from './job-view/job-view.component';
 
 
 
 @NgModule({
   declarations: [
     JobsComponent,
-    JobsPageComponent
+    JobsPageComponent,
+    JobViewComponent
   ],
   imports: [
     CommonModule,

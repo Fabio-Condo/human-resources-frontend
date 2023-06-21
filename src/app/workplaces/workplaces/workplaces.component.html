@@ -5,6 +5,7 @@
     <p-table [value]="workplaces" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
+                <button pButton (click)="onAddNewWorkplace()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getWorkplaces()"/>
@@ -13,7 +14,6 @@
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getWorkplaces()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getWorkplaces()"></p-dropdown>
-                <button pButton (click)="onAddNewWorkplace()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">

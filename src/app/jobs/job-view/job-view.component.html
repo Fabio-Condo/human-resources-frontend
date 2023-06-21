@@ -1,0 +1,77 @@
+
+<link
+  rel="stylesheet"
+  href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
+/>
+<div class="container">
+    <h3 style="color:#fff; background-color: #32aa27; display:inline; float: right;" >&nbsp; candidatar-se &nbsp;</h3>
+    <div style="display:inline;">
+        <h3 style="margin-top: 20px;">{{ job.position.name }}</h3>
+    </div>
+    <p style="margin-top: 20px; margin-bottom: 20px" > Estámos a recrutar um {{ job.position.name }} que terá como principal missão {{ job.position.mission }} para trabalhar em {{ job.position.workplace.name }}</p>
+</div>
+<main>
+    <div class="container">
+
+        <div class="left">
+            <span style="color:#fff; background-color: #1c80cf;">&nbsp; voltar &nbsp;</span>
+            <div class="sidebar">
+                <a class="menu-item active">
+                    <!--
+                    <span><i class="uil uil-home"></i></span> <h3>{{ job.position.name }}</h3>
+                    -->
+                </a>
+            </div>
+        </div>
+
+        <div class="middle" >
+            <div class="feeds">
+                
+                <h3>Responsabilidades</h3>
+                <div class="feed" *ngFor="let mainResponsibility of job.position.mainResponsibilities">
+                    <p>{{ mainResponsibility.designation }};</p>
+                </div>
+                <h3>Requisitos</h3>
+                <div class="feed" *ngFor="let specificRequirement of job.position.specificRequirements">
+                    <p>{{ specificRequirement.designation }};</p>
+                </div>
+
+                <!--
+                <span style="color:#fff; background-color: #3fb334;">&nbsp; enviar candidatura &nbsp;</span>
+                -->
+                
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="messages">
+                <div class="heading">
+                    <img class="w-5 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />
+                </div>
+                                                                                                                           
+            </div>
+        </div>
+    </div>
+</main> 
+
+<!--
+<div class="container">
+    <div class="col-12">
+        <div href="javascript:;" class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+            <img class="w-5 sm:w-16rem xl:w-5rem shadow-2 block xl:block mx-auto border-round"  alt="" />
+            <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                    <div class="text-1xl font-bold text-700">  
+                        <span style="color: #1c80cf;">{{ job.position.name }}</span>
+                    </div>
+                    <p class="flex align-items-center gap-3" *ngFor="let mainResponsibility of job.position.mainResponsibilities">
+                        <span class="flex align-items-center gap-2">
+                            <li>{{ mainResponsibility.designation }}</li>
+                        </span>                    
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
