@@ -29,15 +29,15 @@ export class JobViewComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
     if (id) {
-      this.getUserById(id);
+      this.findById(id);
     }
   }
 
-  getUserById(id: number) {
+  findById(id: number) {
     this.jobsService.findById(id).subscribe(
       (job: Job) => {
         this.job = job;
-        console.log(this.job.position.name)
+        console.log(this.job.position.name);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);

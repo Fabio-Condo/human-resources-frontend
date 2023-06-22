@@ -1,6 +1,7 @@
 main{
     position: relative;
-    top: 5.4rem;
+    /*top: 5.4rem;*/
+    top: 4.4rem;
 }
 
 input[type="file"] {
@@ -112,7 +113,8 @@ label {
     
     main .container{
         display: grid;
-        grid-template-columns: 18vw auto 20vw;
+        grid-template-columns: 14vw auto 20vw;
+        /*grid-template-columns: 18vw auto 20vw;*/
         gap: 2rem;
         position: relative;
     }
@@ -281,33 +283,6 @@ label {
     .middle .stories .story .name{
         z-index: 2;
     }
-    
-    /*
-    .middle .stories .story:nth-child(1){
-        background: url('images/story-1.jpg');
-        no-repeat  center/cover;
-    }
-    .middle .stories .story:nth-child(2){
-        background: url('images/story-2.jpg');
-        no-repeat center center/cover;
-    }
-    .middle .stories .story:nth-child(3){
-        background: url('images/story-3.jpg');
-        no-repeat center center/cover;
-    }
-    .middle .stories .story:nth-child(4){
-        background: url('images/story-4.jpg');
-        no-repeat center center/cover;
-    }
-    .middle .stories .story:nth-child(5){
-        background: url('images/story-5.jpg');
-        no-repeat center center/cover;
-    }
-    .middle .stories .story:nth-child(6){
-        background: url('images/story-6.jpg');
-        no-repeat center center/cover;
-    }
-    */
     
     .middle .story .profile-pic{
         width: 2rem;
