@@ -13,6 +13,24 @@ const routes: Routes = [
       path: 'v1/users', 
       component: UsersComponent,
     }
+
+    /*
+    { 
+      path: 'users', 
+      component: UserSearchComponent,
+      canActivate: [AuthenticationGuard],
+    },
+    { 
+      path: 'user/profile', 
+      component: UserProfileComponent,
+      canActivate: [AuthenticationGuard],
+    },
+    { 
+      path: 'user/profile/:username', 
+      component: UserProfileViewComponent,
+      canActivate: [AuthenticationGuard],
+    }
+    */
 ];
 
 @NgModule({

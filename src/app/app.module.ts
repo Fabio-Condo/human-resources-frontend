@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +40,13 @@ import { UsersModule } from './users/users.module';
 import { UserProfileRoutingModule } from './users/users-routing.module';
 import { JobsModule } from './jobs/jobs.module';
 import { JobsRoutingModule } from './jobs/jobs-routing.module';
+import { SecurityRoutingModule } from './security/security-routing.module';
+import { SecurityModule } from './security/security.module';
+import { AuthenticationService } from './users/authentication.service';
+import { AuthenticationGuard } from './guard/authentication.guard';
+import { UserService } from './users/user.service';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,6 +75,7 @@ import { JobsRoutingModule } from './jobs/jobs-routing.module';
     PayrollsRoutingModule,
     UserProfileRoutingModule,
     JobsRoutingModule,
+    SecurityRoutingModule,
     DepartmentModule,
     WorkplacesModule,
     SkillsModule,
@@ -83,13 +91,25 @@ import { JobsRoutingModule } from './jobs/jobs-routing.module';
     PayrollsModule,
     UsersModule,
     JobsModule,
+    SecurityModule,
 
     CoreModule
   ],
   providers: [
-    MessageService,
-    ConfirmationService,
+    ConfirmationService, 
+    MessageService, 
+    AuthenticationGuard,
+    AuthenticationService,   
+    UserService,
+    JwtHelperService,
     DatePipe,
+    //{ provide: LOCALE_ID, useValue: 'fr' },
+    //{ provide: LOCALE_ID, useValue: 'pt-MZ' },
+    //{ provide: LOCALE_ID, useValue: 'pt-US' },
+    { provide:  JWT_OPTIONS, useValue: JWT_OPTIONS} ,
+    
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, 
+
   ],
   bootstrap: [AppComponent]
 })

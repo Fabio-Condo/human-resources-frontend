@@ -1,0 +1,100 @@
+<!--Login-->
+<div class="container" style="max-width: 300px; margin: auto;" *ngIf="isLogin">
+  
+    <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+      <div class="p-grid" style="margin-top: 60px;">
+  
+        <div class="col-12 p-fluid" class="text-center">
+          <!--
+          <img height="20" width="60" src="{{imagePath}}" class="rounded-circle img-fluid img-thumbnail" alt="" />
+          -->
+          <h3 >LOGIN</h3>
+        </div>
+  
+        <div class="col-12 p-fluid">
+            <input pInputText type="text" class="form-control" name="username" placeholder="Username" ngModel
+                #usernameInput="ngModel" required>
+            <span class="help-block" style="color:red;"
+                *ngIf="usernameInput.invalid && usernameInput.touched">Type the username</span>
+        </div>
+  
+        <div class="col-12 p-fluid">
+          <input pInputText type="password" class="form-control" name="password" placeholder="Password"ngModel
+            #passwordInput="ngModel" required>
+          <span class="help-block" style="color:red;"
+            *ngIf="passwordInput.invalid && passwordInput.touched">Type the password.</span>
+        </div>
+  
+        <div class="col-12 p-fluid">
+          <!--<button pButton type="submit" label="Login"></button>-->
+
+          <button pButton type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn" style="background-color: #6662cf; border: none;">
+            <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+            <span *ngIf="showLoading">Loading...</span> 
+            <span *ngIf="!showLoading">Login</span>      
+          </button>
+        </div>
+        <div class="col-12 p-fluid text-center">
+          <span>Don't have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #6662cf;" (click)="isLogin = !isLogin">&nbsp;&nbsp;Sign Up</a></span>
+        </div>
+        
+      </div>
+    </form>
+  
+  </div>
+
+  <!--Register-->
+  <div class="container" style="max-width: 300px; margin: auto;" *ngIf="!isLogin">
+  
+    <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+      <div class="p-grid" style="margin-top: 60px;">
+  
+        <div class="col-12 p-fluid" class="text-center">
+          <h3 >REGISTER</h3>
+        </div>
+  
+        <div class="col-12 p-fluid">
+            <input pInputText type="text" class="form-control" name="firstName" placeholder="First name" ngModel
+                #firstNameInput="ngModel" required>
+            <span class="help-block" style="color:red;"
+                *ngIf="firstNameInput.invalid && firstNameInput.touched">Please enter a first name</span>
+        </div>
+  
+        <div class="col-12 p-fluid">
+          <input pInputText type="text" class="form-control" name="lastName" placeholder="Last name"ngModel
+            #lastNameInput="ngModel" required>
+          <span class="help-block" style="color:red;"
+            *ngIf="lastNameInput.invalid && lastNameInput.touched">Type last name.</span>
+        </div>
+
+        <div class="col-12 p-fluid">
+          <input pInputText type="text" class="form-control" name="username" placeholder="Username"ngModel
+            #usernameInput="ngModel" required>
+          <span class="help-block" style="color:red;"
+            *ngIf="usernameInput.invalid && usernameInput.touched">Type the password.</span>
+        </div>
+
+        <div class="col-12 p-fluid">
+          <input pInputText type="text" class="form-control" name="email" placeholder="Email"ngModel
+            #emailInput="ngModel" required>
+          <span class="help-block" style="color:red;"
+            *ngIf="emailInput.invalid && emailInput.touched">Type the password.</span>
+        </div>
+  
+        <div class="col-12 p-fluid">
+          <button pButton type="submit" [disabled]="registerForm.invalid || showLoading" name="button" class="btn login_btn" style="background-color: #6662cf; border: none;">
+            <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+            <span *ngIf="showLoading">Loading...</span> 
+            <span *ngIf="!showLoading">Register</span>      
+          </button>
+        </div>
+        <div class="col-12 p-fluid text-center">
+          <span>Already have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #6662cf;" (click)="isLogin = !isLogin">&nbsp;&nbsp;Log In</a></span>
+        </div>
+        
+      </div>
+    </form>
+  
+  </div>
+
+  

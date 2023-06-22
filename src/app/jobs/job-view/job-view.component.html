@@ -4,7 +4,10 @@
   href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
 />
 <div class="container">
-    <h3 style="color:#fff; background-color: #32aa27; display:inline; float: right;" >&nbsp; candidatar-se &nbsp;</h3>
+    <a href="javascript:;" tooltipPosition="top" (click)="onApply()">
+        <h3 style="color:#fff; background-color: #32aa27; display:inline; float: right;" >&nbsp; candidatar-se &nbsp;</h3>
+    </a>
+
     <div style="display:inline;">
         <h3 style="margin-top: 20px;">{{ job.position.name }}</h3>
     </div>
@@ -14,7 +17,9 @@
     <div class="container">
 
         <div class="left">
-            <span style="color:#fff; background-color: #1c80cf;">&nbsp; voltar &nbsp;</span>
+            <a href="javascript:;" tooltipPosition="top" routerLink="/v1/jobs-page">
+                <span style="color:#fff; background-color: #1c80cf;">&nbsp; voltar &nbsp;</span>
+            </a>
             <div class="sidebar">
                 <a class="menu-item active">
                     <!--

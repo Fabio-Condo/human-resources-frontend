@@ -5,6 +5,7 @@ import { Job } from 'src/app/core/model/Job';
 import { JobsService } from '../jobs.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/users/authentication.service';
 
 @Component({
   selector: 'app-job-view',
@@ -20,6 +21,7 @@ export class JobViewComponent implements OnInit {
 
   constructor(
     private jobsService: JobsService,
+    private authenticationService: AuthenticationService, 
     private messageService: MessageService,
     private title: Title,
     private route: ActivatedRoute,
@@ -34,7 +36,7 @@ export class JobViewComponent implements OnInit {
   }
 
   findById(id: number) {
-    this.jobsService.findById(id).subscribe(
+    this.jobsService.findByIdForView(id).subscribe(
       (job: Job) => {
         this.job = job;
         console.log(this.job.position.name);
@@ -44,6 +46,15 @@ export class JobViewComponent implements OnInit {
         this.showLoading = false;
       }
     );
+  }
+
+  onApply(){
+    if (this.authenticationService.isUserLoggedIn()) { 
+      console.log("Implentar a candidatura")
+      this.messageService.add({ severity: 'success', detail: 'Applied successfully!' });
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   private sendErrorNotification(message: string): void {

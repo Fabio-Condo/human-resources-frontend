@@ -56,7 +56,7 @@ export class JobsPageComponent implements OnInit {
   filterJobs(page: number = 0): void {
     this.showLoading = true;
     this.filter.page++;
-    this.jobsService.findAll(this.filter).subscribe(
+    this.jobsService.findAllForView(this.filter).subscribe(
       (data: IApiResponse<IJob>) => {
         this.jobs = [...this.jobs, ...data.content];
         this.totalRecords = data.totalElements;

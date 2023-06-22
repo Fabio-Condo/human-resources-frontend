@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MegaMenuItem } from 'primeng/api';
+import { AuthenticationService } from 'src/app/users/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,8 @@ import { MegaMenuItem } from 'primeng/api';
 })
 export class NavbarComponent implements OnInit {
 
+    isUserLoggedIn: boolean = false;
+
   imagePath = './assets/meta.jpg'
 
   showMenu: boolean = false;
@@ -16,14 +19,16 @@ export class NavbarComponent implements OnInit {
   items!: MegaMenuItem[];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService, 
   ) { }
 
   //ngOnInit(): void {
   //}
 
   ngOnInit() {
-    this.menuItems()
+    this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
+    this.menuItems();
   }
 
   isActive(url: string): boolean {
