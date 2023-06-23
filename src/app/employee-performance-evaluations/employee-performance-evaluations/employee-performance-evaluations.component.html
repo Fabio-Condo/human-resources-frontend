@@ -75,8 +75,8 @@
                     name="strategicThought" #strategicThought ngModel [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Comentário / Recomendações do avaliador</label>
-                <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement" minlength="10" placeholder="Introduza as coordenadas"></textarea>
+                <label>Comentário do avaliador</label>
+                <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement" minlength="10" placeholder="Sem comments"></textarea>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
                 <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">
@@ -192,8 +192,8 @@
             </li>
 
             <br>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário / Recomendações do avaliador</span>: </i></li>
-            <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement" minlength="10" placeholder="Introduza as coordenadas"></textarea>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário do avaliador</span>: </i></li>
+            <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement" minlength="10" placeholder="Sem comments"></textarea>
         </div>
 
     </div> 

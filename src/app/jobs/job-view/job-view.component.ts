@@ -6,6 +6,7 @@ import { JobsService } from '../jobs.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/users/authentication.service';
+import { User } from 'src/app/core/model/User';
 
 @Component({
   selector: 'app-job-view',
@@ -13,6 +14,8 @@ import { AuthenticationService } from 'src/app/users/authentication.service';
   styleUrls: ['./job-view.component.css']
 })
 export class JobViewComponent implements OnInit {
+
+  user: User = new User; 
 
   imagePath = './assets/meta.jpg'
 
@@ -29,17 +32,30 @@ export class JobViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.user = this.authenticationService.getUserFromLocalCache();
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.findById(id);
     }
   }
 
+  isCandidated() {  // Not used yet
+    /*
+    this.user.jobs.forEach((job) => {
+      if(this.job.id == job.id){
+        console.log(true);
+      }else{
+        console.log(false);
+      }
+    });
+    */
+  }
+
   findById(id: number) {
     this.jobsService.findByIdForView(id).subscribe(
       (job: Job) => {
         this.job = job;
-        console.log(this.job.position.name);
+        this.isCandidated();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -50,11 +66,34 @@ export class JobViewComponent implements OnInit {
 
   onApply(){
     if (this.authenticationService.isUserLoggedIn()) { 
-      console.log("Implentar a candidatura")
-      this.messageService.add({ severity: 'success', detail: 'Applied successfully!' });
+      this.addCandidateToJob(this.job.id);
     } else {
       this.router.navigateByUrl('/login');
     }
+  }
+
+  addCandidateToJob(jobId: number) {
+    this.jobsService.addCandidateToJob(this.user.id, jobId).subscribe(
+      (job) => {
+        this.job = job;
+        this.messageService.add({ severity: 'success', detail: 'Candidate added successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+      }
+    )
+  }
+
+  removeCandidateFromJob(jobId: number) { // Dont use, we will not remove, but only add
+    this.jobsService.removeCandidateFromJob(this.user.id, jobId).subscribe(
+      (job) => {
+        this.job = job;
+        this.messageService.add({ severity: 'success', detail: 'Candidate removed successfully!' });
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+      }
+    )
   }
 
   private sendErrorNotification(message: string): void {

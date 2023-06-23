@@ -61,4 +61,12 @@ export class JobsService {
     return this.http.get<IJob>(`${this.jobsUrl}/view/${id}`, { });
   }
 
+  addCandidateToJob(candidateId: number, jobId: number): Observable<IJob> {
+    return this.http.post<IJob>(`${this.jobsUrl}/${jobId}/candidates/${candidateId}`, { });
+  }
+
+  removeCandidateFromJob(candidateId: number, jobId: number): Observable<IJob> {
+    return this.http.put<IJob>(`${this.jobsUrl}/${jobId}/candidates/${candidateId}`, { });
+  }
+
 }

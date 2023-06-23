@@ -1,3 +1,5 @@
+import { User } from "../model/User";
+import { IEmployee } from "./IEmployee";
 import { IPosition } from "./IPosition";
 
 export interface IJob {
@@ -5,4 +7,5 @@ export interface IJob {
     publicationDate: Date;
     expirationDate: Date; 
     position: IPosition,
+    candidates: User[];
 }

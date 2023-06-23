@@ -6,6 +6,8 @@ import { IJobFilter } from 'src/app/core/interfaces/IJobFilter';
 import { JobsService } from '../jobs.service';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
 import { HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/core/model/User';
+import { AuthenticationService } from 'src/app/users/authentication.service';
 
 @Component({
   selector: 'app-jobs-page',
@@ -15,7 +17,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class JobsPageComponent implements OnInit {
 
   imagePath = './assets/meta.jpg'
-  
 
   showLoading: boolean = false;
 

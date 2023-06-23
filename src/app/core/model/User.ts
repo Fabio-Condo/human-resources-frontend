@@ -1,3 +1,4 @@
+import { Job } from "./Job";
 
 
 export class User {
@@ -15,6 +16,7 @@ export class User {
     public notLocked: boolean;
     public role: string;
     public authorities: [];
+    public jobs: Job[];
 
   
     constructor() {
@@ -33,6 +35,7 @@ export class User {
       this.notLocked = false;
       this.role = '';
       this.authorities = [];
+      this.jobs = [];
     }
   
   }
