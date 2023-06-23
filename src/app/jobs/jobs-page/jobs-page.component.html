@@ -1,7 +1,19 @@
 
 
 <div class="container">
-    <h3>Vagas</h3>
+    <h3 >Vagas</h3>
+    <!--
+    <div  style="display:inline; float: right;">   
+        <span class="p-input-icon-left">
+           <i class="pi pi-search"></i>
+           <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterJobs()"/>
+        </span>      
+    </div>
+    <div style="display:inline;">
+        <h3 >Vagas</h3>
+    </div>
+    br
+    -->
 
     <p-dataView 
         #dv [value]="jobs"

@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { JobsComponent } from './jobs/jobs.component';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
 import { JobViewComponent } from './job-view/job-view.component';
+import { AuthenticationGuard } from '../guard/authentication.guard';
 
 
 const routes: Routes = [
     { 
       path: 'v1/jobs', 
       component: JobsComponent,
+      canActivate: [AuthenticationGuard]
     },
     { 
       path: 'v1/jobs-page', 

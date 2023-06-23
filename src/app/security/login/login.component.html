@@ -37,10 +37,15 @@
         <div class="col-12 p-fluid text-center">
           <span>Don't have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" (click)="isLogin = !isLogin">&nbsp;&nbsp;Sign Up</a></span>
         </div>
-        
       </div>
     </form>
-  
+
+    <div class="col-12 p-fluid">
+      <button pButton routerLink="/v1/jobs-page" name="button" class="btn login_btn" style="background-color: #1c80cf; border: none;">
+          Voltar para vagas     
+      </button>
+    </div>
+
   </div>
 
   <!--Register-->
@@ -82,7 +87,7 @@
         </div>
   
         <div class="col-12 p-fluid">
-          <button pButton type="submit" [disabled]="registerForm.invalid || showLoading" name="button" class="btn login_btn" style="background-color: #6662cf; border: none;">
+          <button pButton type="submit" [disabled]="registerForm.invalid || showLoading" name="button" class="btn login_btn" style="background-color: #1c80cf; border: none;">
             <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
             <span *ngIf="showLoading">Loading...</span> 
             <span *ngIf="!showLoading">Register</span>      

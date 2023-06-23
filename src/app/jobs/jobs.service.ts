@@ -35,6 +35,10 @@ export class JobsService {
       .set('sort', filter.sort)
       .set('size', filter.itemsPerPage); 
 
+    if (filter.name) { 
+      params = params.set('name', filter.name); 
+    }
+
       console.log(params);
 
     return this.http.get<IApiResponse<IJob>>(`${this.jobsUrl}/view`, { params });

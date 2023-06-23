@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LoginComponent } from './login/login.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ButtonModule,
     ProgressSpinnerModule,
     DropdownModule,
+    RouterModule,
    
   ]
 })
