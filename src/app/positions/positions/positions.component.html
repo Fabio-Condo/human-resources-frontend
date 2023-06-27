@@ -88,8 +88,11 @@
         <div class="formgrid grid">
         
             <!--Main Responsibilities-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6;">
-                <label>Pricipais Responsibilidades | </label> <span (click)="openAddNewMainResponsabilityModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
+                <label>Pricipais Responsibilidades </label> 
+                <a href="javascript:;" (click)="openAddNewMainResponsabilityModal()">
+                  <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="position.mainResponsibilities" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -101,10 +104,10 @@
                       <td>{{ mr.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span (click)="getReadEditintMainResponsability(mr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeMainResponsability(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                          <a href="javascript:;" (click)="getReadEditintMainResponsability(mr, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                          <a style="margin-left: 3px;" href="javascript:;" (click)="removeMainResponsability(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                         </span>
-                        </td>
+                      </td>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="emptymessage">
@@ -119,8 +122,11 @@
             </div> 
 
             <!--Specific Requirements-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Requisitos especificos exigidos | </label> <span (click)="openAddNewSpecificRequirementModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <label>Requisitos especificos exigidos </label> 
+                <a href="javascript:;" (click)="openAddNewSpecificRequirementModal()">
+                  <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="position.specificRequirements" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -132,8 +138,8 @@
                       <td>{{ sr.designation }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span (click)="getReadEditSpecificRequirement(sr, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeSpecificRequirement(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                          <a href="javascript:;" (click)="getReadEditSpecificRequirement(sr, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                          <a style="margin-left: 3px;" href="javascript:;" (click)="removeSpecificRequirement(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                         </span>
                       </td>
                     </tr>
@@ -150,8 +156,11 @@
             </div> 
             
             <!--Benefits-->
-            <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
-              <label>Beneficios | </label> <span (click)="openAddNewBenefitModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
+              <label>Beneficios </label>
+                <a href="javascript:;" (click)="openAddNewBenefitModal()">
+                  <p-tag [severity]="'success'">add +</p-tag>
+                </a>
               <p-table [value]="position.benefits" [responsive]="true" 
                   styleClass="p-datatable-sm" #tabela >
                 <ng-template pTemplate="header">
@@ -163,8 +172,8 @@
                     <td>{{ b.designation }}</td>
                     <td class="col-acoes">
                       <span class="p-buttonset">
-                        <span (click)="getReadBenefit(b, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                        <span (click)="removeBenefit(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                        <a href="javascript:;" (click)="getReadBenefit(b, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                        <a style="margin-left: 3px;" href="javascript:;" (click)="removeBenefit(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                       </span>
                     </td>                     
                   </tr>       
@@ -260,7 +269,7 @@
           </div>
 
           <!--Main Responsibilities-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6;">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
             <label>Pricipais Responsibilidades </label>
             <p-table [value]="selectedPositionModal.mainResponsibilities" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -285,7 +294,7 @@
           </div> 
 
           <!--Specific Requirements-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Requisitos especificos exigidos</label>
             <p-table [value]="selectedPositionModal.specificRequirements" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -310,7 +319,7 @@
           </div>  
 
           <!--Benefits-->
-          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
+          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
             <label>Beneficios</label>
             <p-table [value]="selectedPositionModal.benefits" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -337,7 +346,7 @@
           </div> 
           
           <!--Employees-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Funcionários com este cargo</label> <span *ngIf="selectedPositionModal.employees.length != 0"> [{{selectedPositionModal.employees.length}}]</span>
             <p-table [value]="selectedPositionModal.employees" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >

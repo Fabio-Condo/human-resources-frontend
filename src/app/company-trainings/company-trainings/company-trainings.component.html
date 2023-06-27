@@ -47,7 +47,7 @@
         </div>
 
         <!--Goals-->
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Objectivos</label> 
             <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela>
@@ -71,7 +71,7 @@
             <br> 
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label >Membros envolvidos</label>
             <p-table [value]="selectedCompanyTrainingModal.employees" selectionMode="single" [responsive]="true" 
                  styleClass="p-datatable-sm" #tabela >
@@ -127,8 +127,11 @@
                 ngModel #duration="ngModel" required minlength="1" [(ngModel)]="companyTraining.duration">  
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaaddEmployeeToTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <label >Membros envolvidos </label> 
+                <a href="javascript:;" (click)="onaaddEmployeeToTraining()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="companyTraining.employees" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -150,7 +153,7 @@
                         <td>{{ employee.position.name }}</td>
                         <td class="col-acoes">
                             <span class="p-buttonset">
-                            <span ><a href="javascript:;" (click)="removeEmployeeFromTrainingConfirm(employee.id)" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeEmployeeFromTrainingConfirm(employee.id)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                             </span>
                         </td> 
                     </tr>

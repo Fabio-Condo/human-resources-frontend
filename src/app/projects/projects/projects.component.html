@@ -65,8 +65,11 @@
                     name="projectStatus" #projectStatus ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label >Membros envolvidos</label> <span *ngIf="editing" (click)="onaddEmployeeToProject()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <label >Membros envolvidos </label> 
+                <a href="javascript:;" (click)="onaddEmployeeToProject()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="project.team" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -82,7 +85,7 @@
                         <td>{{ employee.position.name }}</td>
                         <td class="col-acoes">
                             <span class="p-buttonset">
-                            <span ><a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                                <a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)"><p-tag [severity]="'danger'">remove</p-tag></a>
                             </span>
                         </td> 
                     </tr>
@@ -209,7 +212,7 @@
             </li>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label >Membros envolvidos</label>
             <p-table [value]="selectedProjectModal.team" selectionMode="single" [responsive]="true" 
                  styleClass="p-datatable-sm" #tabela >

@@ -122,27 +122,12 @@
         </div>
 
         <div class="formgrid grid">
-
-
-            <!--
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Endereço fisico</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="physicalAddress"
-                ngModel #physicalAddress="ngModel" required minlength="1" [(ngModel)]="employee.physicalAddress">  
-            </div>
-            -->
-            <!--
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <label>Departamento</label>    
-                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                    [filter]="true" [options]="departments" [(ngModel)]="employee.department.id" name="department"
-                    #department="ngModel" [required]=true>
-                </p-dropdown>
-            </div>
-            -->
             
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Contactos</label> <span (click)="getReadyNewContact()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Contactos </label> 
+                <a href="javascript:;" (click)="getReadyNewContact()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="employee.contacts" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -158,8 +143,8 @@
                       <td>{{ contact.name }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span (click)="getReadyContactEdit(contact, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                          <span (click)="removeContact(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                            <a style="margin-left: 3px;" href="javascript:;" (click)="removeContact(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                         </span>
                       </td> 
                     </tr>
@@ -176,7 +161,10 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label >Educação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label >Educação </label> 
+                <a href="javascript:;" (click)="getReadyNewTraining()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -194,8 +182,10 @@
                       <td>{{ training.end | date:'MMMM, y'}}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                          <span (click)="getReadyTrainingEdit(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                          <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                            <span class="p-buttonset">
+                                <a href="javascript:;" (click)="getReadyTrainingEdit(training, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
+                            </span>
                         </span>
                       </td>  
                     </tr>
@@ -213,7 +203,10 @@
 
             <!--Skills-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Habilidades</label> <span (click)="getReadyNewSkill()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+                <label>Habilidades </label> 
+                <a href="javascript:;" (click)="getReadyNewSkill()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="employee.skills" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -225,8 +218,8 @@
                           <td>{{ skill.name }}</td>
                           <td class="col-acoes">
                             <span class="p-buttonset">
-                              <span (click)="getReadySkillEdit(skill, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                              <span (click)="removeSkill(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                                <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeSkill(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                             </span>
                         </tr>
                     </ng-template>

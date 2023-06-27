@@ -67,8 +67,11 @@
             </div> 
             
             <!--Goals-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Objectivos</label> <span (click)="getReadyNewGoal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <label>Objectivos </label> 
+                <a href="javascript:;" (click)="getReadyNewGoal()">
+                    <p-tag [severity]="'success'">add +</p-tag>
+                </a>
                 <p-table [value]="trainingType.companyTrainingTypeGoals" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -80,8 +83,8 @@
                           <td>{{ goal.designation }}</td>
                           <td class="col-acoes">
                             <span class="p-buttonset">
-                                <span (click)="getReadyGoalEdit(goal, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                                <span (click)="removeGoal(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
+                                <a href="javascript:;" (click)="getReadyGoalEdit(goal, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeGoal(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                             </span>
                         </tr>
                     </ng-template>
@@ -118,7 +121,7 @@
         </div> 
 
         <!--Goals-->
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Objectivos</label>
             <p-table [value]="selectedTrainingTypeModal.companyTrainingTypeGoals" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela>

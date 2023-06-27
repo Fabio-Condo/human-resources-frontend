@@ -6,7 +6,7 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-                <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus" style="background-color: #1c80cf; border-style: none;" ></button>
+                <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus" ></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
@@ -138,7 +138,7 @@
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 8%;">
-          <button pButton type="submit" [disabled]="newUserForm.invalid" class="p-button-sm" style="height: 30px; background-color: #1c80cf; border: none;">
+          <button pButton type="submit" [disabled]="newUserForm.invalid" class="p-button-sm" style="height: 30px;">
             <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
             <span *ngIf="showLoading">Loading...</span>
             <!--<span *ngIf="!showLoading">{{ 'Save' }}</span>--> 
@@ -164,7 +164,7 @@
     </div>
 
     <div class="col-12 p-fluid">
-      <button pButton type="submit" [disabled]="resetPasswordForm.invalid" class="btn btn-primary" style="height: 30px; background-color: #1c80cf;">
+      <button pButton type="submit" [disabled]="resetPasswordForm.invalid" class="btn btn-primary" style="height: 30px;">
         <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
         <span *ngIf="showLoading">Loading...</span>
         <span *ngIf="!showLoading">Reset Password</span>
