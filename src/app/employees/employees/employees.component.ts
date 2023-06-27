@@ -426,6 +426,16 @@ export class EmployeesComponent implements OnInit {
     this.displayModal = true;
   }
 
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return 'primmary';
+      case false:
+        return 'danger';
+    }
+    return '';
+  }
+
   getProjectStatus(status: string) {
     switch (status) {
       case 'IN_PROGRESS':

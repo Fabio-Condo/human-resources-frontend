@@ -40,20 +40,4 @@ export class User {
   
   }
 
-
-  export class UserChangePass {
-
-    public currentPass: string;
-    public newPass: string;
-    public newPassConfirmation: string;
-  
-    constructor() {
-
-      this.currentPass = '';
-      this.newPass = '';
-      this.newPassConfirmation = '';
-
-    }
-  
-  }
   

@@ -1,12 +1,15 @@
 <div class="container">
     <div class="card">
-      <h3>Difinições da conta</h3>
+      <button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>
+      <div style="display:inline;">
+        <h3 style="margin-top: 20px;">Difinições da conta</h3>
+      </div>
       <div class="formgrid grid">
   
         <div  class="field col-12 md:col-3">
 
-            <h5 style="background-color: blue; padding: 0%;">aaaaaaaaaaaaa</h5>
-            <h5 style="background-color: aqua;">aaaaaaaaaaaaa</h5>
+            <h5 style="background-color: whitesmoke; padding: 0%;">aaaaaaaaaaaaa</h5>
+            <h5 style="background-color: whitesmoke;">aaaaaaaaaaaaa</h5>
             <h5>aaaaaaaaaaaaa</h5>
             <h5>aaaaaaaaaaaaa</h5>
             <h5>aaaaaaaaaaaaa</h5>
@@ -40,39 +43,43 @@
         </div>
   
         <div style="background-color: #fff;" class="field col-12 md:col-9">
-            <div class="formgrid grid">
-                <div class="field col-12 md:col-6">
-                    <div class="col-12 p-fluid">
-                        <label>Primeiro Nome</label>
-                        <input pInputText class="p-inputtext-sm" type="text" name="name"
-                        ngModel #name="ngModel" required minlength="1">  
+            <form #profileUserForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)" class="form" novalidate>
+                
+                <div class="formgrid grid">
+                    <div class="field col-12 md:col-6">
+                        <div class="col-12 p-fluid">
+                            <label>Primeiro Nome</label>
+                            <input pInputText class="p-inputtext-sm" type="text" name="firstName"
+                            ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
+                        </div>
+                        <div class="col-12 p-fluid" style="margin-top: 2%;">
+                            <label>Email</label>
+                            <input pInputText class="p-inputtext-sm" type="text" name="email"
+                            ngModel #email="ngModel" required minlength="1"[(ngModel)]="user.email" >  
+                        </div>
                     </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                        <label>Email</label>
-                        <input pInputText class="p-inputtext-sm" type="text" name="email"
-                        ngModel #email="ngModel" required minlength="1">  
+                    <div class="field col-12 md:col-6">
+                        <div class="col-12 p-fluid">
+                            <label>Último Nome</label>
+                            <input pInputText class="p-inputtext-sm" type="text" name="lastName"
+                            ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
+                        </div>
+                        <div class="col-12 p-fluid" style="margin-top: 2%;">
+                            <label>Número de Telefone</label>
+                            <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber"
+                            ngModel #phoneNumber="ngModel" required minlength="1">  
+                        </div>
                     </div>
                 </div>
-                <div class="field col-12 md:col-6">
-                    <div class="col-12 p-fluid">
-                        <label>Último Nome</label>
-                        <input pInputText class="p-inputtext-sm" type="text" name="name"
-                        ngModel #name="ngModel" required minlength="1">  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                        <label>Número de Telefone</label>
-                        <input pInputText class="p-inputtext-sm" type="text" name="email"
-                        ngModel #email="ngModel" required minlength="1">  
-                    </div>
+                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                    <label>Bio</label>
+                    <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="coordinates" minlength="10" placeholder="Bio"></textarea>
                 </div>
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Bio</label>
-                <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="coordinates" minlength="10" placeholder="Bio"></textarea>
-            </div>
+                <div class="col-12" style="margin-top: 2px;">
+                    <button pButton (click)="onLogOut()" pRipple label="save" icon="pi pi-save" class="p-button-primmary mr-2" ></button>
+                </div>
 
-            <button pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-  
+            </form>
         </div>
     </div>
 </div>

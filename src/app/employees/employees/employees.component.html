@@ -14,7 +14,7 @@
                 <th>Nome</th>
                 <th>Cargo</th>
                 <th>Departamento</th>
-                <th>Status</th>
+                <th>Active?</th>
                 <th>Ações</th>       
             </tr>
         </ng-template>
@@ -23,10 +23,17 @@
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
-                <td>
+                <!--
+                <td>                  
                     <a href="javascript:;" [pTooltip]="employee.status ? 'Desativar' : 'Ativar'" tooltipPosition="top" (click)="changeStatus(employee)">
                         <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; ativo &nbsp;&nbsp;</span>
                         <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inativo &nbsp;</span>
+                    </a>  
+                </td>
+                -->
+                <td>
+                    <a href="javascript:;" (click)="changeStatus(employee)" [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">
+                        <p-tag [value]="employee.status" [severity]="getStatus(employee.status)"></p-tag>
                     </a>
                 </td>
                 <td style="width: 180px;">
@@ -235,7 +242,7 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm" style="height: 30px;">
+                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm p-button-success" class="" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      

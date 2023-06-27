@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs'; 
-import { User, UserChangePass } from 'src/app/core/model/User';
+import { User } from 'src/app/core/model/User';
 import { CustomHttpRespone } from '../core/interfaces/CustomHttpRespone';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IUserFilter } from '../core/interfaces/IUserFilter';
@@ -116,14 +116,6 @@ export class UserService {
 
   changeStatusIsFirstLogin(username: string): Observable<void> {
     return this.http.put<void>(`${this.host}/${username}/first-login-user`, { });
-  }
-
-  public createUserFormDateChangePass(userChangePass: UserChangePass): FormData {  
-    const formData = new FormData();
-    formData.append('currentPass', userChangePass.currentPass);
-    formData.append('newPass', userChangePass.newPass);
-    formData.append('newPassConfirmation', userChangePass.newPassConfirmation);
-    return formData;
   }
   
   getUserById(username: string): Observable<User>{
