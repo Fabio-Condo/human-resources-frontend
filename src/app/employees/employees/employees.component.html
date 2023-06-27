@@ -6,7 +6,7 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -28,13 +28,9 @@
                         <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; ativo &nbsp;&nbsp;</span>
                         <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inativo &nbsp;</span>
                     </a>
-                    <!--
-                    <span *ngIf="employee.status" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; Activo &nbsp;</span>
-                    <span *ngIf="!employee.status" style="color:#982F27; background-color: whitesmoke; border-radius: 4%;">&nbsp; Inactivo &nbsp;</span>
-                    -->
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="View" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -323,13 +319,7 @@
                         <tr>
                             <td>{{ project.name }}</td>
                             <td>
-                                <span *ngIf="project.projectStatus==='APPROVED'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='CANCELED'" style="color:#fff; background-color: #e96969; border-radius: 4%;">&nbsp; cancelado &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='CONCLUDED'" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; concluído &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
-                                <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                                <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
                             </td>
                         </tr>
                     </ng-template>
@@ -521,8 +511,7 @@
                             <span *ngIf="epe.strategicThought==='FIVE'"> 5 </span>
                         </td>
                         <td>
-                            <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; mensal &nbsp;</span>
-                            <span *ngIf="epe.category==='YEARLY'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%;">&nbsp; anual &nbsp; &nbsp;</span>
+                            <p-tag [value]="epe.category" [severity]="getPerfomanceEvaluationStatus(epe.category)"></p-tag>
                         </td>
                         <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                         </tr>
@@ -555,9 +544,7 @@
                             <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                             <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                             <td>
-                                <span *ngIf="vocation.vocationStatus==='APPROVED'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-                                <span *ngIf="vocation.vocationStatus==='REJECTED'" style="color:#e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; rejeitado &nbsp;</span>
-                                <span *ngIf="vocation.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+                                <p-tag [value]="vocation.vocationStatus" [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
                             </td>
                         </tr>
                     </ng-template>

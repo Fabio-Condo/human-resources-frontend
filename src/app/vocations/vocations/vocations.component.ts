@@ -243,6 +243,18 @@ export class VocationsComponent implements OnInit {
     this.getVocations(page);
   }
 
+  getVocationStatus(status: string) {
+    switch (status) {
+      case 'PENDING':
+        return 'primmary';
+      case 'APPROVED':
+        return 'success';
+      case 'REJECTED':
+        return 'danger'; 
+    }
+    return '';
+  }
+
   private convertStringsToDates(vocations: any[]) {
     for (const vocation of vocations) {
       vocation.beginDate = new Date(vocation.beginDate);

@@ -32,7 +32,7 @@
                 <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ job.expirationDate | date: 'dd/MM/yyyy'}}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Editar" (click)="onEditJob(job)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(job)" pTooltip="Eliminar" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>

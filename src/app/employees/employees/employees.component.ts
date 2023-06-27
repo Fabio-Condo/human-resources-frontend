@@ -426,6 +426,46 @@ export class EmployeesComponent implements OnInit {
     this.displayModal = true;
   }
 
+  getProjectStatus(status: string) {
+    switch (status) {
+      case 'IN_PROGRESS':
+        return 'primmary';
+      case 'CONCLUDED':
+        return 'success';
+      case 'APPROVED':
+        return 'success'; 
+      case 'PENDING':
+        return 'primmary';
+      case 'CANCELED':
+        return 'danger'; 
+      case 'SUSPENDED':
+        return 'danger'; 
+    }
+    return '';
+  }
+
+  getPerfomanceEvaluationStatus(status: string) {
+    switch (status) {
+      case 'YEARLY':
+        return 'primmary';
+      case 'MONTHLY':
+        return 'success';
+    }
+    return '';
+  }
+
+  getVocationStatus(status: string) {
+    switch (status) {
+      case 'PENDING':
+        return 'primmary';
+      case 'APPROVED':
+        return 'success';
+      case 'REJECTED':
+        return 'danger'; 
+    }
+    return '';
+  }
+
   private convertTrainingStringsToDates(training: any[]) {
     for (const train of training) {
       train.begin = new Date(train.begin);

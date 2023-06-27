@@ -92,8 +92,8 @@ export class ProjectsComponent implements OnInit {
 
   get editing() {
     return Boolean(this.project.id);
-  }   
-
+  }  
+  
   save(projectForm: NgForm) {
     if (this.editing) {
       this.update(projectForm)
@@ -287,6 +287,24 @@ export class ProjectsComponent implements OnInit {
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.filterProjects(page);
+  }
+
+  getProjectStatus(status: string) {
+    switch (status) {
+      case 'IN_PROGRESS':
+        return 'primmary';
+      case 'CONCLUDED':
+        return 'success';
+      case 'APPROVED':
+        return 'success'; 
+      case 'PENDING':
+        return 'primmary';
+      case 'CANCELED':
+        return 'danger'; 
+      case 'SUSPENDED':
+        return 'danger'; 
+    }
+    return '';
   }
 
   private sendErrorNotification(message: string): void {

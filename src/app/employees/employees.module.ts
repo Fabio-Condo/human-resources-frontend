@@ -14,6 +14,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
 import { CalendarModule } from 'primeng/calendar';
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -36,6 +37,7 @@ import { CalendarModule } from 'primeng/calendar';
     DialogModule,
     DividerModule,
     CalendarModule,
+    TagModule,
 
     RouterModule,
     AppRoutingModule

@@ -237,6 +237,16 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.filterEmployeePerformanceEvaluations(page);
   }
 
+  getPerfomanceEvaluationStatus(status: string) {
+    switch (status) {
+      case 'YEARLY':
+        return 'primmary';
+      case 'MONTHLY':
+        return 'success';
+    }
+    return '';
+  }
+
   private sendErrorNotification(message: string): void {
     if (message) {
       this.messageService.add({ severity: 'error', detail: message });

@@ -6,7 +6,7 @@
             <div class="flex">
                 <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length"></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -38,12 +38,10 @@
                 <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <span *ngIf="vocation.vocationStatus==='APPROVED'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-                    <span *ngIf="vocation.vocationStatus==='REJECTED'" style="color:#e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; rejeitado &nbsp;</span>
-                    <span *ngIf="vocation.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+                    <p-tag [value]="vocation.vocationStatus" [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="View" (click)="onSelectVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton  pTooltip="Delete" (click)="deletionConfirm(vocation)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -192,9 +190,7 @@
         </div> 
         <div class="col-12 p-fluid">
             <label>Status</label>: 
-            <span *ngIf="selectedVocationModal.vocationStatus==='APPROVED'" style="color:#63c05a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-            <span *ngIf="selectedVocationModal.vocationStatus==='REJECTED'" style="color:#e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; rejeitado &nbsp;</span>
-            <span *ngIf="selectedVocationModal.vocationStatus==='PENDING'" style="color:#1c80cf; background-color: whitesmoke;; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+            <p-tag [value]="selectedVocationModal.vocationStatus" [severity]="getVocationStatus(selectedVocationModal.vocationStatus)"></p-tag>
         </div> 
         <div class="col-12 p-fluid">
             <label>Inicio</label>: <span> {{selectedVocationModal.beginDate | date: 'dd/MM/yyyy'}}</span> 

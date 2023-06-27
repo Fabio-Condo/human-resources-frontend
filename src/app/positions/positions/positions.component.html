@@ -6,7 +6,7 @@
     <ng-template pTemplate="caption">
       <div class="flex">
           <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-          <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+          <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
     </ng-template>  
     <ng-template pTemplate="header">
@@ -23,7 +23,7 @@
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td style="width: 180px;">
-                <button pButton pTooltip="Visualizar" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                <button pButton pTooltip="Visualizar" (click)="onSelectPosition(position)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                 <button pButton pTooltip="Editar" (click)="onEditPosition(position)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                 <button pButton pTooltip="Eliminar" (click)="deletionConfirm(position)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
               </td>
@@ -270,7 +270,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
                 <tr>
-                  <td>- {{ mr.designation }};</td>
+                  <td>{{ mr.designation }}</td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -295,7 +295,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-sr let-rowIndex="rowIndex">
                 <tr>
-                  <td>- {{ sr.designation }};</td>
+                  <td>{{ sr.designation }}</td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -320,7 +320,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-b let-rowIndex="rowIndex">
                 <tr>
-                  <td>- {{ b.designation }};</td>                    
+                  <td>{{ b.designation }}</td>                    
                 </tr>       
                 
               </ng-template>

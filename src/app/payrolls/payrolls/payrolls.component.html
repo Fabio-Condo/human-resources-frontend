@@ -16,7 +16,7 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewPayroll()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -33,7 +33,7 @@
                 <td> {{ payroll.releaseDate  | date: 'dd/MM/yyyy h:mm a'}} </td>
                 <td> {{ payroll.description }} </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="Edit" (click)="onSelectPayroll(payroll)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onSelectPayroll(payroll)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Delete" (click)="deletionConfirm(payroll)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>

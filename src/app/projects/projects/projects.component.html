@@ -5,7 +5,7 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewProject()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style=" border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -21,16 +21,10 @@
                 <td>{{ project.name }}</td>
                 <td>{{ project.department.name }}</td>
                 <td>
-                    <span *ngIf="project.projectStatus==='APPROVED'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='CANCELED'" style="color:#fff; background-color: #e96969; border-radius: 4%;">&nbsp; cancelado &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='CONCLUDED'" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; concluído &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
-                    <span *ngIf="project.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                    <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectProject(project)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="View" (click)="onSelectProject(project)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditProject(project)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton  pTooltip="Delete" (click)="deletionConfirm(project)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
@@ -210,13 +204,7 @@
             <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedProjectModal.department.name}}</span></i></li>
             <li class="dialog-info-li">
                 <i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Status</span>: 
-                    <span *ngIf="selectedProjectModal.projectStatus==='APPROVED'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='CANCELED'" style="color:#fff; background-color: #e96969; border-radius: 4%;">&nbsp; cancelado &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='CONCLUDED'" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; concluído &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
-                    <span *ngIf="selectedProjectModal.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+                    <p-tag [value]="selectedProjectModal.projectStatus" [severity]="getProjectStatus(selectedProjectModal.projectStatus)"></p-tag>
                 </i>
             </li>
         </div>
@@ -250,3 +238,13 @@
     </div>
 </p-dialog>
 
+
+<!--
+<span *ngIf="project.projectStatus==='APPROVED'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; aprovado &nbsp;</span>
+<span *ngIf="project.projectStatus==='CANCELED'" style="color:#fff; background-color: #e96969; border-radius: 4%;">&nbsp; cancelado &nbsp;</span>
+<span *ngIf="project.projectStatus==='CONCLUDED'" style="color:#fff; background-color: #1c80cf; border-radius: 4%; height: 50px;">&nbsp; concluído &nbsp;</span>
+<span *ngIf="project.projectStatus==='PENDING'" style="color:#999c4d; background-color: whitesmoke; border-radius: 4%;">&nbsp; pendente &nbsp;</span>
+<span *ngIf="project.projectStatus==='IN_TEST'" style="color:#28be1a; background-color: whitesmoke; border-radius: 4%; height: 50px;">&nbsp; em_teste &nbsp;</span>
+<span *ngIf="project.projectStatus==='IN_PROGRESS'" style="color:#1c80cf; background-color: whitesmoke; border-radius: 4%;">&nbsp; em_andamento &nbsp;</span>
+<span *ngIf="project.projectStatus==='SUSPENDED'" style="color: #e96969; background-color: whitesmoke; border-radius: 4%;">&nbsp; suspenso &nbsp;</span>
+-->
