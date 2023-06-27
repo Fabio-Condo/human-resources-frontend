@@ -168,7 +168,7 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label >Educação </label> 
+                <label >Formação acadêmica </label> 
                 <a href="javascript:;" (click)="getReadyNewTraining()">
                     <p-tag [severity]="'success'">add +</p-tag>
                 </a>
@@ -362,7 +362,7 @@
 
             <!--Training-->
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Educação</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
+                <label>Formação acadêmica</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
