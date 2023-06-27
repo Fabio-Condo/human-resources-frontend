@@ -32,9 +32,9 @@
                 <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ job.expirationDate | date: 'dd/MM/yyyy'}}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditJob(job)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(job)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="background-color: #1c80cf; color: #fff; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Editar" (click)="onEditJob(job)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(job)" pTooltip="Eliminar" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -113,59 +113,6 @@
             <br> 
           </div>  
 
-          
-            <!--Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-              <label>Formação exigida</label>
-              <p-table [value]="selectedJobModal.position.training" [responsive]="true" 
-                  styleClass="p-datatable-sm" #tabela >
-                <ng-template pTemplate="header">
-                  <tr>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
-                  <tr>
-                    <td>{{ training.designation }}</td>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                      <td colspan="10">
-                        No trainings found
-                      </td>
-                    </tr>
-                </ng-template>            
-              </p-table>  
-              <br> 
-          </div> 
-          
-          <!--Professional Experience-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-            <label>Experiencia Professional exigida</label>
-            <p-table [value]="selectedJobModal.position.professionalExperience" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ pf.designation }}</td>                   
-                </tr>       
-                
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No Professional Experience found
-                    </td>
-                  </tr>
-              </ng-template>   
-             
-            </p-table>  
-            <br> 
-          </div> 
-
           <!--Benefits-->
           <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
             <label>Beneficios</label>
@@ -191,45 +138,7 @@
              
             </p-table>  
             <br> 
-          </div> 
-
-          <!--Languages-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-            <label>Linguas exigidas</label>
-            <p-table [value]="selectedJobModal.position.languages" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr *ngIf="selectedJobModal.position.languages.length > 0">
-                  <th style="background-color: #FFF;">Nome</th>
-                  <th style="background-color: #FFF;">Escrita</th>
-                  <th style="background-color: #FFF;">Leitura</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-l let-rowIndex="rowIndex">
-                <tr >
-                  <td>{{ l.name }}</td>
-                  <td>
-                    <span *ngIf="l.writeLevel == 'FLUENT'"> Fluente </span>
-                    <span *ngIf="l.writeLevel == 'REASONABLE'"> Razoável </span>
-                  </td>
-                  <td>
-                    <span *ngIf="l.readLevel == 'FLUENT'"> Fluente </span>
-                    <span *ngIf="l.readLevel == 'REASONABLE'"> Razoável </span>
-                  </td>                    
-                </tr>       
-                
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No language found
-                    </td>
-                  </tr>
-              </ng-template>   
-             
-            </p-table>  
-            <br> 
-          </div> 
+          </div>  
 
           <!--Employees-->
           <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
@@ -335,5 +244,7 @@
       
     </form>
 </p-dialog>
+
+
 
 

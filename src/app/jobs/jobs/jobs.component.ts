@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
 import { PositionsService } from 'src/app/positions/positions.service';
 import { IPosition } from 'src/app/core/interfaces/IPosition';
 import { Position } from 'src/app/core/model/Position';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-jobs',

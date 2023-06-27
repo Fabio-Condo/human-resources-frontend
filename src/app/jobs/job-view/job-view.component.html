@@ -40,6 +40,10 @@
                 <div class="feed" *ngFor="let specificRequirement of job.position.specificRequirements">
                     <p>{{ specificRequirement.designation }};</p>
                 </div>
+                <h3>Beneficios</h3>
+                <div class="feed" *ngFor="let benefit of job.position.benefits">
+                    <p>{{ benefit.designation }};</p>
+                </div>
                 
             </div>
         </div>

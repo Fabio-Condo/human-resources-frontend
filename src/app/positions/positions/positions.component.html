@@ -5,16 +5,6 @@
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
-        <!--
-          <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getPositions()"/>
-          </span>
-          <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-          ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getPositions()"></p-dropdown>
-          <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-          ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getPositions()"></p-dropdown>
-        -->
           <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
           <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style="background-color: #1c80cf; border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
@@ -91,27 +81,6 @@
                 </div>
               </div>
             </div>
-            <!--
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-              <label>Idade</label>
-              <input pInputText class="p-inputtext-sm" type="number" name="age"
-                  ngModel #age="ngModel" required minlength="1" [(ngModel)]="position.age">  
-            </div>
-            -->
-            <!--
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-              <label>Cluster Administrativo</label>
-              <p-dropdown class="p-inputtext-sm"  [options]="administrativeClusters" placeholder="Selecione" [filter]="true"
-                  name="administrativeCluster" #administrativeCluster ngModel [(ngModel)]="position.administrativeCluster.id"></p-dropdown>
-            </div>
-            -->
-            <!--
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
-              <label>Reporter hierarquico</label>
-              <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                  name="hierarchicalReporter" #hierarchicalReporter ngModel [(ngModel)]="position.hierarchicalReporter.id"></p-dropdown>
-            </div>
-            -->
           </div>
         </div>  
 
@@ -179,70 +148,6 @@
                 </p-table>  
                 <br> 
             </div> 
-
-            <!--Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Formação exigida | </label><span (click)="openAddNewTrainingModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
-                <p-table [value]="position.training" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela >
-                  <ng-template pTemplate="header">
-                    <tr>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
-                    <tr>
-                      <td>{{ training.designation }}</td>
-                      <td class="col-acoes">
-                        <span class="p-buttonset">
-                            <span (click)="getReadTraining(training, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                            <span (click)="removeTraining(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
-                        </span>
-                      </td>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="emptymessage">
-                      <tr>
-                        <td colspan="10">
-                          No trainings found
-                        </td>
-                      </tr>
-                  </ng-template>            
-                </p-table>  
-                <br> 
-            </div> 
-
-            <!--Professional Experience-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-                <label>Experiencia Professional exigida | </label> <span (click)="openAddNewProfessionalExperienceModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
-                <p-table [value]="position.professionalExperience" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela >
-                  <ng-template pTemplate="header">
-                    <tr>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
-                    <tr>
-                      <td>{{ pf.designation }}</td>
-                      <td class="col-acoes">
-                        <span class="p-buttonset">
-                          <span (click)="getReadProfessionalExperience(pf, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                          <span (click)="removeProfessionalExperience(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
-                        </span>
-                      </td>                     
-                    </tr>       
-                    
-                  </ng-template>
-                  <ng-template pTemplate="emptymessage">
-                      <tr>
-                        <td colspan="10">
-                          No Professional Experience found
-                        </td>
-                      </tr>
-                  </ng-template>   
-                 
-                </p-table>  
-                <br> 
-            </div>  
             
             <!--Benefits-->
             <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
@@ -269,51 +174,6 @@
                     <tr>
                       <td colspan="10">
                         No benefit found
-                      </td>
-                    </tr>
-                </ng-template>   
-               
-              </p-table>  
-              <br> 
-            </div> 
-
-            <!--Languages-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-              <label>Linguas exigidas | </label> <span (click)="openAddNewLanguageModal()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
-              <p-table [value]="position.languages" [responsive]="true" 
-                  styleClass="p-datatable-sm" #tabela >
-                <ng-template pTemplate="header">
-                  <tr *ngIf="position.languages.length > 0">
-                    <th style="background-color: #FFF;">Nome</th>
-                    <th style="background-color: #FFF;">Escrita</th>
-                    <th style="background-color: #FFF;">Leitura</th>
-                    <th style="background-color: #FFF;" class="col-valor-header"></th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-l let-rowIndex="rowIndex">
-                  <tr >
-                    <td>{{ l.name }}</td>
-                    <td>
-                      <span *ngIf="l.writeLevel == 'FLUENT'"> Fluente </span>
-                      <span *ngIf="l.writeLevel == 'REASONABLE'"> Razoável </span>
-                    </td>
-                    <td>
-                      <span *ngIf="l.readLevel == 'FLUENT'"> Fluente </span>
-                      <span *ngIf="l.readLevel == 'REASONABLE'"> Razoável </span>
-                    </td>
-                    <td class="col-acoes">
-                      <span class="p-buttonset">
-                        <span (click)="getReadLanguage(l, rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> editar </a></span>&nbsp;
-                        <span (click)="removeLanguage(rowIndex)"><a href="javascript:;" style="text-decoration: none; color: #e96969;" tooltipPosition="top"> remover </a></span>
-                      </span>
-                    </td>                     
-                  </tr>       
-                  
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                      <td colspan="10">
-                        No language found
                       </td>
                     </tr>
                 </ng-template>   
@@ -363,34 +223,6 @@
     </form>
 </p-dialog>
 
-<!--Training-->
-<p-dialog [header]="editingTraining ? 'Editar formação' : 'Nova formação'" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
-    <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)"> 
-      <div class="col-12 p-fluid">
-        <label>Designation</label>
-        <input pInputText type="text" name="designation"
-          required [(ngModel)]="training.designation" #designation="ngModel"/>
-      </div>
-      <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmTraining.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
-      </div>
-    </form>
-</p-dialog>
-
-<!--Professional Experience-->
-<p-dialog [header]="editingProfessionalExperience ? 'Editar experiência profissional' : 'Nova experiência profissional'" [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
-    <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)"> 
-      <div class="col-12 p-fluid">
-        <label>Designation</label>
-        <input pInputText type="text" name="designation"
-          required [(ngModel)]="professionalExperience.designation" #designation="ngModel"/>
-      </div>
-      <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmProfessionalExperience.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
-      </div>
-    </form>
-</p-dialog>
-
 <!--Benefits-->
 <p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm" [modal]="true" *ngIf="benefit"> 
   <form #frmBenefit="ngForm" (ngSubmit)="confirmBenefit(frmBenefit)"> 
@@ -401,30 +233,6 @@
     </div>
     <div class="col-12 p-fluid">
       <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmBenefit.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
-    </div>
-  </form>
-</p-dialog>
-
-<!--languages-->
-<p-dialog [header]="editingLanguage ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showLanguagesForm" [modal]="true" *ngIf="language"> 
-  <form #frmLanguage="ngForm" (ngSubmit)="confirmLanguage(frmLanguage)"> 
-    <div class="col-12 p-fluid">
-      <label>Designation</label>
-      <input pInputText type="text" name="name"
-        required [(ngModel)]="language.name" #name="ngModel"/>
-    </div>
-    <div class="col-12 p-fluid" style="margin-top: 2%;">
-      <label>Escrita</label>
-      <p-dropdown class="p-inputtext-sm" [options]="languageWriteSpeakLevel" placeholder="Selecione"
-          name="writeLevel" #writeLevel ngModel [(ngModel)]="language.writeLevel"></p-dropdown>
-    </div>
-    <div class="col-12 p-fluid" style="margin-top: 2%;">
-      <label>Leitura</label>
-      <p-dropdown class="p-inputtext-sm"  [options]="languageWriteSpeakLevel" placeholder="Selecione"
-          name="readLevel" #readLevel ngModel [(ngModel)]="language.readLevel"></p-dropdown>
-    </div>
-    <div class="col-12 p-fluid">
-      <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmLanguage.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
     </div>
   </form>
 </p-dialog>
@@ -501,59 +309,6 @@
             <br> 
           </div>  
 
-          
-            <!--Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-              <label>Formação exigida</label>
-              <p-table [value]="selectedPositionModal.training" [responsive]="true" 
-                  styleClass="p-datatable-sm" #tabela >
-                <ng-template pTemplate="header">
-                  <tr>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
-                  <tr>
-                    <td>- {{ training.designation }};</td>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                      <td colspan="10">
-                        No trainings found
-                      </td>
-                    </tr>
-                </ng-template>            
-              </p-table>  
-              <br> 
-          </div> 
-          
-          <!--Professional Experience-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-            <label>Experiencia Professional exigida</label>
-            <p-table [value]="selectedPositionModal.professionalExperience" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
-                <tr>
-                  <td>- {{ pf.designation }};</td>                   
-                </tr>       
-                
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No Professional Experience found
-                    </td>
-                  </tr>
-              </ng-template>   
-             
-            </p-table>  
-            <br> 
-          </div> 
-
           <!--Benefits-->
           <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
             <label>Beneficios</label>
@@ -580,46 +335,7 @@
             </p-table>  
             <br> 
           </div> 
-
-          <!--Languages-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
-            <label>Linguas exigidas</label>
-            <p-table [value]="selectedPositionModal.languages" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr *ngIf="languages.length > 0">
-                  <th style="background-color: #FFF;">Nome</th>
-                  <th style="background-color: #FFF;">Escrita</th>
-                  <th style="background-color: #FFF;">Leitura</th>
-                  <th style="background-color: #FFF;" class="col-valor-header"></th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-l let-rowIndex="rowIndex">
-                <tr >
-                  <td>{{ l.name }}</td>
-                  <td>
-                    <span *ngIf="l.writeLevel == 'FLUENT'"> Fluente </span>
-                    <span *ngIf="l.writeLevel == 'REASONABLE'"> Razoável </span>
-                  </td>
-                  <td>
-                    <span *ngIf="l.readLevel == 'FLUENT'"> Fluente </span>
-                    <span *ngIf="l.readLevel == 'REASONABLE'"> Razoável </span>
-                  </td>                    
-                </tr>       
-                
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No language found
-                    </td>
-                  </tr>
-              </ng-template>   
-             
-            </p-table>  
-            <br> 
-          </div> 
-
+          
           <!--Employees-->
           <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
             <label>Funcionários com este cargo</label> <span *ngIf="selectedPositionModal.employees.length != 0"> [{{selectedPositionModal.employees.length}}]</span>
@@ -701,93 +417,4 @@
   </div> 
 
 </p-dialog>  
-
-
-
-<!--
-<body>
-  <div class="container">
-      <div class="form-image">
-          <img src="assets/img//undraw_shopping_re_3wst.svg" alt="">
-      </div>
-      <div class="form">
-          <form action="#">
-              <div class="form-header">
-                  <div class="title">
-                      <h1>Cadastre-se</h1>
-                  </div>
-                  <div class="login-button">
-                      <button><a href="#">Entrar</a></button>
-                  </div>
-              </div>
-
-              <div class="input-group">
-                  <div class="input-box">
-                      <label for="firstname">Primeiro Nome</label>
-                      <input id="firstname" type="text" name="firstname" placeholder="Digite seu primeiro nome" required>
-                  </div>
-
-                  <div class="input-box">
-                      <label for="lastname">Sobrenome</label>
-                      <input id="lastname" type="text" name="lastname" placeholder="Digite seu sobrenome" required>
-                  </div>
-                  <div class="input-box">
-                      <label for="email">E-mail</label>
-                      <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
-                  </div>
-
-                  <div class="input-box">
-                      <label for="number">Celular</label>
-                      <input id="number" type="tel" name="number" placeholder="(xx) xxxx-xxxx" required>
-                  </div>
-
-                  <div class="input-box">
-                      <label for="password">Senha</label>
-                      <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
-                  </div>
-
-
-                  <div class="input-box">
-                      <label for="confirmPassword">Confirme sua Senha</label>
-                      <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Digite sua senha novamente" required>
-                  </div>
-
-              </div>
-
-              <div class="gender-inputs">
-                  <div class="gender-title">
-                      <h6>Gênero</h6>
-                  </div>
-
-                  <div class="gender-group">
-                      <div class="gender-input">
-                          <input id="female" type="radio" name="gender">
-                          <label for="female">Feminino</label>
-                      </div>
-
-                      <div class="gender-input">
-                          <input id="male" type="radio" name="gender">
-                          <label for="male">Masculino</label>
-                      </div>
-
-                      <div class="gender-input">
-                          <input id="others" type="radio" name="gender">
-                          <label for="others">Outros</label>
-                      </div>
-
-                      <div class="gender-input">
-                          <input id="none" type="radio" name="gender">
-                          <label for="none">Prefiro não dizer</label>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="continue-button">
-                  <button><a href="#">Continuar</a> </button>
-              </div>
-          </form>
-      </div>
-  </div>
-</body>
--->
 

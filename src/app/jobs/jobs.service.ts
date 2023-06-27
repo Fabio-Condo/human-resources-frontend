@@ -73,4 +73,12 @@ export class JobsService {
     return this.http.put<IJob>(`${this.jobsUrl}/${jobId}/candidates/${candidateId}`, { });
   }
 
+  selectCandidateCandidateToJob(candidateId: number, jobId: number): Observable<IJob> {
+    return this.http.post<IJob>(`${this.jobsUrl}/${jobId}/selected-candidates/${candidateId}`, { });
+  }
+
+  removeSelectedCandidateFromJob(candidateId: number, jobId: number): Observable<IJob> {
+    return this.http.put<IJob>(`${this.jobsUrl}/${jobId}/selected-candidates/${candidateId}`, { });
+  }
+
 }

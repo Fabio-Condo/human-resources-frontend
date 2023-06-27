@@ -17,7 +17,7 @@
         <li [class.active]="isActive('/v1/jobs-page')"><a routerLink="/v1/jobs-page">Vagas</a></li>
         <li *ngIf="isUserLoggedIn" [class.active]="isActive('/v1/users')"><a routerLink="/v1/users">Usuários</a></li>
         <li *ngIf="!isUserLoggedIn"><a routerLink="/login">Login</a></li>
-        <span style="margin-left: 20px;" class="gap-2">
+        <span *ngIf="isUserLoggedIn" style="margin-left: 20px;" class="gap-2">
           <!--<i class="pi pi-briefcase" style="color: #eee7e7;"></i>-->
           <li class="pi pi-user" style="color: #a4a1a1;" routerLink="/v1/user-profile"></li>
           <li [class.active]="isActive('/v1/user-profile')"><a routerLink="/v1/user-profile">Fabio</a></li>

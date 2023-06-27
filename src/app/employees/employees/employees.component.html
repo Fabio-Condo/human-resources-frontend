@@ -145,7 +145,7 @@
             </div>
             -->
             
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Contactos</label> <span (click)="getReadyNewContact()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.contacts" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
@@ -179,7 +179,7 @@
                 <br>   
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label >Educação</label> <span (click)="getReadyNewTraining()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
@@ -216,7 +216,7 @@
             </div>
 
             <!--Skills-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Habilidades</label> <span (click)="getReadyNewSkill()"><a href="javascript:;" style="text-decoration: none; color: #1c80cf;" tooltipPosition="top"> adicionar + </a></span>
                 <p-table [value]="employee.skills" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -310,7 +310,7 @@
             </div>  
 
             <!--Projects-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Projectos</label> <span *ngIf="selectedEmployeeModal.projects.length != 0"> [{{selectedEmployeeModal.projects.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.projects" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -345,7 +345,7 @@
             </div>
 
             <!--Contacts-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Contactos</label> <span *ngIf="selectedEmployeeModal.contacts.length != 0"> [{{selectedEmployeeModal.contacts.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela > <!--*ngIf="showContacts"-->
@@ -371,7 +371,7 @@
             </div>
 
             <!--Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Educação</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -401,7 +401,7 @@
             </div>
 
             <!--Company Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Formações obtidas na empresa</label> <span *ngIf="selectedEmployeeModal.companyTrainings.length != 0"> [{{selectedEmployeeModal.companyTrainings.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.companyTrainings" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -433,7 +433,7 @@
             </div>
 
             <!--Skills-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Habilidades</label> <span *ngIf="selectedEmployeeModal.skills.length != 0"> [{{selectedEmployeeModal.skills.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.skills" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -457,7 +457,7 @@
                 <br> 
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Histórico de salário</label> <span *ngIf="selectedEmployeeModal.wageHistories.length != 0"> [{{selectedEmployeeModal.wageHistories.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -484,7 +484,7 @@
                 <br>
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Histórico de avaliação de desenpenho</label> <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0"> [{{selectedEmployeeModal.employeePerformanceEvaluations.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -539,7 +539,7 @@
             </div>  
             
             <!--Vocations-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Férias</label> <span *ngIf="selectedEmployeeModal.vocations.length != 0"> [{{selectedEmployeeModal.vocations.length}}]</span>
                 <p-table [value]="selectedEmployeeModal.vocations" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
