@@ -1,45 +1,13 @@
 <div class="container">
     <div class="card">
-      <button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>
+      <!--<button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>-->
       <div style="display:inline;">
-        <h3 style="margin-top: 20px;">Difinições da conta</h3>
+        <!--<h3 style="margin-top: 20px;">Difinições da conta</h3>-->
       </div>
-      <div class="formgrid grid">
+      <div class="formgrid grid" style="margin-top: 50px;">
   
         <div  class="field col-12 md:col-3">
-
-            <h5 style="background-color: whitesmoke; padding: 0%;">aaaaaaaaaaaaa</h5>
-            <h5 style="background-color: whitesmoke;">aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-            <h5>aaaaaaaaaaaaa</h5>
-
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Funcionários</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Desenpenho</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Projetos</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Cargos</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Férias e ausências</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Formação e desen</a>
-            </li>
-            <li class="menuitem"  routerLinkActive="ativo" >
-                <a style="margin-left: 10px;">Tipos de formação</a>
-            </li>   
-
+            <img class="w-5 sm:w-16rem xl:w-12rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />  
         </div>
   
         <div style="background-color: #fff;" class="field col-12 md:col-9">
@@ -81,10 +49,153 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                <div class="col-12 p-fluid">
                     <label>Bio</label>
                     <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="coordinates" minlength="10" placeholder="Bio"></textarea>
                 </div>
+
+                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
+                    <label>Contactos </label> 
+                    <a href="javascript:;">
+                        <p-tag [severity]="'success'">add +</p-tag>
+                    </a>
+                    <p-table [value]="user.userContacts" selectionMode="single" [responsive]="true" 
+                         styleClass="p-datatable-sm" #tabela >
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="background-color: #FFF;">Número</th>
+                          <th style="background-color: #FFF;">Nome do proprietário</th>
+                          <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="contact">
+                          <td>{{ contact.contactNumber }}</td>
+                          <td>{{ contact.name }}</td>
+                          <td class="col-acoes">
+                            <span class="p-buttonset">
+                                <a href="javascript:;"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" ><p-tag [severity]="'danger'"> remove</p-tag></a>
+                            </span>
+                          </td> 
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr>
+                            <td colspan="10">
+                              Sem contactos
+                            </td>
+                          </tr>
+                      </ng-template>            
+                    </p-table>     
+                    <br>   
+                </div>
+
+                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
+                    <label>Professional Experiences </label> 
+                    <a href="javascript:;">
+                        <p-tag [severity]="'success'">add +</p-tag>
+                    </a>
+                    <p-table [value]="user.professionalExperiences" selectionMode="single" [responsive]="true" 
+                         styleClass="p-datatable-sm" #tabela >
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="background-color: #FFF;">Company</th>
+                          <th style="background-color: #FFF;">Description</th>
+                          <th style="background-color: #FFF;">Location</th>
+                          <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="pf">
+                          <td>{{ pf.company }}</td>
+                          <td>{{ pf.description }}</td>
+                          <td>{{ pf.province.name }}</td>
+                          <td class="col-acoes">
+                            <span class="p-buttonset">
+                                <a href="javascript:;" ><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" ><p-tag [severity]="'danger'"> remove</p-tag></a>
+                            </span>
+                          </td> 
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr>
+                            <td colspan="10">
+                              Sem Experiences
+                            </td>
+                          </tr>
+                      </ng-template>            
+                    </p-table>     
+                    <br>   
+                </div>
+
+                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
+                    <label>Formação acadêmica </label> 
+                    <a href="javascript:;">
+                        <p-tag [severity]="'success'">add +</p-tag>
+                    </a>
+                    <p-table [value]="user.userTrainings" selectionMode="single" [responsive]="true" 
+                         styleClass="p-datatable-sm" #tabela >
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th style="background-color: #FFF;">Description</th>
+                          <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-ut let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="ut">
+                          <td>{{ ut.description }}</td>
+                          <td class="col-acoes">
+                            <span class="p-buttonset">
+                                <a href="javascript:;" ><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                <a style="margin-left: 3px;" href="javascript:;" ><p-tag [severity]="'danger'"> remove</p-tag></a>
+                            </span>
+                          </td> 
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                          <tr>
+                            <td colspan="10">
+                              Sem formacao
+                            </td>
+                          </tr>
+                      </ng-template>            
+                    </p-table>     
+                    <br>   
+                </div>
+
+                <!--Skills-->
+                <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                    <label>Habilidades </label> 
+                    <a href="javascript:;">
+                        <p-tag [severity]="'success'">add +</p-tag>
+                    </a>
+                    <p-table [value]="user.userSkills" [responsive]="true" 
+                        styleClass="p-datatable-sm" #tabela>
+                        <ng-template pTemplate="header">
+                            <tr>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
+                            <tr>
+                            <td>{{ skill.name }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"><p-tag [severity]="'danger'"> remove</p-tag></a>
+                                </span>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="10">
+                                Sem habilidades adicionadas
+                                </td>
+                            </tr>
+                        </ng-template>            
+                    </p-table>  
+                    <br> 
+                </div>
+
                 <div class="col-12" style="margin-top: 2px;">
                     <button pButton (click)="onLogOut()" pRipple label="save" icon="pi pi-save" class="p-button-primmary mr-2" ></button>
                 </div>

@@ -26,6 +26,7 @@ import {SplitterModule} from 'primeng/splitter';
 import {DividerModule} from 'primeng/divider';
 import {ImageModule} from 'primeng/image';
 import {DataViewModule} from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -53,6 +54,7 @@ import {DataViewModule} from 'primeng/dataview';
     DividerModule,
     ImageModule,
     InputTextareaModule,
+    TagModule,
 
     SharedModule,
     RouterModule,

@@ -31,6 +31,8 @@ export class UserProfileComponent implements OnInit {
   public fileStatus = new FileUploadStatus();
   exbindoFormularioChangePass: boolean = false;
 
+  imagePath = './assets/meta.jpg'
+
   roles = [
     { label: 'USER', value: 'ROLE_USER' },
     { label: 'ADMIN', value: 'ROLE_ADMIN' },

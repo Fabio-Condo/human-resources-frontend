@@ -23,14 +23,6 @@
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
-                <!--
-                <td>                  
-                    <a href="javascript:;" [pTooltip]="employee.status ? 'Desativar' : 'Ativar'" tooltipPosition="top" (click)="changeStatus(employee)">
-                        <span *ngIf="employee.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; ativo &nbsp;&nbsp;</span>
-                        <span *ngIf="!employee.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inativo &nbsp;</span>
-                    </a>  
-                </td>
-                -->
                 <td>
                     <a href="javascript:;" (click)="changeStatus(employee)" [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">
                         <p-tag [value]="employee.status" [severity]="getStatus(employee.status)"></p-tag>
@@ -145,7 +137,7 @@
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="employee">
+                    <tr [pSelectableRow]="contact">
                       <td>{{ contact.contactNumber }}</td>
                       <td>{{ contact.name }}</td>
                       <td class="col-acoes">
@@ -296,9 +288,9 @@
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Conjugue</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.spousesName}}</span></i></li>
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
-                            <span style="color:#545555;font-weight:bold">Status</span>: 
-                            <span *ngIf="selectedEmployeeModal.status" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; ativo &nbsp;&nbsp;</span>
-                            <span *ngIf="!selectedEmployeeModal.status" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inativo &nbsp;</span>
+                            <span style="color:#545555;font-weight:bold">Active</span>: 
+                            <p-tag *ngIf="selectedEmployeeModal.status" [severity]="'primmary'">true</p-tag>
+                            <p-tag *ngIf="!selectedEmployeeModal.status" [severity]="'danger'">false</p-tag>
                         </i>
                     </li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Data de nascimento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.birthday | date:'dd/MM/yyyy'}}</span></i></li>

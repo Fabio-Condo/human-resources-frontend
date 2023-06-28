@@ -1,4 +1,8 @@
 import { Job } from "./Job";
+import { ProfessionalExperience } from "./ProfessionalExperience";
+import { UserContact } from "./UserContact";
+import { UserSkill } from "./UserSkill";
+import { UserTraining } from "./UserTraining";
 
 
 export class User {
@@ -17,6 +21,10 @@ export class User {
     public role: string;
     public authorities: [];
     public jobs: Job[];
+    public professionalExperiences: ProfessionalExperience[];
+    public userTrainings: UserTraining[];
+    public userContacts: UserContact[];
+    public userSkills: UserSkill[];
 
   
     constructor() {
@@ -36,6 +44,10 @@ export class User {
       this.role = '';
       this.authorities = [];
       this.jobs = [];
+      this.professionalExperiences = [];
+      this.userTrainings = [];
+      this.userContacts = [];
+      this.userSkills = [];
     }
   
   }
