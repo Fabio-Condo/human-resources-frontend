@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MegaMenuItem } from 'primeng/api';
 import { AuthenticationService } from 'src/app/users/authentication.service';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,8 @@ import { AuthenticationService } from 'src/app/users/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
-    isUserLoggedIn: boolean = false;
+  public user: User = new User; 
+  isUserLoggedIn: boolean = false;
 
   imagePath = './assets/meta.jpg'
 
@@ -28,6 +30,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
+    this.user = this.authenticationService.getUserFromLocalCache();
     this.menuItems();
   }
 

@@ -27,6 +27,7 @@ import {DividerModule} from 'primeng/divider';
 import {ImageModule} from 'primeng/image';
 import {DataViewModule} from 'primeng/dataview';
 import { TagModule } from 'primeng/tag';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
@@ -54,6 +55,7 @@ import { TagModule } from 'primeng/tag';
     DividerModule,
     ImageModule,
     InputTextareaModule,
+    CalendarModule,
     TagModule,
 
     SharedModule,

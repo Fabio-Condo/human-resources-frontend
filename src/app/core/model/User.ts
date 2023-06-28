@@ -12,6 +12,7 @@ export class User {
     public lastName: string;
     public username: string;
     public email: string;
+    public bio: string;
     public lastLoginDate: any;  // Date;
     public lastLoginDateDisplay: any; // Date;
     public joinDate: any;  // Date;
@@ -19,6 +20,9 @@ export class User {
     public active: boolean;
     public notLocked: boolean;
     public role: string;
+    public company: string;
+    public designation: string;
+    public phoneNumber: string;
     public authorities: [];
     public jobs: Job[];
     public professionalExperiences: ProfessionalExperience[];
@@ -35,6 +39,7 @@ export class User {
       this.lastName = '';
       this.username = '';
       this.email = '';
+      this.bio = '';
       this.lastLoginDate = '';
       this.lastLoginDateDisplay = '';
       this.joinDate = '';
@@ -42,6 +47,9 @@ export class User {
       this.active = false;
       this.notLocked = false;
       this.role = '';
+      this.company = '';
+      this.designation = '';
+      this.phoneNumber = '';
       this.authorities = [];
       this.jobs = [];
       this.professionalExperiences = [];

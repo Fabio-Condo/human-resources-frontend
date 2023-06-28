@@ -352,7 +352,6 @@ export class EmployeesComponent implements OnInit {
   }
 
   // Training
-
   getReadyNewTraining() {
     this.showTrainingForm = true;
     this.training = new EmployeeTraining();

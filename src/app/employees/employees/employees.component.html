@@ -181,10 +181,8 @@
                       <td>{{ training.end | date:'MMMM, y'}}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
-                            <span class="p-buttonset">
-                                <a href="javascript:;" (click)="getReadyTrainingEdit(training, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
+                            <a href="javascript:;" (click)="getReadyTrainingEdit(training, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
+                            <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                         </span>
                       </td>  
                     </tr>
@@ -220,6 +218,7 @@
                                 <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
                                 <a style="margin-left: 3px;" href="javascript:;" (click)="removeSkill(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
                             </span>
+                          </td>  
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
