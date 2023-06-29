@@ -10,7 +10,6 @@ const routes: Routes = [
     { 
       path: 'v1/jobs', 
       component: JobsComponent,
-      canActivate: [AuthenticationGuard]
     },
     { 
       path: 'v1/jobs-page', 

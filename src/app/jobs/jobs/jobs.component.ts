@@ -12,6 +12,9 @@ import { PositionsService } from 'src/app/positions/positions.service';
 import { IPosition } from 'src/app/core/interfaces/IPosition';
 import { Position } from 'src/app/core/model/Position';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/core/model/User';
+import { AuthenticationService } from 'src/app/users/authentication.service';
+import { Role } from 'src/app/enum/role.enum';
 
 @Component({
   selector: 'app-jobs',
@@ -35,6 +38,9 @@ export class JobsComponent implements OnInit {
 
   positionById: IPosition = new Position();
 
+  public user: User = new User; 
+  isUserLoggedIn: boolean = false;
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
@@ -50,6 +56,7 @@ export class JobsComponent implements OnInit {
 
   constructor(
     private jobsService: JobsService,
+    private authenticationService: AuthenticationService, 
     private positionsService: PositionsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -57,8 +64,12 @@ export class JobsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
+    this.user = this.authenticationService.getUserFromLocalCache();
     this.title.setTitle('Jobs page');
-    this.getPositions();
+    if(this.isUserLoggedIn){
+      this.getPositions();
+    }
   }
 
   filter: IJobFilter = {
@@ -117,7 +128,7 @@ export class JobsComponent implements OnInit {
   filterJobs(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.jobsService.findAll(this.filter).subscribe(
+    this.jobsService.findAllForView(this.filter).subscribe(
       (data: IApiResponse<IJob>) => {
         this.jobs = data.content;
         this.totalRecords = data.totalElements;
@@ -208,6 +219,18 @@ export class JobsComponent implements OnInit {
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
     this.filterJobs(page);
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isSuperAdmin(): boolean {
+    return this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
   }
 
   private convertStringsToDates(positions: any[]) {

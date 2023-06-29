@@ -39,7 +39,7 @@ export class JobsService {
       params = params.set('name', filter.name); 
     }
 
-      console.log(params);
+    console.log(params);
 
     return this.http.get<IApiResponse<IJob>>(`${this.jobsUrl}/view`, { params });
   }

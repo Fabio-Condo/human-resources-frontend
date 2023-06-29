@@ -17,6 +17,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { JobViewComponent } from './job-view/job-view.component';
+import { TagModule } from 'primeng/tag';
 
 
 
@@ -42,6 +43,7 @@ import { JobViewComponent } from './job-view/job-view.component';
     DividerModule,
     CalendarModule,
     DataViewModule,
+    TagModule,
 
     RouterModule,
     AppRoutingModule

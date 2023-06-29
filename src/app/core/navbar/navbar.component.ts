@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
     return this.router.isActive(url, true);
   }
 
-
   menuItems(){
     this.items = [
       {

@@ -1,27 +1,39 @@
 
 <div class="container">
-    <h3>Admin das Vagas</h3>
+    <h3>Vagas</h3>
 
     <p-table [value]="jobs" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
-        <ng-template pTemplate="caption">
+        <ng-template pTemplate="caption" *ngIf="isUserLoggedIn && isSuperAdmin">
             <div class="flex">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input name="name" pInputText type="text" placeholder="Search" (ngModelChange)="filterJobs()"/>
-                </span>
-                <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterJobs()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterJobs()"></p-dropdown>
                 <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
+            <tr>         
+                <th style="background-color: #fff; width:40%" >Cargo</th>
+                <th style="background-color: #fff; width:20%">Location</th>
+                <th style="background-color: #fff; width:20%">Publicação</th>
+                <th *ngIf="isUserLoggedIn && isSuperAdmin" style="background-color: #fff;">Ações</th>
+            </tr>
             <tr>
-                <th style="background-color: #fff;">Cargo</th>
-                <th style="background-color: #fff;">Publicação</th>
-                <th style="background-color: #fff;">Expiração</th>
-                <th style="background-color: #fff;">Ações</th> 
+              <th>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Position" (ngModelChange)="filterJobs()"/>
+                </span>
+              </th>
+              <th>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" placeholder="Location"/>
+                </span>
+              </th>
+              <th>
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" placeholder="Date" />
+                </span>
+              </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-job>
@@ -31,13 +43,15 @@
                     {{ job.position.name }}
                   </a>  
                 </td>
-                <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>
-                <td>{{ job.expirationDate | date: 'dd/MM/yyyy'}}</td>
-                <td style="width: 180px;">
+                <td>{{ job.position.workplace.name }}</td>
+                <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>  
+
+                <td style="width: 180px;" *ngIf="isUserLoggedIn && isSuperAdmin">
                     <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Editar" (click)="onEditJob(job)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
                     <button pButton (click)="deletionConfirm(job)" pTooltip="Eliminar" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
+
             </tr>
         </ng-template>
     </p-table>
