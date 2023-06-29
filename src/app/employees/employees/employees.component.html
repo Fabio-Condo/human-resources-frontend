@@ -5,7 +5,7 @@
         
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
@@ -20,7 +20,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-employee>
             <tr>
-                <td>{{ employee.name }}</td>
+                <td>
+                    <a href="javascript:;" (click)="onSelectEmployee(employee)">
+                        {{ employee.name }}
+                    </a>           
+                </td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
                 <td>
@@ -125,9 +129,9 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Contactos </label> 
                 <a href="javascript:;" (click)="getReadyNewContact()">
-                    <p-tag [severity]="'success'">add +</p-tag>
+                    <p-tag [severity]="'info'">add +</p-tag>
                 </a>
-                <p-table [value]="employee.contacts" selectionMode="single" [responsive]="true" 
+                <p-table [value]="employee.contacts" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
@@ -136,7 +140,7 @@
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="contact">
+                    <tr>
                       <td>{{ contact.contactNumber }}</td>
                       <td class="col-acoes">
                         <span class="p-buttonset">
@@ -160,9 +164,9 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label >Formação acadêmica </label> 
                 <a href="javascript:;" (click)="getReadyNewTraining()">
-                    <p-tag [severity]="'success'">add +</p-tag>
+                    <p-tag [severity]="'info'">add +</p-tag>
                 </a>
-                <p-table [value]="employee.employeeTrainings" selectionMode="single" [responsive]="true" 
+                <p-table [value]="employee.employeeTrainings" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
@@ -173,7 +177,7 @@
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="training">
+                    <tr>
                       <td>{{ training.description }}</td>
                       <td>{{ training.begin | date:'MMMM, y'}}</td>
                       <td>{{ training.end | date:'MMMM, y'}}</td>
@@ -200,7 +204,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Habilidades </label> 
                 <a href="javascript:;" (click)="getReadyNewSkill()">
-                    <p-tag [severity]="'success'">add +</p-tag>
+                    <p-tag [severity]="'info'">add +</p-tag>
                 </a>
                 <p-table [value]="employee.skills" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
@@ -250,7 +254,7 @@
 
             <div class="formgrid grid">
                 <div class="field col-12 md:col-6">
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.name}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;">{{selectedEmployeeModal.name}}</span></i></li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Cargo</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i></li>
                     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.department.name}}</span></i></li>
                     <li class="dialog-info-li">

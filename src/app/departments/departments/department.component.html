@@ -5,7 +5,7 @@
     <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getDepartments()"/>
@@ -20,19 +20,17 @@
             <tr>
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Descrição</th>
-                <!--
-                <th style="background-color: #fff;">Responsável</th>
-                -->
                 <th style="background-color: #fff;">Ações</th>       
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-dep>
             <tr>
-                <td>{{ dep.name }}</td>
+                <td>
+                    <a href="javascript:;" (click)="onSelectDepartment(dep)">
+                        {{ dep.name }}
+                    </a>           
+                </td>
                 <td>{{ dep.description }}</td>
-                <!--
-                <td>{{ dep.responsibleEmployee.name }}</td>
-                -->
                 <td style="width: 180px;">
                     <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
                     <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;

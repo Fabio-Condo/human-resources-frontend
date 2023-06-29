@@ -4,7 +4,7 @@
     <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" (click)="onAddNewEmployeePerformanceEvaluation()"></button>
+                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" (click)="onAddNewEmployeePerformanceEvaluation()"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -27,7 +27,9 @@
                     <p-tableCheckbox [value]="epe"></p-tableCheckbox>
                 </td>
                 <td>
-                    {{ epe.employee.name }}
+                    <a href="javascript:;" (click)="onSelectEmployeePerformanceEvaluation(epe)">
+                        {{ epe.employee.name }}
+                    </a>           
                 </td>
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>

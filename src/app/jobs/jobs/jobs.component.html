@@ -13,13 +13,12 @@
                 ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterJobs()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
                 ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterJobs()"></p-dropdown>
-                <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">Nome</th>
-                <th style="background-color: #fff;">Missão</th>
+                <th style="background-color: #fff;">Cargo</th>
                 <th style="background-color: #fff;">Publicação</th>
                 <th style="background-color: #fff;">Expiração</th>
                 <th style="background-color: #fff;">Ações</th> 
@@ -27,8 +26,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-job>
             <tr>
-                <td>{{ job.position.name }}</td>
-                <td>{{ job.position.mission }}</td>
+                <td>
+                  <a href="javascript:;" [routerLink]="['/v1/jobs-view', job.id]">
+                    {{ job.position.name }}
+                  </a>  
+                </td>
                 <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ job.expirationDate | date: 'dd/MM/yyyy'}}</td>
                 <td style="width: 180px;">
@@ -64,7 +66,7 @@
           </div>
 
           <!--Main Responsibilities-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6;">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
             <label>Pricipais Responsibilidades </label>
             <p-table [value]="selectedJobModal.position.mainResponsibilities" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -89,7 +91,7 @@
           </div> 
 
           <!--Specific Requirements-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Requisitos especificos exigidos</label>
             <p-table [value]="selectedJobModal.position.specificRequirements" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -114,7 +116,7 @@
           </div>  
 
           <!--Benefits-->
-          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #F4F6F6 ">
+          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
             <label>Beneficios</label>
             <p-table [value]="selectedJobModal.position.benefits" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -141,7 +143,7 @@
           </div>  
 
           <!--Employees-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Funcionários com este cargo</label> 
             <p-table [value]="selectedJobModal.position.employees" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >
@@ -167,7 +169,7 @@
           </div> 
 
           <!--Candidates-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #F4F6F6">
+          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <label>Candidatos para esta vaga</label>
             <p-table [value]="selectedJobModal.candidates" [responsive]="true" 
                 styleClass="p-datatable-sm" #tabela >

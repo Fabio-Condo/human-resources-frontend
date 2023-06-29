@@ -248,7 +248,7 @@ export class VocationsComponent implements OnInit {
       case 'PENDING':
         return 'primmary';
       case 'APPROVED':
-        return 'success';
+        return 'info';
       case 'REJECTED':
         return 'danger'; 
     }

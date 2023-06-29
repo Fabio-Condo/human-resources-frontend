@@ -4,7 +4,7 @@
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewProject()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewProject()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" style=" border-style: none;" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
@@ -18,7 +18,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-project>
             <tr>
-                <td>{{ project.name }}</td>
+                <td>
+                    <a href="javascript:;" (click)="onSelectProject(project)">
+                        {{ project.name }}
+                    </a>           
+                </td>
                 <td>{{ project.department.name }}</td>
                 <td>
                     <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
@@ -68,7 +72,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label >Membros envolvidos </label> 
                 <a href="javascript:;" (click)="onaddEmployeeToProject()">
-                    <p-tag [severity]="'success'">add +</p-tag>
+                    <p-tag [severity]="'info'">add +</p-tag>
                 </a>
                 <p-table [value]="project.team" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >

@@ -242,7 +242,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
       case 'YEARLY':
         return 'primmary';
       case 'MONTHLY':
-        return 'success';
+        return 'info';
     }
     return '';
   }

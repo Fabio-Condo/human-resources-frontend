@@ -294,9 +294,9 @@ export class ProjectsComponent implements OnInit {
       case 'IN_PROGRESS':
         return 'primmary';
       case 'CONCLUDED':
-        return 'success';
+        return 'info';
       case 'APPROVED':
-        return 'success'; 
+        return 'info'; 
       case 'PENDING':
         return 'primmary';
       case 'CANCELED':

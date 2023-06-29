@@ -5,7 +5,7 @@
     <p-table [value]="trainingTypes" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewTrainingType()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewTrainingType()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="filterTrainingTypes()"/>
@@ -25,6 +25,11 @@
         </ng-template>
         <ng-template pTemplate="body" let-trainingType>
             <tr>
+                <td>
+                    <a href="javascript:;" (click)="onSelectTrainingType(trainingType)">
+                        {{ trainingType.level }}
+                    </a>           
+                </td>
                 <td>{{ trainingType.level }}</td>
                 <td>{{ trainingType.type }}</td>
                 <td style="width: 180px;">
@@ -70,7 +75,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Objectivos </label> 
                 <a href="javascript:;" (click)="getReadyNewGoal()">
-                    <p-tag [severity]="'success'">add +</p-tag>
+                    <p-tag [severity]="'info'">add +</p-tag>
                 </a>
                 <p-table [value]="trainingType.companyTrainingTypeGoals" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>

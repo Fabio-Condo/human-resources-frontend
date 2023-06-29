@@ -440,11 +440,11 @@ export class EmployeesComponent implements OnInit {
       case 'IN_PROGRESS':
         return 'primmary';
       case 'CONCLUDED':
-        return 'success';
+        return 'info';
       case 'APPROVED':
-        return 'success'; 
+        return 'info'; 
       case 'PENDING':
-        return 'success';
+        return 'info';
       case 'CANCELED':
         return 'danger'; 
       case 'SUSPENDED':
@@ -458,7 +458,7 @@ export class EmployeesComponent implements OnInit {
       case 'YEARLY':
         return 'primmary';
       case 'MONTHLY':
-        return 'success';
+        return 'info';
     }
     return '';
   }
@@ -468,7 +468,7 @@ export class EmployeesComponent implements OnInit {
       case 'PENDING':
         return 'primmary';
       case 'APPROVED':
-        return 'success';
+        return 'info';
       case 'REJECTED':
         return 'danger'; 
     }

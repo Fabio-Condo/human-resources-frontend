@@ -4,7 +4,7 @@
     <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+                <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length"></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -27,7 +27,11 @@
                 <td>
                     <p-tableCheckbox [value]="vocation"></p-tableCheckbox>
                 </td>
-                <td>{{ vocation.employee.name }}</td>
+                <td>
+                    <a href="javascript:;" (click)="onSelectVocation(vocation)">
+                        {{ vocation.employee.name }}
+                    </a>           
+                </td>
                 <td>
                     <span *ngIf="vocation.vocationType==='VOCATIONS'" >Férias</span>
                     <span *ngIf="vocation.vocationType==='SICK_LEAVE'" >Licença médica</span>

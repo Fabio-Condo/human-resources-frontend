@@ -5,7 +5,7 @@
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
-          <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" ></button>
+          <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
           <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
     </ng-template>  
@@ -19,7 +19,11 @@
       </ng-template>
       <ng-template pTemplate="body" let-position>
           <tr>
-              <td>{{ position.name }}</td>
+              <td>
+                <a href="javascript:;" (click)="onSelectPosition(position)">
+                    {{ position.name }}
+                </a>           
+              </td>
               <td>{{ position.department.name }}</td>
               <td>{{ position.workplace.name }}</td>
               <td style="width: 180px;">
@@ -91,7 +95,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
                 <label>Pricipais Responsibilidades </label> 
                 <a href="javascript:;" (click)="openAddNewMainResponsabilityModal()">
-                  <p-tag [severity]="'success'">add +</p-tag>
+                  <p-tag [severity]="'info'">add +</p-tag>
                 </a>
                 <p-table [value]="position.mainResponsibilities" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
@@ -125,7 +129,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <label>Requisitos especificos exigidos </label> 
                 <a href="javascript:;" (click)="openAddNewSpecificRequirementModal()">
-                  <p-tag [severity]="'success'">add +</p-tag>
+                  <p-tag [severity]="'info'">add +</p-tag>
                 </a>
                 <p-table [value]="position.specificRequirements" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
@@ -159,7 +163,7 @@
             <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
               <label>Beneficios </label>
                 <a href="javascript:;" (click)="openAddNewBenefitModal()">
-                  <p-tag [severity]="'success'">add +</p-tag>
+                  <p-tag [severity]="'info'">add +</p-tag>
                 </a>
               <p-table [value]="position.benefits" [responsive]="true" 
                   styleClass="p-datatable-sm" #tabela >
@@ -192,7 +196,7 @@
             </div> 
 
             <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="positionForm.invalid" class="p-button-sm" style="height: 30px;">
+                <button pButton type="submit" [disabled]="positionForm.invalid" style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
@@ -213,7 +217,7 @@
           required [(ngModel)]="mainResponsibility.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmMainResponsibility.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmMainResponsibility.invalid" style="height: 30px;"></button>
       </div>
     </form>
 </p-dialog>
@@ -227,7 +231,7 @@
           required [(ngModel)]="specificRequirement.designation" #designation="ngModel"/>
       </div>
       <div class="col-12 p-fluid">
-        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+        <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmSpecificRequirement.invalid" style="height: 30px;"></button>
       </div>
     </form>
 </p-dialog>
@@ -241,7 +245,7 @@
         required [(ngModel)]="benefit.designation" #designation="ngModel"/>
     </div>
     <div class="col-12 p-fluid">
-      <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmBenefit.invalid" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+      <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"  [disabled]="frmBenefit.invalid" style="height: 30px;"></button>
     </div>
   </form>
 </p-dialog>

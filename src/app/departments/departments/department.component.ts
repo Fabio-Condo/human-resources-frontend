@@ -8,11 +8,7 @@ import { DepartmentService } from '../department.service';
 import { NgForm } from '@angular/forms';
 import { Department } from 'src/app/core/model/Department';
 import { Title } from '@angular/platform-browser';
-import { Employee } from 'src/app/core/model/Employee';
-import { IEmployee } from 'src/app/core/interfaces/IEmployee';
 import { EmployeesService } from 'src/app/employees/employees.service';
-import { SerializedEmployeeExcludePositition } from 'src/app/core/model/SerializedEmployeeExcludePositition';
-import { ISerializedEmployeeExcludePositition } from 'src/app/core/interfaces/ISerializedEmployeeExcludePositition';
 import { Project } from 'src/app/core/model/Project';
 
 @Component({
