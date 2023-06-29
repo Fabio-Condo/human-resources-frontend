@@ -340,7 +340,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   cloneContact(contact: Contact): Contact {
-    return new Contact(contact.id, contact.contactNumber, contact.name);
+    return new Contact(contact.id, contact.contactNumber);
   }
 
   get editingContact() { 
@@ -391,7 +391,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   getReadySkillEdit(skill: Skill, index: number) {
-    this.skill = this.cloneContact(skill);
+    this.skill = this.cloneSkill(skill);
     this.showSkillForm = true;
     this.skillIndex = index;
   }
@@ -444,7 +444,7 @@ export class EmployeesComponent implements OnInit {
       case 'APPROVED':
         return 'success'; 
       case 'PENDING':
-        return 'primmary';
+        return 'success';
       case 'CANCELED':
         return 'danger'; 
       case 'SUSPENDED':

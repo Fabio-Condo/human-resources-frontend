@@ -113,7 +113,7 @@ export class UserProfileComponent implements OnInit {
         this.fileName = null;
         this.profileImage = null;
         this.refreshing = false;
-        this.messageService.add({ severity: 'success', detail: 'Employee updated successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'User updated successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendNotification(errorResponse.error.message);
@@ -187,7 +187,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   cloneContact(contact: UserContact): UserContact {
-    return new UserContact(contact.id, contact.contactNumber, contact.name);
+    return new UserContact(contact.id, contact.contactNumber);
   }
 
   get editingContact() { 
@@ -238,7 +238,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getReadySkillEdit(skill: UserSkill, index: number) {
-    this.skill = this.cloneContact(skill);
+    this.skill = this.cloneSkill(skill);
     this.showSkillForm = true;
     this.skillIndex = index;
   }

@@ -6,11 +6,11 @@
       </div>
       <div class="formgrid grid" style="margin-top: 50px;"> 
   
-        <div  class="field col-12 md:col-3">
-            <img class="w-5 sm:w-16rem xl:w-12rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />  
+        <div  class="field col-12 md:col-2">
+            <img class="w-5 sm:w-16rem xl:w-10rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />  
         </div>
   
-        <div style="background-color: #fff;" class="field col-12 md:col-9">
+        <div style="background-color: #fff;" class="field col-12 md:col-8">
             <!--<form #profileUserForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)" class="form" novalidate>-->
             <form autocomplete="off" #profileUserForm="ngForm" (ngSubmit)="onUpdate(profileUserForm)" novalidate >
                 
@@ -20,6 +20,11 @@
                             <label>Primeiro Nome</label>
                             <input pInputText class="p-inputtext-sm" type="text" name="firstName"
                             ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
+                        </div>
+                        <div class="col-12 p-fluid" style="margin-top: 2%;">
+                            <label>Username</label>
+                            <input pInputText class="p-inputtext-sm" type="text" name="username"
+                            ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
                         </div>
                         <div class="col-12 p-fluid" style="margin-top: 2%;">
                             <label>Email</label>
@@ -65,14 +70,12 @@
                       <ng-template pTemplate="header">
                         <tr>
                           <th style="background-color: #FFF;">Número</th>
-                          <th style="background-color: #FFF;">Nome do proprietário</th>
                           <th style="background-color: #FFF;" class="col-valor-header"></th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                         <tr>
                           <td>{{ contact.contactNumber }}</td>
-                          <td>{{ contact.name }}</td>
                           <td class="col-acoes">
                             <span class="p-buttonset">
                                 <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
@@ -204,6 +207,11 @@
 
             </form>
         </div>
+
+        <div  class="field col-12 md:col-2">
+            <button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>
+        </div>
+
     </div>
 </div>
 
@@ -214,11 +222,6 @@
         <label>Número</label>
         <input pInputText type="text" name="numero"
           required [(ngModel)]="contact.contactNumber" #contatoNumero="ngModel" placeholder="Ex: 841234567"/>
-      </div>
-      <div class="col-12 p-fluid">
-        <label>Nome</label>
-        <input pInputText type="text" name="nome"
-          required [(ngModel)]="contact.name" #contatoNome="ngModel" placeholder="Ex: Próprio ou Nome - irmã"/>
       </div>
       <div class="col-12 p-fluid">
         <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid" style="height: 30px; margin-top: 1%;"></button>
