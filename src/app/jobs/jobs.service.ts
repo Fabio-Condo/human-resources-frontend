@@ -44,6 +44,24 @@ export class JobsService {
     return this.http.get<IApiResponse<IJob>>(`${this.jobsUrl}/view`, { params });
   }
 
+  filter(filter: IJobFilter) : Observable<IApiResponse<IJob>> { 
+    let params = new HttpParams()  
+      .set('page', filter.page)  
+      .set('jobOrderBy', filter.sort)
+      .set('size', filter.itemsPerPage); 
+
+    if (filter.positionName) { 
+      params = params.set('positionName', filter.positionName); 
+    }
+    if (filter.workplace) { 
+      params = params.set('workplace', filter.workplace); 
+    }
+
+    console.log(params);
+
+    return this.http.get<IApiResponse<IJob>>(`${this.jobsUrl}/filter`, { params });
+  }
+
   add(job: IJob): Observable<IJob> {
     return this.http.post<IJob>(this.jobsUrl, job, { });
   }
