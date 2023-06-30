@@ -38,8 +38,10 @@ export class JobsComponent implements OnInit {
 
   positionById: IPosition = new Position();
 
-  public user: User = new User; 
+  user: User = new User; 
   isUserLoggedIn: boolean = false;
+
+  totalJobs: number = 0;
 
   sizePage = [
     { label: '5 itens por página', value: 5 },
@@ -67,6 +69,7 @@ export class JobsComponent implements OnInit {
     this.isUserLoggedIn = this.authenticationService.isUserLoggedIn();
     this.user = this.authenticationService.getUserFromLocalCache();
     this.title.setTitle('Jobs page');
+    this.getTotalJobs();
     if(this.isUserLoggedIn){
       this.getPositions();
     }
@@ -75,7 +78,7 @@ export class JobsComponent implements OnInit {
   filter: IJobFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'id,asc'
+    sort: 'publicationDate,desc'
   }
 
   @ViewChild('table') grid: any;
@@ -98,6 +101,7 @@ export class JobsComponent implements OnInit {
       (jobAdded) => {
         this.job = jobAdded;
         this.showLoading = false;
+        this.getTotalJobs();
         this.filterJobs();
         this.messageService.add({ severity: 'success', detail: 'Job added successfully' });      
       },
@@ -150,6 +154,7 @@ export class JobsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Job deleted succefully!' })
+        this.getTotalJobs();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -214,6 +219,20 @@ export class JobsComponent implements OnInit {
         this.deleteJob(job);
       }
     });
+  }
+
+  getTotalJobs(){
+    this.showLoading = true;
+    this.jobsService.buscarTotal().subscribe(
+      (total) => {
+        this.totalJobs =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onChangePage(event: LazyLoadEvent) {

@@ -7,9 +7,13 @@ import { AuthenticationGuard } from '../guard/authentication.guard';
 const routes: Routes = [
     { 
       path: 'v1/employees', 
-      component: EmployeesComponent,
-      canActivate: [AuthenticationGuard]
-    }
+      component: EmployeesComponent, 
+      canActivate: [AuthenticationGuard], 
+      data: { 
+        roles: ['ROLE_SUPER_ADMIN'], 
+        requiresRoleCheck: true
+      } 
+    },
 ];
 
 @NgModule({

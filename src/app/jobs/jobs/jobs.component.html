@@ -2,7 +2,17 @@
 <div class="container">
     <h3>Vagas</h3>
 
-    <p-table [value]="jobs" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table 
+      [value]="jobs" 
+      [paginator]="true" 
+      (onLazyLoad)="onChangePage($event)" 
+      [rows]="filter.itemsPerPage" 
+      [lazy]="true" 
+      [totalRecords]="totalRecords" 
+      currentPageReportTemplate="Results: {{totalRecords}} of {{totalJobs}}"
+      [showCurrentPageReport]="true" 
+      styleClass="p-datatable-sm" 
+      #table>
         <ng-template pTemplate="caption" *ngIf="isUserLoggedIn && isSuperAdmin">
             <div class="flex">
                 <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
@@ -10,9 +20,21 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>         
-                <th style="background-color: #fff; width:40%" >Cargo</th>
-                <th style="background-color: #fff; width:20%">Location</th>
-                <th style="background-color: #fff; width:20%">Publicação</th>
+                <th style="background-color: #fff; width:40%" >
+                  Title
+                  <span *ngIf="filter.sort ==='positionName,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
+                  <span *ngIf="filter.sort ==='positionName,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
+                </th>
+                <th style="background-color: #fff; width:20%">
+                  Location
+                  <span *ngIf="filter.sort ==='workplace,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
+                  <span *ngIf="filter.sort ==='workplace,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
+                </th>
+                <th style="background-color: #fff; width:20%">
+                  Date
+                  <span *ngIf="filter.sort ==='publicationDate,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
+                  <span *ngIf="filter.sort ==='publicationDate,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
+                </th>
                 <th *ngIf="isUserLoggedIn && isSuperAdmin" style="background-color: #fff;">Ações</th>
             </tr>
             <tr>
@@ -29,10 +51,10 @@
                 </span>
               </th>
               <th>
-                <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input pInputText type="text" placeholder="Date (dd/MM/y)" />
-                </span>
+                <p-calendar class="p-inputtext-sm" name="publicationDate" dateFormat="dd/mm/yy" 
+                [inputStyle]="{ 'width': '200px'}" [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)"
+                  [inline]="false" [readonlyInput]="false" 
+                  ngModel #publicationDate="ngModel" [required]="true" [(ngModel)]="filter.publicationDate"(ngModelChange)="filterJobs()" ></p-calendar>
               </th>
             </tr>
         </ng-template>
@@ -44,7 +66,7 @@
                   </a>  
                 </td>
                 <td>{{ job.position.workplace.name }}</td>
-                <td>{{ job.publicationDate | date: 'dd/MM/yyyy'}}</td>  
+                <td>{{ job.publicationDate | date: 'd MMM, y'}}</td>  
 
                 <td style="width: 180px;" *ngIf="isUserLoggedIn && isSuperAdmin">
                     <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;

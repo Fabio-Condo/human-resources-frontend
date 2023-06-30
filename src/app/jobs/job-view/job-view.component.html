@@ -4,15 +4,18 @@
   href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
 />
 <div class="container">
-    <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top" (click)="onApply()">
+    <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top" *ngIf="!isAlreadyAplliedToCurrentJob()" (click)="onApply()">
         <p-tag [severity]="'primmary'">apply now</p-tag>
+    </a>
+    <a style="display:inline; float: right;" tooltipPosition="top" *ngIf="isAlreadyAplliedToCurrentJob()">
+        <p-tag [severity]="'primmary'">applied</p-tag>
     </a>
 
     <div style="display:inline;">
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>
     </div>
     <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Country: </span><span style="font-size: 1rem;">{{ job.position.workplace.name }}</span></p>
-    <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{ job.publicationDate | date: 'dd/MM/yyyy' }}</span></p>
+    <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{ job.publicationDate | date: 'd MMM, y' }}</span></p>
     <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;" > At Meta, we’re working hard to build a better future. A more connected, inclusive and sustainable world. As a dynamic global community, it's our human spirit, together with technology, that empowers us to achieve this..</p>
 </div>
 <main>

@@ -39,23 +39,17 @@ export class JobViewComponent implements OnInit {
     }
   }
 
-  isCandidated() {  // Not used yet
-    /*
-    this.user.jobs.forEach((job) => {
-      if(this.job.id == job.id){
-        console.log(true);
-      }else{
-        console.log(false);
-      }
-    });
-    */
+  isAlreadyAplliedToCurrentJob(): boolean {
+    if(this.user){
+      return this.user.jobs.some(job => job.id === this.job.id);
+    }
+    return false;
   }
 
   findById(id: number) {
     this.jobsService.findByIdForView(id).subscribe(
       (job: Job) => {
         this.job = job;
-        this.isCandidated();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);

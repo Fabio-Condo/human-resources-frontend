@@ -9,12 +9,17 @@ const routes: Routes = [
     { 
       path: 'v1/user-profile', 
       component: UserProfileComponent,
-      canActivate: [AuthenticationGuard]
+      canActivate: [AuthenticationGuard], 
+      data: { requiresRoleCheck: false }
     },
     { 
       path: 'v1/users', 
       component: UsersComponent,
-      canActivate: [AuthenticationGuard]
+      canActivate: [AuthenticationGuard], 
+      data: { 
+        roles: ['ROLE_SUPER_ADMIN'], 
+        requiresRoleCheck: true
+      } 
     }
 
     /*

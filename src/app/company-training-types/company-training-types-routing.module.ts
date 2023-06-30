@@ -8,7 +8,11 @@ const routes: Routes = [
     { 
       path: 'v1/company-training-types', 
       component: CompanyTrainingTypesComponent,
-      canActivate: [AuthenticationGuard]
+      canActivate: [AuthenticationGuard], 
+      data: { 
+        roles: ['ROLE_SUPER_ADMIN'], 
+        requiresRoleCheck: true
+      } 
     }
 ];
 

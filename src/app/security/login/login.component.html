@@ -29,7 +29,7 @@
           <!--<button pButton type="submit" label="Login"></button>-->
 
           <button pButton type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn" style="background-color: #1c80cf; border: none;">
-            <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+            <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
             <span *ngIf="showLoading">Loading...</span> 
             <span *ngIf="!showLoading">Login</span>      
           </button>

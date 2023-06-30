@@ -56,6 +56,9 @@ export class JobsService {
     if (filter.workplace) { 
       params = params.set('workplace', filter.workplace); 
     }
+    if (filter.publicationDate) {
+      params = params.set('publicationDate', this.datePipe.transform(filter.publicationDate, 'yyyy-MM-dd')!); 
+    }
 
     console.log(params);
 
@@ -97,6 +100,10 @@ export class JobsService {
 
   removeSelectedCandidateFromJob(candidateId: number, jobId: number): Observable<IJob> {
     return this.http.put<IJob>(`${this.jobsUrl}/${jobId}/selected-candidates/${candidateId}`, { });
+  }
+
+  buscarTotal(): Observable<number> {
+    return this.http.get<number>(`${this.jobsUrl}/total`, { });
   }
 
 }
