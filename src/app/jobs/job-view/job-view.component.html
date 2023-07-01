@@ -4,12 +4,15 @@
   href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
 />
 <div class="container">
-    <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top" *ngIf="!isAlreadyAplliedToCurrentJob()" (click)="onApply()">
-        <p-tag [severity]="'primmary'">apply now</p-tag>
-    </a>
-    <a style="display:inline; float: right;" tooltipPosition="top" *ngIf="isAlreadyAplliedToCurrentJob()">
-        <p-tag [severity]="'primmary'">applied</p-tag>
-    </a>
+    <span *ngIf="user != undefined">
+        <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top" *ngIf="isCandidate && !isAlreadyAplliedToCurrentJob()" (click)="onApply()">
+            <p-tag [severity]="'primmary'">apply now</p-tag>
+        </a>
+        <a style="display:inline; float: right;" tooltipPosition="top" *ngIf="isCandidate && isAlreadyAplliedToCurrentJob()">
+            <p-tag [severity]="'info'">applied</p-tag>
+        </a>
+    </span>
+
 
     <div style="display:inline;">
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>

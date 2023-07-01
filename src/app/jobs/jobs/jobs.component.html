@@ -63,7 +63,13 @@
                 <td>
                   <a href="javascript:;" [routerLink]="['/v1/jobs-view', job.id]">
                     {{ job.position.name }}
-                  </a>  
+                  </a> 
+                  <span *ngIf="user != undefined">
+                    <a *ngIf="isAlreadyAplliedToCurrentJob(job.candidates)">
+                      <p-tag [severity]="'info'">applied</p-tag>
+                    </a>
+                  </span> 
+ 
                 </td>
                 <td>{{ job.position.workplace.name }}</td>
                 <td>{{ job.publicationDate | date: 'd MMM, y'}}</td>  

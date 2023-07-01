@@ -60,17 +60,22 @@
                     <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
                 </div>
 
-                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
-                    <label>Contactos </label> 
-                    <a href="javascript:;" (click)="getReadyNewContact()">
+                <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
+                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="showContacts" class="pi pi-angle-down" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                    Contactos
+                  </div>
+                </a>
+                
+                <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
+                    <!--<label>Contactos </label>-->
+                    <a href="javascript:;" style="display:inline; float: right; padding: 15px;" (click)="getReadyNewContact()">
                         <p-tag [severity]="'info'">add +</p-tag>
                     </a>
-                    <p-table [value]="user.userContacts" [responsive]="true" 
-                         styleClass="p-datatable-sm" #tabela >
+                    <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
                         <tr>
-                          <th style="background-color: #FFF;">Número</th>
-                          <th style="background-color: #FFF;" class="col-valor-header"></th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">

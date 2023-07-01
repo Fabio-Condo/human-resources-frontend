@@ -60,6 +60,8 @@ export class UserProfileComponent implements OnInit {
   showProfessionalExperienceForm = false;
   professionalExperienceIndex?: number;
 
+  showContacts: boolean = false
+
   roles = [
     { label: 'USER', value: 'ROLE_USER' },
     { label: 'ADMIN', value: 'ROLE_ADMIN' },

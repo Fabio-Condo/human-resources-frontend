@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/users/authentication.service';
 import { User } from 'src/app/core/model/User';
+import { Role } from 'src/app/enum/role.enum';
 
 @Component({
   selector: 'app-job-view',
@@ -78,8 +79,8 @@ export class JobViewComponent implements OnInit {
     )
   }
 
-  removeCandidateFromJob(jobId: number) { // Dont use, we will not remove, but only add
-    this.jobsService.removeCandidateFromJob(this.user.id, jobId).subscribe(
+  removeCandidateFromJob() { // Dont use, we will not remove, but only add
+    this.jobsService.removeCandidateFromJob(this.user.id, this.job.id).subscribe(
       (job) => {
         this.job = job;
         this.messageService.add({ severity: 'success', detail: 'Candidate removed successfully!' });
@@ -88,6 +89,22 @@ export class JobViewComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
       }
     )
+  }
+
+  public get isCandidate(): boolean {
+    return this.getUserRole() === Role.CANDIDATE;
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  public get isSuperAdmin(): boolean {
+    return this.getUserRole() === Role.SUPER_ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
   }
 
   private sendErrorNotification(message: string): void {

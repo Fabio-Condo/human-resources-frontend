@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
   ];
 
   roles = [
-    { label: 'USER', value: 'ROLE_USER' },
+    { label: 'CANDIDATE', value: 'ROLE_CANDIDATE' },
     { label: 'ADMIN', value: 'ROLE_ADMIN' },
     { label: 'SUPER ADMIN', value: 'ROLE_SUPER_ADMIN' },
   ];

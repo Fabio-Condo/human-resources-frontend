@@ -163,6 +163,10 @@ export class JobsComponent implements OnInit {
     )
   }
 
+  isAlreadyAplliedToCurrentJob(users: User[]): boolean {
+    return users.some(user => user.id === this.user.id);
+  }
+
   getPositions() {
     return this.positionsService.findAll().subscribe(
       data => {

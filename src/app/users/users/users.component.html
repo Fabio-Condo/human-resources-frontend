@@ -29,6 +29,7 @@
                   <span *ngIf="filter.sort ==='email,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
                   <span *ngIf="filter.sort ==='email,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
                 </th>
+                <th style="background-color: #fff;">Role</th>
                 <th style="background-color: #fff;">Status</th>
                 <th style="background-color: #fff;">Not locked</th>
                 <th style="background-color: #fff;">Actions</th>
@@ -41,7 +42,8 @@
                 </td>
                 <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.firstName }}</td>
                 <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.lastName }}</td>
-                <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}</td>      
+                <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}</td>  
+                <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.role }}</td> 
     
                 <td>
                   <span class="p-column-title">Status</span>
