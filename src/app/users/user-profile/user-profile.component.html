@@ -22,9 +22,9 @@
                             ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
                         </div>
                         <div class="col-12 p-fluid" style="margin-top: 2%;">
-                            <label>Username</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="username"
-                            ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
+                          <label>Último Nome</label>
+                          <input pInputText class="p-inputtext-sm" type="text" name="lastName"
+                          ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
                         </div>
                         <div class="col-12 p-fluid" style="margin-top: 2%;">
                             <label>Email</label>
@@ -39,9 +39,9 @@
                     </div>
                     <div class="field col-12 md:col-6">
                         <div class="col-12 p-fluid">
-                            <label>Último Nome</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="lastName"
-                            ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
+                          <label>Username</label>
+                          <input pInputText class="p-inputtext-sm" type="text" name="username"
+                          ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
                         </div>
                         <div class="col-12 p-fluid" style="margin-top: 2%;">
                             <label>Número de Telefone</label>
@@ -62,17 +62,15 @@
 
                 <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
                   <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
-                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
-                    <i *ngIf="showContacts" class="pi pi-angle-down" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="showContacts" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
                     Contactos
                   </div>
                 </a>
                 
                 <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
                     <!--<label>Contactos </label>-->
-                    <a href="javascript:;" style="display:inline; float: right; padding: 15px;" (click)="getReadyNewContact()">
-                        <p-tag [severity]="'info'">add +</p-tag>
-                    </a>
+                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewContact()">add new</a>
                     <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
                         <tr>
@@ -100,11 +98,16 @@
                     <br>   
                 </div>
 
-                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
-                    <label>Professional Experiences </label> 
-                    <a href="javascript:;" (click)="getReadyNewProfessionalExperience()">
-                        <p-tag [severity]="'info'">add +</p-tag>
-                    </a>
+                <a href="javascript:;" style="text-decoration: none;" (click)="showProfessionalExperiences = !showProfessionalExperiences">
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
+                    <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
+                    Professional Experiences
+                  </div>
+                </a>
+
+                <div *ngIf="showProfessionalExperiences" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewProfessionalExperience()">add new</a>
                     <p-table [value]="user.professionalExperiences" [responsive]="true" 
                          styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
@@ -138,11 +141,16 @@
                     <br>   
                 </div>
 
-                <div class="col-12 p-fluid" style="margin-top: 30px; background-color: #fff">
-                    <label>Formação acadêmica </label> 
-                    <a href="javascript:;" (click)="getReadyNewTraining()">
-                        <p-tag [severity]="'info'">add +</p-tag>
-                    </a>
+                <a href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
+                    <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
+                    Formação acadêmica
+                  </div>
+                </a>
+
+                <div *ngIf="showUserTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                    <a href="javascript:;" (click)="getReadyNewTraining()">add new</a>
                     <p-table [value]="user.userTrainings" [responsive]="true" 
                          styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
@@ -172,12 +180,17 @@
                     <br>   
                 </div>
 
+                <a href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
+                    <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                    <i *ngIf="showUserSkills" class="pi pi-angle-down" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                    Habilidades
+                  </div>
+                </a>
+
                 <!--Skills-->
-                <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                    <label>Habilidades </label> 
-                    <a href="javascript:;" (click)="getReadyNewSkill()">
-                        <p-tag [severity]="'info'">add +</p-tag>
-                    </a>
+                <div *ngIf="showUserSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                    <a href="javascript:;" (click)="getReadyNewSkill()">add new</a>
                     <p-table [value]="user.userSkills" [responsive]="true" 
                         styleClass="p-datatable-sm" #tabela>
                         <ng-template pTemplate="header">
@@ -206,8 +219,8 @@
                     <br> 
                 </div>
 
-                <div class="col-12" style="margin-top: 2px;">
-                    <button pButton type="submit" pRipple label="save" icon="pi pi-save" class="p-button-primmary mr-2" ></button>
+                <div class="col-12" style="margin-top: 2px; display:inline; float: right;">
+                    <button pButton type="submit" pRipple label="Save changes" class="p-button-primmary mr-2" ></button>
                 </div>
 
             </form>
@@ -235,7 +248,7 @@
 </p-dialog>  
 
 <!--Traning-->
-<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
@@ -263,7 +276,7 @@
 </p-dialog>  
 
 <!--Skills-->
-<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [style]="{width: '30vw'}" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
@@ -277,7 +290,7 @@
 </p-dialog> 
 
 <!--Professional Experience-->
-<p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)">
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Provincia</label>    
