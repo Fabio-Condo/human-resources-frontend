@@ -42,6 +42,8 @@ export class ProjectsComponent implements OnInit {
 
   employeeById: IEmployee = new Employee();
 
+  showProjectMembers: boolean = false;
+
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
     { label: 'Concluído', value: 'CONCLUDED' },

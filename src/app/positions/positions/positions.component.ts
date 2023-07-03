@@ -58,6 +58,10 @@ export class PositionsComponent implements OnInit {
 
   displayModalFilter: boolean = false;
 
+  showMainResponsibilities: boolean = false;
+  showSpecificRequirements: boolean = false;
+  showBenefits: boolean = false;
+
   languageWriteSpeakLevel = [
     { label: 'Fluente', value: 'FLUENT' },
     { label: 'Razoável', value: 'REASONABLE' },

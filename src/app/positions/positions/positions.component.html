@@ -37,7 +37,7 @@
 
 </div>
 
-<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false" >
+<p-dialog header="Cargo {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '37vw'}" [draggable]="false" [resizable]="false" >
     <form autocomplete="off" #positionForm="ngForm"  styleClass="p-datatable-sm" (ngSubmit)="save(positionForm)">
 
         <div class="formgrid grid">
@@ -89,14 +89,19 @@
         </div>  
 
 
-        <div class="formgrid grid">
+        <div>
+
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showMainResponsibilities = !showMainResponsibilities">
+              <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showMainResponsibilities" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showMainResponsibilities" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Principais Responsibilidades 
+              </div>
+            </a>
         
             <!--Main Responsibilities-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
-                <label>Pricipais Responsibilidades </label> 
-                <a href="javascript:;" (click)="openAddNewMainResponsabilityModal()">
-                  <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <div *ngIf="showMainResponsibilities" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff;">
+                <a href="javascript:;" (click)="openAddNewMainResponsabilityModal()">add +</a>
                 <p-table [value]="position.mainResponsibilities" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -125,12 +130,17 @@
                 <br> 
             </div> 
 
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showSpecificRequirements = !showSpecificRequirements">
+              <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showSpecificRequirements" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showSpecificRequirements" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Requisitos especificos exigidos
+              </div>
+            </a>
+
             <!--Specific Requirements-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Requisitos especificos exigidos </label> 
-                <a href="javascript:;" (click)="openAddNewSpecificRequirementModal()">
-                  <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <div *ngIf="showSpecificRequirements" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" (click)="openAddNewSpecificRequirementModal()">add +</a>
                 <p-table [value]="position.specificRequirements" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -158,13 +168,18 @@
                 </p-table>  
                 <br> 
             </div> 
+
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showBenefits = !showBenefits">
+              <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showBenefits" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showBenefits" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Beneficios
+              </div>
+            </a>
             
             <!--Benefits-->
-            <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
-              <label>Beneficios </label>
-                <a href="javascript:;" (click)="openAddNewBenefitModal()">
-                  <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <div *ngIf="showBenefits" class="col-12 p-fluid" style="margin-top: 2px;background-color: #fff ">
+              <a href="javascript:;" (click)="openAddNewBenefitModal()">add +</a>
               <p-table [value]="position.benefits" [responsive]="true" 
                   styleClass="p-datatable-sm" #tabela >
                 <ng-template pTemplate="header">
@@ -195,8 +210,8 @@
               <br> 
             </div> 
 
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="positionForm.invalid" style="height: 30px;">
+            <div class="col-12" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="positionForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      

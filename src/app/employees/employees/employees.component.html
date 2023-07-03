@@ -57,8 +57,9 @@
 
 <p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
-
+        
         <div class="formgrid grid">
+
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nome</label>
@@ -124,19 +125,22 @@
             </div>
         </div>
 
-        <div class="formgrid grid">
+        <div>
+
+            <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfo = !showContactsInfo">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                  <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
+                  <i *ngIf="showContactsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
+                  Contacts
+                </div>
+            </a>
             
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Contactos </label> 
-                <a href="javascript:;" (click)="getReadyNewContact()">
-                    <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <div *ngIf="showContactsInfo" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
                 <p-table [value]="employee.contacts" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
                     <tr>
-                      <th style="background-color: #FFF;">Número</th>
-                      <th style="background-color: #FFF;" class="col-valor-header"></th>
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
@@ -161,11 +165,16 @@
                 <br>   
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label >Formação acadêmica </label> 
-                <a href="javascript:;" (click)="getReadyNewTraining()">
-                    <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <a href="javascript:;" style="text-decoration: none;" (click)="showEmployeeTrainings = !showEmployeeTrainings">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                  <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+                  <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+                  Formação acadêmica
+                </div>
+            </a>
+
+            <div *ngIf="showEmployeeTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
                 <p-table [value]="employee.employeeTrainings" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -200,12 +209,17 @@
                 <br>   
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;" (click)="showSkills = !showSkills">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                  <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
+                  <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
+                  Skills
+                </div>
+            </a>
+
             <!--Skills-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Habilidades </label> 
-                <a href="javascript:;" (click)="getReadyNewSkill()">
-                    <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <div *ngIf="showSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
                 <p-table [value]="employee.skills" [responsive]="true" 
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -234,8 +248,8 @@
                 <br> 
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm p-button-success" class="" style="height: 30px;">
+            <div class="col-12" style="margin-top: 2px;"> 
+                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm p-button-success" class="">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      

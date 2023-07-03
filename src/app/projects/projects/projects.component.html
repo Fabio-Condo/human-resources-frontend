@@ -52,7 +52,7 @@
 
 <p-dialog header="Projecto {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #projectStatusForm="ngForm" (ngSubmit)="save(projectStatusForm)">
-        <div class="formgrid grid">
+        <div >
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="name"
@@ -69,11 +69,16 @@
                     name="projectStatus" #projectStatus ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label >Membros envolvidos </label> 
-                <a href="javascript:;" (click)="onaddEmployeeToProject()">
-                    <p-tag [severity]="'info'">add +</p-tag>
-                </a>
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showProjectMembers = !showProjectMembers">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                  <i *ngIf="!showProjectMembers" class="pi pi-angle-right" style="margin: 13px;"></i>
+                  <i *ngIf="showProjectMembers" class="pi pi-angle-down" style="margin: 13px;"></i>
+                  Membros 
+                </div>
+            </a>
+
+            <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <a href="javascript:;" (click)="onaddEmployeeToProject()">add +</a>
                 <p-table [value]="project.team" [responsive]="true" 
                      styleClass="p-datatable-sm" #tabela >
                   <ng-template pTemplate="header">
@@ -105,8 +110,8 @@
                 <br>   
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="projectStatusForm.invalid" class="p-button-sm" style="height: 30px;">
+            <div class="col-12" style="margin-top: 2%;"> 
+                <button pButton type="submit" [disabled]="projectStatusForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      

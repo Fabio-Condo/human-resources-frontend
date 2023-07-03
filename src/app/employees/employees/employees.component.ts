@@ -67,6 +67,10 @@ export class EmployeesComponent implements OnInit {
   departments: any[] = [];
   selectedDepartment?: number;
 
+  showContactsInfo: boolean = false;
+  showEmployeeTrainings: boolean = false;
+  showSkills: boolean = false;
+
   maritalStatuses = [
     { label: 'Solteiro', value: 'SINGLE' },
     { label: 'Casado', value: 'MARRIED' },
