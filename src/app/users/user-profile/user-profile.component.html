@@ -13,64 +13,72 @@
         <div style="background-color: #fff;" class="field col-12 md:col-8">
             <!--<form #profileUserForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)" class="form" novalidate>-->
             <form autocomplete="off" #profileUserForm="ngForm" (ngSubmit)="onUpdate(profileUserForm)" novalidate >
-                
-                <div class="formgrid grid">
-                    <div class="field col-12 md:col-6">
-                        <div class="col-12 p-fluid">
-                            <label>Primeiro Nome</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="firstName"
-                            ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
-                        </div>
-                        <div class="col-12 p-fluid" style="margin-top: 2%;">
-                          <label>Último Nome</label>
-                          <input pInputText class="p-inputtext-sm" type="text" name="lastName"
-                          ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
-                        </div>
-                        <div class="col-12 p-fluid" style="margin-top: 2%;">
-                            <label>Email</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="email"
-                            ngModel #email="ngModel" required minlength="1" [(ngModel)]="user.email" >  
-                        </div>
-                        <div class="col-12 p-fluid" style="margin-top: 2%;">
-                            <label>Company</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="company"
-                            ngModel #company="ngModel" required minlength="1" [(ngModel)]="user.company">  
-                        </div>
+
+                <a href="javascript:;" style="text-decoration: none;" (click)="showAccount = !showAccount">
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showAccount" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showAccount" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Account
+                  </div>
+                </a>
+
+                <div *ngIf="showAccount" class="formgrid grid">
+                  <div class="field col-12 md:col-6">
+                    <div class="col-12 p-fluid">
+                      <label>Primeiro Nome</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="firstName"
+                          ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
                     </div>
-                    <div class="field col-12 md:col-6">
-                        <div class="col-12 p-fluid">
-                          <label>Username</label>
-                          <input pInputText class="p-inputtext-sm" type="text" name="username"
-                          ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
-                        </div>
-                        <div class="col-12 p-fluid" style="margin-top: 2%;">
-                            <label>Número de Telefone</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber"
-                            ngModel #phoneNumber="ngModel" required minlength="1" [(ngModel)]="user.phoneNumber" >  
-                        </div>
-                        <div class="col-12 p-fluid" style="margin-top: 2%;">
-                            <label>Designation</label>
-                            <input pInputText class="p-inputtext-sm" type="text" name="designation"
-                            ngModel #designation="ngModel" required minlength="1"  [(ngModel)]="user.designation">  
-                        </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                      <label>Último Nome</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="lastName"
+                        ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
                     </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                      <label>Email</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="email"
+                        ngModel #email="ngModel" required minlength="1" [(ngModel)]="user.email" >  
+                    </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                      <label>Company</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="company"
+                        ngModel #company="ngModel" required minlength="1" [(ngModel)]="user.company">  
+                    </div>
+                  </div>
+                  <div class="field col-12 md:col-6">
+                    <div class="col-12 p-fluid">
+                      <label>Username</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="username"
+                        ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
+                    </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                      <label>Número de Telefone</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber"
+                        ngModel #phoneNumber="ngModel" required minlength="1" [(ngModel)]="user.phoneNumber" >  
+                    </div>
+                    <div class="col-12 p-fluid" style="margin-top: 2%;">
+                      <label>Designation</label>
+                      <input pInputText class="p-inputtext-sm" type="text" name="designation"
+                        ngModel #designation="ngModel" required minlength="1"  [(ngModel)]="user.designation">  
+                    </div>
+                  </div>
                 </div>
-                <div class="col-12 p-fluid">
-                    <label>Bio</label>
-                    <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+                <div *ngIf="showAccount" class="col-12 p-fluid">
+                  <label>Bio</label>
+                  <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
                 </div>
 
                 <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
-                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
-                    <i *ngIf="showContacts" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
-                    Contactos
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showContacts" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Contacts
                   </div>
                 </a>
                 
                 <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
                     <!--<label>Contactos </label>-->
-                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewContact()">add new</a>
+                    <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
                     <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
                         <tr>
@@ -99,10 +107,10 @@
                 </div>
 
                 <a href="javascript:;" style="text-decoration: none;" (click)="showProfessionalExperiences = !showProfessionalExperiences">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
-                    <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
-                    <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
-                    Professional Experiences
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Professional Experience
                   </div>
                 </a>
 
@@ -142,21 +150,19 @@
                 </div>
 
                 <a href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
-                    <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin-left: 20px; margin-top: 5px;"></i>
-                    <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin-left: 20px; margin-top: 5px;"></i>
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
                     Formação acadêmica
                   </div>
                 </a>
 
                 <div *ngIf="showUserTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                    <a href="javascript:;" (click)="getReadyNewTraining()">add new</a>
+                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
                     <p-table [value]="user.userTrainings" [responsive]="true" 
                          styleClass="p-datatable-sm" #tabela >
                       <ng-template pTemplate="header">
                         <tr>
-                          <th style="background-color: #FFF;">Description</th>
-                          <th style="background-color: #FFF;" class="col-valor-header"></th>
                         </tr>
                       </ng-template>
                       <ng-template pTemplate="body" let-ut let-rowIndex="rowIndex">
@@ -181,16 +187,16 @@
                 </div>
 
                 <a href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 28px; font-size: 14px; ">
-                    <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
-                    <i *ngIf="showUserSkills" class="pi pi-angle-down" style="color: #eee7e7; margin-left: 20px; margin-top: 5px;"></i>
+                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showUserSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
                     Habilidades
                   </div>
                 </a>
 
                 <!--Skills-->
                 <div *ngIf="showUserSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                    <a href="javascript:;" (click)="getReadyNewSkill()">add new</a>
+                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
                     <p-table [value]="user.userSkills" [responsive]="true" 
                         styleClass="p-datatable-sm" #tabela>
                         <ng-template pTemplate="header">

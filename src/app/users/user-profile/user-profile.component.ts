@@ -60,6 +60,7 @@ export class UserProfileComponent implements OnInit {
   showProfessionalExperienceForm = false;
   professionalExperienceIndex?: number;
 
+  showAccount: boolean = true;
   showContacts: boolean = false;
   showProfessionalExperiences: boolean = false;
   showUserTrainings: boolean = false;
