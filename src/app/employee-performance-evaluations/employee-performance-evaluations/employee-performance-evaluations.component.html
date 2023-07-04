@@ -1,12 +1,17 @@
 <div class="container">
     <h3>Avaliação de desenpenho</h3>
 
-    <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations"
+        [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true"
+        [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" (click)="onAddNewEmployeePerformanceEvaluation()"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2"
+                    (click)="onAddNewEmployeePerformanceEvaluation()"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
+                    [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -29,7 +34,7 @@
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployeePerformanceEvaluation(epe)">
                         {{ epe.employee.name }}
-                    </a>           
+                    </a>
                 </td>
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
@@ -37,9 +42,14 @@
                     <p-tag [value]="epe.category" [severity]="getPerfomanceEvaluationStatus(epe.category)"></p-tag>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-eye" style=" height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="View" (click)="onSelectEmployeePerformanceEvaluation(epe)"
+                        tooltipPosition="top" type="button" icon="pi pi-eye" style=" height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)"
+                        tooltipPosition="top" type="button" icon="pi pi-pencil"
+                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button"
+                        icon="pi pi-trash"
+                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -47,157 +57,199 @@
 
 </div>
 
-<p-dialog header="Avaliação {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm" (ngSubmit)="save(employeePerformanceEvaluationForm)">
-        <div class="formgrid grid">   
+<p-dialog header="Avaliação {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+    [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm"
+        (ngSubmit)="save(employeePerformanceEvaluationForm)">
+        <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Funcionário</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                    name="employee" #employee ngModel [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                    name="employee" #employee ngModel
+                    [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Categoria</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione"
-                    name="category" #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="categories" placeholder="Selecione" name="category"
+                    #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Trabalho em equipe - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
-                    name="teamWork" #teamWork ngModel [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione" name="teamWork"
+                    #teamWork ngModel [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comunicação - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
-                    name="communication" #communication ngModel [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione"
+                    name="communication" #communication ngModel
+                    [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Pensamento estratégico - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm"  [options]="evaluationLevels" placeholder="Selecione"
-                    name="strategicThought" #strategicThought ngModel [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione"
+                    name="strategicThought" #strategicThought ngModel
+                    [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comentário do avaliador</label>
-                <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement" minlength="10" placeholder="Sem comments"></textarea>
+                <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel
+                    name="forEmployeeImprovement" [(ngModel)]="employeePerformanceEvaluation.forEmployeeImprovement"
+                    minlength="10" placeholder="Sem comments"></textarea>
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm" style="height: 30px;">
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm"
+                    style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
-                  </button>
-              </div>
-        </div>  
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+                </button>
+            </div>
+        </div>
     </form>
 </p-dialog>
 
 
 
 <!--Filtrar-->
-<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">
 
     <div class="formgrid grid">
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
-                <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..." ngModel name="itemsPerPage"
+                    [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
-                <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..." ngModel name="sort" [(ngModel)]="filter.sort"
+                    (onChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
             </div>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="filter.employee" (ngModelChange)="filterEmployeePerformanceEvaluations()" ></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                name="employee" #employee ngModel [(ngModel)]="filter.employee"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Categoria</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="categories" placeholder="Selecione" 
-                name="category" #category ngModel [(ngModel)]="filter.category" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="categories" placeholder="Selecione" name="category" #category
+                ngModel [(ngModel)]="filter.category"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid"> 
-            <label>Nome</label>    
+        <div class="col-12 p-fluid">
+            <label>Nome</label>
             <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployeePerformanceEvaluations()"/>
-            </span>      
+                <i class="pi pi-search"></i>
+                <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
+                    (ngModelChange)="filterEmployeePerformanceEvaluations()" />
+            </span>
         </div>
 
-        <div class="col-12 p-fluid"> 
-            <label>Nome</label>    
+        <div class="col-12 p-fluid">
+            <label>Nome</label>
             <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployeePerformanceEvaluations()"/>
-              </span>      
+                <i class="pi pi-search"></i>
+                <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
+                    (ngModelChange)="filterEmployeePerformanceEvaluations()" />
+            </span>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
         </div>
-    </div> 
+    </div>
 
-</p-dialog>  
+</p-dialog>
 
 
-<p-dialog header="{{selectedEmployeePerformanceEvaluationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedEmployeePerformanceEvaluationModal.employee.name}}" [(visible)]="displayModal"
+    [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Funcionário</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.name}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Cargo</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.name}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.department.name}}</span></i></li>
-
-            <br>
-            <li class="dialog-info-li">
-                <i class="dialog-info-i">
-                    <span style="color:#545555;font-weight:bold">Categoria</span>: 
-                    <p-tag [value]="selectedEmployeePerformanceEvaluationModal.category" [severity]="getPerfomanceEvaluationStatus(selectedEmployeePerformanceEvaluationModal.category)"></p-tag>
-                </i>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Funcionário</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.name}}</span></i>
             </li>
-            <li class="dialog-info-li">
-                <i class="dialog-info-i">
-                    <span style="color:#545555;font-weight:bold">Trabalho em equipe</span>: 
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='ONE'"> Um [1] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='TWO'"> Dois [2] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='THREE'"> Três [3] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FOUR'"> Quatro [4] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FIVE'"> Cinco [5] </span>
-                </i>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Cargo</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.name}}</span></i>
             </li>
-            <li class="dialog-info-li">
-                <i class="dialog-info-i">
-                    <span style="color:#545555;font-weight:bold">Comunicação</span>: 
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='ONE'"> Um [1] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='TWO'"> Dois [2] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='THREE'"> Três [3] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FOUR'"> Quatro [4] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FIVE'"> Cinco [5] </span>
-                </i>
-            </li>
-            <li class="dialog-info-li">
-                <i class="dialog-info-i">
-                    <span style="color:#545555;font-weight:bold">Pensamento estratégico</span>: 
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='ONE'"> Um [1] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='TWO'"> Dois [2] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='THREE'"> Três [3] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FOUR'"> Quatro [4] </span>
-                    <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FIVE'"> Cinco [5] </span>
-                </i>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Departamento</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedEmployeePerformanceEvaluationModal.employee.position.department.name}}</span></i>
             </li>
 
             <br>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário do avaliador</span>: </i></li>
-            <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel name="forEmployeeImprovement" [(ngModel)]="selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement" minlength="10" placeholder="Sem comments"></textarea>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Categoria</span>:
+                    <p-tag [value]="selectedEmployeePerformanceEvaluationModal.category"
+                        [severity]="getPerfomanceEvaluationStatus(selectedEmployeePerformanceEvaluationModal.category)"></p-tag>
+                </i>
+            </li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Trabalho em equipe</span>:
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.teamWork==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Comunicação</span>:
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.communication==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
+            <li class="dialog-info-li">
+                <i class="dialog-info-i">
+                    <span style="color:#545555;font-weight:bold">Pensamento estratégico</span>:
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='ONE'"> Um [1] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='TWO'"> Dois [2] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='THREE'"> Três [3] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FOUR'"> Quatro [4] </span>
+                    <span style="color:#08080871;font-weight:bold"
+                        *ngIf="selectedEmployeePerformanceEvaluationModal.strategicThought==='FIVE'"> Cinco [5] </span>
+                </i>
+            </li>
+
+            <br>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Comentário
+                        do avaliador</span>: </i></li>
+            <textarea pInputTextarea rows="3" ngModel #forEmployeeImprovement="ngModel" minlength="3" ngModel
+                name="forEmployeeImprovement"
+                [(ngModel)]="selectedEmployeePerformanceEvaluationModal.forEmployeeImprovement" minlength="10"
+                placeholder="Sem comments"></textarea>
         </div>
 
-    </div> 
-</p-dialog>         
+    </div>
+</p-dialog>
 
 <!--
 <span *ngIf="epe.category==='MONTHLY'" style="color:#fff; background-color: #63c05a; border-radius: 4%; height: 50px;">&nbsp; mensal &nbsp;</span>

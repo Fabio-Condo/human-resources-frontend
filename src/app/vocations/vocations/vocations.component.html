@@ -1,12 +1,17 @@
 <div class="container">
     <h3>Pedidos de ausências</h3>
 
-    <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true"
+        (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords"
+        styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()" [disabled]="!selectedVocations || !selectedVocations.length"></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus"
+                    class="p-button-info mr-2"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
+                    [disabled]="!selectedVocations || !selectedVocations.length"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -19,7 +24,7 @@
                 <th style="background-color: #fff;">Inicio</th>
                 <th style="background-color: #fff;">Fim</th>
                 <th style="background-color: #fff;">Status</th>
-                <th style="background-color: #fff;">Ações</th>       
+                <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-vocation>
@@ -30,177 +35,188 @@
                 <td>
                     <a href="javascript:;" (click)="onSelectVocation(vocation)">
                         {{ vocation.employee.name }}
-                    </a>           
+                    </a>
                 </td>
                 <td>
-                    <span *ngIf="vocation.vocationType==='VOCATIONS'" >Férias</span>
-                    <span *ngIf="vocation.vocationType==='SICK_LEAVE'" >Licença médica</span>
-                    <span *ngIf="vocation.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'" >Licença maternidade/paternidade</span>
-                    <span *ngIf="vocation.vocationType==='PAID_LEAVE'" >Licença remunerada</span>
-                    <span *ngIf="vocation.vocationType==='UNPAID_LEAVE'" >Licença não remunerada</span>
+                    <span *ngIf="vocation.vocationType==='VOCATIONS'">Férias</span>
+                    <span *ngIf="vocation.vocationType==='SICK_LEAVE'">Licença médica</span>
+                    <span *ngIf="vocation.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'">Licença
+                        maternidade/paternidade</span>
+                    <span *ngIf="vocation.vocationType==='PAID_LEAVE'">Licença remunerada</span>
+                    <span *ngIf="vocation.vocationType==='UNPAID_LEAVE'">Licença não remunerada</span>
                 </td>
                 <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <p-tag [value]="vocation.vocationStatus" [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
+                    <p-tag [value]="vocation.vocationStatus"
+                        [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditVocation(vocation)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton  pTooltip="Delete" (click)="deletionConfirm(vocation)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="View" (click)="onSelectVocation(vocation)" tooltipPosition="top"
+                        type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditVocation(vocation)" tooltipPosition="top"
+                        type="button" icon="pi pi-pencil"
+                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(vocation)" tooltipPosition="top"
+                        type="button" icon="pi pi-trash"
+                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-            <td colspan="10">
-                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
-                <span *ngIf="!showLoading">No title found </span> 
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;"  pTooltip="Refresh" class="pi pi-refresh"></i>
-                </a>                  
-            </td>
+                <td colspan="10">
+                    <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+                    <span *ngIf="!showLoading">No title found </span>
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                    <a href="javascript:;">
+                        <i *ngIf="!showLoading" style="color: #1c80cf;" pTooltip="Refresh" class="pi pi-refresh"></i>
+                    </a>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 
 </div>
 
-<p-dialog header="Pedido {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Pedido {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #vocationForm="ngForm" (ngSubmit)="save(vocationForm)">
         <div class="formgrid grid">
 
             <div class="col-12 p-fluid">
                 <label>Funcionário</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
+                <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
                     name="employee" #employee ngModel [(ngModel)]="vocation.employee.id"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Tipo de ausência</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="vocationTypes" placeholder="Selecione"
-                    name="vocationType" #vocationType ngModel [(ngModel)]="vocation.vocationType"></p-dropdown>
+                <p-dropdown class="p-inputtext-sm" [options]="vocationTypes" placeholder="Selecione" name="vocationType"
+                    #vocationType ngModel [(ngModel)]="vocation.vocationType"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Status</label>
-                <p-dropdown class="p-inputtext-sm"  [options]="vocationStatuses" placeholder="Selecione"
+                <p-dropdown class="p-inputtext-sm" [options]="vocationStatuses" placeholder="Selecione"
                     name="vocationStatus" #vocationStatus ngModel [(ngModel)]="vocation.vocationStatus"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Inicio</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="beginDate"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #beginDate="ngModel" [required]="true" [(ngModel)]="vocation.beginDate"></p-calendar>
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                    [showOnFocus]="false" name="beginDate" [inline]="false" [readonlyInput]="false" ngModel
+                    #beginDate="ngModel" [required]="true" [(ngModel)]="vocation.beginDate"></p-calendar>
             </div>
 
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Fim</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="endDate"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #endDate="ngModel" [required]="true" [(ngModel)]="vocation.endDate"></p-calendar>
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                    [showOnFocus]="false" name="endDate" [inline]="false" [readonlyInput]="false" ngModel
+                    #endDate="ngModel" [required]="true" [(ngModel)]="vocation.endDate"></p-calendar>
             </div>
-     
-                
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="vocationForm.invalid" class="p-button-sm" style="height: 30px;">
+
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <button pButton type="submit" [disabled]="vocationForm.invalid" class="p-button-sm"
+                    style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
-                  </button>
-              </div>
-        </div>  
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+                </button>
+            </div>
+        </div>
     </form>
 </p-dialog>
 
 
 <!--Filtrar-->
-<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">
 
     <div class="formgrid grid">
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
-                <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getVocations()"></p-dropdown>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..." ngModel name="itemsPerPage"
+                    [(ngModel)]="filter.itemsPerPage" (onChange)="getVocations()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
-                <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getVocations()"></p-dropdown>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..." ngModel name="sort" [(ngModel)]="filter.sort"
+                    (onChange)="getVocations()"></p-dropdown>
             </div>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="filter.employee" (ngModelChange)="getVocations()" ></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                name="employee" #employee ngModel [(ngModel)]="filter.employee"
+                (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Tipo</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="vocationTypes" placeholder="Selecione" 
-                name="vocationType" #vocationType ngModel [(ngModel)]="filter.vocationType" (ngModelChange)="getVocations()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="vocationTypes" placeholder="Selecione" name="vocationType"
+                #vocationType ngModel [(ngModel)]="filter.vocationType" (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Status</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="vocationStatuses" placeholder="Selecione" 
-                name="vocationStatus" #vocationStatus ngModel [(ngModel)]="filter.vocationStatus" (ngModelChange)="getVocations()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="vocationStatuses" placeholder="Selecione"
+                name="vocationStatus" #vocationStatus ngModel [(ngModel)]="filter.vocationStatus"
+                (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Inicio</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-            [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="beginDate"
-              [inline]="false" [readonlyInput]="false" 
-              ngModel #beginDate="ngModel" [required]="true" [(ngModel)]="filter.beginDate" (ngModelChange)="getVocations()"></p-calendar>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                [showOnFocus]="false" name="beginDate" [inline]="false" [readonlyInput]="false" ngModel
+                #beginDate="ngModel" [required]="true" [(ngModel)]="filter.beginDate"
+                (ngModelChange)="getVocations()"></p-calendar>
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Fim</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-            [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="endDate"
-              [inline]="false" [readonlyInput]="false" 
-              ngModel #endDate="ngModel" [required]="true" [(ngModel)]="filter.endDate" (ngModelChange)="getVocations()"></p-calendar>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                [showOnFocus]="false" name="endDate" [inline]="false" [readonlyInput]="false" ngModel #endDate="ngModel"
+                [required]="true" [(ngModel)]="filter.endDate" (ngModelChange)="getVocations()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
         </div>
-    </div> 
+    </div>
 
-</p-dialog>  
+</p-dialog>
 
 <!--Show -->
-<p-dialog header="{{selectedVocationModal.employee.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedVocationModal.employee.name}}" [(visible)]="displayModal" [modal]="true"
+    [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
-            <label>Funcionário</label>: <span> {{selectedVocationModal.employee.name}}</span>  
-        </div> 
-        <div class="col-12 p-fluid">
-            <label>Cargo</label>: <span> {{selectedVocationModal.employee.position.name}}</span> 
-        </div> 
-        <div class="col-12 p-fluid">
-            <label>Tipo</label>: 
-            <span *ngIf="selectedVocationModal.vocationType==='VOCATIONS'" >Férias</span>
-            <span *ngIf="selectedVocationModal.vocationType==='SICK_LEAVE'" >Licença médica</span>
-            <span *ngIf="selectedVocationModal.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'" >Licença maternidade/paternidade</span>
-            <span *ngIf="selectedVocationModal.vocationType==='PAID_LEAVE'" >Licença remunerada</span>
-            <span *ngIf="selectedVocationModal.vocationType==='UNPAID_LEAVE'" >Licença não remunerada</span>
-        </div> 
-        <div class="col-12 p-fluid">
-            <label>Status</label>: 
-            <p-tag [value]="selectedVocationModal.vocationStatus" [severity]="getVocationStatus(selectedVocationModal.vocationStatus)"></p-tag>
-        </div> 
-        <div class="col-12 p-fluid">
-            <label>Inicio</label>: <span> {{selectedVocationModal.beginDate | date: 'dd/MM/yyyy'}}</span> 
+            <label>Funcionário</label>: <span> {{selectedVocationModal.employee.name}}</span>
         </div>
         <div class="col-12 p-fluid">
-            <label>Fim</label>: <span> {{selectedVocationModal.endDate | date: 'dd/MM/yyyy'}}</span> 
+            <label>Cargo</label>: <span> {{selectedVocationModal.employee.position.name}}</span>
         </div>
-    </div>         
+        <div class="col-12 p-fluid">
+            <label>Tipo</label>:
+            <span *ngIf="selectedVocationModal.vocationType==='VOCATIONS'">Férias</span>
+            <span *ngIf="selectedVocationModal.vocationType==='SICK_LEAVE'">Licença médica</span>
+            <span *ngIf="selectedVocationModal.vocationType==='MATERNITY_OR_PATERNITY_LEAVE'">Licença
+                maternidade/paternidade</span>
+            <span *ngIf="selectedVocationModal.vocationType==='PAID_LEAVE'">Licença remunerada</span>
+            <span *ngIf="selectedVocationModal.vocationType==='UNPAID_LEAVE'">Licença não remunerada</span>
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Status</label>:
+            <p-tag [value]="selectedVocationModal.vocationStatus"
+                [severity]="getVocationStatus(selectedVocationModal.vocationStatus)"></p-tag>
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Inicio</label>: <span> {{selectedVocationModal.beginDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Fim</label>: <span> {{selectedVocationModal.endDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+    </div>
 </p-dialog>

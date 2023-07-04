@@ -1,336 +1,355 @@
 <div class="container">
-    <div class="card">
-      <!--<button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>-->
-      <div style="display:inline;">
-        <!--<h3 style="margin-top: 20px;">Difinições da conta</h3>-->
+  <div class="card">
+    <!--<button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>-->
+    <div style="display:inline;">
+      <!--<h3 style="margin-top: 20px;">Difinições da conta</h3>-->
+    </div>
+    <div class="formgrid grid" style="margin-top: 50px;">
+
+      <div class="field col-12 md:col-2">
+        <img class="w-5 sm:w-16rem xl:w-10rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}"
+          alt="" />
       </div>
-      <div class="formgrid grid" style="margin-top: 50px;"> 
-  
-        <div  class="field col-12 md:col-2">
-            <img class="w-5 sm:w-16rem xl:w-10rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />  
-        </div>
-  
-        <div style="background-color: #fff;" class="field col-12 md:col-8">
-            <!--<form #profileUserForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)" class="form" novalidate>-->
-            <form autocomplete="off" #profileUserForm="ngForm" (ngSubmit)="onUpdate(profileUserForm)" novalidate >
 
-                <a href="javascript:;" style="text-decoration: none;" (click)="showAccount = !showAccount">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                    <i *ngIf="!showAccount" class="pi pi-angle-right" style="margin: 13px;"></i>
-                    <i *ngIf="showAccount" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Account
-                  </div>
-                </a>
+      <div style="background-color: #fff;" class="field col-12 md:col-8">
+        <!--<form #profileUserForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)" class="form" novalidate>-->
+        <form autocomplete="off" #profileUserForm="ngForm" (ngSubmit)="onUpdate(profileUserForm)" novalidate>
 
-                <div *ngIf="showAccount" class="formgrid grid">
-                  <div class="field col-12 md:col-6">
-                    <div class="col-12 p-fluid">
-                      <label>Primeiro Nome</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="firstName"
-                          ngModel #firstName="ngModel" required minlength="1" [(ngModel)]="user.firstName" >  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                      <label>Último Nome</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="lastName"
-                        ngModel #lastName="ngModel" required minlength="1" [(ngModel)]="user.lastName">  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                      <label>Email</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="email"
-                        ngModel #email="ngModel" required minlength="1" [(ngModel)]="user.email" >  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                      <label>Company</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="company"
-                        ngModel #company="ngModel" required minlength="1" [(ngModel)]="user.company">  
-                    </div>
-                  </div>
-                  <div class="field col-12 md:col-6">
-                    <div class="col-12 p-fluid">
-                      <label>Username</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="username"
-                        ngModel #username="ngModel" required minlength="1" [(ngModel)]="user.username" >  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                      <label>Número de Telefone</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber"
-                        ngModel #phoneNumber="ngModel" required minlength="1" [(ngModel)]="user.phoneNumber" >  
-                    </div>
-                    <div class="col-12 p-fluid" style="margin-top: 2%;">
-                      <label>Designation</label>
-                      <input pInputText class="p-inputtext-sm" type="text" name="designation"
-                        ngModel #designation="ngModel" required minlength="1"  [(ngModel)]="user.designation">  
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="showAccount" class="col-12 p-fluid">
-                  <label>Bio</label>
-                  <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
-                </div>
+          <a href="javascript:;" style="text-decoration: none;" (click)="showAccount = !showAccount">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showAccount" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showAccount" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Account
+            </div>
+          </a>
 
-                <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                    <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin: 13px;"></i>
-                    <i *ngIf="showContacts" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Contacts
-                  </div>
-                </a>
-                
-                <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
-                    <!--<label>Contactos </label>-->
-                    <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
-                    <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela >
-                      <ng-template pTemplate="header">
-                        <tr>
-                        </tr>
-                      </ng-template>
-                      <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
-                        <tr>
-                          <td>{{ contact.contactNumber }}</td>
-                          <td class="col-acoes">
-                            <span class="p-buttonset">
-                                <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeContact(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
-                          </td> 
-                        </tr>
-                      </ng-template>
-                      <ng-template pTemplate="emptymessage">
-                          <tr>
-                            <td colspan="10">
-                              Sem contactos
-                            </td>
-                          </tr>
-                      </ng-template>            
-                    </p-table>     
-                    <br>   
-                </div>
+          <div *ngIf="showAccount" class="formgrid grid">
+            <div class="field col-12 md:col-6">
+              <div class="col-12 p-fluid">
+                <label>Primeiro Nome</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="firstName" ngModel #firstName="ngModel"
+                  required minlength="1" [(ngModel)]="user.firstName">
+              </div>
+              <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Último Nome</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="lastName" ngModel #lastName="ngModel"
+                  required minlength="1" [(ngModel)]="user.lastName">
+              </div>
+              <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Email</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="email" ngModel #email="ngModel" required
+                  minlength="1" [(ngModel)]="user.email">
+              </div>
+              <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Company</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="company" ngModel #company="ngModel" required
+                  minlength="1" [(ngModel)]="user.company">
+              </div>
+            </div>
+            <div class="field col-12 md:col-6">
+              <div class="col-12 p-fluid">
+                <label>Username</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="username" ngModel #username="ngModel"
+                  required minlength="1" [(ngModel)]="user.username">
+              </div>
+              <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Número de Telefone</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber" ngModel #phoneNumber="ngModel"
+                  required minlength="1" [(ngModel)]="user.phoneNumber">
+              </div>
+              <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <label>Designation</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="designation" ngModel #designation="ngModel"
+                  required minlength="1" [(ngModel)]="user.designation">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="showAccount" class="col-12 p-fluid">
+            <label>Bio</label>
+            <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10"
+              placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+          </div>
 
-                <a href="javascript:;" style="text-decoration: none;" (click)="showProfessionalExperiences = !showProfessionalExperiences">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                    <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin: 13px;"></i>
-                    <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Professional Experience
-                  </div>
-                </a>
+          <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showContacts" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Contacts
+            </div>
+          </a>
 
-                <div *ngIf="showProfessionalExperiences" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewProfessionalExperience()">add new</a>
-                    <p-table [value]="user.professionalExperiences" [responsive]="true" 
-                         styleClass="p-datatable-sm" #tabela >
-                      <ng-template pTemplate="header">
-                        <tr>
-                          <th style="background-color: #FFF;">Company</th>
-                          <th style="background-color: #FFF;">Description</th>
-                          <th style="background-color: #FFF;">Location</th>
-                          <th style="background-color: #FFF;" class="col-valor-header"></th>
-                        </tr>
-                      </ng-template>
-                      <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
-                        <tr>
-                          <td>{{ pf.company }}</td>
-                          <td>{{ pf.description }}</td>
-                          <td>{{ pf.province.name }}</td>
-                          <td class="col-acoes">
-                            <span class="p-buttonset">
-                                <a href="javascript:;" (click)="getReadyProfessionalExperienceEdit(pf, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeProfessionalExperience(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
-                          </td> 
-                      </ng-template>
-                      <ng-template pTemplate="emptymessage">
-                          <tr>
-                            <td colspan="10">
-                              Sem Experiences
-                            </td>
-                          </tr>
-                      </ng-template>            
-                    </p-table>     
-                    <br>   
-                </div>
+          <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
+            <!--<label>Contactos </label>-->
+            <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
+            <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ contact.contactNumber }}</td>
+                  <td class="col-acoes">
+                    <span class="p-buttonset">
+                      <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag
+                          [severity]="'primmary'">edit</p-tag></a>
+                      <a style="margin-left: 3px;" href="javascript:;" (click)="removeContact(rowIndex)"><p-tag
+                          [severity]="'danger'"> remove</p-tag></a>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">
+                    Sem contactos
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br>
+          </div>
 
-                <a href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                    <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
-                    <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Formação acadêmica
-                  </div>
-                </a>
+          <a href="javascript:;" style="text-decoration: none;"
+            (click)="showProfessionalExperiences = !showProfessionalExperiences">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Professional Experience
+            </div>
+          </a>
 
-                <div *ngIf="showUserTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
-                    <p-table [value]="user.userTrainings" [responsive]="true" 
-                         styleClass="p-datatable-sm" #tabela >
-                      <ng-template pTemplate="header">
-                        <tr>
-                        </tr>
-                      </ng-template>
-                      <ng-template pTemplate="body" let-ut let-rowIndex="rowIndex">
-                        <tr>
-                          <td>{{ ut.description }}</td>
-                          <td class="col-acoes">
-                            <span class="p-buttonset">
-                                <a href="javascript:;" (click)="getReadyTrainingEdit(ut, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
-                          </td> 
-                      </ng-template>
-                      <ng-template pTemplate="emptymessage">
-                          <tr>
-                            <td colspan="10">
-                              Sem formacao
-                            </td>
-                          </tr>
-                      </ng-template>            
-                    </p-table>     
-                    <br>   
-                </div>
+          <div *ngIf="showProfessionalExperiences" class="col-12 p-fluid"
+            style="margin-top: 2px; background-color: #fff">
+            <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewProfessionalExperience()">add new</a>
+            <p-table [value]="user.professionalExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="background-color: #FFF;">Company</th>
+                  <th style="background-color: #FFF;">Description</th>
+                  <th style="background-color: #FFF;">Location</th>
+                  <th style="background-color: #FFF;" class="col-valor-header"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ pf.company }}</td>
+                  <td>{{ pf.description }}</td>
+                  <td>{{ pf.province.name }}</td>
+                  <td class="col-acoes">
+                    <span class="p-buttonset">
+                      <a href="javascript:;" (click)="getReadyProfessionalExperienceEdit(pf, rowIndex)"><p-tag
+                          [severity]="'primmary'">edit</p-tag></a>
+                      <a style="margin-left: 3px;" href="javascript:;"
+                        (click)="removeProfessionalExperience(rowIndex)"><p-tag [severity]="'danger'">
+                          remove</p-tag></a>
+                    </span>
+                  </td>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">
+                    Sem Experiences
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br>
+          </div>
 
-                <a href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
-                  <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                    <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
-                    <i *ngIf="showUserSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Habilidades
-                  </div>
-                </a>
+          <a href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Formação acadêmica
+            </div>
+          </a>
 
-                <!--Skills-->
-                <div *ngIf="showUserSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                    <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
-                    <p-table [value]="user.userSkills" [responsive]="true" 
-                        styleClass="p-datatable-sm" #tabela>
-                        <ng-template pTemplate="header">
-                            <tr>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
-                            <tr>
-                                <td>{{ skill.name }}</td>
-                                <td class="col-acoes">
-                                    <span class="p-buttonset">
-                                        <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                        <a style="margin-left: 3px;" href="javascript:;" (click)="removeSkill(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                                    </span>
-                                </td>    
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="10">
-                                Sem habilidades adicionadas
-                                </td>
-                            </tr>
-                        </ng-template>            
-                    </p-table>  
-                    <br> 
-                </div>
+          <div *ngIf="showUserTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+            <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
+            <p-table [value]="user.userTrainings" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-ut let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ ut.description }}</td>
+                  <td class="col-acoes">
+                    <span class="p-buttonset">
+                      <a href="javascript:;" (click)="getReadyTrainingEdit(ut, rowIndex)"><p-tag
+                          [severity]="'primmary'">edit</p-tag></a>
+                      <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag
+                          [severity]="'danger'"> remove</p-tag></a>
+                    </span>
+                  </td>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">
+                    Sem formacao
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br>
+          </div>
 
-                <div class="col-12" style="margin-top: 2px; display:inline; float: right;">
-                    <button pButton type="submit" pRipple label="Save changes" class="p-button-primmary mr-2" ></button>
-                </div>
+          <a href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showUserSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Habilidades
+            </div>
+          </a>
 
-            </form>
-        </div>
+          <!--Skills-->
+          <div *ngIf="showUserSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+            <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
+            <p-table [value]="user.userSkills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ skill.name }}</td>
+                  <td class="col-acoes">
+                    <span class="p-buttonset">
+                      <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag
+                          [severity]="'primmary'">edit</p-tag></a>
+                      <a style="margin-left: 3px;" href="javascript:;" (click)="removeSkill(rowIndex)"><p-tag
+                          [severity]="'danger'"> remove</p-tag></a>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">
+                    Sem habilidades adicionadas
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br>
+          </div>
 
-        <div  class="field col-12 md:col-2">
-            <button style=" display:inline; float: right;" pButton (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out" class="p-button-secondary mr-2" ></button>
-        </div>
+          <button pButton type="submit" style="display:inline; float: right;" pRipple label="Save changes"
+            class="p-button-primmary mr-2"></button>
+
+
+        </form>
+      </div>
+
+      <div class="field col-12 md:col-2" style="margin-top: 5px;">
+        <button style=" display:inline; float: right; background-color: #53595c; border-color: #53595c;" pButton
+          (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out"></button>
+      </div>
 
     </div>
-</div>
+  </div>
 
-<!--Contacts-->
-<p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true" *ngIf="contact"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+  <!--Contacts-->
+  <p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true"
+    *ngIf="contact">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmContact="ngForm" (ngSubmit)="confirmContact(frmContact)">
       <div class="col-12 p-fluid">
         <label>Número</label>
-        <input pInputText type="text" name="numero"
-          required [(ngModel)]="contact.contactNumber" #contatoNumero="ngModel" placeholder="Ex: 841234567"/>
+        <input pInputText type="text" name="numero" required [(ngModel)]="contact.contactNumber"
+          #contatoNumero="ngModel" placeholder="Ex: 841234567" />
       </div>
       <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid" style="height: 30px; margin-top: 1%;"></button>
+        <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid"
+          style="height: 30px; margin-top: 1%;"></button>
       </div>
     </form>
-</p-dialog>  
+  </p-dialog>
 
-<!--Traning-->
-<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+  <!--Traning-->
+  <p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showTrainingForm"
+    [modal]="true" *ngIf="training">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="numero"
-          required [(ngModel)]="training.description" #contatoNumero="ngModel"/>
+        <input pInputText type="text" name="numero" required [(ngModel)]="training.description"
+          #contatoNumero="ngModel" />
       </div>
       <div class="col-12 md-12 p-fluid">
         <label>Início</label>
         <p-calendar class="p-inputtext-sm" name="begin" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
-        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" 
-          [inline]="false" [readonlyInput]="false" 
-          ngModel #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
+          [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel
+          #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
       </div>
       <div class="col-12 md-12 p-fluid">
         <label>Fim</label>
         <p-calendar class="p-inputtext-sm" name="end" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
-        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-          [inline]="false" [readonlyInput]="false" 
-          ngModel #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
+          [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel
+          #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
       </div>
       <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid" style="height: 30px; margin-top: 1%;"></button>
+        <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid"
+          style="height: 30px; margin-top: 1%;"></button>
       </div>
     </form>
-</p-dialog>  
+  </p-dialog>
 
-<!--Skills-->
-<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+  <!--Skills-->
+  <p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [(visible)]="showSkillForm" [modal]="true"
+    *ngIf="skill">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="name"
-          required [(ngModel)]="skill.name" #name="ngModel"/>
+        <input pInputText type="text" name="name" required [(ngModel)]="skill.name" #name="ngModel" />
       </div>
       <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmSkill.invalid" style="height: 30px; margin-top: 1%;"></button>
+        <button pButton type="submit" label="Confirmar" [disabled]="frmSkill.invalid"
+          style="height: 30px; margin-top: 1%;"></button>
       </div>
     </form>
-</p-dialog> 
+  </p-dialog>
 
-<!--Professional Experience-->
-<p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+  <!--Professional Experience-->
+  <p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'"
+    [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)">
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <label>Provincia</label>    
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                [filter]="true" [options]="provinces" [(ngModel)]="professionalExperience.province.id" name="province"
-                #province="ngModel" [required]=true>
-            </p-dropdown>
-        </div>  
-        <div class="col-12 p-fluid">
-            <label>Company</label>
-            <input pInputText type="text" name="company"
-            required [(ngModel)]="professionalExperience.company" #company="ngModel"/>
-        </div>
-        <div class="col-12 p-fluid">
-            <label>Descrição</label>
-            <input pInputText type="text" name="numero"
-            required [(ngModel)]="professionalExperience.description" #contatoNumero="ngModel"/>
-        </div>
-        <div class="col-12 md-12 p-fluid">
-            <label>Início</label>
-            <p-calendar class="p-inputtext-sm" name="beginDate" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
-            [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" 
-            [inline]="false" [readonlyInput]="false" 
-            ngModel #beginDate="ngModel" [required]="true" [(ngModel)]="professionalExperience.beginDate"></p-calendar>
-        </div>
-        <div class="col-12 md-12 p-fluid">
-            <label>Fim</label>
-            <p-calendar class="p-inputtext-sm" name="endDate" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
-            [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-            [inline]="false" [readonlyInput]="false" 
-            ngModel #endDate="ngModel" [required]="true" [(ngModel)]="professionalExperience.endDate"></p-calendar>
-        </div>
-        <div class="col-12 p-fluid">
-            <button pButton type="submit" label="Confirmar" [disabled]="frmProfessionalExperience.invalid" style="height: 30px; margin-top: 1%;"></button>
-        </div>
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Provincia</label>
+        <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
+          [(ngModel)]="professionalExperience.province.id" name="province" #province="ngModel" [required]=true>
+        </p-dropdown>
+      </div>
+      <div class="col-12 p-fluid">
+        <label>Company</label>
+        <input pInputText type="text" name="company" required [(ngModel)]="professionalExperience.company"
+          #company="ngModel" />
+      </div>
+      <div class="col-12 p-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="numero" required [(ngModel)]="professionalExperience.description"
+          #contatoNumero="ngModel" />
+      </div>
+      <div class="col-12 md-12 p-fluid">
+        <label>Início</label>
+        <p-calendar class="p-inputtext-sm" name="beginDate" view="month" dateFormat="mm/yy"
+          placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false"
+          [readonlyInput]="false" ngModel #beginDate="ngModel" [required]="true"
+          [(ngModel)]="professionalExperience.beginDate"></p-calendar>
+      </div>
+      <div class="col-12 md-12 p-fluid">
+        <label>Fim</label>
+        <p-calendar class="p-inputtext-sm" name="endDate" view="month" dateFormat="mm/yy"
+          placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false"
+          [readonlyInput]="false" ngModel #endDate="ngModel" [required]="true"
+          [(ngModel)]="professionalExperience.endDate"></p-calendar>
+      </div>
+      <div class="col-12 p-fluid">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmProfessionalExperience.invalid"
+          style="height: 30px; margin-top: 1%;"></button>
+      </div>
     </form>
-</p-dialog>  
+  </p-dialog>

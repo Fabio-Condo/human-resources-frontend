@@ -1,26 +1,28 @@
-
 <div class="container">
     <h3>Departamentos</h3>
 
-    <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
+                <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus"
+                    class="p-button-info mr-2"></button>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search" (ngModelChange)="getDepartments()"/>
+                    <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Search"
+                        (ngModelChange)="getDepartments()" />
                 </span>
                 <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
-                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getDepartments()"></p-dropdown>
+                    ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
+                <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..." ngModel
+                    name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getDepartments()"></p-dropdown>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Descrição</th>
-                <th style="background-color: #fff;">Ações</th>       
+                <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-dep>
@@ -28,33 +30,40 @@
                 <td>
                     <a href="javascript:;" (click)="onSelectDepartment(dep)">
                         {{ dep.name }}
-                    </a>           
+                    </a>
                 </td>
                 <td>{{ dep.description }}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top"
+                        type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button"
+                        icon="pi pi-pencil"
+                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button"
+                        icon="pi pi-trash"
+                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-            <td colspan="10">
-                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
-                <span *ngIf="!showLoading">No title found </span> 
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getDepartments(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
-                </a>                  
-            </td>
+                <td colspan="10">
+                    <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+                    <span *ngIf="!showLoading">No title found </span>
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                    <a href="javascript:;">
+                        <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="getDepartments(0)" pTooltip="Refresh"
+                            class="pi pi-refresh"></i>
+                    </a>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 
 </div>
 
-<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Departmento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #departmentForm="ngForm" (ngSubmit)="save(departmentForm)">
         <div class="formgrid grid">
 
@@ -68,41 +77,37 @@
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="name"
-                ngModel #name="ngModel" required minlength="1" [(ngModel)]="department.name">  
+                <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
+                    minlength="1" [(ngModel)]="department.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Descrição</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="description"
-                ngModel #description="ngModel" required minlength="1" [(ngModel)]="department.description">  
-            </div>        
-                
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="departmentForm.invalid" class="p-button-sm" style="height: 30px;">
+                <input pInputText class="p-inputtext-sm" type="text" name="description" ngModel #description="ngModel"
+                    required minlength="1" [(ngModel)]="department.description">
+            </div>
+
+            <div class="col-12 p-fluid" style="margin-top: 2%;">
+                <button pButton type="submit" [disabled]="departmentForm.invalid" class="p-button-sm"
+                    style="height: 30px;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
-                  </button>
-              </div>
-        </div>  
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+                </button>
+            </div>
+        </div>
     </form>
 </p-dialog>
 
 
 <!--Show -->
-<p-dialog header="{{selectedDepartmentModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedDepartmentModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false">
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
-            <label>Nome</label>: <span> {{selectedDepartmentModal.name}}</span>  
-        </div> 
+            <label>Nome</label>: <span> {{selectedDepartmentModal.name}}</span>
+        </div>
         <div class="col-12 p-fluid">
-            <label>Descrição</label>: <span> {{selectedDepartmentModal.description}}</span>  
-        </div>  
-    </div>         
+            <label>Descrição</label>: <span> {{selectedDepartmentModal.description}}</span>
+        </div>
+    </div>
 </p-dialog>
-
-
-
-
-
-            

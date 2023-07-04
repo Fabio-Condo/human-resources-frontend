@@ -15,7 +15,6 @@ import { EmployeesService } from '../employees.service';
 import { Contact } from 'src/app/core/model/Contact';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
-import { Position } from 'src/app/core/model/Position';
 import { Skill } from 'src/app/core/model/Skill';
 
 @Component({
@@ -36,7 +35,7 @@ export class EmployeesComponent implements OnInit {
   provinces: any[] = [];
   //selectedProvince?: number;
 
-  positions: any[] = [] ;
+  positions: any[] = [];
 
   contact?: Contact;
   contacts: Array<Contact> = []
@@ -70,6 +69,11 @@ export class EmployeesComponent implements OnInit {
   showContactsInfo: boolean = false;
   showEmployeeTrainings: boolean = false;
   showSkills: boolean = false;
+  showProjects: boolean = false;
+  showCompanyTrainings: boolean = false;
+  showWageHistories: boolean = false;
+  showEmployeePerformanceEvaluations: boolean = false;
+  showVocations: boolean = false;
 
   maritalStatuses = [
     { label: 'Solteiro', value: 'SINGLE' },
@@ -155,7 +159,7 @@ export class EmployeesComponent implements OnInit {
         this.showLoading = false;
         this.filterEmployees();
         this.convertStringsToDates([employeeAdded]);
-        this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -194,7 +198,7 @@ export class EmployeesComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteEmployee(employee: IEmployee) {
@@ -218,7 +222,7 @@ export class EmployeesComponent implements OnInit {
     const novoStatus = !employee.status;
     this.employeesService.changeStatus(employee.id, novoStatus).subscribe(
       () => {
-        const acao = novoStatus ? 'Activado' : 'Inactivo'; 
+        const acao = novoStatus ? 'Activado' : 'Inactivo';
         employee.status = novoStatus;
         this.messageService.add({ severity: 'success', detail: `Funcionário ${acao} com sucesso!` });
       },
@@ -233,29 +237,29 @@ export class EmployeesComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteEmployee(employee);
+        this.deleteEmployee(employee);
       }
     });
   }
 
   getProvinces() {
     this.provinceService.findAll().then(data => {
-      this.provinces = data.map((province:any) => ({ 
+      this.provinces = data.map((province: any) => ({
         label: province.name,
-        value: province.id 
+        value: province.id
       }));
     }),
-    (errorResponse: HttpErrorResponse) => {
-      this.sendErrorNotification(errorResponse.error.message);
-      this.showLoading = false;
-    }
-  } 
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+  }
 
   getPositions() {
     return this.positionsService.findAll().subscribe(
       data => {
         this.positions = data.content.map(position => {
-          return  {
+          return {
             label: position.name,
             value: position.id
           }
@@ -272,24 +276,24 @@ export class EmployeesComponent implements OnInit {
     this.positionsService.getPositionsByDepartmentId(this.selectedDepartment!).then(list => {
       this.positions = list.map(agencia => ({
         label: agencia.name,
-        value: agencia.id 
-      })); 
-      if (this.selectedDepartment !== this.employee.position.department.id){
+        value: agencia.id
+      }));
+      if (this.selectedDepartment !== this.employee.position.department.id) {
         //this.employee.position.id = 0;  
         //this.employee.position.id = undefined;         
-      }          
+      }
     }),
-    (errorResponse: HttpErrorResponse) => {
-      this.sendErrorNotification(errorResponse.error.message);
-      this.showLoading = false;
-    }
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
   }
 
   getDepartments() {
     return this.departmentService.findAll().subscribe(
       data => {
         this.departments = data.content.map(department => {
-          return  {
+          return {
             label: department.name,
             value: department.id
           }
@@ -316,8 +320,8 @@ export class EmployeesComponent implements OnInit {
     this.employee = editEmployee;
     this.employee.id = editEmployee.id;
 
-    this.selectedDepartment = (this.employee.position) ? this.employee.position.department.id : undefined;  
-    if (this.selectedDepartment) { 
+    this.selectedDepartment = (this.employee.position) ? this.employee.position.department.id : undefined;
+    if (this.selectedDepartment) {
       this.getPositionsByDepartmentId();
     }
 
@@ -347,7 +351,7 @@ export class EmployeesComponent implements OnInit {
     return new Contact(contact.id, contact.contactNumber);
   }
 
-  get editingContact() { 
+  get editingContact() {
     return this.contact && this.contact?.id;
   }
 
@@ -379,7 +383,7 @@ export class EmployeesComponent implements OnInit {
     return new EmployeeTraining(training.id, training.description, training.begin, training.end);
   }
 
-  get editingTraining() { 
+  get editingTraining() {
     return this.training && this.training?.id;
   }
 
@@ -410,7 +414,7 @@ export class EmployeesComponent implements OnInit {
     return new Skill(skill.id, skill.name);
   }
 
-  get editingSkill() { 
+  get editingSkill() {
     return this.skill && this.skill?.id;
   }
 
@@ -419,7 +423,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     //this.getEmployees(page);
     this.filterEmployees(page);
   }
@@ -446,13 +450,13 @@ export class EmployeesComponent implements OnInit {
       case 'CONCLUDED':
         return 'info';
       case 'APPROVED':
-        return 'info'; 
+        return 'info';
       case 'PENDING':
         return 'info';
       case 'CANCELED':
-        return 'danger'; 
+        return 'danger';
       case 'SUSPENDED':
-        return 'danger'; 
+        return 'danger';
     }
     return '';
   }
@@ -474,7 +478,7 @@ export class EmployeesComponent implements OnInit {
       case 'APPROVED':
         return 'info';
       case 'REJECTED':
-        return 'danger'; 
+        return 'danger';
     }
     return '';
   }

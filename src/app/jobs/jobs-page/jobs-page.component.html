@@ -1,34 +1,25 @@
-
-
 <div class="container">
-    <h3 >Vagas</h3>
+    <h3>Vagas</h3>
 
-    <p-dataView 
-        #dv [value]="jobs"
-        [value]="jobs" 
-        dataKey="id" 
-        (onLazyLoad)="onChangePage($event)"
-        [rows]="filter.itemsPerPage" 
-        [lazy]="true" 
-        [totalRecords]="totalRecords" 
-        styleClass="p-datatable-sm " 
-        #table
-        >
+    <p-dataView #dv [value]="jobs" [value]="jobs" dataKey="id" (onLazyLoad)="onChangePage($event)"
+        [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm " #table>
         <ng-template let-job pTemplate="listItem">
             <div class="col-12">
                 <div href="javascript:;" class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                     <!--<img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/'" />-->
-                    <img class="w-5 sm:w-16rem xl:w-5rem shadow-5 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />
-                    <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                    <img class="w-5 sm:w-16rem xl:w-5rem shadow-5 block xl:block mx-auto border-round"
+                        src="{{imagePath}}" alt="" />
+                    <div
+                        class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
                         <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                            <div class="text-1xl font-bold text-700">  
+                            <div class="text-1xl font-bold text-700">
                                 <span style="color: #1c80cf;">{{ job.position.name }}</span>
                             </div>
                             <p class="flex align-items-center gap-3">
                                 <span class="flex align-items-center gap-2">
                                     <i class="pi pi-briefcase"></i>
                                     <span>{{ job.position.mission }}</span>
-                                </span>                   
+                                </span>
                                 <span class="flex align-items-center gap-2">
                                     <i class="pi pi-map-marker"></i>
                                     <span> {{ job.position.workplace.name}} </span>
@@ -36,12 +27,15 @@
                                 <span class="flex align-items-center gap-2">
                                     <i class="pi pi-calendar"></i>
                                     <span>Expira: {{ job.expirationDate | date: 'dd/MM/yyyy' }}</span>
-                                </span>  
+                                </span>
                             </p>
                         </div>
                         <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                            <button pButton [routerLink]="['/v1/jobs-view', job.id]" icon="pi pi-eye" class="md:align-self-end mb-2" style="background-color: #fff; color: #1c80cf;"></button>
-                            <button pButton [routerLink]="['/v1/jobs-view', job.id]" icon="pi pi-users" class="md:align-self-end mb-2" style="background-color: #fff; color: #3fb334; border-color: #3fb334;"></button>
+                            <button pButton [routerLink]="['/v1/jobs-view', job.id]" icon="pi pi-eye"
+                                class="md:align-self-end mb-2" style="background-color: #fff; color: #1c80cf;"></button>
+                            <button pButton [routerLink]="['/v1/jobs-view', job.id]" icon="pi pi-users"
+                                class="md:align-self-end mb-2"
+                                style="background-color: #fff; color: #3fb334; border-color: #3fb334;"></button>
                         </div>
 
                     </div>
@@ -51,7 +45,8 @@
     </p-dataView>
 
     <div>
-        <p ><a style="color:#787d7d;font-weight:bold" (click)="filterJobs()" href="javascript:;">Mostrar mais vagas</a></p>
+        <p><a style="color:#787d7d;font-weight:bold" (click)="filterJobs()" href="javascript:;">Mostrar mais vagas</a>
+        </p>
     </div>
-    
+
 </div>

@@ -1,294 +1,306 @@
-
 <div class="container">
-    <h3>Vagas</h3>
+  <h3>Vagas</h3>
 
-    <p-table 
-      [value]="jobs" 
-      [paginator]="true" 
-      (onLazyLoad)="onChangePage($event)" 
-      [rows]="filter.itemsPerPage" 
-      [lazy]="true" 
-      [totalRecords]="totalRecords" 
-      currentPageReportTemplate="Results: {{totalRecords}} of {{totalJobs}}"
-      [showCurrentPageReport]="true" 
-      styleClass="p-datatable-sm" 
-      #table>
-        <ng-template pTemplate="caption" *ngIf="isUserLoggedIn && isSuperAdmin">
-            <div class="flex">
-                <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>         
-                <th style="background-color: #fff; width:40%" >
-                  Title
-                  <span *ngIf="filter.sort ==='positionName,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='positionName,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th style="background-color: #fff; width:20%">
-                  Location
-                  <span *ngIf="filter.sort ==='workplace,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='workplace,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th style="background-color: #fff; width:20%">
-                  Date
-                  <span *ngIf="filter.sort ==='publicationDate,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='publicationDate,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th *ngIf="isUserLoggedIn && isSuperAdmin" style="background-color: #fff;">Ações</th>
-            </tr>
-            <tr>
-              <th>
-                <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input [(ngModel)]="filter.positionName" name="positionName" pInputText type="text" placeholder="Title" (ngModelChange)="filterJobs()"/>
-                </span>
-              </th>
-              <th>
-                <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input [(ngModel)]="filter.workplace" name="workplace" pInputText type="text" placeholder="Location" (ngModelChange)="filterJobs()"/>
-                </span>
-              </th>
-              <th>
-                <p-calendar class="p-inputtext-sm" name="publicationDate" dateFormat="dd/mm/yy" 
-                [inputStyle]="{ 'width': '200px'}" [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #publicationDate="ngModel" [required]="true" [(ngModel)]="filter.publicationDate"(ngModelChange)="filterJobs()" ></p-calendar>
-              </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-job>
-            <tr>
-                <td>
-                  <a href="javascript:;" [routerLink]="['/v1/jobs-view', job.id]">
-                    {{ job.position.name }}
-                  </a> 
-                  <span *ngIf="user != undefined">
-                    <a *ngIf="isAlreadyAplliedToCurrentJob(job.candidates)">
-                      <p-tag [severity]="'info'">applied</p-tag>
-                    </a>
-                  </span> 
- 
-                </td>
-                <td>{{ job.position.workplace.name }}</td>
-                <td>{{ job.publicationDate | date: 'd MMM, y'}}</td>  
+  <p-table [value]="jobs" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+    [lazy]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalJobs}}"
+    [showCurrentPageReport]="true" styleClass="p-datatable-sm" #table>
+    <ng-template pTemplate="caption" *ngIf="isUserLoggedIn && isSuperAdmin">
+      <div class="flex">
+        <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus"
+          class="p-button-info mr-2"></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="background-color: #fff; width:40%">
+          Title
+          <span *ngIf="filter.sort ==='positionName,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='positionName,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th style="background-color: #fff; width:20%">
+          Location
+          <span *ngIf="filter.sort ==='workplace,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='workplace,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th style="background-color: #fff; width:20%">
+          Date
+          <span *ngIf="filter.sort ==='publicationDate,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='publicationDate,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th *ngIf="isUserLoggedIn && isSuperAdmin" style="background-color: #fff;">Ações</th>
+      </tr>
+      <tr>
+        <th>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input [(ngModel)]="filter.positionName" name="positionName" pInputText type="text" placeholder="Title"
+              (ngModelChange)="filterJobs()" />
+          </span>
+        </th>
+        <th>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input [(ngModel)]="filter.workplace" name="workplace" pInputText type="text" placeholder="Location"
+              (ngModelChange)="filterJobs()" />
+          </span>
+        </th>
+        <th>
+          <p-calendar class="p-inputtext-sm" name="publicationDate" dateFormat="dd/mm/yy"
+            [inputStyle]="{ 'width': '200px'}" [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)"
+            [inline]="false" [readonlyInput]="false" ngModel #publicationDate="ngModel" [required]="true"
+            [(ngModel)]="filter.publicationDate" (ngModelChange)="filterJobs()"></p-calendar>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-job>
+      <tr>
+        <td>
+          <a href="javascript:;" [routerLink]="['/v1/jobs-view', job.id]">
+            {{ job.position.name }}
+          </a>
+          <span *ngIf="user != undefined">
+            <a *ngIf="isAlreadyAplliedToCurrentJob(job.candidates)">
+              <p-tag [severity]="'info'">applied</p-tag>
+            </a>
+          </span>
 
-                <td style="width: 180px;" *ngIf="isUserLoggedIn && isSuperAdmin">
-                    <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Editar" (click)="onEditJob(job)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(job)" pTooltip="Eliminar" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
-                </td>
+        </td>
+        <td>{{ job.position.workplace.name }}</td>
+        <td>{{ job.publicationDate | date: 'd MMM, y'}}</td>
 
-            </tr>
-        </ng-template>
-    </p-table>
+        <td style="width: 180px;" *ngIf="isUserLoggedIn && isSuperAdmin">
+          <button pButton pTooltip="Visualizar" (click)="onSelectJob(job)" tooltipPosition="top" type="button"
+            icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+          <button pButton pTooltip="Editar" (click)="onEditJob(job)" tooltipPosition="top" type="button"
+            icon="pi pi-pencil"
+            style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+          <button pButton (click)="deletionConfirm(job)" pTooltip="Eliminar" tooltipPosition="top" type="button"
+            icon="pi pi-trash"
+            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 
-  <!--Show -->
-  <p-dialog header="{{selectedJobModal.position.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
-    <!--Employees view-->
-    <div class="formgrid grid">
+<!--Show -->
+<p-dialog header="{{selectedJobModal.position.name}}" [(visible)]="displayModal" [modal]="true"
+  [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
+  <!--Employees view-->
+  <div class="formgrid grid">
 
-        <div class="col-12 p-fluid">
+    <div class="col-12 p-fluid">
 
-          <div class="formgrid grid">
-            <div class="field col-12 md:col-6">
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.name}}</span></i></li>
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Missão</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.mission}}</span></i></li>
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Grupo funcional</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.functionalGroup}}</span></i></li>
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.department.name}}</span></i></li>    
-            </div>
-            <div class="field col-12 md:col-6">
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de trabalho</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.workplace.name}}</span></i></li>
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário Minimo</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.minimumWage}}</span></i></li>
-              <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário Máximo</span>: <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.maximumWage}}</span></i></li>
-    
-            </div>
-          </div>
-
-          <!--Main Responsibilities-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
-            <label>Pricipais Responsibilidades </label>
-            <p-table [value]="selectedJobModal.position.mainResponsibilities" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ mr.designation }}</td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No main responsibilities found
-                    </td>
-                  </tr>
-              </ng-template>            
-            </p-table> 
-            <br> 
-          </div> 
-
-          <!--Specific Requirements-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Requisitos especificos exigidos</label>
-            <p-table [value]="selectedJobModal.position.specificRequirements" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-sr let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ sr.designation }}</td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No specifics requirements found
-                    </td>
-                  </tr>
-              </ng-template>            
-            </p-table>  
-            <br> 
-          </div>  
-
-          <!--Benefits-->
-          <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
-            <label>Beneficios</label>
-            <p-table [value]="selectedJobModal.position.benefits" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-b let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ b.designation }}</td>                    
-                </tr>       
-                
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No benefit found
-                    </td>
-                  </tr>
-              </ng-template>   
-             
-            </p-table>  
-            <br> 
-          </div>  
-
-          <!--Employees-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Funcionários com este cargo</label> 
-            <p-table [value]="selectedJobModal.position.employees" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-            <ng-template pTemplate="header">
-                <tr>
-                  <th>Nome</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ employee.name }}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="10">
-                    Sem funcionários
-                    </td>
-                </tr>
-            </ng-template>            
-            </p-table>  
-            <br> 
-          </div> 
-
-          <!--Candidates-->
-          <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Candidatos para esta vaga</label>
-            <p-table [value]="selectedJobModal.candidates" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-candidate let-rowIndex="rowIndex">
-                <tr>
-                  <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      No candidates found for this job
-                    </td>
-                  </tr>
-              </ng-template>            
-            </p-table>  
-            <br> 
-          </div> 
-
-        </div>  
-    </div>         
-  </p-dialog>
-
-
-  <p-dialog header="Job {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #jobForm="ngForm" (ngSubmit)="save(jobForm)">
-        <div class="formgrid grid">
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Cargo</label>    
-                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                    [filter]="true" [options]="positions" [(ngModel)]="job.position.id" name="position" (onChange)="findPositionById(job.position.id)"
-                    #position="ngModel" >
-                </p-dropdown>
-            </div>
-            <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
-                <label>Data de expiração</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" name="expirationDate"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #expirationDate="ngModel" [required]="true" [(ngModel)]="job.expirationDate"></p-calendar>
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Missão</label>
-                <input pInputText disabled class="p-inputtext-sm" type="text" name="mission"
-                ngModel #mission="ngModel" required minlength="1" [(ngModel)]="positionById.mission">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Grupo funcional</label>
-                <input pInputText disabled class="p-inputtext-sm" type="text" name="functionalGroup"
-                ngModel #functionalGroup="ngModel" required minlength="1" [(ngModel)]="positionById.functionalGroup">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Departmento</label>
-                <input pInputText disabled class="p-inputtext-sm" type="text" name="department"
-                ngModel #department="ngModel" required minlength="1" [(ngModel)]="positionById.department.name">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
-                <label>Local de trabalho</label>
-                <input pInputText disabled class="p-inputtext-sm" type="text" name="workplace"
-                ngModel #workplace="ngModel" required minlength="1" [(ngModel)]="positionById.workplace.name">  
-            </div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="jobForm.invalid" class="p-button-sm" style="height: 30px;">
-                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
-                    <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
-                  </button>
-              </div>
+      <div class="formgrid grid">
+        <div class="field col-12 md:col-6">
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>:
+              <span style="color:#08080871;font-weight:bold">{{selectedJobModal.position.name}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span
+                style="color:#545555;font-weight:bold">Missão</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.mission}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Grupo
+                funcional</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.functionalGroup}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span
+                style="color:#545555;font-weight:bold">Departamento</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.department.name}}</span></i></li>
         </div>
-      
-    </form>
+        <div class="field col-12 md:col-6">
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de
+                trabalho</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.workplace.name}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
+                Minimo</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.minimumWage}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
+                Máximo</span>: <span
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.maximumWage}}</span></i></li>
+
+        </div>
+      </div>
+
+      <!--Main Responsibilities-->
+      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
+        <label>Pricipais Responsibilidades </label>
+        <p-table [value]="selectedJobModal.position.mainResponsibilities" [responsive]="true"
+          styleClass="p-datatable-sm" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ mr.designation }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="10">
+                No main responsibilities found
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br>
+      </div>
+
+      <!--Specific Requirements-->
+      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+        <label>Requisitos especificos exigidos</label>
+        <p-table [value]="selectedJobModal.position.specificRequirements" [responsive]="true"
+          styleClass="p-datatable-sm" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-sr let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ sr.designation }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="10">
+                No specifics requirements found
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br>
+      </div>
+
+      <!--Benefits-->
+      <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
+        <label>Beneficios</label>
+        <p-table [value]="selectedJobModal.position.benefits" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-b let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ b.designation }}</td>
+            </tr>
+
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="10">
+                No benefit found
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+        <br>
+      </div>
+
+      <!--Employees-->
+      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+        <label>Funcionários com este cargo</label>
+        <p-table [value]="selectedJobModal.position.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ employee.name }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="10">
+                Sem funcionários
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br>
+      </div>
+
+      <!--Candidates-->
+      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+        <label>Candidatos para esta vaga</label>
+        <p-table [value]="selectedJobModal.candidates" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-candidate let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ candidate.firstName }} {{ candidate.lastName }}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="10">
+                No candidates found for this job
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br>
+      </div>
+
+    </div>
+  </div>
 </p-dialog>
 
 
+<p-dialog header="Job {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+  [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+  <form autocomplete="off" #jobForm="ngForm" (ngSubmit)="save(jobForm)">
+    <div class="formgrid grid">
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Cargo</label>
+        <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+          [(ngModel)]="job.position.id" name="position" (onChange)="findPositionById(job.position.id)"
+          #position="ngModel">
+        </p-dropdown>
+      </div>
+      <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+        <label>Data de expiração</label>
+        <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+          [showOnFocus]="false" name="expirationDate" [inline]="false" [readonlyInput]="false" ngModel
+          #expirationDate="ngModel" [required]="true" [(ngModel)]="job.expirationDate"></p-calendar>
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Missão</label>
+        <input pInputText disabled class="p-inputtext-sm" type="text" name="mission" ngModel #mission="ngModel" required
+          minlength="1" [(ngModel)]="positionById.mission">
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Grupo funcional</label>
+        <input pInputText disabled class="p-inputtext-sm" type="text" name="functionalGroup" ngModel
+          #functionalGroup="ngModel" required minlength="1" [(ngModel)]="positionById.functionalGroup">
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Departmento</label>
+        <input pInputText disabled class="p-inputtext-sm" type="text" name="department" ngModel #department="ngModel"
+          required minlength="1" [(ngModel)]="positionById.department.name">
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Local de trabalho</label>
+        <input pInputText disabled class="p-inputtext-sm" type="text" name="workplace" ngModel #workplace="ngModel"
+          required minlength="1" [(ngModel)]="positionById.workplace.name">
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <button pButton type="submit" [disabled]="jobForm.invalid" class="p-button-sm" style="height: 30px;">
+          <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+          <span *ngIf="showLoading">Loading...</span>
+          <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+        </button>
+      </div>
+    </div>
 
-
+  </form>
+</p-dialog>

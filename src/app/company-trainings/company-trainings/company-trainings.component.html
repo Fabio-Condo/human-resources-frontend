@@ -1,12 +1,14 @@
-
 <div class="container">
     <h3>Formações</h3>
 
-    <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewTraining()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button pButton (click)="onAddNewTraining()" pRipple label="Novo" icon="pi pi-plus"
+                    class="p-button-info mr-2"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -15,7 +17,7 @@
                 <th style="background-color: #fff;">Tipo</th>
                 <th style="background-color: #fff;">Data</th>
                 <th style="background-color: #fff;">Duração</th>
-                <th style="background-color: #fff;">Ações</th> 
+                <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-training>
@@ -23,15 +25,20 @@
                 <td>
                     <a href="javascript:;" (click)="onSelectTraining(training)">
                         {{ training.companyTrainingType.level }}
-                    </a>           
-                  </td>
+                    </a>
+                </td>
                 <td>{{ training.companyTrainingType.type }}</td>
                 <td>{{ training.date | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ training.duration }}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectTraining(training)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditTraining(training)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Delete" (click)="deletionConfirm(training)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="View" (click)="onSelectTraining(training)" tooltipPosition="top"
+                        type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditTraining(training)" tooltipPosition="top"
+                        type="button" icon="pi pi-pencil"
+                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(training)" tooltipPosition="top"
+                        type="button" icon="pi pi-trash"
+                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
@@ -39,22 +46,35 @@
 </div>
 
 <!--View-->
-<p-dialog header="{{selectedCompanyTrainingModal.duration}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedCompanyTrainingModal.duration}}" [(visible)]="displayModal" [modal]="true"
+    [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
 
     <div class="formgrid grid">
 
         <div class="col-12 p-fluid">
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nivel</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.companyTrainingType.level}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Tipo</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.companyTrainingType.type}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Duração</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.duration}}</span></i></li>
-            <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Data</span>: <span style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.date | date: 'dd/MM/yyyy' }}</span></i></li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Nivel</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.companyTrainingType.level}}</span></i>
+            </li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Tipo</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.companyTrainingType.type}}</span></i>
+            </li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Duração</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.duration}}</span></i>
+            </li>
+            <li class="dialog-info-li"><i class="dialog-info-i"><span
+                        style="color:#545555;font-weight:bold">Data</span>: <span
+                        style="color:#08080871;font-weight:bold">{{selectedCompanyTrainingModal.date | date:
+                        'dd/MM/yyyy' }}</span></i></li>
         </div>
 
         <!--Goals-->
         <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Objectivos</label> 
-            <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals" [responsive]="true" 
-                styleClass="p-datatable-sm" #tabela>
+            <label>Objectivos</label>
+            <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals"
+                [responsive]="true" styleClass="p-datatable-sm" #tabela>
                 <ng-template pTemplate="header">
                     <tr>
                     </tr>
@@ -67,210 +87,220 @@
                 <ng-template pTemplate="emptymessage">
                     <tr>
                         <td colspan="10">
-                        Sem habilidades adicionadas
+                            Sem habilidades adicionadas
                         </td>
                     </tr>
-                </ng-template>            
-            </p-table>  
-            <br> 
+                </ng-template>
+            </p-table>
+            <br>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label >Membros envolvidos</label>
-            <p-table [value]="selectedCompanyTrainingModal.employees" selectionMode="single" [responsive]="true" 
-                 styleClass="p-datatable-sm" #tabela >
-              <ng-template pTemplate="header">
-                <tr>
-                  <th style="background-color: #FFF;">Nome</th>
-                  <th style="background-color: #FFF;">Cargo</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                <tr [pSelectableRow]="employee">
-                  <td>{{ employee.name }}</td>
-                  <td>{{ employee.position.name }}</td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                  <tr>
-                    <td colspan="10">
-                      Sem participntes na formação
-                    </td>
-                  </tr>
-              </ng-template>            
-            </p-table>     
-            <br>   
+            <label>Membros envolvidos</label>
+            <p-table [value]="selectedCompanyTrainingModal.employees" selectionMode="single" [responsive]="true"
+                styleClass="p-datatable-sm" #tabela>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="background-color: #FFF;">Nome</th>
+                        <th style="background-color: #FFF;">Cargo</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="employee">
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.position.name }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                            Sem participntes na formação
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <br>
         </div>
     </div>
 </p-dialog>
 
 
-<p-dialog header="Treinamento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Treinamento {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+    [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #projectStatusForm="ngForm" (ngSubmit)="save(projectStatusForm)">
         <div>
             <div class="col-12 p-fluid">
                 <label>Nivel</label>
                 <p-dropdown class="p-inputtext-sm" [options]="companyTrainingTypes" placeholder="Selecione"
-                    name="companyTrainingType" #companyTrainingType ngModel (onChange)="findTrainingById(companyTraining.companyTrainingType.id)" [(ngModel)]="companyTraining.companyTrainingType.id"></p-dropdown>
+                    name="companyTrainingType" #companyTrainingType ngModel
+                    (onChange)="findTrainingById(companyTraining.companyTrainingType.id)"
+                    [(ngModel)]="companyTraining.companyTrainingType.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 1%;">
                 <label>Tipo</label>
-                <input pInputText disabled class="p-inputtext-sm" type="text" name="type"
-                ngModel #type="ngModel" required minlength="1" [(ngModel)]="companyTrainingTypeById.type">  
+                <input pInputText disabled class="p-inputtext-sm" type="text" name="type" ngModel #type="ngModel"
+                    required minlength="1" [(ngModel)]="companyTrainingTypeById.type">
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 1%;">
                 <label>Data</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
-                  [inline]="false" [readonlyInput]="false" 
-                  ngModel #date="ngModel" [required]="true" [(ngModel)]="companyTraining.date"></p-calendar>
+                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                    [showIcon]="true" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel
+                    #date="ngModel" [required]="true" [(ngModel)]="companyTraining.date"></p-calendar>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 1%;">
                 <label>Duração</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="duration"
-                ngModel #duration="ngModel" required minlength="1" [(ngModel)]="companyTraining.duration">  
+                <input pInputText class="p-inputtext-sm" type="text" name="duration" ngModel #duration="ngModel"
+                    required minlength="1" [(ngModel)]="companyTraining.duration">
             </div>
 
-            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showProjectMembers = !showProjectMembers">
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+                (click)="showProjectMembers = !showProjectMembers">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                  <i *ngIf="!showProjectMembers" class="pi pi-angle-right" style="margin: 13px;"></i>
-                  <i *ngIf="showProjectMembers" class="pi pi-angle-down" style="margin: 13px;"></i>
-                  Participntes 
+                    <i *ngIf="!showProjectMembers" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showProjectMembers" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Participntes
                 </div>
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <a href="javascript:;" (click)="onaaddEmployeeToTraining()">add +</a>
-                <p-table [value]="companyTraining.employees" [responsive]="true" 
-                     styleClass="p-datatable-sm" #tabela >
-                  <ng-template pTemplate="header">
-                    <tr>
-                        <th style="background-color: #fff; width: 4rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th style="background-color: #FFF;">Nome</th>
-                        <th style="background-color: #FFF;">Cargo</th>
-                        <th style="background-color: #FFF;" class="col-valor-header"></th>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-                    <tr [pSelectableRow]="employee">
-                        <td>
-                            <p-tableCheckbox [value]="employee"></p-tableCheckbox>
-                        </td>
-                        <td>{{ employee.name }}</td>
-                        <td>{{ employee.position.name }}</td>
-                        <td class="col-acoes">
-                            <span class="p-buttonset">
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeEmployeeFromTrainingConfirm(employee.id)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
-                        </td> 
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="emptymessage">
-                      <tr>
-                        <td colspan="10">
-                          Sem membros na formação
-                        </td>
-                      </tr>
-                  </ng-template>            
-                </p-table>     
-                <br>   
+                <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="background-color: #fff; width: 4rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th style="background-color: #FFF;">Nome</th>
+                            <th style="background-color: #FFF;">Cargo</th>
+                            <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
+                        <tr [pSelectableRow]="employee">
+                            <td>
+                                <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+                            </td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.position.name }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeEmployeeFromTrainingConfirm(employee.id)"><p-tag
+                                            [severity]="'danger'"> remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem membros na formação
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
-            <div class="col-12" style="margin-top: 2%;"> 
-                <button pButton type="submit" [disabled]="projectStatusForm.invalid">
+            <div class="col-12" style="margin-top: 2%;">
+                <button pButton type="submit" [disabled]="projectStatusForm.invalid"
+                    style="display:inline; float: right;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
                 </button>
             </div>
         </div>
-      
+
     </form>
 </p-dialog>
 
 
 <!--Add New member in project -->
-<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoTraining" [modal]="true" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #AddasMemberForm="ngForm" (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
+<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoTraining" [modal]="true"
+    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    <form autocomplete="off" #AddasMemberForm="ngForm"
+        (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
         <div class="col-12 p-fluid">
             <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel (onChange)="findEmployeeById(selectedEmployeeIdToAddasMember)" [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                name="employee" #employee ngModel (onChange)="findEmployeeById(selectedEmployeeIdToAddasMember)"
+                [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid">
             <label>Cargo</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="position"
-            ngModel #position="ngModel" required minlength="1" [(ngModel)]="employeeById.position.name">  
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="position" ngModel #position="ngModel"
+                required minlength="1" [(ngModel)]="employeeById.position.name">
         </div>
 
         <div class="col-12 p-fluid">
             <label>Departamento</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="department"
-            ngModel #department="ngModel" required minlength="1" [(ngModel)]="employeeById.position.department.name">  
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="department" ngModel
+                #department="ngModel" required minlength="1" [(ngModel)]="employeeById.position.department.name">
         </div>
 
         <div class="col-12 p-fluid">
             <label>Contrato</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="contractType"
-            ngModel #contractType="ngModel" required minlength="1" [(ngModel)]="employeeById.contractType">  
+            <input disabled pInputText class="p-inputtext-sm" type="text" name="contractType" ngModel
+                #contractType="ngModel" required minlength="1" [(ngModel)]="employeeById.contractType">
         </div>
 
-        <div class="col-12 p-fluid"> 
-            <button pButton type="submit" [disabled]="AddasMemberForm.invalid" class="p-button-sm" style="height: 30px;">
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" [disabled]="AddasMemberForm.invalid" class="p-button-sm"
+                style="height: 30px;">
                 <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                 <span *ngIf="showLoading">Loading...</span>
-                <span *ngIf="!showLoading">add</span>      
+                <span *ngIf="!showLoading">add</span>
             </button>
         </div>
     </form>
 </p-dialog>
 
 <!--Filtrar-->
-<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">
 
     <div class="formgrid grid">
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
-                <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterTrainings()"></p-dropdown>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..." ngModel name="itemsPerPage"
+                    [(ngModel)]="filter.itemsPerPage" (onChange)="filterTrainings()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
-                <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterTrainings()"></p-dropdown>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..." ngModel name="sort" [(ngModel)]="filter.sort"
+                    (onChange)="filterTrainings()"></p-dropdown>
             </div>
         </div>
 
         <div class="col-12 p-fluid">
             <label>Nivel</label>
             <p-dropdown class="p-inputtext-sm" [options]="companyTrainingTypes" placeholder="Selecione"
-                name="companyTrainingType" #companyTrainingType ngModel [(ngModel)]="filter.companyTrainingTypeLevel" (onChange)="findTrainingById(filter.companyTrainingTypeLevel)" (onChange)="filterTrainings()"></p-dropdown>
+                name="companyTrainingType" #companyTrainingType ngModel [(ngModel)]="filter.companyTrainingTypeLevel"
+                (onChange)="findTrainingById(filter.companyTrainingTypeLevel)"
+                (onChange)="filterTrainings()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Tipo</label>
-            <input pInputText disabled class="p-inputtext-sm" type="text" name="type"
-            ngModel #type="ngModel" required minlength="1" [(ngModel)]="companyTrainingTypeById.type">  
+            <input pInputText disabled class="p-inputtext-sm" type="text" name="type" ngModel #type="ngModel" required
+                minlength="1" [(ngModel)]="companyTrainingTypeById.type">
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-            [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false"
-              [inline]="false" [readonlyInput]="false" 
-              ngModel #date="ngModel" [required]="true" [(ngModel)]="filter.date"(ngModelChange)="filterTrainings()" ></p-calendar>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                [showIcon]="true" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel #date="ngModel"
+                [required]="true" [(ngModel)]="filter.date" (ngModelChange)="filterTrainings()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
         </div>
 
-    </div> 
+    </div>
 
-</p-dialog>  
+</p-dialog>

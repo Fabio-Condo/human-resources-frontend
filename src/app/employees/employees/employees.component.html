@@ -1,12 +1,15 @@
 <div class="container">
     <h3>Funcionários</h3>
 
-    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
-        
+    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus"
+                    class="p-button-info mr-2"></button>
+                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -15,7 +18,7 @@
                 <th>Cargo</th>
                 <th>Departamento</th>
                 <th>Active?</th>
-                <th>Ações</th>       
+                <th>Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee>
@@ -23,104 +26,111 @@
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployee(employee)">
                         {{ employee.name }}
-                    </a>           
+                    </a>
                 </td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
                 <td>
-                    <a href="javascript:;" (click)="changeStatus(employee)" [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">
+                    <a href="javascript:;" (click)="changeStatus(employee)"
+                        [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">
                         <p-tag [value]="employee.status" [severity]="getStatus(employee.status)"></p-tag>
                     </a>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <button pButton pTooltip="View" (click)="onSelectEmployee(employee)" tooltipPosition="top"
+                        type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Edit" (click)="onEditEmployee(employee)" tooltipPosition="top"
+                        type="button" icon="pi pi-pencil"
+                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+                    <button pButton pTooltip="Delete" (click)="deletionConfirm(employee)" tooltipPosition="top"
+                        type="button" icon="pi pi-trash"
+                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
             <tr>
-            <td colspan="10">
-                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
-                <span *ngIf="!showLoading">No title found </span> 
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterEmployees(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
-                </a>                  
-            </td>
+                <td colspan="10">
+                    <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+                    <span *ngIf="!showLoading">No title found </span>
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                    <a href="javascript:;">
+                        <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterEmployees(0)" pTooltip="Refresh"
+                            class="pi pi-refresh"></i>
+                    </a>
+                </td>
             </tr>
         </ng-template>
     </p-table>
 
 </div>
 
-<p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
+    [style]="{width: '60vw', height: '50vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
-        
+
         <div class="formgrid grid">
 
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nome</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="name"
-                    ngModel #name="ngModel" required minlength="1" [(ngModel)]="employee.name">  
+                    <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
+                        minlength="1" [(ngModel)]="employee.name">
                 </div>
                 <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                     <label>Data de nascimento</label>
                     <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                    [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
-                      [inline]="false" [readonlyInput]="false" 
-                      ngModel #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
+                        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
+                        [inline]="false" [readonlyInput]="false" ngModel #birthday="ngModel" [required]="true"
+                        [(ngModel)]="employee.birthday"></p-calendar>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 1%;">
                     <label>Tipo de contrato</label>
-                    <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
+                    <p-dropdown class="p-inputtext-sm" [options]="contractTypes" placeholder="Selecione"
                         name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 1%;">
                     <label>Departamento</label>
-                    <p-dropdown placeholder="Selecione..."
-                      [filter]="true" [options]="departments"
-                      [(ngModel)]="selectedDepartment" name="selectedDepartment"
-                      #department="ngModel" (onChange)="getPositionsByDepartmentId()"></p-dropdown>
+                    <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
+                        [(ngModel)]="selectedDepartment" name="selectedDepartment" #department="ngModel"
+                        (onChange)="getPositionsByDepartmentId()"></p-dropdown>
                 </div>
-        
+
                 <div class="col-12 p-fluid" style="margin-top: 1%;">
-                    <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento primeiro]</span>    
-                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                        [filter]="true" [options]="positions" [(ngModel)]="employee.position.id" name="position"
-                        #position="ngModel" [required]=true [disabled]="!selectedDepartment">
+                    <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o
+                        departmento primeiro]</span>
+                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+                        [(ngModel)]="employee.position.id" name="position" #position="ngModel" [required]=true
+                        [disabled]="!selectedDepartment">
                     </p-dropdown>
                 </div>
             </div>
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Genero</label>
-                    <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
-                        name="gender" #gender ngModel [(ngModel)]="employee.gender"></p-dropdown>
+                    <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender
+                        ngModel [(ngModel)]="employee.gender"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Estado civil</label>
-                    <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
+                    <p-dropdown class="p-inputtext-sm" [options]="maritalStatuses" placeholder="Selecione"
                         name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Conjugue</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="spousesName"
-                    ngModel #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">  
+                    <input pInputText class="p-inputtext-sm" type="text" name="spousesName" ngModel
+                        #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Provincia</label>    
-                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                        [filter]="true" [options]="provinces" [(ngModel)]="employee.province.id" name="province"
-                        #province="ngModel" [required]=true>
+                    <label>Provincia</label>
+                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
+                        [(ngModel)]="employee.province.id" name="province" #province="ngModel" [required]=true>
                     </p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue"
-                    ngModel #wageValue="ngModel" required minlength="1" [(ngModel)]="employee.wageValue">  
+                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue" ngModel #wageValue="ngModel"
+                        required minlength="1" [(ngModel)]="employee.wageValue">
                 </div>
             </div>
         </div>
@@ -129,193 +139,242 @@
 
             <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfo = !showContactsInfo">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                  <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
-                  <i *ngIf="showContactsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
-                  Contacts
+                    <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showContactsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Contacts
                 </div>
             </a>
-            
+
             <div *ngIf="showContactsInfo" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
                 <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
-                <p-table [value]="employee.contacts" [responsive]="true" 
-                     styleClass="p-datatable-sm" #tabela >
-                  <ng-template pTemplate="header">
-                    <tr>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
-                    <tr>
-                      <td>{{ contact.contactNumber }}</td>
-                      <td class="col-acoes">
-                        <span class="p-buttonset">
-                            <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                            <a style="margin-left: 3px;" href="javascript:;" (click)="removeContact(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                        </span>
-                      </td> 
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="emptymessage">
-                      <tr>
-                        <td colspan="10">
-                          Sem contactos
-                        </td>
-                      </tr>
-                  </ng-template>            
-                </p-table>     
-                <br>   
+                <p-table [value]="employee.contacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ contact.contactNumber }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadyContactEdit(contact, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeContact(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem contactos
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
-            <a href="javascript:;" style="text-decoration: none;" (click)="showEmployeeTrainings = !showEmployeeTrainings">
+            <a href="javascript:;" style="text-decoration: none;"
+                (click)="showEmployeeTrainings = !showEmployeeTrainings">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                  <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
-                  <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
-                  Formação acadêmica
+                    <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Formação acadêmica
                 </div>
             </a>
 
             <div *ngIf="showEmployeeTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
                 <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
-                <p-table [value]="employee.employeeTrainings" [responsive]="true" 
-                     styleClass="p-datatable-sm" #tabela >
-                  <ng-template pTemplate="header">
-                    <tr>
-                      <th style="background-color: #FFF;">Descrição</th>
-                      <th style="background-color: #FFF;">Início</th>
-                      <th style="background-color: #FFF;">Fim</th>
-                      <th style="background-color: #FFF;" class="col-valor-header"></th>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
-                    <tr>
-                      <td>{{ training.description }}</td>
-                      <td>{{ training.begin | date:'MMMM, y'}}</td>
-                      <td>{{ training.end | date:'MMMM, y'}}</td>
-                      <td class="col-acoes">
-                        <span class="p-buttonset">
-                            <a href="javascript:;" (click)="getReadyTrainingEdit(training, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                            <a style="margin-left: 3px;" href="javascript:;" (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                        </span>
-                      </td>  
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="emptymessage">
-                      <tr>
-                        <td colspan="10">
-                          Sem educação adicionada
-                        </td>
-                      </tr>
-                  </ng-template>            
-                </p-table>     
-                <br>   
+                <p-table [value]="employee.employeeTrainings" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="background-color: #FFF;">Descrição</th>
+                            <th style="background-color: #FFF;">Início</th>
+                            <th style="background-color: #FFF;">Fim</th>
+                            <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ training.description }}</td>
+                            <td>{{ training.begin | date:'MMMM, y'}}</td>
+                            <td>{{ training.end | date:'MMMM, y'}}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadyTrainingEdit(training, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeTraining(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem educação adicionada
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
             <a href="javascript:;" style="text-decoration: none;" (click)="showSkills = !showSkills">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-                  <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
-                  <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
-                  Skills
+                    <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Skills
                 </div>
             </a>
 
             <!--Skills-->
             <div *ngIf="showSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
                 <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
-                <p-table [value]="employee.skills" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela>
+                <p-table [value]="employee.skills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ skill.name }}</td>
-                          <td class="col-acoes">
-                            <span class="p-buttonset">
-                                <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag [severity]="'primmary'">edit</p-tag></a>
-                                <a style="margin-left: 3px;" href="javascript:;" (click)="removeSkill(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
-                            </span>
-                          </td>  
+                            <td>{{ skill.name }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadySkillEdit(skill, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeSkill(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
+                                </span>
+                            </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem habilidades adicionadas
+                                Sem habilidades adicionadas
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
-            <div class="col-12" style="margin-top: 2px;"> 
-                <button pButton type="submit" [disabled]="employeeForm.invalid" class="p-button-sm p-button-success" class="">
+            <div class="col-12" style="margin-top: 2px;">
+                <button pButton type="submit" [disabled]="employeeForm.invalid" style="display:inline; float: right;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
-                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>      
-                  </button>
-              </div>
+                    <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+                </button>
+            </div>
         </div>
-      
+
     </form>
 </p-dialog>
 
 <!--Show -->
-<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true"
+    [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
     <!--Employees view-->
     <div class="formgrid grid">
         <div class="col-12 p-fluid">
 
             <div class="formgrid grid">
                 <div class="field col-12 md:col-6">
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Nome</span>: <span style="color:#08080871;">{{selectedEmployeeModal.name}}</span></i></li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Cargo</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i></li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Departamento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.department.name}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Nome</span>: <span
+                                style="color:#08080871;">{{selectedEmployeeModal.name}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Cargo</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.name}}</span></i>
+                    </li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Departamento</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.position.department.name}}</span></i>
+                    </li>
                     <li class="dialog-info-li">
-                        <i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Tipo de contrato</span>: 
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='INDEFINITE_PERIOD'"> Indeterminado </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='DEFINITE_PERIOD'"> Determinado </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='PART_TIME'"> Tempo parcial </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='TEMPORARY'"> Temporário </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.contractType==='SERVICE_PROVIDER'"> Prestador de serviços </span>
+                        <i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Tipo de contrato</span>:
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.contractType==='INDEFINITE_PERIOD'"> Indeterminado </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.contractType==='DEFINITE_PERIOD'"> Determinado </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.contractType==='PART_TIME'"> Tempo parcial </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.contractType==='TEMPORARY'"> Temporário </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.contractType==='SERVICE_PROVIDER'"> Prestador de serviços
+                            </span>
                         </i>
                     </li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.wageValue}}</span></i></li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Provincia</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Salário</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.wageValue}}</span></i>
+                    </li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Provincia</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.province.name}}</span></i>
+                    </li>
                 </div>
                 <div class="field col-12 md:col-6">
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
-                            <span style="color:#545555;font-weight:bold">Genero</span>: 
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.gender==='MASCULINE'"> Masculino </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.gender==='FEMININE'"> Feminino </span>
+                            <span style="color:#545555;font-weight:bold">Genero</span>:
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.gender==='MASCULINE'"> Masculino </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.gender==='FEMININE'"> Feminino </span>
                         </i>
                     </li>
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
-                            <span style="color:#545555;font-weight:bold">Estado civil</span>: 
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'"> Solteiro </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'"> Casado </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='DIVORCED'"> Divorciado </span>
-                            <span style="color:#08080871;font-weight:bold" *ngIf="selectedEmployeeModal.maritalStatus==='WIDOWER'"> Viúvo </span>
+                            <span style="color:#545555;font-weight:bold">Estado civil</span>:
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'"> Solteiro </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'"> Casado </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.maritalStatus==='DIVORCED'"> Divorciado </span>
+                            <span style="color:#08080871;font-weight:bold"
+                                *ngIf="selectedEmployeeModal.maritalStatus==='WIDOWER'"> Viúvo </span>
                         </i>
                     </li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Conjugue</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.spousesName}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Conjugue</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.spousesName}}</span></i>
+                    </li>
                     <li class="dialog-info-li">
                         <i class="dialog-info-i">
-                            <span style="color:#545555;font-weight:bold">Active</span>: 
+                            <span style="color:#545555;font-weight:bold">Active</span>:
                             <p-tag *ngIf="selectedEmployeeModal.status" [severity]="'primmary'">true</p-tag>
                             <p-tag *ngIf="!selectedEmployeeModal.status" [severity]="'danger'">false</p-tag>
                         </i>
                     </li>
-                    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Data de nascimento</span>: <span style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.birthday | date:'dd/MM/yyyy'}}</span></i></li>
+                    <li class="dialog-info-li"><i class="dialog-info-i"><span
+                                style="color:#545555;font-weight:bold">Data de nascimento</span>: <span
+                                style="color:#08080871;font-weight:bold">{{selectedEmployeeModal.birthday |
+                                date:'dd/MM/yyyy'}}</span></i></li>
                 </div>
-            </div>  
+            </div>
+
+            <a href="javascript:;" style="text-decoration: none;" (click)="showProjects = !showProjects">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showProjects" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showProjects" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Projectos
+                    <span *ngIf="selectedEmployeeModal.projects.length != 0">
+                        ({{selectedEmployeeModal.projects.length}})</span>
+                </div>
+            </a>
 
             <!--Projects-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Projectos</label> <span *ngIf="selectedEmployeeModal.projects.length != 0"> [{{selectedEmployeeModal.projects.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.projects" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <div *ngIf="showProjects" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.projects" [responsive]="true" styleClass="p-datatable-sm"
+                    #tabela>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Nome</th>
@@ -326,51 +385,70 @@
                         <tr>
                             <td>{{ project.name }}</td>
                             <td>
-                                <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
+                                <p-tag [value]="project.projectStatus"
+                                    [severity]="getProjectStatus(project.projectStatus)"></p-tag>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                            Sem projectos adicionados
+                                Sem projectos adicionados
                             </td>
                         </tr>
-                    </ng-template>            
-                </p-table> 
+                    </ng-template>
+                </p-table>
                 <br>
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfo = !showContactsInfo">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showContactsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Contacts
+                    <span *ngIf="selectedEmployeeModal.contacts.length != 0">
+                        ({{selectedEmployeeModal.contacts.length}})</span>
+                </div>
+            </a>
+
             <!--Contacts-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Contactos</label> <span *ngIf="selectedEmployeeModal.contacts.length != 0"> [{{selectedEmployeeModal.contacts.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela > <!--*ngIf="showContacts"-->
+            <div *ngIf="showContactsInfo" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" styleClass="p-datatable-sm"
+                    #tabela> <!--*ngIf="showContacts"-->
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Número</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-contact let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ contact.contactNumber }}</td>
+                            <td>{{ contact.contactNumber }}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem contactos adicionados
+                                Sem contactos adicionados
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;"
+                (click)="showEmployeeTrainings = !showEmployeeTrainings">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Formação acadêmica
+                    <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0">
+                        ({{selectedEmployeeModal.employeeTrainings.length}})</span>
+                </div>
+            </a>
+
             <!--Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Formação acadêmica</label> <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0"> [{{selectedEmployeeModal.employeeTrainings.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true" 
+            <div *ngIf="showEmployeeTrainings" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true"
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
@@ -381,26 +459,36 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ training.description }}</td>
-                          <td>{{ training.begin | date:'MMMM, y'}}</td>
-                          <td>{{ training.end | date:'MMMM, y'}}</td>
+                            <td>{{ training.description }}</td>
+                            <td>{{ training.begin | date:'MMMM, y'}}</td>
+                            <td>{{ training.end | date:'MMMM, y'}}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem educação adicionada
+                                Sem educação adicionada
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;"
+                (click)="showCompanyTrainings = !showCompanyTrainings">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showCompanyTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showCompanyTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Formações obtidas na empresa
+                    <span *ngIf="selectedEmployeeModal.companyTrainings.length != 0">
+                        ({{selectedEmployeeModal.companyTrainings.length}})</span>
+                </div>
+            </a>
+
             <!--Company Training-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Formações obtidas na empresa</label> <span *ngIf="selectedEmployeeModal.companyTrainings.length != 0"> [{{selectedEmployeeModal.companyTrainings.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.companyTrainings" [responsive]="true" 
+            <div *ngIf="showCompanyTrainings" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.companyTrainings" [responsive]="true"
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
@@ -421,43 +509,60 @@
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem formações adicionadas
+                                Sem formações adicionadas
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;" (click)="showSkills = !showSkills">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Habilidades
+                    <span *ngIf="selectedEmployeeModal.skills.length != 0">
+                        ({{selectedEmployeeModal.skills.length}})</span>
+                </div>
+            </a>
+
             <!--Skills-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Habilidades</label> <span *ngIf="selectedEmployeeModal.skills.length != 0"> [{{selectedEmployeeModal.skills.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.skills" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela>
+            <div *ngIf="showSkills" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.skills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-skill let-rowIndex="rowIndex">
                         <tr>
-                          <td>{{ skill.name }};</td>
+                            <td>{{ skill.name }};</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem habilidades adicionadas
+                                Sem habilidades adicionadas
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Histórico de salário</label> <span *ngIf="selectedEmployeeModal.wageHistories.length != 0"> [{{selectedEmployeeModal.wageHistories.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela>
+            <a href="javascript:;" style="text-decoration: none;" (click)="showWageHistories = !showWageHistories">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showWageHistories" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showWageHistories" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Histórico de salário
+                    <span *ngIf="selectedEmployeeModal.wageHistories.length != 0">
+                        ({{selectedEmployeeModal.wageHistories.length}})</span>
+                </div>
+            </a>
+
+            <div *ngIf="showWageHistories" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" styleClass="p-datatable-sm"
+                    #tabela>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Valor</th>
@@ -473,72 +578,95 @@
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                            Sem Avaliações
+                                Sem Avaliações
                             </td>
                         </tr>
-                    </ng-template>            
-                </p-table>  
+                    </ng-template>
+                </p-table>
                 <br>
             </div>
 
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Histórico de avaliação de desenpenho</label> <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0"> [{{selectedEmployeeModal.employeePerformanceEvaluations.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true" 
+            <a href="javascript:;" style="text-decoration: none;"
+                (click)="showEmployeePerformanceEvaluations = !showEmployeePerformanceEvaluations">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showEmployeePerformanceEvaluations" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showEmployeePerformanceEvaluations" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Histórico de avaliação de desenpenho
+                    <span *ngIf="selectedEmployeeModal.employeePerformanceEvaluations.length != 0">
+                        ({{selectedEmployeeModal.employeePerformanceEvaluations.length}})</span>
+                </div>
+            </a>
+
+            <div *ngIf="showEmployeePerformanceEvaluations" class="col-12 p-fluid"
+                style="margin-top: 2%; background-color: #fff">
+                <p-table [value]="selectedEmployeeModal.employeePerformanceEvaluations" [responsive]="true"
                     styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
-                        <th>Trabalho em equipe <span style="color: #1c80cf;">[1-5]</span></th>
-                        <th>Comunicação <span style="color: #1c80cf;">[1-5]</span></th>
-                        <th>Pensamento estratégico <span style="color: #1c80cf;">[1-5]</span></th>
-                        <th>Categoria</th>
-                        <th>Data</th>
+                            <th>Trabalho em equipe <span style="color: #1c80cf;">[1-5]</span></th>
+                            <th>Comunicação <span style="color: #1c80cf;">[1-5]</span></th>
+                            <th>Pensamento estratégico <span style="color: #1c80cf;">[1-5]</span></th>
+                            <th>Categoria</th>
+                            <th>Data</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-epe let-rowIndex="rowIndex">
                         <tr>
-                        <td>
-                            <span *ngIf="epe.teamWork==='ONE'"> 1 </span>
-                            <span *ngIf="epe.teamWork==='TWO'"> 2 </span>
-                            <span *ngIf="epe.teamWork==='THREE'"> 3 </span>
-                            <span *ngIf="epe.teamWork==='FOUR'"> 4 </span>
-                            <span *ngIf="epe.teamWork==='FIVE'"> 5 </span>
-                        </td>
-                        <td>
-                            <span *ngIf="epe.communication==='ONE'"> 1 </span>
-                            <span *ngIf="epe.communication==='TWO'"> 2 </span>
-                            <span *ngIf="epe.communication==='THREE'"> 3 </span>
-                            <span *ngIf="epe.communication==='FOUR'"> 4 </span>
-                            <span *ngIf="epe.communication==='FIVE'"> 5 </span>
-                        </td>
-                        <td>
-                            <span *ngIf="epe.strategicThought==='ONE'"> 1 </span>
-                            <span *ngIf="epe.strategicThought==='TWO'"> 2 </span>
-                            <span *ngIf="epe.strategicThought==='THREE'"> 3 </span>
-                            <span *ngIf="epe.strategicThought==='FOUR'"> 4 </span>
-                            <span *ngIf="epe.strategicThought==='FIVE'"> 5 </span>
-                        </td>
-                        <td>
-                            <p-tag [value]="epe.category" [severity]="getPerfomanceEvaluationStatus(epe.category)"></p-tag>
-                        </td>
-                        <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
+                            <td>
+                                <span *ngIf="epe.teamWork==='ONE'"> 1 </span>
+                                <span *ngIf="epe.teamWork==='TWO'"> 2 </span>
+                                <span *ngIf="epe.teamWork==='THREE'"> 3 </span>
+                                <span *ngIf="epe.teamWork==='FOUR'"> 4 </span>
+                                <span *ngIf="epe.teamWork==='FIVE'"> 5 </span>
+                            </td>
+                            <td>
+                                <span *ngIf="epe.communication==='ONE'"> 1 </span>
+                                <span *ngIf="epe.communication==='TWO'"> 2 </span>
+                                <span *ngIf="epe.communication==='THREE'"> 3 </span>
+                                <span *ngIf="epe.communication==='FOUR'"> 4 </span>
+                                <span *ngIf="epe.communication==='FIVE'"> 5 </span>
+                            </td>
+                            <td>
+                                <span *ngIf="epe.strategicThought==='ONE'"> 1 </span>
+                                <span *ngIf="epe.strategicThought==='TWO'"> 2 </span>
+                                <span *ngIf="epe.strategicThought==='THREE'"> 3 </span>
+                                <span *ngIf="epe.strategicThought==='FOUR'"> 4 </span>
+                                <span *ngIf="epe.strategicThought==='FIVE'"> 5 </span>
+                            </td>
+                            <td>
+                                <p-tag [value]="epe.category"
+                                    [severity]="getPerfomanceEvaluationStatus(epe.category)"></p-tag>
+                            </td>
+                            <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                            Sem avaliações adicionadas
+                                Sem avaliações adicionadas
                             </td>
                         </tr>
-                    </ng-template>            
+                    </ng-template>
                 </p-table>
-                <br> 
-            </div>  
-            
+                <br>
+            </div>
+
+            <a href="javascript:;" style="text-decoration: none;" (click)="showVocations = !showVocations">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showVocations" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showVocations" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Férias
+                    <span *ngIf="selectedEmployeeModal.vocations.length != 0">
+                        ({{selectedEmployeeModal.vocations.length}})</span>
+                </div>
+            </a>
+
             <!--Vocations-->
-            <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <label>Férias</label> <span *ngIf="selectedEmployeeModal.vocations.length != 0"> [{{selectedEmployeeModal.vocations.length}}]</span>
-                <p-table [value]="selectedEmployeeModal.vocations" [responsive]="true" 
-                    styleClass="p-datatable-sm" #tabela>
+            <div *ngIf="showVocations" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+                <label>Férias</label> <span *ngIf="selectedEmployeeModal.vocations.length != 0">
+                    [{{selectedEmployeeModal.vocations.length}}]</span>
+                <p-table [value]="selectedEmployeeModal.vocations" [responsive]="true" styleClass="p-datatable-sm"
+                    #tabela>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>Inicio</th>
@@ -551,147 +679,160 @@
                             <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                             <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                             <td>
-                                <p-tag [value]="vocation.vocationStatus" [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
+                                <p-tag [value]="vocation.vocationStatus"
+                                    [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
                             <td colspan="10">
-                              Sem pedido de férias
+                                Sem pedido de férias
                             </td>
                         </tr>
-                      </ng-template>            
-                </p-table>  
-                <br> 
+                    </ng-template>
+                </p-table>
+                <br>
             </div>
 
-        </div> 
-        
-    </div>         
+        </div>
+
+    </div>
 </p-dialog>
 
 <!--Contacts-->
-<p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true" *ngIf="contact"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true"
+    *ngIf="contact">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmContact="ngForm" (ngSubmit)="confirmContact(frmContact)">
-      <div class="col-12 p-fluid">
-        <label>Número</label>
-        <input pInputText type="text" name="numero"
-          required [(ngModel)]="contact.contactNumber" #contatoNumero="ngModel" placeholder="Ex: 841234567"/>
-      </div>
-      <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid" style="height: 30px; margin-top: 1%;"></button>
-      </div>
+        <div class="col-12 p-fluid">
+            <label>Número</label>
+            <input pInputText type="text" name="numero" required [(ngModel)]="contact.contactNumber"
+                #contatoNumero="ngModel" placeholder="Ex: 841234567" />
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
     </form>
-</p-dialog>  
+</p-dialog>
 
 <!--Traning-->
-<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}" [(visible)]="showTrainingForm" [modal]="true" *ngIf="training"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}"
+    [(visible)]="showTrainingForm" [modal]="true" *ngIf="training">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
-      <div class="col-12 p-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text" name="numero"
-          required [(ngModel)]="training.description" #contatoNumero="ngModel"/>
-      </div>
-      <div class="col-12 md-12 p-fluid">
-        <label>Início</label>
-        <p-calendar class="p-inputtext-sm" name="begin" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
-        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" 
-          [inline]="false" [readonlyInput]="false" 
-          ngModel #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
-      </div>
-      <div class="col-12 md-12 p-fluid">
-        <label>Fim</label>
-        <p-calendar class="p-inputtext-sm" name="end" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
-        [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-          [inline]="false" [readonlyInput]="false" 
-          ngModel #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
-      </div>
-      <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid" style="height: 30px; margin-top: 1%;"></button>
-      </div>
+        <div class="col-12 p-fluid">
+            <label>Descrição</label>
+            <input pInputText type="text" name="numero" required [(ngModel)]="training.description"
+                #contatoNumero="ngModel" />
+        </div>
+        <div class="col-12 md-12 p-fluid">
+            <label>Início</label>
+            <p-calendar class="p-inputtext-sm" name="begin" view="month" dateFormat="mm/yy"
+                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                [inline]="false" [readonlyInput]="false" ngModel #begin="ngModel" [required]="true"
+                [(ngModel)]="training.begin"></p-calendar>
+        </div>
+        <div class="col-12 md-12 p-fluid">
+            <label>Fim</label>
+            <p-calendar class="p-inputtext-sm" name="end" view="month" dateFormat="mm/yy"
+                placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                [inline]="false" [readonlyInput]="false" ngModel #end="ngModel" [required]="true"
+                [(ngModel)]="training.end"></p-calendar>
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
     </form>
-</p-dialog>  
+</p-dialog>
 
 <!--Skills-->
-<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [style]="{width: '30vw'}" [(visible)]="showSkillForm" [modal]="true" *ngIf="skill"> <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
+<p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [style]="{width: '30vw'}"
+    [(visible)]="showSkillForm" [modal]="true" *ngIf="skill">
+    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
-      <div class="col-12 p-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text" name="name"
-          required [(ngModel)]="skill.name" #name="ngModel"/>
-      </div>
-      <div class="col-12 p-fluid">
-        <button pButton type="submit" label="Confirmar" [disabled]="frmSkill.invalid" style="height: 30px; margin-top: 1%;"></button>
-      </div>
+        <div class="col-12 p-fluid">
+            <label>Descrição</label>
+            <input pInputText type="text" name="name" required [(ngModel)]="skill.name" #name="ngModel" />
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmSkill.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
     </form>
-</p-dialog> 
+</p-dialog>
 
 <!--Filtrar-->
-<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true"> 
+<p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">
 
     <div class="formgrid grid">
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Itens por página</label>
-                <p-dropdown [options]="sizePage" placeholder="Sort by..."
-                ngModel name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployees()"></p-dropdown>
+                <p-dropdown [options]="sizePage" placeholder="Sort by..." ngModel name="itemsPerPage"
+                    [(ngModel)]="filter.itemsPerPage" (onChange)="filterEmployees()"></p-dropdown>
             </div>
         </div>
         <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Ordenação</label>
-                <p-dropdown [options]="orderPage" placeholder="Sort by..."
-                ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterEmployees()"></p-dropdown>
+                <p-dropdown [options]="orderPage" placeholder="Sort by..." ngModel name="sort" [(ngModel)]="filter.sort"
+                    (onChange)="filterEmployees()"></p-dropdown>
             </div>
         </div>
 
-        <div class="col-12 p-fluid"> 
-          <label>Nome</label>    
-          <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search" (ngModelChange)="filterEmployees()"/>
-          </span>   
+        <div class="col-12 p-fluid">
+            <label>Nome</label>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
+                    (ngModelChange)="filterEmployees()" />
+            </span>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Genero</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="genders" placeholder="Selecione"
-                name="gender" #gender ngModel [(ngModel)]="filter.gender" (onChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+                [(ngModel)]="filter.gender" (onChange)="filterEmployees()"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Estado civil</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="maritalStatuses" placeholder="Selecione"
-                name="maritalStatus" #maritalStatus ngModel [(ngModel)]="filter.maritalStatus" (ngModelChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus"
+                #maritalStatus ngModel [(ngModel)]="filter.maritalStatus"
+                (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de contrato</label>
-            <p-dropdown class="p-inputtext-sm"  [options]="contractTypes" placeholder="Selecione"
-                name="contractType" #contractType ngModel [(ngModel)]="filter.contractType" (ngModelChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="contractTypes" placeholder="Selecione" name="contractType"
+                #contractType ngModel [(ngModel)]="filter.contractType"
+                (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Departamento</label>
-            <p-dropdown placeholder="Selecione..."
-              [filter]="true" [options]="departments"
-              [(ngModel)]="selectedDepartment" [(ngModel)]="filter.department" name="selectedDepartment"
-              #department="ngModel" (onChange)="getPositionsByDepartmentId()" (ngModelChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
+                [(ngModel)]="selectedDepartment" [(ngModel)]="filter.department" name="selectedDepartment"
+                #department="ngModel" (onChange)="getPositionsByDepartmentId()"
+                (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
-            <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento primeiro]</span>    
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                [filter]="true" [options]="positions" [(ngModel)]="filter.position" name="position"
-                #position="ngModel" [disabled]="!selectedDepartment" (ngModelChange)="filterEmployees()">
+            <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento
+                primeiro]</span>
+            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+                [(ngModel)]="filter.position" name="position" #position="ngModel" [disabled]="!selectedDepartment"
+                (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
-            <label>Provincia</label>    
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..."
-                [filter]="true" [options]="provinces" [(ngModel)]="filter.province" name="province"
-                #province="ngModel" [required]=true (ngModelChange)="filterEmployees()">
+            <label>Provincia</label>
+            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
+                [(ngModel)]="filter.province" name="province" #province="ngModel" [required]=true
+                (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
@@ -699,6 +840,6 @@
             <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
         </div>
 
-    </div> 
+    </div>
 
-</p-dialog>  
+</p-dialog>

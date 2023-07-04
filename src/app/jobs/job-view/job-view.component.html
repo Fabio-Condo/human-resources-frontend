@@ -1,14 +1,12 @@
-
-<link
-  rel="stylesheet"
-  href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css"
-/>
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css" />
 <div class="container">
     <span *ngIf="user != undefined">
-        <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top" *ngIf="isCandidate && !isAlreadyAplliedToCurrentJob()" (click)="onApply()">
+        <a href="javascript:;" style="display:inline; float: right;" tooltipPosition="top"
+            *ngIf="isCandidate && !isAlreadyAplliedToCurrentJob()" (click)="onApply()">
             <p-tag [severity]="'primmary'">apply now</p-tag>
         </a>
-        <a style="display:inline; float: right;" tooltipPosition="top" *ngIf="isCandidate && isAlreadyAplliedToCurrentJob()">
+        <a style="display:inline; float: right;" tooltipPosition="top"
+            *ngIf="isCandidate && isAlreadyAplliedToCurrentJob()">
             <p-tag [severity]="'info'">applied</p-tag>
         </a>
     </span>
@@ -17,9 +15,13 @@
     <div style="display:inline;">
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>
     </div>
-    <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Country: </span><span style="font-size: 1rem;">{{ job.position.workplace.name }}</span></p>
-    <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{ job.publicationDate | date: 'd MMM, y' }}</span></p>
-    <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;" > At Meta, we’re working hard to build a better future. A more connected, inclusive and sustainable world. As a dynamic global community, it's our human spirit, together with technology, that empowers us to achieve this..</p>
+    <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Country: </span><span
+            style="font-size: 1rem;">{{ job.position.workplace.name }}</span></p>
+    <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{
+            job.publicationDate | date: 'd MMM, y' }}</span></p>
+    <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;"> At Meta, we’re working hard to build a better
+        future. A more connected, inclusive and sustainable world. As a dynamic global community, it's our human spirit,
+        together with technology, that empowers us to achieve this..</p>
 </div>
 <main>
     <div class="container">
@@ -37,9 +39,9 @@
             </div>
         </div>
 
-        <div class="middle" >
+        <div class="middle">
             <div class="feeds">
-                
+
                 <h3>Responsabilidades</h3>
                 <div class="feed" *ngFor="let mainResponsibility of job.position.mainResponsibilities">
                     <p>{{ mainResponsibility.designation }};</p>
@@ -52,19 +54,20 @@
                 <div class="feed" *ngFor="let benefit of job.position.benefits">
                     <p>{{ benefit.designation }};</p>
                 </div>
-                
+
             </div>
         </div>
 
         <div class="right">
             <div class="messages">
                 <div class="heading">
-                    <img class="w-5 sm:w-16rem xl:w-10rem shadow-5 block xl:block mx-auto border-round" src="{{imagePath}}" alt="" />
-                </div>                                                                                                              
+                    <img class="w-5 sm:w-16rem xl:w-10rem shadow-5 block xl:block mx-auto border-round"
+                        src="{{imagePath}}" alt="" />
+                </div>
             </div>
         </div>
     </div>
-</main> 
+</main>
 
 <!--
 <div class="container">
