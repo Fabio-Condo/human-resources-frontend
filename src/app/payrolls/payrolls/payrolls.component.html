@@ -1,5 +1,5 @@
 <div class="container">
-    <h3>Pagamento de salários</h3>
+    <h3>Folhas de salários</h3>
 
     <p-table [value]="payrolls" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
         [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
@@ -27,7 +27,6 @@
                         {{ payroll.description }}
                     </a>
                 </td>
-                <td> {{ payroll.description }} </td>
                 <td> {{ payroll.referenceMonth | date: 'MM/yyyy'}} </td>
                 <td> {{ payroll.releaseDate | date: 'dd/MM/yyyy h:mm a'}} </td>
                 <td style="width: 180px;">
@@ -103,28 +102,20 @@
     [draggable]="false" [resizable]="false">
     <form autocomplete="off" #payrollForm="ngForm" (ngSubmit)="save(payrollForm)">
         <div class="formgrid grid">
+            <div style="margin-bottom: 10px; margin-left: 7px;">
+                <p-calendar class="p-inputtext-sm" name="referenceMonth" view="month" dateFormat="mm/yy"
+                    placeholder="Mês de referênia" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
+                    [showOnFocus]="false" name="referenceMonth" [inline]="false" [readonlyInput]="false" ngModel
+                    #birthday="ngModel" [required]="true" [(ngModel)]="payroll.referenceMonth">
+                </p-calendar>
+            </div>
 
             <div class="col-12 md-12 p-fluid">
-                <p-table [value]="payroll.payments" [(selection)]="selectedPayrolls" [lazy]="true"
+                <p-table [value]="payroll.payments" [scrollable]="true" scrollHeight="400px"  [(selection)]="selectedPayments" [lazy]="true"
                     styleClass="p-datatable-sm" #table>
-
-                    <ng-template pTemplate="caption">
-                        <div class="flex">
-                            <input pInputText class="p-inputtext-sm" type="text" name="description"
-                                placeholder="Descrição Ex: folha de salário do mês de abril" ngModel
-                                #description="ngModel" required minlength="1" [(ngModel)]="payroll.description">
-                            <p-calendar class="p-inputtext-sm" name="referenceMonth" view="month" dateFormat="mm/yy"
-                                placeholder="Mês de referênia" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
-                                [showOnFocus]="false" name="referenceMonth" [inline]="false" [readonlyInput]="false"
-                                ngModel #birthday="ngModel" [required]="true" [(ngModel)]="payroll.referenceMonth">
-                            </p-calendar>
-                            <button pButton icon="pi pi-save" type="submit" [disabled]="payrollForm.invalid"
-                                class="ml-auto" style="background-color: #677377; border-style: none;"></button>
-                        </div>
-                    </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th style="width: 4rem">
+                            <th style="width: 4rem" *ngIf="!payroll.id">
                                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                             </th>
                             <th>Nome</th>
@@ -136,7 +127,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-payment>
                         <tr>
-                            <td>
+                            <td *ngIf="!payroll.id">
                                 <p-tableCheckbox [value]="payment"></p-tableCheckbox>
                             </td>
                             <td>{{ payment.employee.name }}</td>
@@ -160,6 +151,18 @@
                         </tr>
                     </ng-template>
                 </p-table>
+
+                <div class="formgrid grid" style="margin-top: 7px;">
+                    <div class="field col-12 md:col-10">
+                        <input pInputText type="text" name="description"
+                            placeholder="Descrição Ex: folha de salário do mês de abril" ngModel #description="ngModel"
+                            required minlength="1" [(ngModel)]="payroll.description">
+                    </div>
+                    <div class="field col-12 md:col-2">
+                        <button pButton type="submit" [disabled]="payrollForm.invalid || selectedPayments.length == 0 || payroll.id">save</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </form>

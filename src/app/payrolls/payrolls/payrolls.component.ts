@@ -30,6 +30,7 @@ export class PayrollsComponent implements OnInit {
   payrolls: IPayRoll[] = [];
 
   selectedPayrolls: IPayRoll[] = [];
+  selectedPayments: IPayment[] = [];
 
   displayModalFilter: boolean = false;
 
@@ -94,6 +95,8 @@ export class PayrollsComponent implements OnInit {
   save(vocationForm: NgForm) {
     //this.payroll.description = "Folhas de junho"
     this.showLoading = true;
+    this.payroll.payments = [];
+    this.payroll.payments = this.selectedPayments;
     this.payRollService.add(this.payroll).subscribe(
       (payrollAdded) => {
         this.payroll = payrollAdded;
