@@ -264,6 +264,54 @@
                 <br>
             </div>
 
+            <a href="javascript:;" style="text-decoration: none;" (click)="showDependents = !showDependents">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showDependents" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showDependents" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Dependentes
+                </div>
+            </a>
+
+            <!--Dependents-->
+            <div *ngIf="showDependents" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewDependent()">add new</a>
+                <p-table [value]="employee.dependents" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="background-color: #FFF;">Nome</th>
+                            <th style="background-color: #FFF;">Genero</th>
+                            <th style="background-color: #FFF;">Parentesco</th>
+                            <th style="background-color: #FFF;">Data de nascimento</th>
+                            <th style="background-color: #FFF;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-dependent let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ dependent.name }}</td>
+                            <td>{{ dependent.gender }}</td>
+                            <td>{{ dependent.relationship }}</td>
+                            <td>{{ dependent.birthday | date: 'dd/MM/yyyy' }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadyDependentEdit(dependent, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeDependent(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem dependentes adicionados
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
+            </div>
+
             <div class="col-12" style="margin-top: 2px;">
                 <button pButton type="submit" [disabled]="employeeForm.invalid" style="display:inline; float: right;">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
@@ -756,6 +804,39 @@
         </div>
     </form>
 </p-dialog>
+
+<!--Dependents-->
+<p-dialog [header]="editingDependent ? 'Edição dependente' : 'Novo dependente'" [style]="{width: '30vw'}"
+    [(visible)]="showDependentForm" [modal]="true" *ngIf="dependent">
+    <form #frmDependent="ngForm" (ngSubmit)="confirmDependent(frmDependent)">
+        <div class="col-12 p-fluid">
+            <label>Nome</label>
+            <input pInputText type="text" name="name" required [(ngModel)]="dependent.name" #name="ngModel" />
+        </div>
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Genero</label>
+            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender
+                ngModel [(ngModel)]="dependent.gender"></p-dropdown>
+        </div>
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <label>Grau de parentesco</label>
+            <p-dropdown class="p-inputtext-sm" [options]="RelationshipTypes" placeholder="Selecione"
+                name="relationship" #relationship ngModel [(ngModel)]="dependent.relationship"></p-dropdown>
+        </div>
+        <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+            <label>Data de nascimento</label>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
+                [inline]="false" [readonlyInput]="false" ngModel #birthday="ngModel" [required]="true"
+                [(ngModel)]="dependent.birthday"></p-calendar>
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmDependent.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </form>
+</p-dialog>
+
 
 <!--Filtrar-->
 <p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">

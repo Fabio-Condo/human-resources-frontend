@@ -16,6 +16,7 @@ import { Contact } from 'src/app/core/model/Contact';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 import { Skill } from 'src/app/core/model/Skill';
+import { Dependent } from 'src/app/core/model/Depedent';
 
 @Component({
   selector: 'app-employees',
@@ -52,6 +53,11 @@ export class EmployeesComponent implements OnInit {
   showSkillForm = false;
   skillIndex?: number;
 
+  dependent?: Dependent;
+  dependents: Array<Dependent> = []
+  showDependentForm = false;
+  dependentIndex?: number;
+
   showWageHistory: boolean = false;
   showEmployeePerformanceEvaluationHistory: boolean = false;
   showTrainings: boolean = false;
@@ -71,6 +77,7 @@ export class EmployeesComponent implements OnInit {
   showEmployeeTrainings: boolean = false;
   showEmployeeTrainingsView: boolean = false;
   showSkills: boolean = false;
+  showDependents: boolean = false;
   showSkillsView: boolean = false;
   showProjects: boolean = false;
   showCompanyTrainings: boolean = false;
@@ -96,6 +103,26 @@ export class EmployeesComponent implements OnInit {
   genders = [
     { label: 'Masculino', value: 'MASCULINE' },
     { label: 'Feminino', value: 'FEMININE' },
+  ];
+
+  RelationshipTypes = [
+    { label: 'SPOUSE', value: 'SPOUSE' },
+    { label: 'FATHER', value: 'FATHER' },
+    { label: 'MOTHER', value: 'MOTHER' },
+    { label: 'SON', value: 'SON' },
+    { label: 'DAUGHTER', value: 'DAUGHTER' },
+    { label: 'BROTHER', value: 'BROTHER' },
+    { label: 'SISTER', value: 'SISTER' },
+    { label: 'UNCLE', value: 'UNCLE' },
+    { label: 'AUNT', value: 'AUNT' },
+    { label: 'NEPHEW', value: 'NEPHEW' },
+    { label: 'NIECE', value: 'NIECE' },
+    { label: 'GRANDMOTHER', value: 'GRANDMOTHER' },
+    { label: 'GRANDFATHER', value: 'GRANDFATHER' },
+    { label: 'GRANDCHILD', value: 'GRANDCHILD' },
+    { label: 'GRANDDAUGTHER', value: 'GRANDDAUGTHER' },
+    { label: 'FATHER_IN_LAW', value: 'FATHER_IN_LAW' },
+    { label: 'MOTHER_IN_LAW', value: 'MOTHER_IN_LAW' },
   ];
 
   sizePage = [
@@ -425,6 +452,38 @@ export class EmployeesComponent implements OnInit {
     this.employee.skills.splice(index, 1);
   }
 
+  // Dependents
+  getReadyNewDependent() {
+    this.showDependentForm = true;
+    this.dependent = new Dependent();
+    this.dependentIndex = this.employee.dependents.length;
+  }
+
+  getReadyDependentEdit(dependent: Dependent, index: number) {
+    this.dependent = this.cloneDependent(dependent);
+    this.showDependentForm = true;
+    this.convertDependentStringsToDates([this.dependent]);
+    this.dependentIndex = index;
+  }
+
+  confirmDependent(frm: NgForm) {
+    this.employee.dependents[this.dependentIndex!] = this.cloneDependent(this.dependent!);
+    this.showDependentForm = false;
+    frm.reset();
+  }
+
+  cloneDependent(dependent: Dependent): Dependent {
+    return new Dependent(dependent.id, dependent.name, dependent.gender, dependent.relationship, dependent.birthday);
+  }
+
+  get editingDependent() {
+    return this.dependent && this.dependent?.id;
+  }
+
+  removeDependent(index: number) {
+    this.employee.dependents.splice(index, 1);
+  }
+
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;
     //this.getEmployees(page);
@@ -498,6 +557,12 @@ export class EmployeesComponent implements OnInit {
   private convertStringsToDates(employees: any[]) {
     for (const employee of employees) {
       employee.birthday = new Date(employee.birthday);
+    }
+  }
+
+  private convertDependentStringsToDates(dependents: any[]) {
+    for (const dependent of dependents) {
+      dependent.birthday = new Date(dependent.birthday);
     }
   }
 

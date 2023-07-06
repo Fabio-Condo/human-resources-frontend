@@ -4,6 +4,7 @@ import { IProject } from "../interfaces/IProject";
 import { ISkill } from "../interfaces/ISkill";
 import { IVocation } from "../interfaces/IVocation";
 import { Contact } from "./Contact";
+import { Dependent } from "./Depedent";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
 import { EmployeeTraining } from "./EmployeeTraining";
 import { EmployeeWage } from "./EmployeeWage";
@@ -34,6 +35,7 @@ export class Employee implements IEmployee {
     vocations: Vocation[] = [];
     skills: Skill[] = [];
     companyTrainings: ICompanyTraining[] = [];
+    dependents: Dependent[] = [];
 }
 
 
