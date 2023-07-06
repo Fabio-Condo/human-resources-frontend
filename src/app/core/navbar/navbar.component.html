@@ -21,7 +21,7 @@
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/workplaces')"><a
             routerLink="/v1/workplaces">L. trabalho</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/payrolls')"><a
-            routerLink="/v1/payrolls">Pagamentos</a></li>
+            routerLink="/v1/payrolls">F. Salários</a></li>
         <li [class.active]="isActive('/v1/jobs')"><a routerLink="/v1/jobs">Vagas</a></li>
         <!--<li [class.active]="isActive('/v1/jobs-page')"><a routerLink="/v1/jobs-page">Vagas</a></li>-->
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/users')"><a

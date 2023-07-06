@@ -47,6 +47,8 @@ export class CompanyTrainingsComponent implements OnInit {
   displayModalFilter: boolean = false;
 
   showProjectMembers: boolean = false;
+  showProjectMembersView: boolean = false;
+  showProjectGoalsView: boolean = false;
 
   sizePage = [
     { label: '5 itens por página', value: 5 },

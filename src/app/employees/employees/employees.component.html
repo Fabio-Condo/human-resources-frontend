@@ -66,7 +66,7 @@
 </div>
 
 <p-dialog header="Funcionário {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
-    [style]="{width: '60vw', height: '50vw'}" [draggable]="false" [resizable]="false">
+    [style]="{width: '60vw', height: '44vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeeForm="ngForm" (ngSubmit)="save(employeeForm)">
 
         <div class="formgrid grid">
@@ -403,10 +403,10 @@
         <br>
     </div>
 
-    <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfo = !showContactsInfo">
+    <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfoView = !showContactsInfoView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-            <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
-            <i *ngIf="showContactsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
+            <i *ngIf="!showContactsInfoView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showContactsInfoView" class="pi pi-angle-down" style="margin: 13px;"></i>
             Contacts
             <span *ngIf="selectedEmployeeModal.contacts.length != 0">
                 ({{selectedEmployeeModal.contacts.length}})</span>
@@ -414,7 +414,7 @@
     </a>
 
     <!--Contacts-->
-    <div *ngIf="showContactsInfo" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+    <div *ngIf="showContactsInfoView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
             <!--*ngIf="showContacts"-->
             <ng-template pTemplate="header">
@@ -437,10 +437,10 @@
         <br>
     </div>
 
-    <a href="javascript:;" style="text-decoration: none;" (click)="showEmployeeTrainings = !showEmployeeTrainings">
+    <a href="javascript:;" style="text-decoration: none;" (click)="showEmployeeTrainingsView = !showEmployeeTrainingsView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-            <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
-            <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
+            <i *ngIf="!showEmployeeTrainingsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showEmployeeTrainingsView" class="pi pi-angle-down" style="margin: 13px;"></i>
             Formação acadêmica
             <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0">
                 ({{selectedEmployeeModal.employeeTrainings.length}})</span>
@@ -448,7 +448,7 @@
     </a>
 
     <!--Training-->
-    <div *ngIf="showEmployeeTrainings" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+    <div *ngIf="showEmployeeTrainingsView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedEmployeeModal.employeeTrainings" [responsive]="true" styleClass="p-datatable-sm"
             #tabela>
             <ng-template pTemplate="header">
@@ -517,10 +517,10 @@
         <br>
     </div>
 
-    <a href="javascript:;" style="text-decoration: none;" (click)="showSkills = !showSkills">
+    <a href="javascript:;" style="text-decoration: none;" (click)="showSkillsView = !showSkillsView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-            <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
-            <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
+            <i *ngIf="!showSkillsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showSkillsView" class="pi pi-angle-down" style="margin: 13px;"></i>
             Habilidades
             <span *ngIf="selectedEmployeeModal.skills.length != 0">
                 ({{selectedEmployeeModal.skills.length}})</span>
@@ -528,7 +528,7 @@
     </a>
 
     <!--Skills-->
-    <div *ngIf="showSkills" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+    <div *ngIf="showSkillsView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedEmployeeModal.skills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
             <ng-template pTemplate="header">
                 <tr>

@@ -137,7 +137,7 @@
 <!--Show -->
 <p-dialog header="{{selectedTrainingTypeModal.level}}" [(visible)]="displayModal" [modal]="true"
     [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
-    <div class="formgrid grid">
+    <div>
         <div class="col-12 p-fluid">
             <label>Nivel</label>: <span> {{selectedTrainingTypeModal.level}}</span>
         </div>
@@ -145,9 +145,17 @@
             <label>Tipo</label>: <span> {{selectedTrainingTypeModal.type}}</span>
         </div>
 
+        <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+            (click)="showProjectGoalsView = !showProjectGoalsView">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showProjectGoalsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showProjectGoalsView" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Objectivos
+            </div>
+        </a>
+
         <!--Goals-->
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Objectivos</label>
+        <div *ngIf="showProjectGoalsView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <p-table [value]="selectedTrainingTypeModal.companyTrainingTypeGoals" [responsive]="true"
                 styleClass="p-datatable-sm" #tabela>
                 <ng-template pTemplate="header">

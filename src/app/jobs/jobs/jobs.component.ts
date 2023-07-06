@@ -43,6 +43,12 @@ export class JobsComponent implements OnInit {
 
   totalJobs: number = 0;
 
+  showMainResponsibilitiesView: boolean = false;
+  showSpecificRequirementsView: boolean = false;
+  showBenefitsView: boolean = false;
+  showEmployeesView: boolean = false;
+  showCandidatesView: boolean = false;
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },

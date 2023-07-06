@@ -89,8 +89,9 @@
                 </div>
             </a>
 
-            <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 5%; background-color: #fff">
-                <a href="javascript:;" (click)="onaddEmployeeToProject()">add +</a>
+            <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a *ngIf="editing" href="javascript:;" (click)="onaddEmployeeToProject()">add +</a>
+                <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o projeto</span>
                 <p-table [value]="project.team" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
@@ -230,7 +231,7 @@
 <p-dialog header="{{selectedProjectModal.name}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '45vw'}"
     [draggable]="false" [resizable]="false">
 
-    <div class="formgrid grid">
+    <div>
 
         <div class="col-12 p-fluid">
             <li class="dialog-info-li"><i class="dialog-info-i"><span
@@ -248,8 +249,16 @@
             </li>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Membros envolvidos</label>
+        <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+            (click)="showProjectMembersView = !showProjectMembersView">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showProjectMembersView" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showProjectMembersView" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Membros
+            </div>
+        </a>
+
+        <div *ngIf="showProjectMembersView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
             <p-table [value]="selectedProjectModal.team" selectionMode="single" [responsive]="true"
                 styleClass="p-datatable-sm" #tabela>
                 <ng-template pTemplate="header">

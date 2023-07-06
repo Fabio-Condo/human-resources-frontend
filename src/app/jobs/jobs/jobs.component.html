@@ -92,7 +92,7 @@
 
 <!--Show -->
 <p-dialog header="{{selectedJobModal.position.name}}" [(visible)]="displayModal" [modal]="true"
-  [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
+  [style]="{width: '60vw', height: '30vw'}" [draggable]="false" [resizable]="false">
   <!--Employees view-->
   <div class="formgrid grid">
 
@@ -126,9 +126,17 @@
         </div>
       </div>
 
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+        (click)="showMainResponsibilitiesView = !showMainResponsibilitiesView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+          <i *ngIf="!showMainResponsibilitiesView" class="pi pi-angle-right" style="margin: 13px;"></i>
+          <i *ngIf="showMainResponsibilitiesView" class="pi pi-angle-down" style="margin: 13px;"></i>
+          Principais Responsibilidades
+        </div>
+      </a>
+
       <!--Main Responsibilities-->
-      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
-        <label>Pricipais Responsibilidades </label>
+      <div *ngIf="showMainResponsibilitiesView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
         <p-table [value]="selectedJobModal.position.mainResponsibilities" [responsive]="true"
           styleClass="p-datatable-sm" #tabela>
           <ng-template pTemplate="header">
@@ -151,9 +159,17 @@
         <br>
       </div>
 
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+        (click)="showSpecificRequirementsView = !showSpecificRequirementsView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+          <i *ngIf="!showSpecificRequirementsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+          <i *ngIf="showSpecificRequirementsView" class="pi pi-angle-down" style="margin: 13px;"></i>
+          Requisitos especificos exigidos
+        </div>
+      </a>
+
       <!--Specific Requirements-->
-      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <label>Requisitos especificos exigidos</label>
+      <div *ngIf="showSpecificRequirementsView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedJobModal.position.specificRequirements" [responsive]="true"
           styleClass="p-datatable-sm" #tabela>
           <ng-template pTemplate="header">
@@ -176,9 +192,16 @@
         <br>
       </div>
 
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showBenefitsView = !showBenefitsView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+          <i *ngIf="!showBenefitsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+          <i *ngIf="showBenefitsView" class="pi pi-angle-down" style="margin: 13px;"></i>
+          Beneficios
+        </div>
+      </a>
+
       <!--Benefits-->
-      <div class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
-        <label>Beneficios</label>
+      <div *ngIf="showBenefitsView" class="col-12 p-fluid" style="margin-top: 2%;background-color: #fff ">
         <p-table [value]="selectedJobModal.position.benefits" [responsive]="true" styleClass="p-datatable-sm" #tabela>
           <ng-template pTemplate="header">
             <tr>
@@ -202,34 +225,16 @@
         <br>
       </div>
 
-      <!--Employees-->
-      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <label>Funcionários com este cargo</label>
-        <p-table [value]="selectedJobModal.position.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Nome</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
-            <tr>
-              <td>{{ employee.name }}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td colspan="10">
-                Sem funcionários
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-        <br>
-      </div>
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showCandidatesView = !showCandidatesView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+          <i *ngIf="!showCandidatesView" class="pi pi-angle-right" style="margin: 13px;"></i>
+          <i *ngIf="showCandidatesView" class="pi pi-angle-down" style="margin: 13px;"></i>
+          Candidatos para esta vaga
+        </div>
+      </a>
 
       <!--Candidates-->
-      <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <label>Candidatos para esta vaga</label>
+      <div *ngIf="showCandidatesView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedJobModal.candidates" [responsive]="true" styleClass="p-datatable-sm" #tabela>
           <ng-template pTemplate="header">
             <tr>

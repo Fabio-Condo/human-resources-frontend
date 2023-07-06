@@ -34,6 +34,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
   goalIndex?: number;
 
   showTrainingGoals: boolean = false;
+  showProjectGoalsView: boolean = false;
 
   sizePage = [
     { label: '5 itens por página', value: 5 },

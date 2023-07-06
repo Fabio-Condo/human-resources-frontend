@@ -67,8 +67,11 @@ export class EmployeesComponent implements OnInit {
   selectedDepartment?: number;
 
   showContactsInfo: boolean = false;
+  showContactsInfoView: boolean = false;
   showEmployeeTrainings: boolean = false;
+  showEmployeeTrainingsView: boolean = false;
   showSkills: boolean = false;
+  showSkillsView: boolean = false;
   showProjects: boolean = false;
   showCompanyTrainings: boolean = false;
   showWageHistories: boolean = false;

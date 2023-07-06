@@ -49,7 +49,7 @@
 <p-dialog header="{{selectedCompanyTrainingModal.duration}}" [(visible)]="displayModal" [modal]="true"
     [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
 
-    <div class="formgrid grid">
+    <div>
 
         <div class="col-12 p-fluid">
             <li class="dialog-info-li"><i class="dialog-info-i"><span
@@ -70,9 +70,17 @@
                         'dd/MM/yyyy' }}</span></i></li>
         </div>
 
+        <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+            (click)="showProjectGoalsView = !showProjectGoalsView">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showProjectGoalsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showProjectGoalsView" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Objectivos
+            </div>
+        </a>
+
         <!--Goals-->
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Objectivos</label>
+        <div *ngIf="showProjectGoalsView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <p-table [value]="selectedCompanyTrainingModal.companyTrainingType.companyTrainingTypeGoals"
                 [responsive]="true" styleClass="p-datatable-sm" #tabela>
                 <ng-template pTemplate="header">
@@ -95,8 +103,16 @@
             <br>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-            <label>Membros envolvidos</label>
+        <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+            (click)="showProjectMembersView = !showProjectMembersView">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showProjectMembersView" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showProjectMembersView" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Participntes
+            </div>
+        </a>
+
+        <div *ngIf="showProjectMembersView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
             <p-table [value]="selectedCompanyTrainingModal.employees" selectionMode="single" [responsive]="true"
                 styleClass="p-datatable-sm" #tabela>
                 <ng-template pTemplate="header">
@@ -163,7 +179,8 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <a href="javascript:;" (click)="onaaddEmployeeToTraining()">add +</a>
+                <a *ngIf="editing" href="javascript:;" (click)="onaaddEmployeeToTraining()">add +</a>
+                <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o projeto</span>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>

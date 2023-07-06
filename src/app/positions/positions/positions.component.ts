@@ -61,6 +61,10 @@ export class PositionsComponent implements OnInit {
   showMainResponsibilities: boolean = false;
   showSpecificRequirements: boolean = false;
   showBenefits: boolean = false;
+  showMainResponsibilitiesView: boolean = false;
+  showSpecificRequirementsView: boolean = false;
+  showBenefitsView: boolean = false;
+  showEmployeesView: boolean = false;
 
   languageWriteSpeakLevel = [
     { label: 'Fluente', value: 'FLUENT' },
