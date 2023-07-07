@@ -6,7 +6,7 @@
         [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2"
+                <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-primmary mr-2"
                     (click)="onAddNewEmployeePerformanceEvaluation()"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>

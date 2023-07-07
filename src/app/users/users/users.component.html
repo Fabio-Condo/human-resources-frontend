@@ -5,7 +5,7 @@
     <p-table [value]="users" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus" class="p-button-info mr-2" ></button>
+                <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus" class="p-button-primmary mr-2" ></button>
                 <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus" ></button>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>

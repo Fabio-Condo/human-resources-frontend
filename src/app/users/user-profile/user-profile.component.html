@@ -135,7 +135,6 @@
                 <tr>
                   <td>{{ pf.company }}</td>
                   <td>{{ pf.description }}</td>
-                  <td>{{ pf.province.name }}</td>
                   <td class="col-acoes">
                     <span class="p-buttonset">
                       <a href="javascript:;" (click)="getReadyProfessionalExperienceEdit(pf, rowIndex)"><p-tag
@@ -319,12 +318,6 @@
     [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
     <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)">
-      <div class="col-12 p-fluid" style="margin-top: 2%;">
-        <label>Provincia</label>
-        <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
-          [(ngModel)]="professionalExperience.province.id" name="province" #province="ngModel" [required]=true>
-        </p-dropdown>
-      </div>
       <div class="col-12 p-fluid">
         <label>Company</label>
         <input pInputText type="text" name="company" required [(ngModel)]="professionalExperience.company"

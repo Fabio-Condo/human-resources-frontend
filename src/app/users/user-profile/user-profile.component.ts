@@ -288,7 +288,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   cloneProfessionalExperience(professionalExperience: ProfessionalExperience): ProfessionalExperience {
-    return new ProfessionalExperience(professionalExperience.id, professionalExperience.description, professionalExperience.company, professionalExperience.beginDate, professionalExperience.endDate, professionalExperience.province);
+    return new ProfessionalExperience(professionalExperience.id, professionalExperience.description, professionalExperience.company, professionalExperience.beginDate, professionalExperience.endDate);
   }
 
   get editingProfessionalExperience() { 

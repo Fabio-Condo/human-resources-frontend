@@ -6,14 +6,12 @@ export class ProfessionalExperience{
     company?: string;
     beginDate?: Date;
     endDate?: Date;
-    province = new Province;
 
-    constructor(id?: number,description?: string,company?: string, beginDate?: Date, endDate?: Date, province = new Province) {
+    constructor(id?: number,description?: string,company?: string, beginDate?: Date, endDate?: Date) {
         this.id = id;
         this.description = description;
         this.company = company;
         this.beginDate = beginDate;
         this.endDate = endDate;
-        this.province = province;
     }
 }
