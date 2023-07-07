@@ -6,7 +6,7 @@
     </div>
     <div class="formgrid grid" style="margin-top: 50px;">
 
-      <div class="field col-12 md:col-2">
+      <div class="field col-12 md:col-2" (click)="onLogOut()">
         <img class="w-5 sm:w-16rem xl:w-10rem shadow-7 block xl:block mx-auto border-round" src="{{imagePath}}"
           alt="" />
       </div>
@@ -238,14 +238,16 @@
           <button pButton type="submit" style="display:inline; float: right;" pRipple label="Save changes"
             class="p-button-primmary mr-2"></button>
 
-
         </form>
       </div>
 
+      <!--
       <div class="field col-12 md:col-2" style="margin-top: 5px;">
-        <button style=" display:inline; float: right; background-color: #53595c; border-color: #53595c;" pButton
+        <button style=" display:inline; float: right;" pButton
           (click)="onLogOut()" pRipple label="logout" icon="pi pi-sign-out"></button>
       </div>
+      -->
+
 
     </div>
   </div>
