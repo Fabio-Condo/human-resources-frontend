@@ -15,6 +15,7 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="background-color: #fff;">Nome</th>
+                <th style="background-color: #fff;">Descrição</th>
                 <th style="background-color: #fff;">Departamento</th>
                 <th style="background-color: #fff;">Status</th>
                 <th style="background-color: #fff;">Ações</th>
@@ -27,6 +28,7 @@
                         {{ project.name }}
                     </a>
                 </td>
+                <td>{{ project.description }}</td>
                 <td>{{ project.department.name }}</td>
                 <td>
                     <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
@@ -64,23 +66,68 @@
     [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #projectStatusForm="ngForm" (ngSubmit)="save(projectStatusForm)">
         <div>
-            <div class="col-12 p-fluid" style="margin-top: 2%;">
+            <div class="col-12 p-fluid">
                 <label>Name</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
                     minlength="1" [(ngModel)]="project.name">
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <div class="col-12 p-fluid" style="margin-top: 2px;">
+                <label>Descrição</label>
+                <input pInputText class="p-inputtext-sm" type="text" name="description" ngModel #description="ngModel" required
+                    minlength="1" [(ngModel)]="project.description">
+            </div>
+            <div class="col-12 p-fluid" style="margin-top: 2px;">
                 <label>Departamento</label>
                 <p-dropdown class="p-inputtext-sm" [options]="departments" placeholder="Selecione" name="department"
                     #department ngModel [(ngModel)]="project.department.id"></p-dropdown>
             </div>
-            <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <div class="col-12 p-fluid" style="margin-top: 2px;">
                 <label>Status</label>
                 <p-dropdown class="p-inputtext-sm" [options]="projectStatuses" placeholder="Selecione"
                     name="projectStatus" #projectStatus ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
             </div>
 
-            <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+            <a href="javascript:;" style="text-decoration: none;" (click)="showTasks = !showTasks">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showTasks" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showTasks" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Tasks
+                </div>
+            </a>
+
+            <div *ngIf="showTasks" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewTask()">add new</a>
+                <p-table [value]="project.tasks" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-task let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ task.description }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadyTaskEdit(task, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeTask(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem tarefas adicionadas
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
+            </div>
+
+            <a href="javascript:;" style="text-decoration: none; margin-top: 4px;"
                 (click)="showProjectMembers = !showProjectMembers">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
                     <i *ngIf="!showProjectMembers" class="pi pi-angle-right" style="margin: 13px;"></i>
@@ -284,6 +331,21 @@
             <br>
         </div>
     </div>
+</p-dialog>
+
+<!--Tasks-->
+<p-dialog [header]="editingTask ? 'Edição tarefa' : 'Nova tarefa'" [style]="{width: '30vw'}"
+    [(visible)]="showTaskForm" [modal]="true" *ngIf="task">
+    <form #frmTask="ngForm" (ngSubmit)="confirmTask(frmTask)">
+        <div class="col-12 p-fluid">
+            <label>Descrição</label>
+            <input pInputText type="text" name="description" required [(ngModel)]="task.description" #description="ngModel" />
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmTask.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </form>
 </p-dialog>
 
 

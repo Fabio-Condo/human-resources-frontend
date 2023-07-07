@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { DepartmentService } from 'src/app/departments/department.service';
 import { EmployeesService } from 'src/app/employees/employees.service';
-import { IPositionFilter } from 'src/app/core/interfaces/IPositionFilter';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
 import { IProject } from 'src/app/core/interfaces/IProject';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,6 +12,7 @@ import { NgForm } from '@angular/forms';
 import { IProjectFilter } from 'src/app/core/interfaces/IProjectFilter';
 import { IEmployee } from 'src/app/core/interfaces/IEmployee';
 import { Employee } from 'src/app/core/model/Employee';
+import { ProjectTask } from 'src/app/core/model/ProjectTask';
 
 @Component({
   selector: 'app-projects',
@@ -29,8 +29,8 @@ export class ProjectsComponent implements OnInit {
   project: IProject = new Project;
   displayModalSave: boolean = false;
 
-  departments: any[] = [] ;
-  employees: any[] = [] ;
+  departments: any[] = [];
+  employees: any[] = [];
 
   selectedEmployeeIdToAddasMember: any;
 
@@ -42,8 +42,14 @@ export class ProjectsComponent implements OnInit {
 
   employeeById: IEmployee = new Employee();
 
+  showTasks: boolean = false;
   showProjectMembers: boolean = false;
   showProjectMembersView: boolean = false;
+
+  task?: ProjectTask;
+  tasks: Array<ProjectTask> = [];
+  showTaskForm = false;
+  taskIndex?: number;
 
   projectStatuses = [
     { label: 'Em andamento', value: 'IN_PROGRESS' },
@@ -95,8 +101,8 @@ export class ProjectsComponent implements OnInit {
 
   get editing() {
     return Boolean(this.project.id);
-  }  
-  
+  }
+
   save(projectForm: NgForm) {
     if (this.editing) {
       this.update(projectForm)
@@ -112,7 +118,7 @@ export class ProjectsComponent implements OnInit {
         this.project = projectAdded;
         this.showLoading = false;
         this.filterProjects();
-        this.messageService.add({ severity: 'success', detail: 'Project added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Project added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -151,14 +157,14 @@ export class ProjectsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   getDepartments() {
     return this.departmentService.findAll().subscribe(
       data => {
         this.departments = data.content.map(department => {
-          return  {
+          return {
             label: department.name,
             value: department.id
           }
@@ -175,7 +181,7 @@ export class ProjectsComponent implements OnInit {
     return this.employeesService.findAll().subscribe(
       data => {
         this.employees = data.content.map(employee => {
-          return  {
+          return {
             label: employee.name,
             value: employee.id
           }
@@ -219,7 +225,7 @@ export class ProjectsComponent implements OnInit {
     )
   }
 
-  onaddEmployeeToProject(){
+  onaddEmployeeToProject() {
     this.displayModalAddNewMemberIntoProject = true;
   }
 
@@ -288,8 +294,39 @@ export class ProjectsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.filterProjects(page);
+  }
+
+  // Tasks
+  getReadyNewTask() {
+    this.showTaskForm = true;
+    this.task = new ProjectTask();
+    this.taskIndex = this.project.tasks.length;
+  }
+
+  getReadyTaskEdit(task: ProjectTask, index: number) {
+    this.task = this.cloneTask(task);
+    this.showTaskForm = true;
+    this.taskIndex = index;
+  }
+
+  confirmTask(frm: NgForm) {
+    this.project.tasks[this.taskIndex!] = this.cloneTask(this.task!);
+    this.showTaskForm = false;
+    frm.reset();
+  }
+
+  cloneTask(task: ProjectTask): ProjectTask {
+    return new ProjectTask(task.id, task.description);
+  }
+
+  get editingTask() {
+    return this.task && this.task?.id;
+  }
+
+  removeTask(index: number) {
+    this.project.tasks.splice(index, 1);
   }
 
   getProjectStatus(status: string) {
@@ -299,13 +336,13 @@ export class ProjectsComponent implements OnInit {
       case 'CONCLUDED':
         return 'info';
       case 'APPROVED':
-        return 'info'; 
+        return 'info';
       case 'PENDING':
         return 'primmary';
       case 'CANCELED':
-        return 'danger'; 
+        return 'danger';
       case 'SUSPENDED':
-        return 'danger'; 
+        return 'danger';
     }
     return '';
   }
