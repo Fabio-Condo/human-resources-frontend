@@ -416,6 +416,7 @@ export class EmployeesComponent implements OnInit {
   getReadyIdCardEdit(idCard: IdCard, index: number) {
     this.idCard = this.cloneIdCard(idCard);
     this.showIdCardForm = true;
+    this.convertIdCardsStringsToDates([this.idCard]);
     this.idCardIndex = index;
   }
 
@@ -611,6 +612,12 @@ export class EmployeesComponent implements OnInit {
   private convertDependentStringsToDates(dependents: any[]) {
     for (const dependent of dependents) {
       dependent.birthday = new Date(dependent.birthday);
+    }
+  }
+
+  private convertIdCardsStringsToDates(idCards: any[]) {
+    for (const idCard of idCards) {
+      idCard.issueDate = new Date(idCard.issueDate);
     }
   }
 
