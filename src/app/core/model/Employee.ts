@@ -8,6 +8,7 @@ import { Dependent } from "./Depedent";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
 import { EmployeeTraining } from "./EmployeeTraining";
 import { EmployeeWage } from "./EmployeeWage";
+import { IdCard } from "./IdCard";
 import { Position } from "./Position";
 import { Project } from "./Project";
 import { Province } from "./Province";
@@ -31,6 +32,7 @@ export class Employee implements IEmployee {
     wageHistories: EmployeeWage[] = [];
     employeeTrainings: EmployeeTraining [] = [];
     contacts: Contact[] = [];
+    idCards: IdCard[] = [];
     projects: Project[] = [];
     vocations: Vocation[] = [];
     skills: Skill[] = [];

@@ -137,6 +137,52 @@
 
         <div>
 
+            <a href="javascript:;" style="text-decoration: none;" (click)="showIdCardsInfo = !showIdCardsInfo">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showIdCardsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showIdCardsInfo" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Documentos
+                </div>
+            </a>
+
+            <div *ngIf="showIdCardsInfo" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewIdCard()">add new</a>
+                <p-table [value]="employee.idCards" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Número</th>
+                            <th>Data de expiração</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-idCard let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ idCard.type }}</td>
+                            <td>{{ idCard.idNumber }}</td>
+                            <td>{{ idCard.issueDate | date:'dd/MM/yyyy'}}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;" (click)="getReadyIdCardEdit(idCard, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeIdCard(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem documentos
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
+            </div>
+
             <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfo = !showContactsInfo">
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
                     <i *ngIf="!showContactsInfo" class="pi pi-angle-right" style="margin: 13px;"></i>
@@ -296,7 +342,8 @@
                                     <a href="javascript:;" (click)="getReadyDependentEdit(dependent, rowIndex)"><p-tag
                                             [severity]="'primmary'">edit</p-tag></a>
                                     <a style="margin-left: 3px;" href="javascript:;"
-                                        (click)="removeDependent(rowIndex)"><p-tag [severity]="'danger'"> remove</p-tag></a>
+                                        (click)="removeDependent(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
                                 </span>
                             </td>
                         </tr>
@@ -343,7 +390,8 @@
                             style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.position.department.name}}</span></i>
                 </li>
                 <li class="dialog-info-li">
-                    <i class="dialog-info-i"><span style="color:hsl(252, 30%, 17%);font-weight:bold">Tipo de contrato</span>:
+                    <i class="dialog-info-i"><span style="color:hsl(252, 30%, 17%);font-weight:bold">Tipo de
+                            contrato</span>:
                         <span style="color:hsl(252, 30%, 17%);"
                             *ngIf="selectedEmployeeModal.contractType==='INDEFINITE_PERIOD'"> Indeterminado </span>
                         <span style="color:hsl(252, 30%, 17%);"
@@ -372,25 +420,23 @@
                 <li class="dialog-info-li">
                     <i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);font-weight:bold">Genero</span>:
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.gender==='MASCULINE'">
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.gender==='MASCULINE'">
                             Masculino </span>
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.gender==='FEMININE'">
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.gender==='FEMININE'">
                             Feminino </span>
                     </i>
                 </li>
                 <li class="dialog-info-li">
                     <i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);font-weight:bold">Estado civil</span>:
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'"> Solteiro </span>
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'"> Casado </span>
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.maritalStatus==='SINGLE'">
+                            Solteiro </span>
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.maritalStatus==='MARRIED'">
+                            Casado </span>
                         <span style="color:hsl(252, 30%, 17%);"
                             *ngIf="selectedEmployeeModal.maritalStatus==='DIVORCED'"> Divorciado </span>
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.maritalStatus==='WIDOWER'"> Viúvo </span>
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.maritalStatus==='WIDOWER'">
+                            Viúvo </span>
                     </i>
                 </li>
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
@@ -404,12 +450,50 @@
                         <p-tag *ngIf="!selectedEmployeeModal.status" [severity]="'danger'">false</p-tag>
                     </i>
                 </li>
-                <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:hsl(252, 30%, 17%);font-weight:bold">Data de
-                            nascimento</span>: <span
-                            style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.birthday |
+                <li class="dialog-info-li"><i class="dialog-info-i"><span
+                            style="color:hsl(252, 30%, 17%);font-weight:bold">Data de
+                            nascimento</span>: <span style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.birthday
+                            |
                             date:'dd/MM/yyyy'}}</span></i></li>
             </div>
         </div>
+    </div>
+
+    <a href="javascript:;" style="text-decoration: none;" (click)="showIdCardsInfoView = !showIdCardsInfoView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showIdCardsInfoView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showIdCardsInfoView" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Documentos
+            <span *ngIf="selectedEmployeeModal.idCards.length != 0">
+                ({{selectedEmployeeModal.idCards.length}})</span>
+        </div>
+    </a>
+
+    <div *ngIf="showIdCardsInfoView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.idCards" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Tipo</th>
+                    <th>Número</th>
+                    <th>Data de expiração</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-idCard let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ idCard.type }}</td>
+                    <td>{{ idCard.idNumber }}</td>
+                    <td>{{ idCard.issueDate | date:'dd/MM/yyyy'}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        Sem documentos
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
     </div>
 
     <a href="javascript:;" style="text-decoration: none;" (click)="showProjects = !showProjects">
@@ -485,7 +569,8 @@
         <br>
     </div>
 
-    <a href="javascript:;" style="text-decoration: none;" (click)="showEmployeeTrainingsView = !showEmployeeTrainingsView">
+    <a href="javascript:;" style="text-decoration: none;"
+        (click)="showEmployeeTrainingsView = !showEmployeeTrainingsView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showEmployeeTrainingsView" class="pi pi-angle-right" style="margin: 13px;"></i>
             <i *ngIf="showEmployeeTrainingsView" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -709,8 +794,6 @@
 
     <!--Vocations-->
     <div *ngIf="showVocations" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <label>Férias</label> <span *ngIf="selectedEmployeeModal.vocations.length != 0">
-            [{{selectedEmployeeModal.vocations.length}}]</span>
         <p-table [value]="selectedEmployeeModal.vocations" [responsive]="true" styleClass="p-datatable-sm" #tabela>
             <ng-template pTemplate="header">
                 <tr>
@@ -739,6 +822,73 @@
         </p-table>
         <br>
     </div>
+
+    <a href="javascript:;" style="text-decoration: none;" (click)="showDependentsView = !showDependentsView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showDependentsView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showDependentsView" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Dependentes
+            <span *ngIf="selectedEmployeeModal.dependents.length != 0">
+                ({{selectedEmployeeModal.dependents.length}})</span>
+        </div>
+    </a>
+
+    <!--Dependents-->
+    <div *ngIf="showDependentsView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.dependents" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="background-color: #FFF;">Nome</th>
+                    <th style="background-color: #FFF;">Genero</th>
+                    <th style="background-color: #FFF;">Parentesco</th>
+                    <th style="background-color: #FFF;">Data de nascimento</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-dependent let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ dependent.name }}</td>
+                    <td>{{ dependent.gender }}</td>
+                    <td>{{ dependent.relationship }}</td>
+                    <td>{{ dependent.birthday | date: 'dd/MM/yyyy' }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        Sem dependentes adicionados
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
+    </div>
+</p-dialog>
+
+<!--Documentos-->
+<p-dialog [header]="editingIdCard ? 'Edição' : 'Novo'" [(visible)]="showIdCardForm" [modal]="true"
+    [style]="{width: '30vw'}" *ngIf="idCard">
+    <form #frmIdCard="ngForm" (ngSubmit)="confirmIdCard(frmIdCard)">
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Tipo de documento</label>
+            <p-dropdown class="p-inputtext-sm" [options]="idCardsTypes" placeholder="Selecione" name="type" #type
+                ngModel [(ngModel)]="idCard.type"></p-dropdown>
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Número</label>
+            <input pInputText type="text" name="idNumber" required [(ngModel)]="idCard.idNumber" #idNumber="ngModel" />
+        </div>
+        <div class="col-12 md-12 p-fluid">
+            <label>Data de expiração</label>
+            <p-calendar class="p-inputtext-sm" name="issueDate" view="month" dateFormat="d/mm/yy"
+                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                [inline]="false" [readonlyInput]="false" ngModel #issueDate="ngModel" [required]="true"
+                [(ngModel)]="idCard.issueDate"></p-calendar>
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmIdCard.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </form>
 </p-dialog>
 
 <!--Contacts-->
@@ -815,20 +965,19 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Genero</label>
-            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender
-                ngModel [(ngModel)]="dependent.gender"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+                [(ngModel)]="dependent.gender"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Grau de parentesco</label>
-            <p-dropdown class="p-inputtext-sm" [options]="RelationshipTypes" placeholder="Selecione"
-                name="relationship" #relationship ngModel [(ngModel)]="dependent.relationship"></p-dropdown>
+            <p-dropdown class="p-inputtext-sm" [options]="RelationshipTypes" placeholder="Selecione" name="relationship"
+                #relationship ngModel [(ngModel)]="dependent.relationship"></p-dropdown>
         </div>
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Data de nascimento</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-                [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
-                [inline]="false" [readonlyInput]="false" ngModel #birthday="ngModel" [required]="true"
-                [(ngModel)]="dependent.birthday"></p-calendar>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                [showIcon]="true" [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
+                #birthday="ngModel" [required]="true" [(ngModel)]="dependent.birthday"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmDependent.invalid"

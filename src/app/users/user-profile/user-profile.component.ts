@@ -65,6 +65,7 @@ export class UserProfileComponent implements OnInit {
   showProfessionalExperiences: boolean = false;
   showUserTrainings: boolean = false;
   showUserSkills: boolean = false;
+  showJobs: boolean = false;
 
   roles = [
     { label: 'USER', value: 'ROLE_USER' },

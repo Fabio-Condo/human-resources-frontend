@@ -17,6 +17,7 @@ import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
 import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 import { Skill } from 'src/app/core/model/Skill';
 import { Dependent } from 'src/app/core/model/Depedent';
+import { IdCard } from 'src/app/core/model/IdCard';
 
 @Component({
   selector: 'app-employees',
@@ -42,6 +43,11 @@ export class EmployeesComponent implements OnInit {
   contacts: Array<Contact> = []
   showContactForm = false;
   contactIndex?: number;
+
+  idCard?: IdCard;
+  idCards: Array<IdCard> = []
+  showIdCardForm = false;
+  idCardIndex?: number;
 
   training?: IEmployeeTraining;
   trainings: Array<IEmployeeTraining> = []
@@ -73,17 +79,28 @@ export class EmployeesComponent implements OnInit {
   selectedDepartment?: number;
 
   showContactsInfo: boolean = false;
+  showIdCardsInfo: boolean = false;
+  showIdCardsInfoView: boolean = false;
   showContactsInfoView: boolean = false;
   showEmployeeTrainings: boolean = false;
   showEmployeeTrainingsView: boolean = false;
   showSkills: boolean = false;
   showDependents: boolean = false;
+  showDependentsView: boolean = false;
   showSkillsView: boolean = false;
   showProjects: boolean = false;
   showCompanyTrainings: boolean = false;
   showWageHistories: boolean = false;
   showEmployeePerformanceEvaluations: boolean = false;
   showVocations: boolean = false;
+
+  idCardsTypes = [
+    { label: 'BI', value: 'ID_CARD' },
+    { label: 'Passaporte', value: 'PASSPORT' },
+    { label: 'Carta de Condução', value: 'DRIVER_LICENSE' },
+    { label: 'Carteira de Trabalho', value: 'WORK_CARD' },
+    { label: 'Carteira de Identidade Profissional', value: 'PROFESSIONAL_IDENTITY_CARD' },
+  ];
 
   maritalStatuses = [
     { label: 'Solteiro', value: 'SINGLE' },
@@ -387,6 +404,37 @@ export class EmployeesComponent implements OnInit {
 
   removeContact(index: number) {
     this.employee.contacts.splice(index, 1);
+  }
+
+  // Id Cards
+  getReadyNewIdCard() {
+    this.showIdCardForm = true;
+    this.idCard = new IdCard();
+    this.idCardIndex = this.employee.idCards.length;
+  }
+
+  getReadyIdCardEdit(idCard: IdCard, index: number) {
+    this.idCard = this.cloneIdCard(idCard);
+    this.showIdCardForm = true;
+    this.idCardIndex = index;
+  }
+
+  confirmIdCard(frm: NgForm) {
+    this.employee.idCards[this.idCardIndex!] = this.cloneIdCard(this.idCard!);
+    this.showIdCardForm = false;
+    frm.reset();
+  }
+
+  cloneIdCard(contact: IdCard): IdCard {
+    return new IdCard(contact.id, contact.type, contact.idNumber, contact.issueDate);
+  }
+
+  get editingIdCard() {
+    return this.idCard && this.idCard?.id;
+  }
+
+  removeIdCard(index: number) {
+    this.employee.idCards.splice(index, 1);
   }
 
   // Training

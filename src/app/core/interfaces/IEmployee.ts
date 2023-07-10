@@ -1,6 +1,7 @@
 import { CompanyTraining } from "../model/CompanyTraining";
 import { Contact } from "../model/Contact";
 import { Dependent } from "../model/Depedent";
+import { IdCard } from "../model/IdCard";
 import { Skill } from "../model/Skill";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
 import { IEmployeeTraining } from "./IEmployeeTraining";
@@ -28,6 +29,7 @@ export interface IEmployee {
     wageHistories: IEmployeeWage[];
     employeeTrainings: IEmployeeTraining[];
     contacts: Contact[];
+    idCards: IdCard[];
     projects: IProject[];
     vocations: IVocation[];
     skills: Skill[];

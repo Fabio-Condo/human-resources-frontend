@@ -127,7 +127,6 @@
                 <tr>
                   <th style="background-color: #FFF;">Company</th>
                   <th style="background-color: #FFF;">Description</th>
-                  <th style="background-color: #FFF;">Location</th>
                   <th style="background-color: #FFF;" class="col-valor-header"></th>
                 </tr>
               </ng-template>
@@ -227,6 +226,42 @@
                 <tr>
                   <td colspan="10">
                     Sem habilidades adicionadas
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br>
+          </div>
+
+          <a href="javascript:;" style="text-decoration: none;" (click)="showJobs = !showJobs">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+              <i *ngIf="!showJobs" class="pi pi-angle-right" style="margin: 13px;"></i>
+              <i *ngIf="showJobs" class="pi pi-angle-down" style="margin: 13px;"></i>
+              Applied Jobs
+            </div>
+          </a>
+
+          <div *ngIf="showJobs" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
+            <p-table [value]="user.jobs" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+              <ng-template pTemplate="header">
+                <tr>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-job let-rowIndex="rowIndex">
+                <tr>
+                  <td>{{ job.position.name }}</td>
+                  <td class="col-acoes">
+                    <span class="p-buttonset">
+                      <a style="margin-left: 3px;" href="javascript:;" [routerLink]="['/v1/jobs-view', job.id]"><p-tag
+                          [severity]="'primmary'"> view</p-tag></a>
+                    </span>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="10">
+                    Sem contactos
                   </td>
                 </tr>
               </ng-template>
