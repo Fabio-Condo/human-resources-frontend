@@ -27,7 +27,7 @@
           </a>
         </td>
         <td>{{ position.department.name }}</td>
-        <td>{{ position.workplace.name }}</td>
+        <td>{{ position.location.name }}, {{ position.location.country.name }}</td>
         <td style="width: 180px;">
           <button pButton pTooltip="Visualizar" (click)="onSelectPosition(position)" tooltipPosition="top" type="button"
             icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
@@ -74,8 +74,8 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
           <label>Local de trabalho</label>
-          <p-dropdown class="p-inputtext-sm" [options]="workplaces" placeholder="Selecione" [filter]="true"
-            name="workplace" #workplace ngModel [(ngModel)]="position.workplace.id"></p-dropdown>
+          <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true"
+            name="location" #location ngModel [(ngModel)]="position.location.id"></p-dropdown>
         </div>
         <div class="formgrid grid" style="margin-top: 2%;">
           <div class="field col-12 md:col-6">
@@ -310,7 +310,7 @@
         <div class="field col-12 md:col-6">
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de
                 trabalho</span>: <span
-                style="color:#08080871;font-weight:bold">{{selectedPositionModal.workplace.name}}</span></i></li>
+                style="color:#08080871;font-weight:bold">{{selectedPositionModal.location.name}}</span></i></li>
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
                 Minimo</span>: <span
                 style="color:#08080871;font-weight:bold">{{selectedPositionModal.minimumWage}}</span></i></li>
@@ -499,8 +499,8 @@
     </div>
     <div class="col-12 p-fluid" style="margin-top: 2%;">
       <label>Local de trabalho</label>
-      <p-dropdown class="p-inputtext-sm" [options]="workplaces" placeholder="Selecione" [filter]="true" name="workplace"
-        #workplace ngModel [(ngModel)]="filter.workplace" (ngModelChange)="filterPositions()"></p-dropdown>
+      <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true" name="location"
+        #location ngModel [(ngModel)]="filter.location" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">

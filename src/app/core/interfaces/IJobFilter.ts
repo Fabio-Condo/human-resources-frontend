@@ -1,6 +1,6 @@
 export interface IJobFilter {
     positionName?: string;
-    workplace?: string;
+    location?: string;
     publicationDate?: Date;
     name?: string,
     page: number,

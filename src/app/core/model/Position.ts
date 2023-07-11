@@ -6,7 +6,7 @@ import { Employee } from "./Employee";
 import { MainResponsibility } from "./MainResponsibility";
 import { PositionLanguages } from "./PositionLanguages";
 import { SpecificRequirement } from "./SpecificRequirement";
-import { Workplace } from "./Workplace";
+import { Location } from "./Location";
 
 export class Position implements IPosition {
     id!: number;
@@ -17,7 +17,7 @@ export class Position implements IPosition {
     minimumWage!: number;
     maximumWage!: number;
     department = new Department;
-    workplace = new Workplace;
+    location = new Location;
     benefits: Benefit[] = [];
     mainResponsibilities: MainResponsibility[] = [];
     specificRequirements: SpecificRequirement[] = [];

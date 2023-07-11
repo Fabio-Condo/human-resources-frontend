@@ -14,8 +14,8 @@ import { MainResponsibility } from 'src/app/core/model/MainResponsibility';
 import { Position } from 'src/app/core/model/Position';
 import { PositionLanguages } from 'src/app/core/model/PositionLanguages';
 import { SpecificRequirement } from 'src/app/core/model/SpecificRequirement';
-import { WorkplacesService } from 'src/app/workplaces/workplaces.service';
 import { PositionsService } from '../positions.service';
+import { LocationsService } from 'src/app/workplaces/locations.service';
 
 @Component({
   selector: 'app-positions',
@@ -34,7 +34,7 @@ export class PositionsComponent implements OnInit {
 
   departments: any[] = [] ;
   administrativeClusters: any[] = [] ;
-  workplaces: any[] = [] ;
+  locations: any[] = [] ;
   employees: any[] = [];
 
   mainResponsibilities: Array<MainResponsibility> = []
@@ -102,7 +102,7 @@ export class PositionsComponent implements OnInit {
   constructor(
     private positionsService: PositionsService,
     private departmentService: DepartmentService,
-    private workplacesService: WorkplacesService,
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private employeesService: EmployeesService,
@@ -112,7 +112,7 @@ export class PositionsComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Positions page');
     this.getDepartments();
-    this.getWorkplaces();
+    this.getLocations();
     //this.getHierarchicalReporter();
   }
 
@@ -219,13 +219,13 @@ export class PositionsComponent implements OnInit {
   }
 
 
-  getWorkplaces() {
-    return this.workplacesService.findAll().subscribe(
+  getLocations() {
+    return this.locationsService.findAll().subscribe(
       data => {
-        this.workplaces = data.content.map(workplace => {
+        this.locations = data.content.map(location => {
           return  {
-            label: workplace.name,
-            value: workplace.id
+            label: location.name,
+            value: location.id
           }
         })
       },

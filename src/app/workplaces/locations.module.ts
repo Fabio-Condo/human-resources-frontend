@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WorkplacesComponent } from './workplaces/workplaces.component';
+import { LocationsComponent } from './locations/locations.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +18,7 @@ import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
-    WorkplacesComponent
+    LocationsComponent
   ],
   imports: [
     CommonModule,
@@ -39,4 +39,4 @@ import { AppRoutingModule } from '../app-routing.module';
     AppRoutingModule
   ]
 })
-export class WorkplacesModule { }
+export class LocationsModule { }

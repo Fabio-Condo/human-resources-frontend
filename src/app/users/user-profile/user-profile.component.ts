@@ -166,6 +166,10 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  public get isCandidate(): boolean {
+    return this.getUserRole() === Role.CANDIDATE;
+  }
+
   public get isAdmin(): boolean {
     return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
   }

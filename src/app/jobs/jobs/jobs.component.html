@@ -46,7 +46,7 @@
         <th>
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input [(ngModel)]="filter.workplace" name="workplace" pInputText type="text" placeholder="Location"
+            <input [(ngModel)]="filter.location" name="workplace" pInputText type="text" placeholder="Location"
               (ngModelChange)="filterJobs()" />
           </span>
         </th>
@@ -66,7 +66,7 @@
           </a>
           <span *ngIf="user != undefined">
             <a *ngIf="isAlreadyAplliedToCurrentJob(job.candidates)">
-              <p-tag [severity]="'primmary'">applied</p-tag>
+              <p-tag [severity]="'info'">applied</p-tag>
             </a>
           </span>
 
@@ -115,7 +115,7 @@
         <div class="field col-12 md:col-6">
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de
                 trabalho</span>: <span
-                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.workplace.name}}</span></i></li>
+                style="color:#08080871;font-weight:bold">{{selectedJobModal.position.location.name}}</span></i></li>
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
                 Minimo</span>: <span
                 style="color:#08080871;font-weight:bold">{{selectedJobModal.position.minimumWage}}</span></i></li>
@@ -296,7 +296,7 @@
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Local de trabalho</label>
         <input pInputText disabled class="p-inputtext-sm" type="text" name="workplace" ngModel #workplace="ngModel"
-          required minlength="1" [(ngModel)]="positionById.workplace.name">
+          required minlength="1" [(ngModel)]="positionById.location.name">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <button pButton type="submit" [disabled]="jobForm.invalid" class="p-button-sm" style="height: 30px;">

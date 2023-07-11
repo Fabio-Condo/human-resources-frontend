@@ -7,7 +7,7 @@
         </a>
         <a style="display:inline; float: right;" tooltipPosition="top"
             *ngIf="isCandidate && isAlreadyAplliedToCurrentJob()">
-            <p-tag [severity]="'primmary'">applied</p-tag>
+            <p-tag [severity]="'info'">applied</p-tag>
         </a>
     </span>
 
@@ -16,7 +16,7 @@
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>
     </div>
     <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Country: </span><span
-            style="font-size: 1rem;">{{ job.position.workplace.name }}</span></p>
+            style="font-size: 1rem;">{{ job.position.location.name }}</span></p>
     <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{
             job.publicationDate | date: 'd MMM, y' }}</span></p>
     <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;"> At Meta, we’re working hard to build a better
@@ -28,7 +28,7 @@
 
         <div class="left">
             <a href="javascript:;" tooltipPosition="top" routerLink="/v1/jobs">
-                <p-tag [severity]="'primmary'">voltar</p-tag>
+                <p-tag [severity]="'primmary'">voltar para vagas</p-tag>
             </a>
             <div class="sidebar">
                 <a class="menu-item active">

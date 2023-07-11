@@ -70,7 +70,7 @@
               placeholder="Bio" [(ngModel)]="user.bio"></textarea>
           </div>
 
-          <a href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
+          <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
               <i *ngIf="!showContacts" class="pi pi-angle-right" style="margin: 13px;"></i>
               <i *ngIf="showContacts" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -110,7 +110,7 @@
             <br>
           </div>
 
-          <a href="javascript:;" style="text-decoration: none;"
+          <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;"
             (click)="showProfessionalExperiences = !showProfessionalExperiences">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
               <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin: 13px;"></i>
@@ -155,7 +155,7 @@
             <br>
           </div>
 
-          <a href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
+          <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;" (click)="showUserTrainings = !showUserTrainings">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
               <i *ngIf="!showUserTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
               <i *ngIf="showUserTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -193,7 +193,7 @@
             <br>
           </div>
 
-          <a href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
+          <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;" (click)="showUserSkills = !showUserSkills">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
               <i *ngIf="!showUserSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
               <i *ngIf="showUserSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -233,7 +233,7 @@
             <br>
           </div>
 
-          <a href="javascript:;" style="text-decoration: none;" (click)="showJobs = !showJobs">
+          <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;" (click)="showJobs = !showJobs">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
               <i *ngIf="!showJobs" class="pi pi-angle-right" style="margin: 13px;"></i>
               <i *ngIf="showJobs" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -269,7 +269,7 @@
             <br>
           </div>
 
-          <button pButton type="submit" style="display:inline; float: right;" pRipple label="Save changes"
+          <button pButton type="submit" style="display:inline; float: right; margin-top: 5px;" pRipple label="Save changes"
             class="p-button-primmary mr-2"></button>
 
         </form>

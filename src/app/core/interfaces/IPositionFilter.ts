@@ -2,7 +2,7 @@ export interface IPositionFilter {
     name?: string,
     functionalGroup?: string,
     department?: number,
-    workplace?: number,
+    location?: number,
     employeeOrderBy?: string,
 
     page: number,

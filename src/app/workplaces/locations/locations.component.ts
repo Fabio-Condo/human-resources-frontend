@@ -4,28 +4,31 @@ import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
-import { IWorkplace } from 'src/app/core/interfaces/IWorkplace';
-import { IWorkplaceFilter } from 'src/app/core/interfaces/IWorkplaceFilter';
-import { Workplace } from 'src/app/core/model/Workplace';
-import { WorkplacesService } from '../workplaces.service';
+import { ILocation } from 'src/app/core/interfaces/ILocation';
+import { ILocationFilter } from 'src/app/core/interfaces/ILocationFilter';
+import { Location } from 'src/app/core/model/Location';
+import { CountryService } from 'src/app/countries/country.service';
+import { LocationsService } from '../locations.service';
 
 @Component({
-  selector: 'app-workplaces',
-  templateUrl: './workplaces.component.html',
-  styleUrls: ['./workplaces.component.css']
+  selector: 'app-locations',
+  templateUrl: './locations.component.html',
+  styleUrls: ['./locations.component.css']
 })
-export class WorkplacesComponent implements OnInit {
+export class LocationsComponent implements OnInit {
 
   showLoading: boolean = false;
 
   totalRecords: number = 0
-  workplaces: IWorkplace[] = [];
+  locations: ILocation[] = [];
 
-  workplace: IWorkplace = new Workplace;
+  location: ILocation = new Location;
   displayModalSave: boolean = false;
 
-  selectedWorkplaceModal: Workplace = new Workplace();
+  selectedLocationModal: Location = new Location();
   displayModal = false;
+
+  countries: any[] = [];
 
   sizePage = [
     { label: '5 itens por página', value: 5 },
@@ -43,17 +46,19 @@ export class WorkplacesComponent implements OnInit {
   ];
 
   constructor(
-    private workplacesService: WorkplacesService,
+    private locationsService: LocationsService,
+    private countryService: CountryService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private title: Title,
   ) { }
 
   ngOnInit(): void {
-    this.title.setTitle('Workplaces page');
+    this.title.setTitle('Locations page');
+    this.getCountries();
   }
 
-  filter: IWorkplaceFilter = {
+  filter: ILocationFilter = {
     page: 0,
     itemsPerPage: 10,
     sort: 'name,asc'
@@ -62,25 +67,25 @@ export class WorkplacesComponent implements OnInit {
   @ViewChild('table') grid: any;
 
   get editing() {
-    return Boolean(this.workplace.id);
+    return Boolean(this.location.id);
   }
 
-  save(workplaceForm: NgForm) {
+  save(locationForm: NgForm) {
     if (this.editing) {
-      this.update(workplaceForm)
+      this.update(locationForm)
     } else {
-      this.addNew(workplaceForm)
+      this.addNew(locationForm)
     }
   }
 
-  addNew(workplaceForm: NgForm) {
+  addNew(locationForm: NgForm) {
     this.showLoading = true;
-    this.workplacesService.add(this.workplace).subscribe(
-      (workplaceAdded) => {
-        this.workplace = workplaceAdded;
+    this.locationsService.add(this.location).subscribe(
+      (locationAdded) => {
+        this.location = locationAdded;
         this.showLoading = false;
-        this.getWorkplaces();
-        this.messageService.add({ severity: 'success', detail: 'Workplace added successfully' });      
+        this.getLocations();
+        this.messageService.add({ severity: 'success', detail: 'Location added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -89,13 +94,13 @@ export class WorkplacesComponent implements OnInit {
     );
   }
 
-  update(workplaceForm: NgForm) {
+  update(locationForm: NgForm) {
     this.showLoading = true;
-    this.workplacesService.update(this.workplace).subscribe(
-      (workplace) => {
-        this.workplace = workplace;
+    this.locationsService.update(this.location).subscribe(
+      (location) => {
+        this.location = location;
         this.showLoading = false;
-        this.messageService.add({ severity: 'success', detail: 'Workplace updated successfully!' });
+        this.messageService.add({ severity: 'success', detail: 'Location updated successfully!' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -104,12 +109,12 @@ export class WorkplacesComponent implements OnInit {
     )
   }
 
-  getWorkplaces(page: number = 0): void {
+  getLocations(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.workplacesService.getWorkplaces(this.filter).subscribe(
-      (data: IApiResponse<IWorkplace>) => {
-        this.workplaces = data.content;
+    this.locationsService.getLocations(this.filter).subscribe(
+      (data: IApiResponse<ILocation>) => {
+        this.locations = data.content;
         this.totalRecords = data.totalElements;
         this.showLoading = false;
       },
@@ -120,15 +125,15 @@ export class WorkplacesComponent implements OnInit {
     );   
   }
 
-  deleteWorkplace(workplace: IWorkplace) {
-    this.workplacesService.delete(workplace.id).subscribe(
+  deleteLocation(location: ILocation) {
+    this.locationsService.delete(location.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          this.getWorkplaces();
+          this.getLocations();
         } else {
           this.grid.reset();
         }
-        this.messageService.add({ severity: 'success', detail: 'Workplace deleted succefully!' })
+        this.messageService.add({ severity: 'success', detail: 'Location deleted succefully!' })
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -137,34 +142,47 @@ export class WorkplacesComponent implements OnInit {
     )
   }
 
-  onAddNewWorkplace(): void {
-    this.workplace = new Workplace();
+  getCountries() {
+    this.countryService.findAll().then(data => {
+      this.countries = data.map((country: any) => ({
+        label: country.name,
+        value: country.id
+      }));
+    }),
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+  }
+
+  onAddNewLocation(): void {
+    this.location = new Location();
     this.displayModalSave = true;
   }
 
-  onEditWorkplace(editWorkplace: Workplace): void {
-    this.workplace = editWorkplace;
-    this.workplace.id = editWorkplace.id
+  onEditLocation(editLocation: Location): void {
+    this.location = editLocation;
+    this.location.id = editLocation.id
     this.displayModalSave = true;
   }
 
-  onSelectWorkplace(selectedWorkplace: Workplace): void {
-    this.selectedWorkplaceModal = selectedWorkplace;
+  onSelectLocation(selectedLocation: Location): void {
+    this.selectedLocationModal = selectedLocation;
     this.displayModal = true;
   }
 
-  deletionConfirm(workplace: IWorkplace): void {
+  deletionConfirm(location: ILocation): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-        this.deleteWorkplace(workplace);
+        this.deleteLocation(location);
       }
     });
   }
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;  
-    this.getWorkplaces(page);
+    this.getLocations(page);
   }
   
   private sendErrorNotification(message: string): void {

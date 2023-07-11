@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WorkplacesComponent } from './workplaces/workplaces.component';
+import { LocationsComponent } from './locations/locations.component';
 import { AuthenticationGuard } from '../guard/authentication.guard';
 
 
 const routes: Routes = [
     { 
-      path: 'v1/workplaces', 
-      component: WorkplacesComponent,
+      path: 'v1/locations', 
+      component: LocationsComponent,
       canActivate: [AuthenticationGuard], 
       data: { 
         roles: ['ROLE_SUPER_ADMIN'], 
@@ -22,4 +22,4 @@ const routes: Routes = [
     ],
     exports: [RouterModule]
 })
-export class WorkplacesRoutingModule { }
+export class LocationsRoutingModule { }

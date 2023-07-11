@@ -1,4 +1,4 @@
-export interface IWorkplaceFilter {
+export interface ILocationFilter {
     name?: string,
     page: number,
     itemsPerPage: number,

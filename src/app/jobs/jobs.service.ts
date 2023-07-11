@@ -53,8 +53,8 @@ export class JobsService {
     if (filter.positionName) { 
       params = params.set('positionName', filter.positionName); 
     }
-    if (filter.workplace) { 
-      params = params.set('workplace', filter.workplace); 
+    if (filter.location) { 
+      params = params.set('location', filter.location); 
     }
     if (filter.publicationDate) {
       params = params.set('publicationDate', this.datePipe.transform(filter.publicationDate, 'yyyy-MM-dd')!); 

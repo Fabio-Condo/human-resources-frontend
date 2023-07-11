@@ -34,8 +34,8 @@ export class PositionsService {
     if (filter.department) { 
       params = params.set('department', filter.department); 
     }
-    if (filter.workplace) { 
-      params = params.set('workplace', filter.workplace); 
+    if (filter.location) { 
+      params = params.set('location', filter.location); 
     }
     if (filter.functionalGroup) { 
       params = params.set('functionalGroup', filter.functionalGroup); 

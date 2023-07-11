@@ -4,7 +4,7 @@ import { IEmployee } from "./IEmployee";
 import { IMainResponsibility } from "./IMainResponsibility";
 import { IPositionLanguages } from "./IPositionLanguages";
 import { ISpecificRequirement } from "./ISpecificRequirement";
-import { IWorkplace } from "./IWorkplace";
+import { ILocation } from "./ILocation";
 
 export interface IPosition {
     id: number,
@@ -15,7 +15,7 @@ export interface IPosition {
     maximumWage: number,
     minimumWage: number,
     department: IDepartment,
-    workplace: IWorkplace,
+    location: ILocation,
     benefits: IBenefit[];
     mainResponsibilities: IMainResponsibility[];
     specificRequirements: ISpecificRequirement[];
