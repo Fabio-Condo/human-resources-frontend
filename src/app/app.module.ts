@@ -14,7 +14,6 @@ import { PositionsRoutingModule } from './positions/positions-routing.module';
 import { PositionsModule } from './positions/positions.module';
 import { SkillsRoutingModule } from './skills/skills-routing.module';
 import { SkillsModule } from './skills/skills.module';
-import { LocationsModule } from './workplaces/locations.module';
 import { CoreModule } from './core/core.module';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeesRoutingModule } from './employees/employees-routing.module';
@@ -42,7 +41,9 @@ import { AuthenticationGuard } from './guard/authentication.guard';
 import { UserService } from './users/user.service';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
-import { LocationsRoutingModule } from './workplaces/locations-routing.module';
+import { LocationsRoutingModule } from './locations/locations-routing.module';
+import { LocationsModule } from './locations/locations.module';
+
 
 @NgModule({
   declarations: [

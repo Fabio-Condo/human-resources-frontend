@@ -15,7 +15,7 @@ import { Position } from 'src/app/core/model/Position';
 import { PositionLanguages } from 'src/app/core/model/PositionLanguages';
 import { SpecificRequirement } from 'src/app/core/model/SpecificRequirement';
 import { PositionsService } from '../positions.service';
-import { LocationsService } from 'src/app/workplaces/locations.service';
+import { LocationsService } from 'src/app/locations/locations.service';
 
 @Component({
   selector: 'app-positions',

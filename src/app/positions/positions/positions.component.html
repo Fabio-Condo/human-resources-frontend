@@ -15,7 +15,7 @@
       <tr>
         <th style="background-color: #fff;">Nome</th>
         <th style="background-color: #fff;">Departamento</th>
-        <th style="background-color: #fff;">Local de trabalho</th>
+        <th style="background-color: #fff;">Local</th>
         <th style="background-color: #fff;">Ações</th>
       </tr>
     </ng-template>
@@ -73,7 +73,7 @@
             name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-          <label>Local de trabalho</label>
+          <label>Local</label>
           <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true"
             name="location" #location ngModel [(ngModel)]="position.location.id"></p-dropdown>
         </div>
@@ -95,7 +95,7 @@
         </div>
       </div>
     </div>
-    
+
     <div>
 
       <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
@@ -308,9 +308,8 @@
                 style="color:#08080871;font-weight:bold">{{selectedPositionModal.department.name}}</span></i></li>
         </div>
         <div class="field col-12 md:col-6">
-          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local de
-                trabalho</span>: <span
-                style="color:#08080871;font-weight:bold">{{selectedPositionModal.location.name}}</span></i></li>
+          <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local</span>:
+              <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.location.name}}, {{selectedPositionModal.location.country.name}}</span></i></li>
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
                 Minimo</span>: <span
                 style="color:#08080871;font-weight:bold">{{selectedPositionModal.minimumWage}}</span></i></li>
@@ -387,7 +386,8 @@
         <br>
       </div>
 
-      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showBenefitsView = !showBenefitsView">
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+        (click)="showBenefitsView = !showBenefitsView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
           <i *ngIf="!showBenefitsView" class="pi pi-angle-right" style="margin: 13px;"></i>
           <i *ngIf="showBenefitsView" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -420,7 +420,8 @@
         <br>
       </div>
 
-      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;" (click)="showEmployeesView = !showEmployeesView">
+      <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+        (click)="showEmployeesView = !showEmployeesView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
           <i *ngIf="!showEmployeesView" class="pi pi-angle-right" style="margin: 13px;"></i>
           <i *ngIf="showEmployeesView" class="pi pi-angle-down" style="margin: 13px;"></i>
@@ -498,7 +499,7 @@
         (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
     <div class="col-12 p-fluid" style="margin-top: 2%;">
-      <label>Local de trabalho</label>
+      <label>Local</label>
       <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true" name="location"
         #location ngModel [(ngModel)]="filter.location" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
