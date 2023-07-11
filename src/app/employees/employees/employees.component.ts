@@ -18,6 +18,7 @@ import { IEmployeeTraining } from 'src/app/core/interfaces/IEmployeeTraining';
 import { Skill } from 'src/app/core/model/Skill';
 import { Dependent } from 'src/app/core/model/Depedent';
 import { IdCard } from 'src/app/core/model/IdCard';
+import { LocationsService } from 'src/app/locations/locations.service';
 
 @Component({
   selector: 'app-employees',
@@ -34,6 +35,7 @@ export class EmployeesComponent implements OnInit {
   employee: IEmployee = new Employee;
   displayModalSave: boolean = false;
 
+  locations: any[] = [] ;
   provinces: any[] = [];
   //selectedProvince?: number;
 
@@ -163,6 +165,7 @@ export class EmployeesComponent implements OnInit {
 
   constructor(
     private employeesService: EmployeesService,
+    private locationsService: LocationsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private provinceService: ProvinceService,
@@ -175,7 +178,7 @@ export class EmployeesComponent implements OnInit {
     this.title.setTitle('employees page');
     this.getProvinces();
     this.getDepartments();
-    //this.getPositions();
+    this.getLocations();
   }
 
   @ViewChild('table') grid: any;
@@ -343,6 +346,23 @@ export class EmployeesComponent implements OnInit {
           return {
             label: department.name,
             value: department.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getLocations() {
+    return this.locationsService.findAll().subscribe(
+      data => {
+        this.locations = data.content.map(location => {
+          return  {
+            label: location.name + ", (" + location.country.name + ")",
+            value: location.id
           }
         })
       },

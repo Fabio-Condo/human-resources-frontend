@@ -6,6 +6,7 @@ import { Skill } from "../model/Skill";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
 import { IEmployeeTraining } from "./IEmployeeTraining";
 import { IEmployeeWage } from "./IEmployeeWage";
+import { ILocation } from "./ILocation";
 import { IPosition } from "./IPosition";
 import { IProject } from "./IProject";
 import { IProvince } from "./IProvince";
@@ -23,6 +24,7 @@ export interface IEmployee {
     spousesName: string,
     status: boolean,
     wageValue: number,
+    birthplace: ILocation;
     province: IProvince;
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
     position: IPosition;

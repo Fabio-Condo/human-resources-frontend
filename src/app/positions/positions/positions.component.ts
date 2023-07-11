@@ -218,13 +218,12 @@ export class PositionsComponent implements OnInit {
     )
   }
 
-
   getLocations() {
     return this.locationsService.findAll().subscribe(
       data => {
         this.locations = data.content.map(location => {
           return  {
-            label: location.name,
+            label: location.name + ", (" + location.country.name + ")",
             value: location.id
           }
         })

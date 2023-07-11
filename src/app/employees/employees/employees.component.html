@@ -122,6 +122,11 @@
                         #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Local de nascimento</label>
+                    <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true"
+                        name="birthplace" #birthplace ngModel [(ngModel)]="employee.birthplace.id"></p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Provincia</label>
                     <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
                         [(ngModel)]="employee.province.id" name="province" #province="ngModel" [required]=true>

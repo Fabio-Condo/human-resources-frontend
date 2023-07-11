@@ -1,8 +1,5 @@
 import { ICompanyTraining } from "../interfaces/ICompanyTraining";
 import { IEmployee } from "../interfaces/IEmployee";
-import { IProject } from "../interfaces/IProject";
-import { ISkill } from "../interfaces/ISkill";
-import { IVocation } from "../interfaces/IVocation";
 import { Contact } from "./Contact";
 import { Dependent } from "./Depedent";
 import { EmployeePerformanceEvaluation } from "./EmployeePerformanceEvaluation";
@@ -14,6 +11,7 @@ import { Project } from "./Project";
 import { Province } from "./Province";
 import { Skill } from "./Skill";
 import { Vocation } from "./Vocation";
+import { Location } from "./Location";
 
 export class Employee implements IEmployee {
     id!: number;
@@ -26,6 +24,7 @@ export class Employee implements IEmployee {
     spousesName!: string;
     status!: boolean;
     wageValue!: number;
+    birthplace = new Location;
     province = new  Province;
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
