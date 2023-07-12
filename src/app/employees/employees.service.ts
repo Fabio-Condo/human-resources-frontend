@@ -30,8 +30,8 @@ export class EmployeesService {
     if (filter.name) { 
      params = params.set('name', filter.name); 
     }
-    if (filter.province) { 
-      params = params.set('province', filter.province); 
+    if (filter.birthplace) { 
+      params = params.set('birthplace', filter.birthplace); 
     }
     if (filter.gender) { 
       params = params.set('gender', filter.gender); 

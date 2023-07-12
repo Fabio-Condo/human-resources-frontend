@@ -10,7 +10,6 @@ import { IEmployeeFilter } from 'src/app/core/interfaces/IEmployeeFilter';
 import { Employee } from 'src/app/core/model/Employee';
 import { EmployeePerformanceEvaluation } from 'src/app/core/model/EmployeePerformanceEvaluation';
 import { PositionsService } from 'src/app/positions/positions.service';
-import { ProvinceService } from 'src/app/provinces/provincia.service';
 import { EmployeesService } from '../employees.service';
 import { Contact } from 'src/app/core/model/Contact';
 import { EmployeeTraining } from 'src/app/core/model/EmployeeTraining';
@@ -168,7 +167,6 @@ export class EmployeesComponent implements OnInit {
     private locationsService: LocationsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private provinceService: ProvinceService,
     private positionsService: PositionsService,
     private departmentService: DepartmentService,
     private title: Title,
@@ -176,7 +174,6 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('employees page');
-    this.getProvinces();
     this.getDepartments();
     this.getLocations();
   }
@@ -290,19 +287,6 @@ export class EmployeesComponent implements OnInit {
         this.deleteEmployee(employee);
       }
     });
-  }
-
-  getProvinces() {
-    this.provinceService.findAll().then(data => {
-      this.provinces = data.map((province: any) => ({
-        label: province.name,
-        value: province.id
-      }));
-    }),
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
   }
 
   getPositions() {

@@ -1,6 +1,4 @@
 import { IDepartment } from "../interfaces/IDepartments";
-import { Project } from "./Project";
-import { SerializedEmployeeExcludePositition } from "./SerializedEmployeeExcludePositition";
 
 export class Department implements IDepartment {
     id!: number;

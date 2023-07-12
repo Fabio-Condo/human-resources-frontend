@@ -9,7 +9,6 @@ import { IEmployeeWage } from "./IEmployeeWage";
 import { ILocation } from "./ILocation";
 import { IPosition } from "./IPosition";
 import { IProject } from "./IProject";
-import { IProvince } from "./IProvince";
 import { ISkill } from "./ISkill";
 import { IVocation } from "./IVocation";
 
@@ -25,7 +24,6 @@ export interface IEmployee {
     status: boolean,
     wageValue: number,
     birthplace: ILocation;
-    province: IProvince;
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
     position: IPosition;
     wageHistories: IEmployeeWage[];

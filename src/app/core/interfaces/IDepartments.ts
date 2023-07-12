@@ -1,6 +1,3 @@
-import { Project } from "../model/Project";
-import { ISerializedEmployeeExcludePositition } from "./ISerializedEmployeeExcludePositition";
-
 export interface IDepartment {
     id: number,
     name: string,

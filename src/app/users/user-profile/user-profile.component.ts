@@ -14,7 +14,6 @@ import { UserContact } from 'src/app/core/model/UserContact';
 import { UserTraining } from 'src/app/core/model/UserTraining';
 import { UserSkill } from 'src/app/core/model/UserSkill';
 import { ProfessionalExperience } from 'src/app/core/model/ProfessionalExperience';
-import { ProvinceService } from 'src/app/provinces/provincia.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -78,7 +77,6 @@ export class UserProfileComponent implements OnInit {
     private router: Router, 
     private authenticationService: AuthenticationService,
     private userService: UserService, 
-    private provinceService: ProvinceService,
     private messageService: MessageService,
     private title: Title,
     private confirmationService: ConfirmationService,
@@ -86,7 +84,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
-    this.getProvinces();
   }
 
   onUpdateCurrentUser(user: User): void { // Not used
@@ -129,19 +126,6 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-
-  getProvinces() {
-    this.provinceService.findAll().then(data => {
-      this.provinces = data.map((province:any) => ({ 
-        label: province.name,
-        value: province.id 
-      }));
-    }),
-    (errorResponse: HttpErrorResponse) => {
-      this.sendNotification(errorResponse.error.message);
-      this.refreshing = false;
-    }
-  } 
 
   onProfileImageChange(fileName: any, profileImage: any): void {    
     this.fileName =  fileName.target.files[0].name;

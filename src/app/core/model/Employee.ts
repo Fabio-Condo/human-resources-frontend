@@ -8,7 +8,6 @@ import { EmployeeWage } from "./EmployeeWage";
 import { IdCard } from "./IdCard";
 import { Position } from "./Position";
 import { Project } from "./Project";
-import { Province } from "./Province";
 import { Skill } from "./Skill";
 import { Vocation } from "./Vocation";
 import { Location } from "./Location";
@@ -25,7 +24,6 @@ export class Employee implements IEmployee {
     status!: boolean;
     wageValue!: number;
     birthplace = new Location;
-    province = new  Province;
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
     wageHistories: EmployeeWage[] = [];

@@ -127,12 +127,6 @@
                         name="birthplace" #birthplace ngModel [(ngModel)]="employee.birthplace.id"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Provincia</label>
-                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
-                        [(ngModel)]="employee.province.id" name="province" #province="ngModel" [required]=true>
-                    </p-dropdown>
-                </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
                     <input pInputText class="p-inputtext-sm" type="text" name="wageValue" ngModel #wageValue="ngModel"
                         required minlength="1" [(ngModel)]="employee.wageValue">
@@ -413,10 +407,6 @@
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
                             style="color:hsl(252, 30%, 17%);font-weight:bold">Salário</span>: <span
                             style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.wageValue}}</span></i>
-                </li>
-                <li class="dialog-info-li"><i class="dialog-info-i"><span
-                            style="color:hsl(252, 30%, 17%);font-weight:bold">Provincia</span>: <span
-                            style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.province.name}}</span></i>
                 </li>
             </div>
         </div>
@@ -1057,9 +1047,9 @@
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
-            <label>Provincia</label>
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="provinces"
-                [(ngModel)]="filter.province" name="province" #province="ngModel" [required]=true
+            <label>Birthplace</label>
+            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="locations"
+                [(ngModel)]="filter.birthplace" name="birthplace" #birthplace="ngModel" [required]=true
                 (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>

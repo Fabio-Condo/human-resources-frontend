@@ -15,8 +15,8 @@
     <div style="display:inline;">
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>
     </div>
-    <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Country: </span><span
-            style="font-size: 1rem;">{{ job.position.location.name }}</span></p>
+    <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Location: </span><span
+            style="font-size: 1rem;">{{ job.position.location.name }}, {{ job.position.location.country.name }}</span></p>
     <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{
             job.publicationDate | date: 'd MMM, y' }}</span></p>
     <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;"> At Meta, we’re working hard to build a better

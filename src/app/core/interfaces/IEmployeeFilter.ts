@@ -4,7 +4,7 @@ export interface IEmployeeFilter {
     gender?: string,
     contractType?: string,
     maritalStatus?: string,
-    province?: number,
+    birthplace?: number,
     position?: number,
     department?: number,
 

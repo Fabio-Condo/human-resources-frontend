@@ -1,4 +1,3 @@
-import { Province } from "./Province";
 
 export class ProfessionalExperience{
     id?: number;
