@@ -227,7 +227,7 @@
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
                     <i *ngIf="!showEmployeeTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
                     <i *ngIf="showEmployeeTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Formação acadêmica
+                    Formação acadêmica / Histórico educacional
                 </div>
             </a>
 
@@ -491,45 +491,6 @@
         <br>
     </div>
 
-    <a href="javascript:;" style="text-decoration: none;" (click)="showProjects = !showProjects">
-        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-            <i *ngIf="!showProjects" class="pi pi-angle-right" style="margin: 13px;"></i>
-            <i *ngIf="showProjects" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Projectos
-            <span *ngIf="selectedEmployeeModal.projects.length != 0">
-                ({{selectedEmployeeModal.projects.length}})</span>
-        </div>
-    </a>
-
-    <!--Projects-->
-    <div *ngIf="showProjects" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <p-table [value]="selectedEmployeeModal.projects" [responsive]="true" styleClass="p-datatable-sm" #tabela>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Nome</th>
-                    <th>Status</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
-                <tr>
-                    <td>{{ project.name }}</td>
-                    <td>
-                        <p-tag [value]="project.projectStatus"
-                            [severity]="getProjectStatus(project.projectStatus)"></p-tag>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="10">
-                        Sem projectos adicionados
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-        <br>
-    </div>
-
     <a href="javascript:;" style="text-decoration: none;" (click)="showContactsInfoView = !showContactsInfoView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showContactsInfoView" class="pi pi-angle-right" style="margin: 13px;"></i>
@@ -569,7 +530,7 @@
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showEmployeeTrainingsView" class="pi pi-angle-right" style="margin: 13px;"></i>
             <i *ngIf="showEmployeeTrainingsView" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Formação acadêmica
+            Formação acadêmica / Histórico educacional
             <span *ngIf="selectedEmployeeModal.employeeTrainings.length != 0">
                 ({{selectedEmployeeModal.employeeTrainings.length}})</span>
         </div>
@@ -608,7 +569,7 @@
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showCompanyTrainings" class="pi pi-angle-right" style="margin: 13px;"></i>
             <i *ngIf="showCompanyTrainings" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Formações obtidas na empresa
+            Formações / Treinamentos obtidos na empresa
             <span *ngIf="selectedEmployeeModal.companyTrainings.length != 0">
                 ({{selectedEmployeeModal.companyTrainings.length}})</span>
         </div>
@@ -649,7 +610,7 @@
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showSkillsView" class="pi pi-angle-right" style="margin: 13px;"></i>
             <i *ngIf="showSkillsView" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Habilidades
+            Habilidades e competências
             <span *ngIf="selectedEmployeeModal.skills.length != 0">
                 ({{selectedEmployeeModal.skills.length}})</span>
         </div>
@@ -671,41 +632,6 @@
                 <tr>
                     <td colspan="10">
                         Sem habilidades adicionadas
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-        <br>
-    </div>
-
-    <a href="javascript:;" style="text-decoration: none;" (click)="showWageHistories = !showWageHistories">
-        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
-            <i *ngIf="!showWageHistories" class="pi pi-angle-right" style="margin: 13px;"></i>
-            <i *ngIf="showWageHistories" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Histórico de salário
-            <span *ngIf="selectedEmployeeModal.wageHistories.length != 0">
-                ({{selectedEmployeeModal.wageHistories.length}})</span>
-        </div>
-    </a>
-
-    <div *ngIf="showWageHistories" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-        <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" styleClass="p-datatable-sm" #tabela>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Valor</th>
-                    <th>Data</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-wage let-rowIndex="rowIndex">
-                <tr>
-                    <td>{{ wage.value }}</td>
-                    <td>{{ wage.date | date: 'dd/MM/yyyy'}}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="10">
-                        Sem Avaliações
                     </td>
                 </tr>
             </ng-template>
@@ -781,7 +707,7 @@
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showVocations" class="pi pi-angle-right" style="margin: 13px;"></i>
             <i *ngIf="showVocations" class="pi pi-angle-down" style="margin: 13px;"></i>
-            Férias
+            Licenças e Férias
             <span *ngIf="selectedEmployeeModal.vocations.length != 0">
                 ({{selectedEmployeeModal.vocations.length}})</span>
         </div>
@@ -857,6 +783,80 @@
         </p-table>
         <br>
     </div>
+
+    <a href="javascript:;" style="text-decoration: none;" (click)="showWageHistories = !showWageHistories">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showWageHistories" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showWageHistories" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Histórico de salário
+            <span *ngIf="selectedEmployeeModal.wageHistories.length != 0">
+                ({{selectedEmployeeModal.wageHistories.length}})</span>
+        </div>
+    </a>
+
+    <div *ngIf="showWageHistories" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.wageHistories" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Valor</th>
+                    <th>Data</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-wage let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ wage.value }}</td>
+                    <td>{{ wage.date | date: 'dd/MM/yyyy'}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        Sem Avaliações
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
+    </div>
+
+    <a href="javascript:;" style="text-decoration: none;" (click)="showProjects = !showProjects">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showProjects" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showProjects" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Projectos
+            <span *ngIf="selectedEmployeeModal.projects.length != 0">
+                ({{selectedEmployeeModal.projects.length}})</span>
+        </div>
+    </a>
+
+    <!--Projects-->
+    <div *ngIf="showProjects" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.projects" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ project.name }}</td>
+                    <td>
+                        <p-tag [value]="project.projectStatus"
+                            [severity]="getProjectStatus(project.projectStatus)"></p-tag>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        Sem projectos adicionados
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
+    </div>
 </p-dialog>
 
 <!--Documentos-->
@@ -875,7 +875,7 @@
         <div class="col-12 md-12 p-fluid">
             <label>Data de expiração</label>
             <p-calendar class="p-inputtext-sm" name="issueDate" view="month" dateFormat="d/mm/yy"
-                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                placeholder="dia/mês/ano - 15/04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #issueDate="ngModel" [required]="true"
                 [(ngModel)]="idCard.issueDate"></p-calendar>
         </div>
