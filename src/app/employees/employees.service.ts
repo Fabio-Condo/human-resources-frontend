@@ -27,6 +27,9 @@ export class EmployeesService {
       params = params.set('employeeOrderBy', filter.sort); 
     } 
 
+    if (filter.global) { 
+     params = params.set('global', filter.global); 
+    }
     if (filter.name) { 
      params = params.set('name', filter.name); 
     }

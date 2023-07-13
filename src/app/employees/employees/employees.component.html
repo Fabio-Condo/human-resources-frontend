@@ -8,6 +8,11 @@
             <div class="flex">
                 <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"
+                        (ngModelChange)="filterEmployees()" />
+                </span>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -273,7 +278,7 @@
                 <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
                     <i *ngIf="!showSkills" class="pi pi-angle-right" style="margin: 13px;"></i>
                     <i *ngIf="showSkills" class="pi pi-angle-down" style="margin: 13px;"></i>
-                    Skills
+                    Habilidades e competências
                 </div>
             </a>
 

@@ -1,6 +1,6 @@
 export interface IEmployeeFilter {
+    global?: string,
     name?: string,
-
     gender?: string,
     contractType?: string,
     maritalStatus?: string,
