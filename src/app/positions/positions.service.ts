@@ -27,7 +27,10 @@ export class PositionsService {
     if (filter.sort) { 
       params = params.set('positionOrderBy', filter.sort); 
     } 
-
+    
+    if (filter.global) { 
+      params = params.set('global', filter.global); 
+    }
     if (filter.name) { 
      params = params.set('name', filter.name); 
     }

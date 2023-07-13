@@ -7,6 +7,11 @@
       <div class="flex">
         <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus"
           class="p-button-primmary mr-2"></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Nome, department or loc" [(ngModel)]="filter.global"
+            (ngModelChange)="filterPositions()" />
+        </span>
         <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
           pTooltip="Selection Only" tooltipPosition="bottom"></button>
       </div>
@@ -309,7 +314,8 @@
         </div>
         <div class="field col-12 md:col-6">
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Local</span>:
-              <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.location.name}}, {{selectedPositionModal.location.country.name}}</span></i></li>
+              <span style="color:#08080871;font-weight:bold">{{selectedPositionModal.location.name}},
+                {{selectedPositionModal.location.country.name}}</span></i></li>
           <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#545555;font-weight:bold">Salário
                 Minimo</span>: <span
                 style="color:#08080871;font-weight:bold">{{selectedPositionModal.minimumWage}}</span></i></li>

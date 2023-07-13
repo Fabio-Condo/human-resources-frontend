@@ -1,5 +1,5 @@
 export interface ICompanyTrainingFilter {
-
+    global?: string,
     companyTrainingTypeLevel?: number,
     date?: Date;
 

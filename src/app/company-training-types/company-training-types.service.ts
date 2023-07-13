@@ -14,19 +14,19 @@ export class CompanyTrainingTypesService {
 
   companyTrainingsUrl: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.companyTrainingsUrl = `${environment.apiUrl}/company-training-types`;
   }
 
-  filter(filter: ICompanyTrainingTypeFilter) : Observable<IApiResponse<ICompanyTrainingType>> { 
+  filter(filter: ICompanyTrainingTypeFilter): Observable<IApiResponse<ICompanyTrainingType>> {
 
-    let params = new HttpParams()  
-      .set('page', filter.page)  
+    let params = new HttpParams()
+      .set('page', filter.page)
       .set('sort', filter.sort)
-      .set('size', filter.itemsPerPage);  
-
-    if (filter.name) {  
-      params = params.set('name', filter.name); 
+      .set('size', filter.itemsPerPage);
+      
+    if (filter.name) {
+      params = params.set('name', filter.name);
     }
 
     console.log(params);
@@ -34,25 +34,25 @@ export class CompanyTrainingTypesService {
     return this.http.get<IApiResponse<ICompanyTrainingType>>(`${this.companyTrainingsUrl}`, { params });
   }
 
-  findAll() : Observable<IApiResponse<ICompanyTrainingType>> { 
-    return this.http.get<IApiResponse<ICompanyTrainingType>>(`${this.companyTrainingsUrl}`, { });
+  findAll(): Observable<IApiResponse<ICompanyTrainingType>> {
+    return this.http.get<IApiResponse<ICompanyTrainingType>>(`${this.companyTrainingsUrl}`, {});
   }
 
   add(trainingType: ICompanyTrainingType): Observable<ICompanyTrainingType> {
-    return this.http.post<ICompanyTrainingType>(this.companyTrainingsUrl, trainingType, { });
+    return this.http.post<ICompanyTrainingType>(this.companyTrainingsUrl, trainingType, {});
   }
 
   update(trainingType: ICompanyTrainingType): Observable<ICompanyTrainingType> {
     console.log(trainingType)
-    return this.http.put<ICompanyTrainingType>(`${this.companyTrainingsUrl}/${trainingType.id}`, trainingType, { });
+    return this.http.put<ICompanyTrainingType>(`${this.companyTrainingsUrl}/${trainingType.id}`, trainingType, {});
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.companyTrainingsUrl}/${id}`, { });
+    return this.http.delete<void>(`${this.companyTrainingsUrl}/${id}`, {});
   }
-  
+
   findById(id: number): Observable<ICompanyTrainingType> {
-    return this.http.get<ICompanyTrainingType>(`${this.companyTrainingsUrl}/${id}`, { });
+    return this.http.get<ICompanyTrainingType>(`${this.companyTrainingsUrl}/${id}`, {});
   }
 
 }

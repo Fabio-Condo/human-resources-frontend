@@ -27,6 +27,9 @@ export class CompanyTrainingsService {
       .set('trainingOrderBy', filter.sort)
       .set('size', filter.itemsPerPage); 
 
+      if (filter.global) {
+        params = params.set('global', filter.global);
+      }
       if (filter.companyTrainingTypeLevel) { 
         params = params.set('companyTrainingType', filter.companyTrainingTypeLevel); 
       }

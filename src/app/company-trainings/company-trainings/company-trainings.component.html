@@ -7,6 +7,11 @@
             <div class="flex">
                 <button pButton (click)="onAddNewTraining()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i> 
+                    <input pInputText type="text" placeholder="Level or type" [(ngModel)]="filter.global"
+                        (ngModelChange)="filterTrainings()" />
+                </span>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -180,7 +185,8 @@
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 <a *ngIf="editing" href="javascript:;" (click)="onaaddEmployeeToTraining()">add +</a>
-                <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o projeto</span>
+                <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o
+                    projeto</span>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>

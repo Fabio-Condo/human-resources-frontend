@@ -8,8 +8,6 @@
             routerLink="/v1/employee-performance-evaluations">Desenpenho</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/vocations')"><a
             routerLink="/v1/vocations">Ausências</a></li>
-        <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/departments')"><a
-            routerLink="/v1/departments">Departamentos</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/projects')"><a
             routerLink="/v1/projects">Projectos</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/positions')"><a
@@ -18,6 +16,8 @@
             routerLink="/v1/company-trainings">Formação</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/company-training-types')"><a
             routerLink="/v1/company-training-types">T. Formação</a></li>
+        <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/departments')"><a
+            routerLink="/v1/departments">Departamentos</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/locations')"><a
             routerLink="/v1/locations">Locations</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/payrolls')"><a
