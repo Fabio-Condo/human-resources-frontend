@@ -10,6 +10,11 @@
                     class="p-button-primmary mr-2"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedVocations || !selectedVocations.length"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Employee name" [(ngModel)]="filter.global"
+                        (ngModelChange)="getVocations()" />
+                </span>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>

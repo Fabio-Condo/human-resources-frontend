@@ -24,6 +24,9 @@ export class VocationsService {
       .set('vocationOrderBy', filter.sort)
       .set('size', filter.itemsPerPage); 
 
+      if (filter.global) { 
+        params = params.set('global', filter.global); 
+      }
       if (filter.vocationStatus) { 
         params = params.set('vocationStatus', filter.vocationStatus); 
       }

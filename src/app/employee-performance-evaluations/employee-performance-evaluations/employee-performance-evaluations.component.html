@@ -10,6 +10,11 @@
                     (click)="onAddNewEmployeePerformanceEvaluation()"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" placeholder="Employee, position or d" [(ngModel)]="filter.global"
+                        (ngModelChange)="filterEmployeePerformanceEvaluations()" />
+                </span>
                 <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
                     pTooltip="Selection Only" tooltipPosition="bottom"></button>
             </div>
@@ -20,6 +25,7 @@
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
                 <th style="background-color: #fff;">Funcionário</th>
+                <th style="background-color: #fff;">Cargo</th>
                 <th style="background-color: #fff;">Departamento</th>
                 <th style="background-color: #fff;">Data</th>
                 <th style="background-color: #fff;">Categoria</th>
@@ -36,6 +42,7 @@
                         {{ epe.employee.name }}
                     </a>
                 </td>
+                <td>{{ epe.employee.position.name }}</td>
                 <td>{{ epe.employee.position.department.name }}</td>
                 <td>{{ epe.date | date: 'dd/MM/yyyy'}}</td>
                 <td>
@@ -142,20 +149,20 @@
                 (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid">
-            <label>Nome</label>
+        <div class="col-12 p-fluid" style="margin-top: 2%;" >
+            <label>Departamento (Deverá ser select)</label>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
+                <input [(ngModel)]="filter.global" name="department" pInputText type="text" placeholder="Search"
                     (ngModelChange)="filterEmployeePerformanceEvaluations()" />
             </span>
         </div>
 
-        <div class="col-12 p-fluid">
-            <label>Nome</label>
+        <div class="col-12 p-fluid"style="margin-top: 2%;" >
+            <label>Data</label>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
-                <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
+                <input [(ngModel)]="filter.global" name="date" pInputText type="text" placeholder="Search"
                     (ngModelChange)="filterEmployeePerformanceEvaluations()" />
             </span>
         </div>

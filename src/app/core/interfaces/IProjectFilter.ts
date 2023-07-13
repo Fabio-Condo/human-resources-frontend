@@ -1,4 +1,5 @@
 export interface IProjectFilter {
+    global?: string,
     name?: string,
     department?: number,
     projectStatus?: string,

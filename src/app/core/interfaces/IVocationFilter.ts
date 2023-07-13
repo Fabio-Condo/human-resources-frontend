@@ -1,4 +1,5 @@
 export interface IVocationFilter {
+    global?: string,
     employee?: number,
     vocationStatus?: string;
     vocationType?: string;

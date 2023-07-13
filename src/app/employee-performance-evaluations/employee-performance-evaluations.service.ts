@@ -27,8 +27,8 @@ export class EmployeePerformanceEvaluationsService {
       params = params.set('employeePerformanceEvaluationOrderBy', filter.sort); 
     } 
 
-    if (filter.name) { 
-     params = params.set('name', filter.name); 
+    if (filter.global) { 
+      params = params.set('global', filter.global); 
     }
     if (filter.category) { 
       params = params.set('category', filter.category); 
@@ -47,10 +47,6 @@ export class EmployeePerformanceEvaluationsService {
       .set('page', filter.page)  
       .set('sort', filter.sort)
       .set('size', filter.itemsPerPage);  
-
-    if (filter.name) {  
-      params = params.set('name', filter.name); 
-    }
 
     console.log(params);
 

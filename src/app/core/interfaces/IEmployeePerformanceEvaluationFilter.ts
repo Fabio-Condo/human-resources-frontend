@@ -1,6 +1,5 @@
 export interface IEmployeePerformanceEvaluationFilter {
-    name?: string,
-
+    global?: string,
     category?: string,
     employee?: number,
 

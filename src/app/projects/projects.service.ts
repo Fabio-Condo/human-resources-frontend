@@ -28,6 +28,9 @@ export class ProjectsService {
       params = params.set('projectOrderBy', filter.sort); 
     } 
 
+    if (filter.global) {  
+      params = params.set('global', filter.global); 
+    }
     if (filter.name) { 
      params = params.set('name', filter.name); 
     }
