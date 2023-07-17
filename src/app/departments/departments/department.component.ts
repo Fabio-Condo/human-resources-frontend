@@ -23,10 +23,6 @@ interface Column {
 })
 export class DepartmentComponent implements OnInit {
 
-  cols!: Column[];
-
-  _selectedColumns!: Column[];
-
   showLoading: boolean = false;
 
   totalRecords: number = 0
@@ -70,6 +66,13 @@ export class DepartmentComponent implements OnInit {
     { label: 'Id (decrescente)', value: 'id,desc' },
   ];
 
+  cols = [
+    { field: 'name', header: 'Name' },
+    { field: 'description', header: 'Descrição' },
+  ];
+
+  _selectedColumns = this.cols;
+
   constructor(
     private departmentService: DepartmentService,
     private messageService: MessageService,
@@ -80,13 +83,11 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
+    this._selectedColumns = [];
 
-    this.cols = [
+    /*this._selectedColumns = [
       { field: 'name', header: 'Name' },
-      { field: 'description', header: 'Descrição' },
-    ];
-
-    this._selectedColumns = this.cols;
+    ]*/
   }
 
   @Input() get selectedColumns(): any[] {
