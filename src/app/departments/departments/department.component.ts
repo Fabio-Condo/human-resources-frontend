@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { IDepartmentFilter } from 'src/app/core/interfaces/IDepartmentFilter';
 import { IApiResponse } from 'src/app/core/interfaces/IApiResponse';
@@ -11,12 +11,21 @@ import { Title } from '@angular/platform-browser';
 import { EmployeesService } from 'src/app/employees/employees.service';
 import { Project } from 'src/app/core/model/Project';
 
+interface Column {
+  field: string;
+  header: string;
+}
+
 @Component({
   selector: 'app-department',
   templateUrl: './department.component.html',
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
+
+  cols!: Column[];
+
+  _selectedColumns!: Column[];
 
   showLoading: boolean = false;
 
@@ -29,7 +38,7 @@ export class DepartmentComponent implements OnInit {
   selectedDepartmentModal: Department = new Department();
   displayModal = false;
 
-  employeesForProjectResponsibleSelect: any[] = [] ;
+  employeesForProjectResponsibleSelect: any[] = [];
 
   project?: Project;
   projects: Array<Project> = []
@@ -71,6 +80,22 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
+
+    this.cols = [
+      { field: 'name', header: 'Name' },
+      { field: 'description', header: 'Descrição' },
+    ];
+
+    this._selectedColumns = this.cols;
+  }
+
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this.cols.filter((col) => val.includes(col));
   }
 
   filter: IDepartmentFilter = {
@@ -100,7 +125,7 @@ export class DepartmentComponent implements OnInit {
         this.department = departmentAdded;
         this.showLoading = false;
         this.getDepartments();
-        this.messageService.add({ severity: 'success', detail: 'Department added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Department added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -138,7 +163,7 @@ export class DepartmentComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteDepartment(department: IDepartment) {
@@ -162,7 +187,7 @@ export class DepartmentComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteDepartment(department);
+        this.deleteDepartment(department);
       }
     });
   }
@@ -184,7 +209,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.getDepartments(page);
   }
 

@@ -18,6 +18,7 @@ import { NgForm } from '@angular/forms';
 export class VocationsComponent implements OnInit {
 
   selectedVocations: IVocation[] = [];
+  selectedStatus: string = "";
 
   showLoading: boolean = false;
 
@@ -44,9 +45,9 @@ export class VocationsComponent implements OnInit {
   ];
 
   vocationStatuses = [
-    { label: 'Aprovado', value: 'APPROVED' },
-    { label: 'Pendente', value: 'PENDING' },
-    { label: 'Rejeitado', value: 'REJECTED' },
+    { label: 'APPROVED', value: 'APPROVED' },
+    { label: 'PENDING', value: 'PENDING' },
+    { label: 'REJECTED', value: 'REJECTED' },
   ];
 
   sizePage = [
@@ -197,6 +198,15 @@ export class VocationsComponent implements OnInit {
     });
   }
 
+  severalStatusUpdateConfirm(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja atualizar os items selecionados?',
+      accept: () => {
+          this.severalStatusUpdate();
+      }
+    });
+  }
+
   severalDelete(){
     this.vocationsService.severalDelete(this.selectedVocations).subscribe(
       () => {
@@ -208,6 +218,26 @@ export class VocationsComponent implements OnInit {
         }
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
+        this.selectedVocations = [];
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  severalStatusUpdate(){
+    this.vocationsService.severalStatusUpdate(this.selectedVocations, this.selectedStatus).subscribe(
+      () => {
+        this.showLoading = true;
+        if (this.grid.first === 0) {
+          this.getVocations();
+        } else {
+          this.grid.reset();
+        }
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Selected items updated succefully!' })
         this.selectedVocations = [];
       },
       (errorResponse: HttpErrorResponse) => {

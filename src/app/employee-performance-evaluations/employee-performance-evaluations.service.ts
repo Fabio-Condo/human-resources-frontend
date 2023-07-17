@@ -68,4 +68,8 @@ export class EmployeePerformanceEvaluationsService {
   severalDelete(employeePerformanceEvaluationList: IEmployeePerformanceEvaluation[]): Observable<IEmployeePerformanceEvaluation[]> {
     return this.http.post<IEmployeePerformanceEvaluation[]>(`${this.employeePerformanceEvaluation}/deleteAll`, employeePerformanceEvaluationList, { });
   }
+
+  severalStatusUpdate(employeePerformanceEvaluationList: IEmployeePerformanceEvaluation[], status: string): Observable<IEmployeePerformanceEvaluation[]> {
+    return this.http.put<IEmployeePerformanceEvaluation[]>(`${this.employeePerformanceEvaluation}/updateStatusAll/${status}`, employeePerformanceEvaluationList, { });
+  }
 }

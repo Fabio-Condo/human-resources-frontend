@@ -86,7 +86,27 @@ export class UserProfileComponent implements OnInit {
     this.user = this.authenticationService.getUserFromLocalCache();
   }
 
-  onUpdateCurrentUser(user: User): void { // Not used
+  onUpdate(userForm: NgForm) {
+    this.refreshing
+    this.userService.update(this.user).subscribe(
+      (userAdded) => {
+        //this.user = userAdded;
+        this.authenticationService.addUserToLocalCache(userAdded);
+        this.fileName = null;
+        this.profileImage = null;
+        this.refreshing = false;
+        this.messageService.add({ severity: 'success', detail: 'User updated successfully' });      
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(errorResponse.error.message);
+        this.refreshing = false;
+        this.profileImage = null;
+      }
+    );
+  }
+
+    /*
+  onUpdateCurrentUser(user: User): void { 
     this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
     const formData = this.userService.createUserFormDate(this.currentUsername, user, this.profileImage);
@@ -107,25 +127,7 @@ export class UserProfileComponent implements OnInit {
       )
     );
   }
-
-  onUpdate(userForm: NgForm) {
-    this.refreshing
-    this.userService.update(this.user).subscribe(
-      (userAdded) => {
-        this.user = userAdded;
-        this.authenticationService.addUserToLocalCache(userAdded);
-        this.fileName = null;
-        this.profileImage = null;
-        this.refreshing = false;
-        this.messageService.add({ severity: 'success', detail: 'User updated successfully' });      
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendNotification(errorResponse.error.message);
-        this.refreshing = false;
-        this.profileImage = null;
-      }
-    );
-  }
+  */
 
   onProfileImageChange(fileName: any, profileImage: any): void {    
     this.fileName =  fileName.target.files[0].name;

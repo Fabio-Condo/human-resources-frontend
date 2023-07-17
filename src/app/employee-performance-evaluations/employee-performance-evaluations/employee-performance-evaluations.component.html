@@ -8,8 +8,11 @@
             <div class="flex">
                 <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-primmary mr-2"
                     (click)="onAddNewEmployeePerformanceEvaluation()"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
+                <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
+                <p-dropdown [options]="categories" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"
+                    placeholder="Status" [style]="{width: '10vw'}" ngModel [(ngModel)]="selectedStatus"
+                    (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Employee, position or d" [(ngModel)]="filter.global"
@@ -149,7 +152,7 @@
                 (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
-        <div class="col-12 p-fluid" style="margin-top: 2%;" >
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Departamento (Deverá ser select)</label>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
@@ -158,7 +161,7 @@
             </span>
         </div>
 
-        <div class="col-12 p-fluid"style="margin-top: 2%;" >
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>

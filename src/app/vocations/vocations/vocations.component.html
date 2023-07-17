@@ -7,9 +7,11 @@
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus"
-                    class="p-button-primmary mr-2"></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="severalDeleteConfirm()"
+                    class="p-button-primmary mr-2 "></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedVocations || !selectedVocations.length"></button>
+                <p-dropdown [options]="vocationStatuses" [disabled]="!selectedVocations || !selectedVocations.length" placeholder="Status" [style]="{width: '10vw'}"
+                    ngModel [(ngModel)]="selectedStatus" (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Employee name" [(ngModel)]="filter.global"

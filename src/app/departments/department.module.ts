@@ -12,7 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
-import { DepartmentRoutingModule } from './department-routing.module';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 
@@ -39,6 +39,7 @@ import { AppRoutingModule } from '../app-routing.module';
     SelectButtonModule,
     DialogModule,
     DividerModule,
+    MultiSelectModule,
 
     RouterModule,
     AppRoutingModule

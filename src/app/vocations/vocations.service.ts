@@ -63,4 +63,8 @@ export class VocationsService {
   severalDelete(vocationList: IVocation[]): Observable<IVocation[]> {
     return this.http.post<IVocation[]>(`${this.vocationsUrl}/deleteAll`, vocationList, { });
   }
+
+  severalStatusUpdate(vocationList: IVocation[], status: string): Observable<IVocation[]> {
+    return this.http.put<IVocation[]>(`${this.vocationsUrl}/updateStatusAll/${status}`, vocationList, { });
+  }
 }

@@ -17,6 +17,7 @@ import { EmployeePerformanceEvaluationsService } from '../employee-performance-e
 export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   selectedEmployeePerformanceEvaluations: IEmployeePerformanceEvaluation[] = [];
+  selectedStatus: string = "";
 
   showLoading: boolean = false;
 
@@ -34,8 +35,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   displayModal = false;
 
   categories = [
-    { label: 'Anual', value: 'YEARLY' },
-    { label: 'Mensal', value: 'MONTHLY' },
+    { label: 'YEARLY', value: 'YEARLY' },
+    { label: 'MONTHLY', value: 'MONTHLY' },
   ];
 
   evaluationLevels = [
@@ -183,6 +184,15 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     });
   }
 
+  severalStatusUpdateConfirm(): void {
+    this.confirmationService.confirm({
+      message: 'Tem certeza que deseja atualizar os items selecionados?',
+      accept: () => {
+          this.severalStatusUpdate();
+      }
+    });
+  }
+
   severalDelete(){
     this.employeePerformanceEvaluationsService.severalDelete(this.selectedEmployeePerformanceEvaluations).subscribe(
       () => {
@@ -194,6 +204,26 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         }
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Selected items deleted succefully!' })
+        this.selectedEmployeePerformanceEvaluations = [];
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  severalStatusUpdate(){
+    this.employeePerformanceEvaluationsService.severalStatusUpdate(this.selectedEmployeePerformanceEvaluations, this.selectedStatus).subscribe(
+      () => {
+        this.showLoading = true;
+        if (this.grid.first === 0) {
+          this.filterEmployeePerformanceEvaluations();
+        } else {
+          this.grid.reset();
+        }
+        this.showLoading = false;
+        this.messageService.add({ severity: 'success', detail: 'Selected items updated succefully!' })
         this.selectedEmployeePerformanceEvaluations = [];
       },
       (errorResponse: HttpErrorResponse) => {

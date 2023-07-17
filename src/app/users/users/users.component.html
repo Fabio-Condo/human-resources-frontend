@@ -1,228 +1,290 @@
-<div class="container" >
+<div class="container">
 
-    <h3>Usuários</h3>
+  <h3>Usuários</h3>
 
-    <p-table [value]="users" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
-        <ng-template pTemplate="caption">
-            <div class="flex">
-                <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus" class="p-button-primmary mr-2" ></button>
-                <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus" ></button>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="background-color: #fff;">Photo</th>
-                <th style="background-color: #fff;">
-                  <span>First name</span>
-                  
-                  <span *ngIf="filter.sort ==='firstName,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='firstName,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th style="background-color: #fff;">
-                  Last name
-                  <span *ngIf="filter.sort ==='lastName,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='lastName,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th style="background-color: #fff;">
-                  Email
-                  <span *ngIf="filter.sort ==='email,desc'" class="pi pi-sort-down" style="margin-left: 2px; color: #1c80cf;" ></span>
-                  <span *ngIf="filter.sort ==='email,asc'" class="pi pi-sort-up" style="margin-left: 2px; color: #1c80cf;" ></span>
-                </th>
-                <th style="background-color: #fff;">Role</th>
-                <th style="background-color: #fff;">Status</th>
-                <th style="background-color: #fff;">Not locked</th>
-                <th style="background-color: #fff;">Actions</th>
-            </tr>   
-        </ng-template>
-        <ng-template pTemplate="body" let-appUser>
-            <tr [pSelectableRow]="appUser">
-                <td>
-                  <img height="20" width="20" src="{{appUser?.profileImageUrl}}" class="rounded-circle img-fluid img-thumbnail" alt="" style="border-radius: 50%;"/>
-                </td>
-                <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.firstName }}</td>
-                <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.lastName }}</td>
-                <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}</td>  
-                <td pTooltip="Clica para visualizar" tooltipPosition="top" style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.role }}</td> 
-    
-                <td>
-                  <span class="p-column-title">Status</span>
-                  <a href="javascript:;" [pTooltip]="appUser.active ? 'Inactive' : 'Active'" tooltipPosition="top" (click)="changeStatusActive(appUser)" style="max-width: 8ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    <span *ngIf="appUser.active" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; active &nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <span *ngIf="!appUser.active" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; inactive &nbsp;</span>
-                  </a>
-                </td>
-    
-                <td>
-                  <span class="p-column-title">Not locked</span>
-                  <a href="javascript:;" [pTooltip]="appUser.notLocked ? 'Inactive' : 'Active'" tooltipPosition="top" (click)="changeStatusNotLocked(appUser)" style="max-width: 25ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    <span *ngIf="appUser.notLocked" style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; true &nbsp;&nbsp;</span>
-                    <span *ngIf="!appUser.notLocked" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; false &nbsp;</span>
-                  </a>
-                </td>
-                <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectUser(appUser)" tooltipPosition="top" type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton [disabled]="!isAdmin" pButton pTooltip="Edit" (click)="onEditUser(appUser)" tooltipPosition="top" type="button" icon="pi pi-pencil" style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton pButton [disabled]="!isSuperAdmin" pTooltip="Delete" (click)="confirmarExclusao(appUser)" tooltipPosition="top" type="button" icon="pi pi-trash" style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-            <td colspan="10">
-                <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span> 
-                <span *ngIf="!showLoading">No title found </span> 
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-                <a href="javascript:;">
-                <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterAll(0)" pTooltip="Refresh" class="pi pi-refresh"></i>
-                </a>                  
-            </td>
-            </tr>
-        </ng-template>
-    </p-table>
+  <p-table [value]="users" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+    [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus"
+          class="p-button-primmary mr-2"></button>
+        <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus"></button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="firstName, lastName or email" [(ngModel)]="filter.global"
+            (ngModelChange)="filterAll()" />
+        </span>
+        <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+          pTooltip="Selection Only" tooltipPosition="bottom"></button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="background-color: #fff;">Photo</th>
+        <th style="background-color: #fff;">
+          <span>First name</span>
+
+          <span *ngIf="filter.sort ==='firstName,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='firstName,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th style="background-color: #fff;">
+          Last name
+          <span *ngIf="filter.sort ==='lastName,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='lastName,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th style="background-color: #fff;">
+          Email
+          <span *ngIf="filter.sort ==='email,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='email,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
+        <th style="background-color: #fff;">Role</th>
+        <th style="background-color: #fff;">Status</th>
+        <th style="background-color: #fff;">Not locked</th>
+        <th style="background-color: #fff;">Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-appUser>
+      <tr [pSelectableRow]="appUser">
+        <td>
+          <img height="20" width="20" src="{{appUser?.profileImageUrl}}" class="rounded-circle img-fluid img-thumbnail"
+            alt="" style="border-radius: 50%;" />
+        </td>
+        <td pTooltip="Clica para visualizar" tooltipPosition="top"
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.firstName
+          }}</td>
+        <td pTooltip="Clica para visualizar" tooltipPosition="top"
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.lastName
+          }}</td>
+        <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top"
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}
+        </td>
+        <td pTooltip="Clica para visualizar" tooltipPosition="top"
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.role }}
+        </td>
+
+        <td>
+          <span class="p-column-title">Status</span>
+          <a href="javascript:;" [pTooltip]="appUser.active ? 'Inactive' : 'Active'" tooltipPosition="top"
+            (click)="changeStatusActive(appUser)"
+            style="max-width: 8ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <span *ngIf="appUser.active"
+              style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; active
+              &nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span *ngIf="!appUser.active" style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp;
+              inactive &nbsp;</span>
+          </a>
+        </td>
+
+        <td>
+          <span class="p-column-title">Not locked</span>
+          <a href="javascript:;" [pTooltip]="appUser.notLocked ? 'Inactive' : 'Active'" tooltipPosition="top"
+            (click)="changeStatusNotLocked(appUser)"
+            style="max-width: 25ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <span *ngIf="appUser.notLocked"
+              style="background-color: whitesmoke; color:#1c80cf; border-radius: 4%; height: 50px;">&nbsp; true
+              &nbsp;&nbsp;</span>
+            <span *ngIf="!appUser.notLocked"
+              style="background-color: whitesmoke; color:#982F27; border-radius: 4%;">&nbsp; false &nbsp;</span>
+          </a>
+        </td>
+        <td style="width: 180px;">
+          <button pButton pTooltip="View" (click)="onSelectUser(appUser)" tooltipPosition="top" type="button"
+            icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
+          <button pButton [disabled]="!isAdmin" pButton pTooltip="Edit" (click)="onEditUser(appUser)"
+            tooltipPosition="top" type="button" icon="pi pi-pencil"
+            style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
+          <button pButton pButton [disabled]="!isSuperAdmin" pTooltip="Delete" (click)="confirmarExclusao(appUser)"
+            tooltipPosition="top" type="button" icon="pi pi-trash"
+            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="10">
+          <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+          <span *ngIf="!showLoading">No title found </span>
+          <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+          <a href="javascript:;">
+            <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterAll(0)" pTooltip="Refresh"
+              class="pi pi-refresh"></i>
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
 </div>
 
 
-<p-dialog header="{{selectedUserModal.firstName}}" [(visible)]="displayModal" [modal]="true" [draggable]="false" [resizable]="false">
- 
-  <p-card header="{{selectedUserModal.firstName}} {{selectedUserModal.lastName}}" subheader="Username: {{selectedUserModal.username}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
+<p-dialog header="{{selectedUserModal.firstName}}" [(visible)]="displayModal" [modal]="true" [draggable]="false"
+  [resizable]="false">
+
+  <p-card header="{{selectedUserModal.firstName}} {{selectedUserModal.lastName}}"
+    subheader="Username: {{selectedUserModal.username}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
     <ng-template pTemplate="header">
-        <img alt="Card" height="220" src="{{selectedUserModal.profileImageUrl}}">
+      <img alt="Card" height="220" src="{{selectedUserModal.profileImageUrl}}">
     </ng-template>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">User ID</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.userId}}</span></i></li>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Email</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.email}}</span></i></li>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y, h:mm:ss a'}}</span></i></li>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Last Login Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate | date:'dd/MM/y, h:mm:ss a'}}</span></i></li>
-    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Status</span>: <span [style.color]="selectedUserModal.active === true ? '#1c80cf' : '#982F27'">{{ selectedUserModal.active ? 'active' : 'inactive' }}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">User ID</span>:
+        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.userId}}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Email</span>: <span
+          style="color:#3f393371;font-weight:bold">{{selectedUserModal.email}}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
+          style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
+        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y, h:mm:ss
+          a'}}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Last Login
+          Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate | date:'dd/MM/y,
+          h:mm:ss a'}}</span></i></li>
+    <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Status</span>:
+        <span [style.color]="selectedUserModal.active === true ? '#1c80cf' : '#982F27'">{{ selectedUserModal.active ?
+          'active' : 'inactive' }}</span></i></li>
   </p-card>
-</p-dialog>    
+</p-dialog>
 
-  <!--Add user-->
-<p-dialog header="User {{ editing ? '(editing)' : '(new)' }}" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '40vw'}" >
-    <form #newUserForm="ngForm" (ngSubmit)="save(newUserForm)"> 
-      
-      <div class="formgrid grid">
-        <div class="col-12 p-fluid">
-          <label>First name</label>
-          <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName" [(ngModel)]="user.firstName" required/>
-        </div>
-        <div class="col-12 p-fluid" style="margin-top: 1%;">
-          <label>Last name</label>
-          <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName" [(ngModel)]="user.lastName" required/>
-        </div>
-        <div class="col-12 p-fluid" style="margin-top: 1%;">
-          <label>Username</label>
-          <input pInputText type="text" class="p-inputtext-sm" ngModel name="username" [(ngModel)]="user.username" required/>
-        </div>
-        <div class="col-12 p-fluid" style="margin-top: 1%;">
-          <label>Email</label>
-          <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.email" required/>
-        </div>
+<!--Add user-->
+<p-dialog header="User {{ editing ? '(editing)' : '(new)' }}" [(visible)]="displayModalSave" [modal]="true"
+  [style]="{width: '40vw'}">
+  <form #newUserForm="ngForm" (ngSubmit)="save(newUserForm)">
 
-        <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
-          <label>Role</label>
-          <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Selecione"
-            #role [required]="true" name="role" ngModel="ROLE_USER" [(ngModel)]="user.role"></p-dropdown>
-        </div>
-
-        <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
-          <div class="">
-            <span class="">Photo </span>
-          </div>
-          <div class="" style="background-color: #eff3f5;">
-
-            <input style="background-color: #eff3f5; border:none;" type="file" accept="image/*" name="profileImage"
-            (change)="onProfileImageChange($event, $event)">
-              
-          </div>
-        </div>
-
-        <div class="col-12 p-fluid" style="margin-top: 8%;">
-          <button pButton type="submit" [disabled]="newUserForm.invalid" class="p-button-sm" style="height: 30px;">
-            <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-            <span *ngIf="showLoading">Loading...</span>
-            <!--<span *ngIf="!showLoading">{{ 'Save' }}</span>--> 
-          <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>                        
-          </button>
-        </div> 
-
+    <div class="formgrid grid">
+      <div class="col-12 p-fluid">
+        <label>First name</label>
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName" [(ngModel)]="user.firstName"
+          required />
       </div>
-    </form>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Last name</label>
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName" [(ngModel)]="user.lastName"
+          required />
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Username</label>
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="username" [(ngModel)]="user.username"
+          required />
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 1%;">
+        <label>Email</label>
+        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.email" required />
+      </div>
+
+      <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
+        <label>Role</label>
+        <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Selecione" #role [required]="true" name="role"
+          ngModel="ROLE_USER" [(ngModel)]="user.role"></p-dropdown>
+      </div>
+
+      <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
+        <div class="">
+          <span class="">Photo </span>
+        </div>
+        <div class="" style="background-color: #eff3f5;">
+
+          <input style="background-color: #eff3f5; border:none;" type="file" accept="image/*" name="profileImage"
+            (change)="onProfileImageChange($event, $event)">
+
+        </div>
+      </div>
+
+      <div class="col-12 p-fluid" style="margin-top: 8%;">
+        <button pButton type="submit" [disabled]="newUserForm.invalid" class="p-button-sm" style="height: 30px;">
+          <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
+          <span *ngIf="showLoading">Loading...</span>
+          <!--<span *ngIf="!showLoading">{{ 'Save' }}</span>-->
+          <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
+        </button>
+      </div>
+
+    </div>
+  </form>
 </p-dialog>
 
 
 <!--Reset password user-->
-<p-dialog header="Reset user password" [(visible)]="displayModalSettingsUser" [modal]="true" >
+<p-dialog header="Reset user password" [(visible)]="displayModalSettingsUser" [modal]="true">
 
   <form #resetPasswordForm="ngForm" (ngSubmit)="onResetPassword(resetPasswordForm)">
     <div class="col-12 p-fluid">
       <label></label>
       <input pInputText type="email" name="reset-password-email" required ngModel class="form-control"
-              placeholder="examplo@email.com">
-              
+        placeholder="examplo@email.com">
+
       <small class="form-text text-muted">Set the user email.</small>
     </div>
 
     <div class="col-12 p-fluid">
-      <button pButton type="submit" [disabled]="resetPasswordForm.invalid" class="btn btn-primary" style="height: 30px;">
+      <button pButton type="submit" [disabled]="resetPasswordForm.invalid" class="btn btn-primary"
+        style="height: 30px;">
         <i *ngIf="showLoading" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
         <span *ngIf="showLoading">Loading...</span>
         <span *ngIf="!showLoading">Reset Password</span>
       </button>
     </div>
   </form>
-</p-dialog>  
+</p-dialog>
 
 
 <!--Filter-->
-<p-dialog header="Filter" [(visible)]="displayModalFilter" [modal]="true" [style]="{width: '40vw'}" [draggable]="false" [resizable]="false">
+<p-dialog header="Filter" [(visible)]="displayModalFilter" [modal]="true" [style]="{width: '40vw'}" [draggable]="false"
+  [resizable]="false">
   <form autocomplete="off">
     <div class="formgrid grid">
       <!--Filter form-->
       <div class="col-12 p-fluid">
         <label>Sort</label>
-        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true"
-          ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="filterAll()"></p-dropdown>
-      </div>  
+        <p-dropdown [options]="orderPage" placeholder="Sort by..." [filter]="true" ngModel name="sort"
+          [(ngModel)]="filter.sort" (onChange)="filterAll()"></p-dropdown>
+      </div>
 
       <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
         <label>Role</label>
-        <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Select..."
-          #role name="role" [(ngModel)]="filter.role" (onChange)="filterAll()"></p-dropdown>
+        <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Select..." #role name="role"
+          [(ngModel)]="filter.role" (onChange)="filterAll()"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Status</label>
-        <p-dropdown [options]="userStatus" placeholder="Sort by..."
-          ngModel name="isActive" [(ngModel)]="filter.isActive" (onChange)="filterAll()"></p-dropdown>
-      </div> 
+        <p-dropdown [options]="userStatus" placeholder="Sort by..." ngModel name="isActive"
+          [(ngModel)]="filter.isActive" (onChange)="filterAll()"></p-dropdown>
+      </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Not Locked</label>
-        <p-dropdown [options]="userNotLocked" placeholder="Sort by..." 
-          ngModel name="isNotLocked" [(ngModel)]="filter.isNotLocked" (onChange)="filterAll()"></p-dropdown>
+        <p-dropdown [options]="userNotLocked" placeholder="Sort by..." ngModel name="isNotLocked"
+          [(ngModel)]="filter.isNotLocked" (onChange)="filterAll()"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>First Name</label>
-        <input [(ngModel)]="filter.firstName" name="firstName" type="text" pInputText placeholder="First name" (ngModelChange)="filterAll()">          
+        <input [(ngModel)]="filter.firstName" name="firstName" type="text" pInputText placeholder="First name"
+          (ngModelChange)="filterAll()">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Last Name</label>
-        <input [(ngModel)]="filter.lastName" name="lastName" type="text" pInputText placeholder="Last name" (ngModelChange)="filterAll()">          
+        <input [(ngModel)]="filter.lastName" name="lastName" type="text" pInputText placeholder="Last name"
+          (ngModelChange)="filterAll()">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Username</label>
-        <input [(ngModel)]="filter.username" name="username" type="text" pInputText placeholder="Username" (ngModelChange)="filterAll()">          
+        <input [(ngModel)]="filter.username" name="username" type="text" pInputText placeholder="Username"
+          (ngModelChange)="filterAll()">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>
-        <input [(ngModel)]="filter.email" name="email" type="text" pInputText placeholder="Email" (ngModelChange)="filterAll()">          
+        <input [(ngModel)]="filter.email" name="email" type="text" pInputText placeholder="Email"
+          (ngModelChange)="filterAll()">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 2%; margin-right: 1%;">
-        <button (click)="resetFields()" style="margin-top: 10%;" pButton type="button" label="Reset fildies" class="p-button-info p-button-sm" style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
+        <button (click)="resetFields()" style="margin-top: 10%;" pButton type="button" label="Reset fildies"
+          class="p-button-info p-button-sm"
+          style="height: 30px; background-color: #1c80cf; border-style: none;"></button>
       </div>
-      
-    </div>   
-       
+
+    </div>
+
   </form>
 </p-dialog>

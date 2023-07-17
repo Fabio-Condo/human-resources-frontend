@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs'; 
+import { Observable } from 'rxjs';
 import { User } from 'src/app/core/model/User';
 import { CustomHttpRespone } from '../core/interfaces/CustomHttpRespone';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IUserFilter } from '../core/interfaces/IUserFilter';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
   private host = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  search(filter: IUserFilter): Observable<IApiResponse<User>> {  
+  search(filter: IUserFilter): Observable<IApiResponse<User>> {
 
-    let params = new HttpParams()  
-      .set('page', filter.page)  
+    let params = new HttpParams()
+      .set('page', filter.page)
       .set('size', filter.itemsPerPage)
-      .set('sort', filter.sort)
-      ;  
+      .set('sort', filter.sort);
 
-    if (filter.name) {  
-      params = params.set('name', filter.name); 
+    if (filter.name) {
+      params = params.set('name', filter.name);
     }
 
     console.log(params);
@@ -31,35 +30,38 @@ export class UserService {
     return this.http.get<IApiResponse<User>>(`${this.host}/user/list/pageable`, { params });
   }
 
-  filter(filter: IUserFilter): Observable<IApiResponse<User>> {  
+  filter(filter: IUserFilter): Observable<IApiResponse<User>> {
 
-    let params = new HttpParams()  
-      .set('page', filter.page)  
-      .set('size', filter.itemsPerPage); 
-      
-    if (filter.sort) {  
-       params = params.set('userOrderBy', filter.sort); 
-    } 
-    if (filter.firstName) {   
-      params = params.set('firstName', filter.firstName); 
+    let params = new HttpParams()
+      .set('page', filter.page)
+      .set('size', filter.itemsPerPage);
+
+    if (filter.global) {
+      params = params.set('global', filter.global);
     }
-    if (filter.lastName) {  
-      params = params.set('lastName', filter.lastName); 
+    if (filter.sort) {
+      params = params.set('userOrderBy', filter.sort);
     }
-    if (filter.username) {  
-      params = params.set('username', filter.username); 
+    if (filter.firstName) {
+      params = params.set('firstName', filter.firstName);
     }
-    if (filter.email) {  
-      params = params.set('email', filter.email); 
+    if (filter.lastName) {
+      params = params.set('lastName', filter.lastName);
     }
-    if (filter.role) {  
-      params = params.set('role', filter.role); 
+    if (filter.username) {
+      params = params.set('username', filter.username);
     }
-    if (filter.isActive) {  
-      params = params.set('isActiveStr', filter.isActive); 
+    if (filter.email) {
+      params = params.set('email', filter.email);
     }
-    if (filter.isNotLocked) {  
-      params = params.set('isNotLockedStr', filter.isNotLocked); 
+    if (filter.role) {
+      params = params.set('role', filter.role);
+    }
+    if (filter.isActive) {
+      params = params.set('isActiveStr', filter.isActive);
+    }
+    if (filter.isNotLocked) {
+      params = params.set('isNotLockedStr', filter.isNotLocked);
     }
 
     console.log(params);
@@ -73,7 +75,7 @@ export class UserService {
   }
 
   public addUser(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/add`, formData);  
+    return this.http.post<User>(`${this.host}/user/add`, formData);
   }
 
   public updateUser(formData: FormData): Observable<User> {
@@ -84,7 +86,7 @@ export class UserService {
     return this.http.post<User>(`${this.host}/user/update/profile`, formData);
   }
 
-  public resetPassword(email: string): Observable<CustomHttpRespone> { 
+  public resetPassword(email: string): Observable<CustomHttpRespone> {
     return this.http.get<CustomHttpRespone>(`${this.host}/user/resetpassword/${email}`);
   }
 
@@ -92,9 +94,9 @@ export class UserService {
     return this.http.delete<CustomHttpRespone>(`${this.host}/user/delete/${username}`);
   }
 
-  public createUserFormDate(loggedInUsername: any, user: User, profileImage: File): FormData {  
+  public createUserFormDate(loggedInUsername: any, user: User, profileImage: File): FormData {
     const formData = new FormData();
-    formData.append('currentUsername', loggedInUsername); 
+    formData.append('currentUsername', loggedInUsername);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
     formData.append('username', user.username);
@@ -107,23 +109,23 @@ export class UserService {
   }
 
   changeStatusActive(username: string, active: boolean): Observable<void> {
-    return this.http.put<void>(`${this.host}/${username}/active-user`, active, { });
+    return this.http.put<void>(`${this.host}/${username}/active-user`, active, {});
   }
-  
+
   changeStatusNotLocked(username: string, notLocked: boolean): Observable<void> {
-    return this.http.put<void>(`${this.host}/${username}/notLocked-user`, notLocked, { });
+    return this.http.put<void>(`${this.host}/${username}/notLocked-user`, notLocked, {});
   }
 
   changeStatusIsFirstLogin(username: string): Observable<void> {
-    return this.http.put<void>(`${this.host}/${username}/first-login-user`, { });
+    return this.http.put<void>(`${this.host}/${username}/first-login-user`, {});
   }
-  
-  getUserById(username: string): Observable<User>{
-    return this.http.get<User>(`${this.host}/user/find/${username}`, { });
+
+  getUserById(username: string): Observable<User> {
+    return this.http.get<User>(`${this.host}/user/find/${username}`, {});
   }
 
   update(user: User): Observable<User> {
-    return this.http.put<User>(`${this.host}/update/${user.id}`, user, { });
+    return this.http.put<User>(`${this.host}/update/${user.id}`, user, {});
   }
 
 }
