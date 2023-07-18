@@ -93,32 +93,42 @@
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nome</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
+                    <input pInputText type="text" name="name" ngModel #name="ngModel" required
                         minlength="1" [(ngModel)]="employee.name">
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Email</label>
+                    <input pInputText type="email" name="email" ngModel #email="ngModel" required
+                        minlength="1" [(ngModel)]="employee.email">
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Nationality</label>
+                    <input pInputText type="text" name="nationality" ngModel #nationality="ngModel" required
+                        minlength="1" [(ngModel)]="employee.nationality">
                 </div>
                 <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                     <label>Data de nascimento</label>
-                    <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+                    <p-calendar name="date" dateFormat="dd/mm/yy"
                         [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
                         [inline]="false" [readonlyInput]="false" ngModel #birthday="ngModel" [required]="true"
                         [(ngModel)]="employee.birthday"></p-calendar>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Tipo de contrato</label>
-                    <p-dropdown class="p-inputtext-sm" [options]="contractTypes" placeholder="Selecione"
+                    <p-dropdown [options]="contractTypes" placeholder="Selecione"
                         name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Departamento</label>
                     <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
                         [(ngModel)]="selectedDepartment" name="selectedDepartment" #department="ngModel"
                         (onChange)="getPositionsByDepartmentId()"></p-dropdown>
                 </div>
 
-                <div class="col-12 p-fluid" style="margin-top: 1%;">
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o
                         departmento primeiro]</span>
-                    <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+                    <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
                         [(ngModel)]="employee.position.id" name="position" #position="ngModel" [required]=true
                         [disabled]="!selectedDepartment">
                     </p-dropdown>
@@ -127,28 +137,40 @@
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Genero</label>
-                    <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender
+                    <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender
                         ngModel [(ngModel)]="employee.gender"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Estado civil</label>
-                    <p-dropdown class="p-inputtext-sm" [options]="maritalStatuses" placeholder="Selecione"
+                    <p-dropdown [options]="maritalStatuses" placeholder="Selecione"
                         name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Conjugue</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="spousesName" ngModel
+                    <input pInputText type="text" name="spousesName" ngModel
                         #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Local de nascimento</label>
-                    <p-dropdown class="p-inputtext-sm" [options]="locations" placeholder="Selecione" [filter]="true"
+                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true"
                         name="birthplace" #birthplace ngModel [(ngModel)]="employee.birthplace.id"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Local de residência</label>
+                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true"
+                        name="residenceLocation" #residenceLocation ngModel [(ngModel)]="employee.residenceLocation.id"></p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
-                    <input pInputText class="p-inputtext-sm" type="text" name="wageValue" ngModel #wageValue="ngModel"
+                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel"
                         required minlength="1" [(ngModel)]="employee.wageValue">
+                </div>
+                <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
+                    <label>Data de contratação</label>
+                    <p-calendar name="hiringDate" dateFormat="dd/mm/yy"
+                        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="hiringDate"
+                        [inline]="false" [readonlyInput]="false" ngModel #hiringDate="ngModel" [required]="true"
+                        [(ngModel)]="employee.hiringDate"></p-calendar>
                 </div>
             </div>
         </div>
@@ -934,14 +956,14 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Início</label>
-            <p-calendar class="p-inputtext-sm" name="begin" view="month" dateFormat="mm/yy"
+            <p-calendar name="begin" view="month" dateFormat="mm/yy"
                 placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #begin="ngModel" [required]="true"
                 [(ngModel)]="training.begin"></p-calendar>
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Fim</label>
-            <p-calendar class="p-inputtext-sm" name="end" view="month" dateFormat="mm/yy"
+            <p-calendar name="end" view="month" dateFormat="mm/yy"
                 placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #end="ngModel" [required]="true"
                 [(ngModel)]="training.end"></p-calendar>
@@ -979,17 +1001,17 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Genero</label>
-            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+            <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
                 [(ngModel)]="dependent.gender"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Grau de parentesco</label>
-            <p-dropdown class="p-inputtext-sm" [options]="RelationshipTypes" placeholder="Selecione" name="relationship"
+            <p-dropdown [options]="RelationshipTypes" placeholder="Selecione" name="relationship"
                 #relationship ngModel [(ngModel)]="dependent.relationship"></p-dropdown>
         </div>
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Data de nascimento</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
                 [showIcon]="true" [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
                 #birthday="ngModel" [required]="true" [(ngModel)]="dependent.birthday"></p-calendar>
         </div>
@@ -1031,19 +1053,19 @@
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Genero</label>
-            <p-dropdown class="p-inputtext-sm" [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+            <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
                 [(ngModel)]="filter.gender" (onChange)="filterEmployees()"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Estado civil</label>
-            <p-dropdown class="p-inputtext-sm" [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus"
+            <p-dropdown [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus"
                 #maritalStatus ngModel [(ngModel)]="filter.maritalStatus"
                 (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de contrato</label>
-            <p-dropdown class="p-inputtext-sm" [options]="contractTypes" placeholder="Selecione" name="contractType"
+            <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType"
                 #contractType ngModel [(ngModel)]="filter.contractType"
                 (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
@@ -1059,7 +1081,7 @@
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento
                 primeiro]</span>
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
                 [(ngModel)]="filter.position" name="position" #position="ngModel" [disabled]="!selectedDepartment"
                 (ngModelChange)="filterEmployees()">
             </p-dropdown>
@@ -1067,7 +1089,7 @@
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Birthplace</label>
-            <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="locations"
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="locations"
                 [(ngModel)]="filter.birthplace" name="birthplace" #birthplace="ngModel" [required]=true
                 (ngModelChange)="filterEmployees()">
             </p-dropdown>

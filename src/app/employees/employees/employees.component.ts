@@ -186,7 +186,7 @@ export class EmployeesComponent implements OnInit {
     this.getDepartments();
     this.getLocations();
     this._selectedColumns = [
-      { field: 'gender', header: 'Gender' }
+      //{ field: 'gender', header: 'Gender' }
     ];
   }
 
@@ -631,6 +631,7 @@ export class EmployeesComponent implements OnInit {
   private convertStringsToDates(employees: any[]) {
     for (const employee of employees) {
       employee.birthday = new Date(employee.birthday);
+      employee.hiringDate = new Date(employee.hiringDate);
     }
   }
 

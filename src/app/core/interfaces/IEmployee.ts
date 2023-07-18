@@ -15,15 +15,19 @@ import { IVocation } from "./IVocation";
 export interface IEmployee {
     id: number,
     name: string,
+    email: string,
     gender: string,
     contractType: string
     birthday: Date,
+    hiringDate: Date,
+    nationality: string,
     physicalAddress: string,
     maritalStatus: string,
     spousesName: string,
     status: boolean,
     wageValue: number,
     birthplace: ILocation;
+    residenceLocation: ILocation;
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
     position: IPosition;
     wageHistories: IEmployeeWage[];
