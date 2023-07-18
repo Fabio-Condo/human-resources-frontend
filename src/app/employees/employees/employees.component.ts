@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
@@ -162,6 +162,15 @@ export class EmployeesComponent implements OnInit {
     { label: 'Id (decrescente)', value: 'id,desc' },
   ];
 
+  cols = [
+    { field: 'gender', header: 'Gender' },
+    { field: 'birthday', header: 'Birthday' },
+    { field: 'contractType', header: 'Contract Type' },
+    { field: 'wageValue', header: 'Wage' },
+  ];
+
+  _selectedColumns = this.cols;
+
   constructor(
     private employeesService: EmployeesService,
     private locationsService: LocationsService,
@@ -176,6 +185,18 @@ export class EmployeesComponent implements OnInit {
     this.title.setTitle('employees page');
     this.getDepartments();
     this.getLocations();
+    this._selectedColumns = [
+      { field: 'gender', header: 'Gender' }
+    ];
+  }
+
+  @Input() get selectedColumns(): any[] { 
+    return this._selectedColumns;
+  }
+
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this.cols.filter((col) => val.includes(col));
   }
 
   @ViewChild('table') grid: any;

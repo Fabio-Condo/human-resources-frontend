@@ -1,8 +1,8 @@
 <div class="container">
     <h3>Departamentos</h3>
 
-    <p-table [value]="departments" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
-        [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus"
@@ -16,36 +16,23 @@
                     ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..." ngModel
                     name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getDepartments()"></p-dropdown>
-                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" class="ml-auto"
-                    selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}"
-                    placeholder="Choose Columns"></p-multiSelect>
             </div>
         </ng-template>
-        <ng-template pTemplate="header" let-columns>
+        <ng-template pTemplate="header">
             <tr>
-                <!--
                 <th style="background-color: #fff;">Nome</th>
                 <th style="background-color: #fff;">Descrição</th>
-                -->
-                <th *ngFor="let col of columns">
-                    {{col.header}}
-                </th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-dep let-columns="columns">
+        <ng-template pTemplate="body" let-dep>
             <tr>
-                <!--
                 <td>
                     <a href="javascript:;" (click)="onSelectDepartment(dep)">
                         {{ dep.name }}
                     </a>
-                </td>    
-                <td>{{ dep.description }}</td>
-                -->
-                <td *ngFor="let col of columns">
-                    {{dep[col.field]}}
                 </td>
+                <td>{{ dep.description }}</td>
                 <td style="width: 180px;">
                     <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top"
                         type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;

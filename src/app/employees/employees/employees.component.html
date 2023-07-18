@@ -1,8 +1,8 @@
 <div class="container">
     <h3>Funcionários</h3>
 
-    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
-        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    <p-table [value]="employees" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
+        [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
             <div class="flex">
@@ -13,20 +13,30 @@
                     <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"
                         (ngModelChange)="filterEmployees()" />
                 </span>
-                <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
+
+                <span class="ml-auto">
+                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" 
+                    selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px', 'margin-right': '10px'}"
+                    placeholder="Choose Columns"></p-multiSelect>
+                    <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" 
                     pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                </span>
+
             </div>
         </ng-template>
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" let-columns >
             <tr>
                 <th>Nome</th>
                 <th>Cargo</th>
                 <th>Departamento</th>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
                 <th>Active?</th>
                 <th>Ações</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-employee>
+        <ng-template pTemplate="body" let-employee let-columns="columns">
             <tr>
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployee(employee)">
@@ -35,6 +45,10 @@
                 </td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
+                <td *ngFor="let col of columns">
+                    <span *ngIf="col.field == 'birthday' ">{{ employee[col.field] | date: 'dd/MM/yyyy' }}</span>
+                    <span *ngIf="col.field != 'birthday' ">{{ employee[col.field] }}</span>
+                </td>
                 <td>
                     <a href="javascript:;" (click)="changeStatus(employee)"
                         [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">

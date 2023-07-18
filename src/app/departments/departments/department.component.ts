@@ -66,13 +66,6 @@ export class DepartmentComponent implements OnInit {
     { label: 'Id (decrescente)', value: 'id,desc' },
   ];
 
-  cols = [
-    { field: 'name', header: 'Name' },
-    { field: 'description', header: 'Descrição' },
-  ];
-
-  _selectedColumns = this.cols;
-
   constructor(
     private departmentService: DepartmentService,
     private messageService: MessageService,
@@ -83,20 +76,6 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
-    this._selectedColumns = [];
-
-    /*this._selectedColumns = [
-      { field: 'name', header: 'Name' },
-    ]*/
-  }
-
-  @Input() get selectedColumns(): any[] {
-    return this._selectedColumns;
-  }
-
-  set selectedColumns(val: any[]) {
-    //restore original order
-    this._selectedColumns = this.cols.filter((col) => val.includes(col));
   }
 
   filter: IDepartmentFilter = {
