@@ -1,6 +1,7 @@
 import { CompanyTraining } from "../model/CompanyTraining";
 import { Contact } from "../model/Contact";
 import { Dependent } from "../model/Depedent";
+import { EmployeeExperience } from "../model/EmployeeExperience";
 import { IdCard } from "../model/IdCard";
 import { Skill } from "../model/Skill";
 import { IEmployeePerformanceEvaluation } from "./IEmployeePerformanceEvaluation";
@@ -26,10 +27,11 @@ export interface IEmployee {
     spousesName: string,
     status: boolean,
     wageValue: number,
+    position: IPosition;
     birthplace: ILocation;
     residenceLocation: ILocation;
+    employeeExperiences: EmployeeExperience[];
     employeePerformanceEvaluations: IEmployeePerformanceEvaluation[];
-    position: IPosition;
     wageHistories: IEmployeeWage[];
     employeeTrainings: IEmployeeTraining[];
     contacts: Contact[];

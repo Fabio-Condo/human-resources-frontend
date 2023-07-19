@@ -11,6 +11,7 @@ import { Project } from "./Project";
 import { Skill } from "./Skill";
 import { Vocation } from "./Vocation";
 import { Location } from "./Location";
+import { EmployeeExperience } from "./EmployeeExperience";
 
 export class Employee implements IEmployee {
     id!: number;
@@ -30,6 +31,7 @@ export class Employee implements IEmployee {
     residenceLocation = new Location;
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
+    employeeExperiences: EmployeeExperience[] = [];
     wageHistories: EmployeeWage[] = [];
     employeeTrainings: EmployeeTraining [] = [];
     contacts: Contact[] = [];

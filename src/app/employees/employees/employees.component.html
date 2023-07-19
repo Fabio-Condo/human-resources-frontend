@@ -15,16 +15,17 @@
                 </span>
 
                 <span class="ml-auto">
-                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" 
-                    selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px', 'margin-right': '10px'}"
-                    placeholder="Choose Columns"></p-multiSelect>
-                    <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" 
-                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
+                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                        selectedItemsLabel="{0} columns selected"
+                        [style]="{'min-width': '200px', 'margin-right': '10px'}"
+                        placeholder="Choose Columns"></p-multiSelect>
+                    <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"
+                        pTooltip="Selection Only" tooltipPosition="bottom"></button>
                 </span>
 
             </div>
         </ng-template>
-        <ng-template pTemplate="header" let-columns >
+        <ng-template pTemplate="header" let-columns>
             <tr>
                 <th>Nome</th>
                 <th>Cargo</th>
@@ -93,13 +94,13 @@
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nome</label>
-                    <input pInputText type="text" name="name" ngModel #name="ngModel" required
-                        minlength="1" [(ngModel)]="employee.name">
+                    <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
+                        [(ngModel)]="employee.name">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Email</label>
-                    <input pInputText type="email" name="email" ngModel #email="ngModel" required
-                        minlength="1" [(ngModel)]="employee.email">
+                    <input pInputText type="email" name="email" ngModel #email="ngModel" required minlength="1"
+                        [(ngModel)]="employee.email">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nationality</label>
@@ -108,15 +109,14 @@
                 </div>
                 <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                     <label>Data de nascimento</label>
-                    <p-calendar name="date" dateFormat="dd/mm/yy"
-                        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="birthday"
-                        [inline]="false" [readonlyInput]="false" ngModel #birthday="ngModel" [required]="true"
-                        [(ngModel)]="employee.birthday"></p-calendar>
+                    <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
+                        [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
+                        #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Tipo de contrato</label>
-                    <p-dropdown [options]="contractTypes" placeholder="Selecione"
-                        name="contractType" #contractType ngModel [(ngModel)]="employee.contractType"></p-dropdown>
+                    <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType" #contractType
+                        ngModel [(ngModel)]="employee.contractType"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Departamento</label>
@@ -137,39 +137,39 @@
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Genero</label>
-                    <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender
-                        ngModel [(ngModel)]="employee.gender"></p-dropdown>
+                    <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+                        [(ngModel)]="employee.gender"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Estado civil</label>
-                    <p-dropdown [options]="maritalStatuses" placeholder="Selecione"
-                        name="maritalStatus" #maritalStatus ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
+                    <p-dropdown [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus" #maritalStatus
+                        ngModel [(ngModel)]="employee.maritalStatus"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Conjugue</label>
-                    <input pInputText type="text" name="spousesName" ngModel
-                        #spousesName="ngModel" required minlength="1" [(ngModel)]="employee.spousesName">
+                    <input pInputText type="text" name="spousesName" ngModel #spousesName="ngModel" required
+                        minlength="1" [(ngModel)]="employee.spousesName">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Local de nascimento</label>
-                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true"
-                        name="birthplace" #birthplace ngModel [(ngModel)]="employee.birthplace.id"></p-dropdown>
+                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="birthplace"
+                        #birthplace ngModel [(ngModel)]="employee.birthplace.id"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Local de residência</label>
-                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true"
-                        name="residenceLocation" #residenceLocation ngModel [(ngModel)]="employee.residenceLocation.id"></p-dropdown>
+                    <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="residenceLocation"
+                        #residenceLocation ngModel [(ngModel)]="employee.residenceLocation.id"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
-                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel"
-                        required minlength="1" [(ngModel)]="employee.wageValue">
+                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel" required minlength="1"
+                        [(ngModel)]="employee.wageValue">
                 </div>
                 <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                     <label>Data de contratação</label>
-                    <p-calendar name="hiringDate" dateFormat="dd/mm/yy"
-                        [inputStyle]="{ 'width': '100px'}" [showIcon]="true" [showOnFocus]="false" name="hiringDate"
-                        [inline]="false" [readonlyInput]="false" ngModel #hiringDate="ngModel" [required]="true"
+                    <p-calendar name="hiringDate" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                        [showIcon]="true" [showOnFocus]="false" name="hiringDate" [inline]="false"
+                        [readonlyInput]="false" ngModel #hiringDate="ngModel" [required]="true"
                         [(ngModel)]="employee.hiringDate"></p-calendar>
                 </div>
             </div>
@@ -303,6 +303,52 @@
                         <tr>
                             <td colspan="10">
                                 Sem educação adicionada
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <br>
+            </div>
+
+            <a href="javascript:;" style="text-decoration: none;"
+                (click)="showProfessionalExperiences = !showProfessionalExperiences">
+                <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                    <i *ngIf="!showProfessionalExperiences" class="pi pi-angle-right" style="margin: 13px;"></i>
+                    <i *ngIf="showProfessionalExperiences" class="pi pi-angle-down" style="margin: 13px;"></i>
+                    Professional Experience
+                </div>
+            </a>
+
+            <div *ngIf="showProfessionalExperiences" class="col-12 p-fluid"
+                style="margin-top: 2px; background-color: #fff">
+                <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewProfessionalExperience()">add new</a>
+                <p-table [value]="employee.employeeExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="background-color: #FFF;">Company</th>
+                            <th style="background-color: #FFF;">Description</th>
+                            <th style="background-color: #FFF;" class="col-valor-header"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{ pf.company }}</td>
+                            <td>{{ pf.description }}</td>
+                            <td class="col-acoes">
+                                <span class="p-buttonset">
+                                    <a href="javascript:;"
+                                        (click)="getReadyProfessionalExperienceEdit(pf, rowIndex)"><p-tag
+                                            [severity]="'primmary'">edit</p-tag></a>
+                                    <a style="margin-left: 3px;" href="javascript:;"
+                                        (click)="removeProfessionalExperience(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
+                                </span>
+                            </td>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="10">
+                                Sem Experiences
                             </td>
                         </tr>
                     </ng-template>
@@ -486,10 +532,9 @@
                         <p-tag *ngIf="!selectedEmployeeModal.status" [severity]="'danger'">false</p-tag>
                     </i>
                 </li>
-                <li class="dialog-info-li"><i class="dialog-info-i"><span
-                            style="color:hsl(252, 30%, 17%);font-weight:bold">Data de
-                            nascimento</span>: <span style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.birthday
-                            |
+                <li class="dialog-info-li"><i class="dialog-info-i">
+                        <span style="color:hsl(252, 30%, 17%);font-weight:bold">Data denascimento
+                        </span>: <span style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.birthday |
                             date:'dd/MM/yyyy'}}</span></i></li>
             </div>
         </div>
@@ -545,7 +590,6 @@
     <!--Contacts-->
     <div *ngIf="showContactsInfoView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
         <p-table [value]="selectedEmployeeModal.contacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
-            <!--*ngIf="showContacts"-->
             <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -640,6 +684,42 @@
                 <tr>
                     <td colspan="10">
                         Sem formações adicionadas
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
+    </div>
+
+    <a href="javascript:;" style="text-decoration: none;"
+        (click)="showProfessionalExperiencesInfoView = !showProfessionalExperiencesInfoView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showProfessionalExperiencesInfoView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showProfessionalExperiencesInfoView" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Professional Experience
+            <span *ngIf="selectedEmployeeModal.employeeExperiences.length != 0">
+                ({{selectedEmployeeModal.employeeExperiences.length}})</span>
+        </div>
+    </a>
+
+    <div *ngIf="showProfessionalExperiencesInfoView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.employeeExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="background-color: #FFF;">Company</th>
+                    <th style="background-color: #FFF;">Description</th>
+                    <th style="background-color: #FFF;" class="col-valor-header"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pf let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ pf.company }}</td>
+                    <td>{{ pf.description }}</td>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        Sem Experiences
                     </td>
                 </tr>
             </ng-template>
@@ -930,7 +1010,6 @@
 <!--Contacts-->
 <p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true"
     *ngIf="contact">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmContact="ngForm" (ngSubmit)="confirmContact(frmContact)">
         <div class="col-12 p-fluid">
             <label>Número</label>
@@ -947,7 +1026,6 @@
 <!--Traning-->
 <p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [style]="{width: '30vw'}"
     [(visible)]="showTrainingForm" [modal]="true" *ngIf="training">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
         <div class="col-12 p-fluid">
             <label>Descrição</label>
@@ -956,17 +1034,15 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Início</label>
-            <p-calendar name="begin" view="month" dateFormat="mm/yy"
-                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-                [inline]="false" [readonlyInput]="false" ngModel #begin="ngModel" [required]="true"
-                [(ngModel)]="training.begin"></p-calendar>
+            <p-calendar name="begin" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
+                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false"
+                ngModel #begin="ngModel" [required]="true" [(ngModel)]="training.begin"></p-calendar>
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Fim</label>
-            <p-calendar name="end" view="month" dateFormat="mm/yy"
-                placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-                [inline]="false" [readonlyInput]="false" ngModel #end="ngModel" [required]="true"
-                [(ngModel)]="training.end"></p-calendar>
+            <p-calendar name="end" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
+                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false"
+                ngModel #end="ngModel" [required]="true" [(ngModel)]="training.end"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmTraining.invalid"
@@ -978,7 +1054,6 @@
 <!--Skills-->
 <p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [style]="{width: '30vw'}"
     [(visible)]="showSkillForm" [modal]="true" *ngIf="skill">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
         <div class="col-12 p-fluid">
             <label>Descrição</label>
@@ -1006,13 +1081,13 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Grau de parentesco</label>
-            <p-dropdown [options]="RelationshipTypes" placeholder="Selecione" name="relationship"
-                #relationship ngModel [(ngModel)]="dependent.relationship"></p-dropdown>
+            <p-dropdown [options]="RelationshipTypes" placeholder="Selecione" name="relationship" #relationship ngModel
+                [(ngModel)]="dependent.relationship"></p-dropdown>
         </div>
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Data de nascimento</label>
-            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
-                [showIcon]="true" [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
+                [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
                 #birthday="ngModel" [required]="true" [(ngModel)]="dependent.birthday"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
@@ -1058,16 +1133,14 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Estado civil</label>
-            <p-dropdown [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus"
-                #maritalStatus ngModel [(ngModel)]="filter.maritalStatus"
-                (ngModelChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown [options]="maritalStatuses" placeholder="Selecione" name="maritalStatus" #maritalStatus ngModel
+                [(ngModel)]="filter.maritalStatus" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de contrato</label>
-            <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType"
-                #contractType ngModel [(ngModel)]="filter.contractType"
-                (ngModelChange)="filterEmployees()"></p-dropdown>
+            <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType" #contractType ngModel
+                [(ngModel)]="filter.contractType" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
@@ -1081,17 +1154,16 @@
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Cargo</label> <span *ngIf="!selectedDepartment" style="color: #e96969;"> [selecione o departmento
                 primeiro]</span>
-            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
-                [(ngModel)]="filter.position" name="position" #position="ngModel" [disabled]="!selectedDepartment"
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions" [(ngModel)]="filter.position"
+                name="position" #position="ngModel" [disabled]="!selectedDepartment"
                 (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Birthplace</label>
-            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="locations"
-                [(ngModel)]="filter.birthplace" name="birthplace" #birthplace="ngModel" [required]=true
-                (ngModelChange)="filterEmployees()">
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="locations" [(ngModel)]="filter.birthplace"
+                name="birthplace" #birthplace="ngModel" [required]=true (ngModelChange)="filterEmployees()">
             </p-dropdown>
         </div>
 
@@ -1101,4 +1173,39 @@
 
     </div>
 
+</p-dialog>
+
+<!--Professional Experience-->
+<p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'"
+    [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
+    <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)">
+        <div class="col-12 p-fluid">
+            <label>Company</label>
+            <input pInputText type="text" name="company" required [(ngModel)]="professionalExperience.company"
+                #company="ngModel" />
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Descrição</label>
+            <input pInputText type="text" name="numero" required [(ngModel)]="professionalExperience.description"
+                #contatoNumero="ngModel" />
+        </div>
+        <div class="col-12 md-12 p-fluid">
+            <label>Início</label>
+            <p-calendar class="p-inputtext-sm" name="beginDate" view="month" dateFormat="mm/yy"
+                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                [inline]="false" [readonlyInput]="false" ngModel #beginDate="ngModel" [required]="true"
+                [(ngModel)]="professionalExperience.beginDate"></p-calendar>
+        </div>
+        <div class="col-12 md-12 p-fluid">
+            <label>Fim</label>
+            <p-calendar class="p-inputtext-sm" name="endDate" view="month" dateFormat="mm/yy"
+                placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
+                [inline]="false" [readonlyInput]="false" ngModel #endDate="ngModel" [required]="true"
+                [(ngModel)]="professionalExperience.endDate"></p-calendar>
+        </div>
+        <div class="col-12 p-fluid">
+            <button pButton type="submit" label="Confirmar" [disabled]="frmProfessionalExperience.invalid"
+                style="height: 30px; margin-top: 1%;"></button>
+        </div>
+    </form>
 </p-dialog>

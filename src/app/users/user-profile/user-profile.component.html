@@ -79,7 +79,6 @@
           </a>
 
           <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
-            <!--<label>Contactos </label>-->
             <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
             <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
@@ -289,7 +288,6 @@
   <!--Contacts-->
   <p-dialog [header]="editingContact ? 'Edição Contato' : 'Novo Contato'" [(visible)]="showContactForm" [modal]="true"
     *ngIf="contact">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmContact="ngForm" (ngSubmit)="confirmContact(frmContact)">
       <div class="col-12 p-fluid">
         <label>Número</label>
@@ -306,7 +304,6 @@
   <!--Traning-->
   <p-dialog [header]="editingTraining ? 'Edição Formação' : 'Nova Formação'" [(visible)]="showTrainingForm"
     [modal]="true" *ngIf="training">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmTraining="ngForm" (ngSubmit)="confirmTraining(frmTraining)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
@@ -335,7 +332,6 @@
   <!--Skills-->
   <p-dialog [header]="editingSkill ? 'Edição habilidade' : 'Nova habilidade'" [(visible)]="showSkillForm" [modal]="true"
     *ngIf="skill">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmSkill="ngForm" (ngSubmit)="confirmSkill(frmSkill)">
       <div class="col-12 p-fluid">
         <label>Descrição</label>
@@ -351,7 +347,6 @@
   <!--Professional Experience-->
   <p-dialog [header]="editingProfessionalExperience ? 'Edição Formação' : 'Nova Formação'"
     [(visible)]="showProfessionalExperienceForm" [modal]="true" *ngIf="professionalExperience">
-    <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmProfessionalExperience="ngForm" (ngSubmit)="confirmProfessionalExperience(frmProfessionalExperience)">
       <div class="col-12 p-fluid">
         <label>Company</label>

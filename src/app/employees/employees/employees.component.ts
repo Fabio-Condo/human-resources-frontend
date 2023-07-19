@@ -18,6 +18,7 @@ import { Skill } from 'src/app/core/model/Skill';
 import { Dependent } from 'src/app/core/model/Depedent';
 import { IdCard } from 'src/app/core/model/IdCard';
 import { LocationsService } from 'src/app/locations/locations.service';
+import { EmployeeExperience } from 'src/app/core/model/EmployeeExperience';
 
 @Component({
   selector: 'app-employees',
@@ -34,7 +35,7 @@ export class EmployeesComponent implements OnInit {
   employee: IEmployee = new Employee;
   displayModalSave: boolean = false;
 
-  locations: any[] = [] ;
+  locations: any[] = [];
   provinces: any[] = [];
   //selectedProvince?: number;
 
@@ -79,6 +80,11 @@ export class EmployeesComponent implements OnInit {
   departments: any[] = [];
   selectedDepartment?: number;
 
+  professionalExperience?: EmployeeExperience;
+  professionalExperiences: Array<EmployeeExperience> = []
+  showProfessionalExperienceForm = false;
+  professionalExperienceIndex?: number;
+
   showContactsInfo: boolean = false;
   showIdCardsInfo: boolean = false;
   showIdCardsInfoView: boolean = false;
@@ -94,6 +100,8 @@ export class EmployeesComponent implements OnInit {
   showWageHistories: boolean = false;
   showEmployeePerformanceEvaluations: boolean = false;
   showVocations: boolean = false;
+  showProfessionalExperiences: boolean = false;
+  showProfessionalExperiencesInfoView: boolean = false;
 
   idCardsTypes = [
     { label: 'BI', value: 'ID_CARD' },
@@ -190,7 +198,7 @@ export class EmployeesComponent implements OnInit {
     ];
   }
 
-  @Input() get selectedColumns(): any[] { 
+  @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
   }
 
@@ -365,7 +373,7 @@ export class EmployeesComponent implements OnInit {
     return this.locationsService.findAll().subscribe(
       data => {
         this.locations = data.content.map(location => {
-          return  {
+          return {
             label: location.name + ", (" + location.country.name + ")",
             value: location.id
           }
@@ -569,6 +577,39 @@ export class EmployeesComponent implements OnInit {
     this.displayModal = true;
   }
 
+  // Professional Experience
+  getReadyNewProfessionalExperience() {
+    this.showProfessionalExperienceForm = true;
+    this.professionalExperience = new EmployeeExperience();
+    this.professionalExperienceIndex = this.employee.employeeExperiences.length;
+  }
+
+  getReadyProfessionalExperienceEdit(professionalExperience: EmployeeExperience, index: number) {
+    this.professionalExperience = this.cloneProfessionalExperience(professionalExperience);
+    this.showProfessionalExperienceForm = true;
+    this.convertTrainingStringsToDates([this.professionalExperience]);
+    this.professionalExperienceIndex = index;
+  }
+
+  confirmProfessionalExperience(frm: NgForm) {
+    this.employee.employeeExperiences[this.professionalExperienceIndex!] = this.cloneProfessionalExperience(this.professionalExperience!);
+    this.showProfessionalExperienceForm = false;
+    frm.reset();
+  }
+
+  cloneProfessionalExperience(professionalExperience: EmployeeExperience): EmployeeExperience {
+    return new EmployeeExperience(professionalExperience.id, professionalExperience.description, professionalExperience.company, professionalExperience.beginDate, professionalExperience.endDate);
+  }
+
+  get editingProfessionalExperience() {
+    return this.professionalExperience && this.professionalExperience?.id;
+  }
+
+  removeProfessionalExperience(index: number) {
+    this.employee.employeeExperiences.splice(index, 1);
+  }
+
+
   getStatus(status: boolean) {
     switch (status) {
       case true:
@@ -625,6 +666,12 @@ export class EmployeesComponent implements OnInit {
     }
     for (const train of training) {
       train.end = new Date(train.end);
+    }
+    for (const train of training) {
+      train.beginDate = new Date(train.beginDate);
+    }
+    for (const train of training) {
+      train.endDate = new Date(train.endDate);
     }
   }
 
