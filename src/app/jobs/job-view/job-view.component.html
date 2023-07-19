@@ -16,9 +16,13 @@
         <p style="margin-top: 20px; font-size: 30px;">{{ job.position.name }}</p>
     </div>
     <p style="margin-top: 20px; "><span style="color: #1a1919; font-size: 1.1rem; ">Posting Location: </span><span
-            style="font-size: 1rem;">{{ job.position.location.name }}, {{ job.position.location.country.name }}</span></p>
+            style="font-size: 1rem;">{{ job.position.location.name }}, {{ job.position.location.country.name }}</span>
+    </p>
     <p><span style="color: #1a1919; font-size: 1.1rem; ">Date Posted: </span><span style="font-size: 1rem;">{{
             job.publicationDate | date: 'd MMM, y' }}</span></p>
+    <p><span style="color: #1a1919; font-size: 1.1rem; ">Contract Type: </span><span style="font-size: 1rem;">{{
+            job.position.positionType }}</span>
+    </p>
     <p style="margin-top: 20px; margin-bottom: 20px; font-size: 0.85rem;"> At Meta, we’re working hard to build a better
         future. A more connected, inclusive and sustainable world. As a dynamic global community, it's our human spirit,
         together with technology, that empowers us to achieve this..</p>

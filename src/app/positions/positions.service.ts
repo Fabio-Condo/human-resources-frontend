@@ -43,6 +43,9 @@ export class PositionsService {
     if (filter.functionalGroup) { 
       params = params.set('functionalGroup', filter.functionalGroup); 
     }
+    if (filter.positionType) { 
+      params = params.set('positionType', filter.positionType); 
+    }
 
     console.log(params);
     return this.http.get<IApiResponse<IPosition>>(`${this.positionsUrl}/filter`, { params });

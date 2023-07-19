@@ -118,12 +118,13 @@ export class EmployeesComponent implements OnInit {
     { label: 'Viúvo', value: 'WIDOWER' },
   ];
 
-  contractTypes = [
-    { label: 'Indeterminado', value: 'INDEFINITE_PERIOD' },
-    { label: 'Determinado', value: 'DEFINITE_PERIOD' },
-    { label: 'Tempo parcial', value: 'PART_TIME' },
-    { label: 'Temporário', value: 'TEMPORARY' },
-    { label: 'Prestador de serviços', value: 'SERVICE_PROVIDER' },
+  positionTypes = [
+    { label: 'FULL_TIME', value: 'FULL_TIME' },
+    { label: 'PART_TIME', value: 'PART_TIME' },
+    { label: 'FREELANCER', value: 'FREELANCER' },
+    { label: 'REMOTE', value: 'REMOTE' },
+    { label: 'HYBRID', value: 'HYBRID' },
+    { label: 'INTERNSHIP', value: 'INTERNSHIP' },
   ];
 
   genders = [

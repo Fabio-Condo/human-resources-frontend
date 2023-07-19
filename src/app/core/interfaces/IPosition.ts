@@ -14,6 +14,7 @@ export interface IPosition {
     age: number,
     maximumWage: number,
     minimumWage: number,
+    positionType: string,
     department: IDepartment,
     location: ILocation,
     benefits: IBenefit[];

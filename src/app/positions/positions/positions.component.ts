@@ -84,6 +84,15 @@ export class PositionsComponent implements OnInit {
     { label: 'Recursos e Sustentabilidade', value: 'RESOURCES_SUSTAINABILITY' },
   ];
 
+  positionTypes = [
+    { label: 'FULL_TIME', value: 'FULL_TIME' },
+    { label: 'PART_TIME', value: 'PART_TIME' },
+    { label: 'FREELANCER', value: 'FREELANCER' },
+    { label: 'REMOTE', value: 'REMOTE' },
+    { label: 'HYBRID', value: 'HYBRID' },
+    { label: 'INTERNSHIP', value: 'INTERNSHIP' },
+  ];
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },

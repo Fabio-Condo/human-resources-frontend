@@ -45,8 +45,8 @@ export class EmployeesService {
     if (filter.position) { 
       params = params.set('position', filter.position); 
     }
-    if (filter.contractType) { 
-      params = params.set('contractType', filter.contractType); 
+    if (filter.positionType) { 
+      params = params.set('positionType', filter.positionType); 
     }
     if (filter.maritalStatus) { 
       params = params.set('maritalStatus', filter.maritalStatus); 

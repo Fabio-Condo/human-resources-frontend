@@ -236,7 +236,7 @@ export class CompanyTrainingsComponent implements OnInit {
     );
   }
 
-  onaaddEmployeeToTraining(){
+  onAddEmployeeToTraining(){
     this.displayModalAddNewMemberIntoTraining = true;
   }
 
@@ -244,6 +244,7 @@ export class CompanyTrainingsComponent implements OnInit {
     this.companyTrainingsService.addEmployeeToTraining(employeeId, this.companyTraining.id).subscribe(
       (companyTraining) => {
         this.filterTrainings();
+        this.convertStringsToDates([companyTraining]);
         this.companyTraining = companyTraining;
         this.messageService.add({ severity: 'success', detail: 'Employee added successfully!' });
       },

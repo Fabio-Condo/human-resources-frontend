@@ -184,7 +184,7 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <a *ngIf="editing" href="javascript:;" (click)="onaaddEmployeeToTraining()">add +</a>
+                <a *ngIf="editing" href="javascript:;" (click)="onAddEmployeeToTraining()">add +</a>
                 <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o
                     projeto</span>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>

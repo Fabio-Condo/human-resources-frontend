@@ -114,11 +114,6 @@
                         #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Tipo de contrato</label>
-                    <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType" #contractType
-                        ngModel [(ngModel)]="employee.contractType"></p-dropdown>
-                </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Departamento</label>
                     <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
                         [(ngModel)]="selectedDepartment" name="selectedDepartment" #department="ngModel"
@@ -132,6 +127,11 @@
                         [(ngModel)]="employee.position.id" name="position" #position="ngModel" [required]=true
                         [disabled]="!selectedDepartment">
                     </p-dropdown>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Salário</label>
+                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel" required minlength="1"
+                        [(ngModel)]="employee.wageValue">
                 </div>
             </div>
             <div class="field col-12 md:col-6">
@@ -159,11 +159,6 @@
                     <label>Local de residência</label>
                     <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="residenceLocation"
                         #residenceLocation ngModel [(ngModel)]="employee.residenceLocation.id"></p-dropdown>
-                </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Salário</label>
-                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel" required minlength="1"
-                        [(ngModel)]="employee.wageValue">
                 </div>
                 <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                     <label>Data de contratação</label>
@@ -470,16 +465,16 @@
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
                             style="color:hsl(252, 30%, 17%);font-weight:bold">Cargo</span>: <span
                             style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.position.name}}</span></i>
+                <li class="dialog-info-li"><i class="dialog-info-i"><span
+                            style="color:hsl(252, 30%, 17%);font-weight:bold">Tipo de emprego</span>: <span
+                            style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.position.positionType}}</span></i>
                 </li>
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
                             style="color:hsl(252, 30%, 17%);font-weight:bold">Departamento</span>: <span
                             style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.position.department.name}}</span></i>
                 </li>
                 <li class="dialog-info-li">
-                    <i class="dialog-info-i"><span style="color:hsl(252, 30%, 17%);font-weight:bold">Tipo de
-                            contrato</span>:
-                        <span style="color:hsl(252, 30%, 17%);"
-                            *ngIf="selectedEmployeeModal.contractType==='INDEFINITE_PERIOD'"> Indeterminado </span>
+                    <i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);"
                             *ngIf="selectedEmployeeModal.contractType==='DEFINITE_PERIOD'"> Determinado </span>
                         <span style="color:hsl(252, 30%, 17%);"
@@ -702,8 +697,10 @@
         </div>
     </a>
 
-    <div *ngIf="showProfessionalExperiencesInfoView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-        <p-table [value]="selectedEmployeeModal.employeeExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+    <div *ngIf="showProfessionalExperiencesInfoView" class="col-12 p-fluid"
+        style="margin-top: 2px; background-color: #fff">
+        <p-table [value]="selectedEmployeeModal.employeeExperiences" [responsive]="true" styleClass="p-datatable-sm"
+            #tabela>
             <ng-template pTemplate="header">
                 <tr>
                     <th style="background-color: #FFF;">Company</th>
@@ -1138,9 +1135,9 @@
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
-            <label>Tipo de contrato</label>
-            <p-dropdown [options]="contractTypes" placeholder="Selecione" name="contractType" #contractType ngModel
-                [(ngModel)]="filter.contractType" (ngModelChange)="filterEmployees()"></p-dropdown>
+            <label>Tipo de cargo</label>
+            <p-dropdown [options]="positionTypes" placeholder="Selecione" name="positionType" #positionType ngModel
+                [(ngModel)]="filter.positionType" (ngModelChange)="filterEmployees()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">

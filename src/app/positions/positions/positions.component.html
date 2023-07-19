@@ -19,6 +19,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="background-color: #fff;">Nome</th>
+        <th style="background-color: #fff;">Tipo</th>
         <th style="background-color: #fff;">Departamento</th>
         <th style="background-color: #fff;">Local</th>
         <th style="background-color: #fff;">Ações</th>
@@ -31,6 +32,7 @@
             {{ position.name }}
           </a>
         </td>
+        <td>{{ position.positionType }}</td>
         <td>{{ position.department.name }}</td>
         <td>{{ position.location.name }}, {{ position.location.country.name }}</td>
         <td style="width: 180px;">
@@ -69,6 +71,11 @@
           <label>Grupo funcional</label>
           <p-dropdown class="p-inputtext-sm" [options]="functionalGroups" placeholder="Selecione" name="functionalGroup"
             #functionalGroup ngModel [(ngModel)]="position.functionalGroup"></p-dropdown>
+        </div>
+        <div class="col-12 p-fluid" style="margin-top: 2%;">
+          <label>Job Type</label>
+          <p-dropdown class="p-inputtext-sm" [options]="positionTypes" placeholder="Selecione" name="positionType"
+            #positionType ngModel [(ngModel)]="position.positionType"></p-dropdown>
         </div>
       </div>
       <div class="field col-12 md:col-6">
@@ -490,6 +497,12 @@
         <input [(ngModel)]="filter.name" name="designation" pInputText type="text" placeholder="Search"
           (ngModelChange)="filterPositions()" />
       </span>
+    </div>
+
+    <div class="col-12 p-fluid" style="margin-top: 2%;">
+      <label>Job Type</label>
+      <p-dropdown class="p-inputtext-sm" [options]="positionTypes" placeholder="Selecione" name="positionType"
+        #positionType ngModel [(ngModel)]="filter.positionType" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">

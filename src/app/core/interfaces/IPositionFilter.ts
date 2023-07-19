@@ -1,6 +1,7 @@
 export interface IPositionFilter {
     global?: string,
     name?: string,
+    positionType?: string,
     functionalGroup?: string,
     department?: number,
     location?: number,

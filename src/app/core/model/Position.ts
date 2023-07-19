@@ -16,6 +16,7 @@ export class Position implements IPosition {
     age!: number;
     minimumWage!: number;
     maximumWage!: number;
+    positionType!: string;
     department = new Department;
     location = new Location;
     benefits: Benefit[] = [];
