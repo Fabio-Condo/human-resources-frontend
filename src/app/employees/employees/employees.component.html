@@ -535,6 +535,39 @@
         </div>
     </div>
 
+    <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
+        (click)="showMainResponsibilitiesView = !showMainResponsibilitiesView">
+        <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+            <i *ngIf="!showMainResponsibilitiesView" class="pi pi-angle-right" style="margin: 13px;"></i>
+            <i *ngIf="showMainResponsibilitiesView" class="pi pi-angle-down" style="margin: 13px;"></i>
+            Principais Responsibilidades (cargo selecionado)
+        </div>
+    </a>
+
+    <!--Main Responsibilities-->
+    <div *ngIf="showMainResponsibilitiesView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
+        <p-table [value]="selectedEmployeeModal.position.mainResponsibilities" [responsive]="true" styleClass="p-datatable-sm"
+            #tabela>
+            <ng-template pTemplate="header">
+                <tr>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-mr let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ mr.designation }}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="10">
+                        No main responsibilities found
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <br>
+    </div>
+
     <a href="javascript:;" style="text-decoration: none;" (click)="showIdCardsInfoView = !showIdCardsInfoView">
         <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
             <i *ngIf="!showIdCardsInfoView" class="pi pi-angle-right" style="margin: 13px;"></i>

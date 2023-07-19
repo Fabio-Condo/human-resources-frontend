@@ -43,6 +43,7 @@ export class ProjectsComponent implements OnInit {
   employeeById: IEmployee = new Employee();
 
   showTasks: boolean = false;
+  showTasksView: boolean = false;
   showProjectMembers: boolean = false;
   showProjectMembersView: boolean = false;
 

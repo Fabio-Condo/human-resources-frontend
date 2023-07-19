@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IEmployeePerformanceEvaluation } from '../core/interfaces/IEmployeePerformanceEvaluation';
 import { IEmployeePerformanceEvaluationFilter } from '../core/interfaces/IEmployeePerformanceEvaluationFilter';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class EmployeePerformanceEvaluationsService {
 
   employeePerformanceEvaluation: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private datePipe: DatePipe) { 
     this.employeePerformanceEvaluation = `${environment.apiUrl}/employees-performance-evaluations`;
   }
 
@@ -35,6 +36,15 @@ export class EmployeePerformanceEvaluationsService {
     }
     if (filter.employee) { 
       params = params.set('employee', filter.employee); 
+    }
+    if (filter.position) { 
+      params = params.set('position', filter.position); 
+    }
+    if (filter.department) { 
+      params = params.set('department', filter.department); 
+    }
+    if (filter.date) {
+      params = params.set('date', this.datePipe.transform(filter.date, 'yyyy-MM-dd')!); 
     }
 
     console.log(params);

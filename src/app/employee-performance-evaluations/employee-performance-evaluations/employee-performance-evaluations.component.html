@@ -140,12 +140,6 @@
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="filter.employee"
-                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
-        </div>
-        <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Categoria</label>
             <p-dropdown class="p-inputtext-sm" [options]="categories" placeholder="Selecione" name="category" #category
                 ngModel [(ngModel)]="filter.category"
@@ -153,21 +147,33 @@
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <label>Departamento (Deverá ser select)</label>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input [(ngModel)]="filter.global" name="department" pInputText type="text" placeholder="Search"
-                    (ngModelChange)="filterEmployeePerformanceEvaluations()" />
-            </span>
+            <label>Funcionário</label>
+            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                name="employee" #employee ngModel [(ngModel)]="filter.employee"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Cargo</label>
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
+                [(ngModel)]="filter.position" name="position"
+                #position="ngModel" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 1%;">
+            <label>Departamento</label>
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
+                [(ngModel)]="filter.department" name="department"
+                #department="ngModel" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
-            <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input [(ngModel)]="filter.global" name="date" pInputText type="text" placeholder="Search"
-                    (ngModelChange)="filterEmployeePerformanceEvaluations()" />
-            </span>
+
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
+            [inputStyle]="{ 'width': '200px'}" [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)"
+            [inline]="false" [readonlyInput]="false" ngModel #date="ngModel" [required]="true"
+            [(ngModel)]="filter.date" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">

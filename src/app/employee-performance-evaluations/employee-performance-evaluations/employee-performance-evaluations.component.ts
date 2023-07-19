@@ -8,6 +8,8 @@ import { IEmployeePerformanceEvaluation } from 'src/app/core/interfaces/IEmploye
 import { IEmployeePerformanceEvaluationFilter } from 'src/app/core/interfaces/IEmployeePerformanceEvaluationFilter';
 import { EmployeePerformanceEvaluation } from 'src/app/core/model/EmployeePerformanceEvaluation';
 import { EmployeePerformanceEvaluationsService } from '../employee-performance-evaluations.service';
+import { DepartmentService } from 'src/app/departments/department.service';
+import { PositionsService } from 'src/app/positions/positions.service';
 
 @Component({
   selector: 'app-employee-performance-evaluations',
@@ -27,7 +29,10 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   employeePerformanceEvaluation: IEmployeePerformanceEvaluation = new EmployeePerformanceEvaluation;
   displayModalSave: boolean = false;
 
-  employees: any[] = [] ;
+  employees: any[] = [];
+
+  departments: any[] = [];
+  positions: any[] = [];
 
   displayModalFilter: boolean = false;
 
@@ -46,7 +51,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     { label: 'Quatro [4]', value: 'FOUR' },
     { label: 'Cinco [5]', value: 'FIVE' },
   ];
-  
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
@@ -64,6 +69,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   constructor(
     private employeePerformanceEvaluationsService: EmployeePerformanceEvaluationsService,
+    private positionsService: PositionsService,
+    private departmentService: DepartmentService,
     private messageService: MessageService,
     private employeesService: EmployeesService,
     private confirmationService: ConfirmationService,
@@ -71,6 +78,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
+    this.getPositions();
+    this.getDepartments();
   }
 
   @ViewChild('table') grid: any;
@@ -100,7 +109,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.employeePerformanceEvaluation = employeePerformanceEvaluationAdded;
         this.showLoading = false;
         this.filterEmployeePerformanceEvaluations();
-        this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -138,7 +147,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteEmployeePerformanceEvaluations(employeePerformanceEvaluation: EmployeePerformanceEvaluation) {
@@ -162,7 +171,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     return this.employeesService.findAll().subscribe(
       data => {
         this.employees = data.content.map(employee => {
-          return  {
+          return {
             label: employee.name,
             value: employee.id
           }
@@ -179,7 +188,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir os items selecionados?',
       accept: () => {
-          this.severalDelete();
+        this.severalDelete();
       }
     });
   }
@@ -188,12 +197,12 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja atualizar os items selecionados?',
       accept: () => {
-          this.severalStatusUpdate();
+        this.severalStatusUpdate();
       }
     });
   }
 
-  severalDelete(){
+  severalDelete() {
     this.employeePerformanceEvaluationsService.severalDelete(this.selectedEmployeePerformanceEvaluations).subscribe(
       () => {
         this.showLoading = true;
@@ -213,7 +222,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     )
   }
 
-  severalStatusUpdate(){
+  severalStatusUpdate() {
     this.employeePerformanceEvaluationsService.severalStatusUpdate(this.selectedEmployeePerformanceEvaluations, this.selectedStatus).subscribe(
       () => {
         this.showLoading = true;
@@ -225,6 +234,40 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.showLoading = false;
         this.messageService.add({ severity: 'success', detail: 'Selected items updated succefully!' })
         this.selectedEmployeePerformanceEvaluations = [];
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getPositions() {
+    return this.departmentService.findAll().subscribe(
+      data => {
+        this.positions = data.content.map(position => {
+          return {
+            label: position.name,
+            value: position.id
+          }
+        })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+  }
+
+  getDepartments() {
+    return this.departmentService.findAll().subscribe(
+      data => {
+        this.departments = data.content.map(department => {
+          return {
+            label: department.name,
+            value: department.id
+          }
+        })
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -263,7 +306,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.filterEmployeePerformanceEvaluations(page);
   }
 

@@ -302,6 +302,36 @@
             </li>
         </div>
 
+        <a href="javascript:;" style="text-decoration: none;" (click)="showTasksView = !showTasksView">
+            <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
+                <i *ngIf="!showTasksView" class="pi pi-angle-right" style="margin: 13px;"></i>
+                <i *ngIf="showTasksView" class="pi pi-angle-down" style="margin: 13px;"></i>
+                Tasks
+            </div>
+        </a>
+
+        <div *ngIf="showTasksView" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
+            <p-table [value]="selectedProjectModal.tasks" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+                <ng-template pTemplate="header">
+                    <tr>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-task let-rowIndex="rowIndex">
+                    <tr>
+                        <td>{{ task.description }}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="10">
+                            Sem tarefas adicionadas
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <br>
+        </div>
+
         <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
             (click)="showProjectMembersView = !showProjectMembersView">
             <div style="background-color: #53595c; color: #fff; margin: 7px; height: 50px; font-size: 13px; ">
@@ -336,6 +366,7 @@
             </p-table>
             <br>
         </div>
+
     </div>
 </p-dialog>
 

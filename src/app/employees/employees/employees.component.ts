@@ -102,6 +102,7 @@ export class EmployeesComponent implements OnInit {
   showVocations: boolean = false;
   showProfessionalExperiences: boolean = false;
   showProfessionalExperiencesInfoView: boolean = false;
+  showMainResponsibilitiesView: boolean = false;
 
   idCardsTypes = [
     { label: 'BI', value: 'ID_CARD' },
