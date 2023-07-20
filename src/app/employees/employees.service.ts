@@ -51,6 +51,12 @@ export class EmployeesService {
     if (filter.maritalStatus) { 
       params = params.set('maritalStatus', filter.maritalStatus); 
     }
+    if (filter.wageValueBegin) {
+      params = params.set('wageValueBegin', filter.wageValueBegin);
+    }
+    if (filter.wageValueEnd) {
+      params = params.set('wageValueEnd', filter.wageValueEnd);
+    }
 
     console.log(params);
     return this.http.get<IApiResponse<IEmployee>>(`${this.employeesUrl}/filter`, { params });

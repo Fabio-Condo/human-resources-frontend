@@ -16,6 +16,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { CalendarModule } from 'primeng/calendar';
 import { TagModule } from 'primeng/tag';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
@@ -40,6 +41,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     CalendarModule,
     TagModule,
     MultiSelectModule,
+    InputNumberModule, 
 
     RouterModule,
     AppRoutingModule

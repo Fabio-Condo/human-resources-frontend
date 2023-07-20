@@ -7,6 +7,8 @@ export interface IEmployeeFilter {
     birthplace?: number,
     position?: number,
     department?: number,
+    wageValueBegin?: number,
+    wageValueEnd?: number,
 
     page: number,
     itemsPerPage: number,

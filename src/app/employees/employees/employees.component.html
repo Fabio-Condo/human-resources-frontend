@@ -130,8 +130,7 @@
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
-                    <input pInputText type="text" name="wageValue" ngModel #wageValue="ngModel" required minlength="1"
-                        [(ngModel)]="employee.wageValue">
+                    <p-inputNumber [(ngModel)]="employee.wageValue" name="wageValue" #wageValue="ngModel" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
                 </div>
             </div>
             <div class="field col-12 md:col-6">
@@ -546,8 +545,8 @@
 
     <!--Main Responsibilities-->
     <div *ngIf="showMainResponsibilitiesView" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff;">
-        <p-table [value]="selectedEmployeeModal.position.mainResponsibilities" [responsive]="true" styleClass="p-datatable-sm"
-            #tabela>
+        <p-table [value]="selectedEmployeeModal.position.mainResponsibilities" [responsive]="true"
+            styleClass="p-datatable-sm" #tabela>
             <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -1195,6 +1194,17 @@
             <p-dropdown placeholder="Selecione..." [filter]="true" [options]="locations" [(ngModel)]="filter.birthplace"
                 name="birthplace" #birthplace="ngModel" [required]=true (ngModelChange)="filterEmployees()">
             </p-dropdown>
+        </div>
+
+        <div class="col-12" style="margin-top: 2%;">
+            <label style="display: block">Salário</label>
+            <input pInputText style="width: 205px;" placeholder="Begin" type="number" name="wageValueBegin"
+                [(ngModel)]="filter.wageValueBegin" class="p-inputtext-sm" (ngModelChange)="filterEmployees()">
+
+            <label class="label">até</label>
+
+            <input pInputText style="width: 205px;" placeholder="End" type="number" name="wageValueEnd"
+                [(ngModel)]="filter.wageValueEnd" class="p-inputtext-sm" (ngModelChange)="filterEmployees()">
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
