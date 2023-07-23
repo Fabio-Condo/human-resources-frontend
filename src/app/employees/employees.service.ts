@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IApiResponse } from '../core/interfaces/IApiResponse';
 import { IEmployee } from '../core/interfaces/IEmployee';
@@ -80,6 +80,10 @@ export class EmployeesService {
 
   findAll() : Observable<IApiResponse<IEmployee>> { 
     return this.http.get<IApiResponse<IEmployee>>(`${this.employeesUrl}`, { });
+  }
+
+  findAllV2() : Promise<any> {
+    return firstValueFrom(this.http.get(`${this.employeesUrl}/all`, { }));
   }
 
   add(employe: IEmployee): Observable<IEmployee> {

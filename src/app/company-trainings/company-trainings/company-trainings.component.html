@@ -184,15 +184,12 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                <a *ngIf="editing" href="javascript:;" (click)="onAddEmployeeToTraining()">add +</a>
-                <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o
-                    projeto</span>
+                
+                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="name"></p-multiSelect>
+
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th style="background-color: #fff; width: 4rem">
-                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                            </th>
                             <th style="background-color: #FFF;">Nome</th>
                             <th style="background-color: #FFF;">Cargo</th>
                             <th style="background-color: #FFF;" class="col-valor-header"></th>
@@ -200,15 +197,12 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                         <tr [pSelectableRow]="employee">
-                            <td>
-                                <p-tableCheckbox [value]="employee"></p-tableCheckbox>
-                            </td>
                             <td>{{ employee.name }}</td>
                             <td>{{ employee.position.name }}</td>
                             <td class="col-acoes">
                                 <span class="p-buttonset">
                                     <a style="margin-left: 3px;" href="javascript:;"
-                                        (click)="removeEmployeeFromTrainingConfirm(employee.id)"><p-tag
+                                    (click)="removeMember(rowIndex)"><p-tag
                                             [severity]="'danger'"> remove</p-tag></a>
                                 </span>
                             </td>
@@ -235,48 +229,6 @@
             </div>
         </div>
 
-    </form>
-</p-dialog>
-
-
-<!--Add New member in project -->
-<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoTraining" [modal]="true"
-    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #AddasMemberForm="ngForm"
-        (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
-        <div class="col-12 p-fluid">
-            <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel (onChange)="findEmployeeById(selectedEmployeeIdToAddasMember)"
-                [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Cargo</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="position" ngModel #position="ngModel"
-                required minlength="1" [(ngModel)]="employeeById.position.name">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Departamento</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="department" ngModel
-                #department="ngModel" required minlength="1" [(ngModel)]="employeeById.position.department.name">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Contrato</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="contractType" ngModel
-                #contractType="ngModel" required minlength="1" [(ngModel)]="employeeById.contractType">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <button pButton type="submit" [disabled]="AddasMemberForm.invalid" class="p-button-sm"
-                style="height: 30px;">
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
-                <span *ngIf="showLoading">Loading...</span>
-                <span *ngIf="!showLoading">add</span>
-            </button>
-        </div>
     </form>
 </p-dialog>
 

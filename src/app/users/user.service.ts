@@ -105,6 +105,7 @@ export class UserService {
     formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
+    formData.append('gender', user.gender);
     return formData;
   }
 

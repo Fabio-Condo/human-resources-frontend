@@ -138,11 +138,9 @@
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
-        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y, h:mm:ss
-          a'}}</span></i></li>
+        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y, h:mm:ssa'}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Last Login
-          Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate | date:'dd/MM/y,
-          h:mm:ss a'}}</span></i></li>
+          Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate | date:'dd/MM/y,h:mm:ss a'}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Status</span>:
         <span [style.color]="selectedUserModal.active === true ? '#1c80cf' : '#982F27'">{{ selectedUserModal.active ?
           'active' : 'inactive' }}</span></i></li>
@@ -169,6 +167,11 @@
         <label>Username</label>
         <input pInputText type="text" class="p-inputtext-sm" ngModel name="username" [(ngModel)]="user.username"
           required />
+      </div>
+      <div class="col-12 p-fluid" style="margin-top: 2%;">
+        <label>Genero</label>
+        <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
+            [(ngModel)]="user.gender"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>

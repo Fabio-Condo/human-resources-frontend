@@ -15,6 +15,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
 import { TagModule } from 'primeng/tag';
+import { MultiSelectModule } from 'primeng/multiselect';
+MultiSelectModule 
 
 
 
@@ -38,7 +40,8 @@ import { TagModule } from 'primeng/tag';
     DividerModule,
     CalendarModule,
     TagModule,
-
+    MultiSelectModule,
+    
     RouterModule,
     AppRoutingModule
   ]

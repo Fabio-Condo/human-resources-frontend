@@ -42,9 +42,12 @@ export class CompanyTrainingsComponent implements OnInit {
   employeeById: IEmployee = new Employee();
   selectedEmployeeIdToAddasMember: any;
 
-  employees: any[] = [] ;
+  employees: IEmployee[] = [] ;
+  employees2: IEmployee[] = [] ;
+  selectedEmployees!: IEmployee[];
 
   displayModalFilter: boolean = false;
+
 
   showProjectMembers: boolean = false;
   showProjectMembersView: boolean = false;
@@ -100,6 +103,8 @@ export class CompanyTrainingsComponent implements OnInit {
 
   addNew(trainingForm: NgForm) {
     this.showLoading = true;
+    this.companyTraining.employees = []
+    this.companyTraining.employees = this.selectedEmployees
     this.companyTrainingsService.add(this.companyTraining).subscribe(
       (companyTrainingAdded) => {
         this.companyTraining = companyTrainingAdded;
@@ -117,6 +122,7 @@ export class CompanyTrainingsComponent implements OnInit {
 
   update(trainingForm: NgForm) {
     this.showLoading = true;
+    this.companyTraining.employees = this.selectedEmployees
     this.companyTrainingsService.update(this.companyTraining).subscribe(
       (companyTraining) => {
         this.companyTraining = companyTraining;
@@ -192,20 +198,19 @@ export class CompanyTrainingsComponent implements OnInit {
   }
 
   getEmployees() {
-    return this.employeesService.findAll().subscribe(
-      data => {
-        this.employees = data.content.map(employee => {
-          return  {
-            label: employee.name,
-            value: employee.id
-          }
-        })
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    )
+    this.employeesService.findAllV2().then(dados => {
+      //this.employees2 = dados.map((dado: IEmployee) => ({
+      //  label: dado.name,
+      //  value: dado.id
+      //}));
+      this.employees = dados
+    })
+      .catch(
+        (errorResponse: HttpErrorResponse) => {
+          this.sendErrorNotification(errorResponse.error.message);
+          this.showLoading = false;
+        }
+      );
   }
 
   findTrainingById(id: any ) { // number
@@ -240,50 +245,21 @@ export class CompanyTrainingsComponent implements OnInit {
     this.displayModalAddNewMemberIntoTraining = true;
   }
 
-  addEmployeeToProject(employeeId: number) {
-    this.companyTrainingsService.addEmployeeToTraining(employeeId, this.companyTraining.id).subscribe(
-      (companyTraining) => {
-        this.filterTrainings();
-        this.convertStringsToDates([companyTraining]);
-        this.companyTraining = companyTraining;
-        this.messageService.add({ severity: 'success', detail: 'Employee added successfully!' });
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-      }
-    )
-  }
-
-  removeEmployeeFromTraining(employeeId: number) {
-    this.companyTrainingsService.removeEmployeeFromTraining(employeeId, this.companyTraining.id).subscribe(
-      (project) => {
-        this.filterTrainings();
-        this.companyTraining = project;
-        this.messageService.add({ severity: 'success', detail: 'Employee removed successfully!' });
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-      }
-    )
-  }
-
-  removeEmployeeFromTrainingConfirm(employeeId: number): void {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete remove this member?',
-      accept: () => {
-        this.removeEmployeeFromTraining(employeeId);
-      }
-    });
+  removeMember(index: number) {
+    this.companyTraining.employees.splice(index, 1);
+    this.selectedEmployees = this.companyTraining.employees  // remove and update selected employees
   }
 
   onAddNewTraining(): void {
     this.companyTraining = new CompanyTraining();
+    this.selectedEmployees = []
     this.displayModalSave = true;
   }
 
   onEditTraining(editTraining: ICompanyTraining): void {
     this.convertStringsToDates([editTraining]);
     this.companyTraining = editTraining;
+    this.selectedEmployees = this.companyTraining.employees
     this.companyTraining.id = editTraining.id
     this.findTrainingById(this.companyTraining.companyTrainingType.id)
     this.displayModalSave = true;

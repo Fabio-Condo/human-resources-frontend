@@ -23,6 +23,7 @@ export class User {
     public company: string;
     public designation: string;
     public phoneNumber: string;
+    public gender: string;
     public authorities: [];
     public jobs: Job[];
     public professionalExperiences: ProfessionalExperience[];
@@ -50,6 +51,7 @@ export class User {
       this.company = '';
       this.designation = '';
       this.phoneNumber = '';
+      this.gender = ''
       this.authorities = [];
       this.jobs = [];
       this.professionalExperiences = [];

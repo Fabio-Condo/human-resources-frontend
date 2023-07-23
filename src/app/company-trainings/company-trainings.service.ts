@@ -62,11 +62,4 @@ export class CompanyTrainingsService {
     return this.http.get<ICompanyTraining>(`${this.companyTrainingsUrl}/${id}`, { });
   }
 
-  addEmployeeToTraining(employeeId: number, traningId: number): Observable<ICompanyTraining> {
-    return this.http.post<ICompanyTraining>(`${this.companyTrainingsUrl}/${traningId}/employees/${employeeId}`, { });
-  }
-
-  removeEmployeeFromTraining(employeeId: number, traningId: number): Observable<ICompanyTraining> {
-    return this.http.put<ICompanyTraining>(`${this.companyTrainingsUrl}/${traningId}/employees/${employeeId}`, { });
-  }
 }

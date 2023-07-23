@@ -77,6 +77,11 @@ export class UsersComponent implements OnInit {
     { label: 'False', value: 'false' },
   ];
 
+  genders = [
+    { label: 'Masculino', value: 'MASCULINE' },
+    { label: 'Feminino', value: 'FEMININE' },
+  ];
+
   constructor(
     private router: Router, 
     private authenticationService: AuthenticationService,
