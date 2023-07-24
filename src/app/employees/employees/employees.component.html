@@ -133,10 +133,6 @@
                         [disabled]="!selectedDepartment">
                     </p-dropdown>
                 </div>
-                <div class="col-12 p-fluid" style="margin-top: 2%;">
-                    <label>Salário</label>
-                    <p-inputNumber [(ngModel)]="employee.wageValue" name="wageValue" #wageValue="ngModel" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
-                </div>
             </div>
             <div class="field col-12 md:col-6">
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -170,6 +166,10 @@
                         [showIcon]="true" [showOnFocus]="false" name="hiringDate" [inline]="false"
                         [readonlyInput]="false" ngModel #hiringDate="ngModel" [required]="true"
                         [(ngModel)]="employee.hiringDate"></p-calendar>
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Salário</label>
+                    <p-inputNumber [(ngModel)]="employee.wageValue" name="wageValue" #wageValue="ngModel" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
                 </div>
             </div>
         </div>
