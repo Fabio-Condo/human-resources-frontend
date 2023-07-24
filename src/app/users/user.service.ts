@@ -42,12 +42,12 @@ export class UserService {
     if (filter.sort) {
       params = params.set('userOrderBy', filter.sort);
     }
-    if (filter.firstName) {
+    /*if (filter.firstName) {
       params = params.set('firstName', filter.firstName);
     }
     if (filter.lastName) {
       params = params.set('lastName', filter.lastName);
-    }
+    }*/
     if (filter.username) {
       params = params.set('username', filter.username);
     }
@@ -97,15 +97,15 @@ export class UserService {
   public createUserFormDate(loggedInUsername: any, user: User, profileImage: File): FormData {
     const formData = new FormData();
     formData.append('currentUsername', loggedInUsername);
-    formData.append('firstName', user.firstName);
-    formData.append('lastName', user.lastName);
+    formData.append('firstName', user.person.firstName);
+    formData.append('lastName', user.person.lastName);
     formData.append('username', user.username);
-    formData.append('email', user.email);
+    formData.append('email', user.person.email);
     formData.append('role', user.role);
     formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
-    formData.append('gender', user.gender);
+    formData.append('gender', user.person.gender);
     return formData;
   }
 

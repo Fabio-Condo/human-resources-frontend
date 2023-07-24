@@ -103,7 +103,7 @@ export class UsersComponent implements OnInit {
   filter: IUserFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'firstName,asc',
+    sort: 'person.firstName,asc',
     isActive: 'trueAndFalse',
     isNotLocked: 'trueAndFalse'
   }
@@ -172,7 +172,7 @@ export class UsersComponent implements OnInit {
           this.user = response;
           this.fileName = null;
           this.profileImage = null;
-          this.messageService.add({ severity: 'success', detail: `${response.firstName} ${response.lastName} updated successfully` });
+          this.messageService.add({ severity: 'success', detail: `${response.person.firstName} ${response.person.lastName} updated successfully` });
           this.showLoading = false;
         },
         (errorResponse: HttpErrorResponse) => {

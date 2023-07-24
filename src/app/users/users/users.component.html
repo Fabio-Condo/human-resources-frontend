@@ -56,13 +56,13 @@
             alt="" style="border-radius: 50%;" />
         </td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.firstName
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.person.firstName
           }}</td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.lastName
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.person.lastName
           }}</td>
         <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.person.email }}
         </td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
           style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.role }}
@@ -123,10 +123,10 @@
 </div>
 
 
-<p-dialog header="{{selectedUserModal.firstName}}" [(visible)]="displayModal" [modal]="true" [draggable]="false"
+<p-dialog header="{{selectedUserModal.person.firstName}}" [(visible)]="displayModal" [modal]="true" [draggable]="false"
   [resizable]="false">
 
-  <p-card header="{{selectedUserModal.firstName}} {{selectedUserModal.lastName}}"
+  <p-card header="{{selectedUserModal.person.firstName}} {{selectedUserModal.person.lastName}}"
     subheader="Username: {{selectedUserModal.username}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
     <ng-template pTemplate="header">
       <img alt="Card" height="220" src="{{selectedUserModal.profileImageUrl}}">
@@ -134,7 +134,7 @@
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">User ID</span>:
         <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.userId}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Email</span>: <span
-          style="color:#3f393371;font-weight:bold">{{selectedUserModal.email}}</span></i></li>
+          style="color:#3f393371;font-weight:bold">{{selectedUserModal.person.email}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
@@ -155,12 +155,12 @@
     <div class="formgrid grid">
       <div class="col-12 p-fluid">
         <label>First name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName" [(ngModel)]="user.firstName"
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName" [(ngModel)]="user.person.firstName"
           required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Last name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName" [(ngModel)]="user.lastName"
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName" [(ngModel)]="user.person.lastName"
           required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
@@ -171,11 +171,11 @@
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <label>Genero</label>
         <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
-            [(ngModel)]="user.gender"></p-dropdown>
+            [(ngModel)]="user.person.gender"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>
-        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.email" required />
+        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.person.email" required />
       </div>
 
       <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">

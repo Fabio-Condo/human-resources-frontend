@@ -214,7 +214,7 @@ export class EmployeesComponent implements OnInit {
   filter: IEmployeeFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'name,asc'
+    sort: 'person.firstName,asc'
   }
 
   get editing() {

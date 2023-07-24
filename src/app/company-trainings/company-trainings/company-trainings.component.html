@@ -128,7 +128,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                     <tr [pSelectableRow]="employee">
-                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.person.firstName }} {{ employee.person.lastName }}</td>
                         <td>{{ employee.position.name }}</td>
                     </tr>
                 </ng-template>
@@ -185,7 +185,7 @@
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 
-                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="name"></p-multiSelect>
+                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="person.firstName"></p-multiSelect>
                 <br>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -197,7 +197,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
                         <tr [pSelectableRow]="employee">
-                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.person.firstName }} {{ employee.person.lastName }}</td>
                             <td>{{ employee.position.name }}</td>
                             <td class="col-acoes">
                                 <span class="p-buttonset">

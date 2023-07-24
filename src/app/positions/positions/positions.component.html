@@ -452,7 +452,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
             <tr>
-              <td>{{ employee.name }}</td>
+              <td>{{ employee.person.firstName }} {{ employee.person.lastName }}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">

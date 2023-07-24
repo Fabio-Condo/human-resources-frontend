@@ -12,6 +12,7 @@ import { Skill } from "./Skill";
 import { Vocation } from "./Vocation";
 import { Location } from "./Location";
 import { EmployeeExperience } from "./EmployeeExperience";
+import { Person } from "./Person";
 
 export class Employee implements IEmployee {
     id!: number;
@@ -27,6 +28,7 @@ export class Employee implements IEmployee {
     spousesName!: string;
     status!: boolean;
     wageValue!: number;
+    person = new Person;
     birthplace = new Location;
     residenceLocation = new Location;
     employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];

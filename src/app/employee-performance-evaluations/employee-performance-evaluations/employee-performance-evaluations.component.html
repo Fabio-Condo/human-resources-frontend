@@ -42,7 +42,7 @@
                 </td>
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployeePerformanceEvaluation(epe)">
-                        {{ epe.employee.name }}
+                        {{ epe.employee.person.firstName }} {{ epe.employee.person.lastName }}
                     </a>
                 </td>
                 <td>{{ epe.employee.position.name }}</td>

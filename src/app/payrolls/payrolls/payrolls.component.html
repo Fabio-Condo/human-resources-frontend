@@ -130,7 +130,7 @@
                             <td *ngIf="!payroll.id">
                                 <p-tableCheckbox [value]="payment"></p-tableCheckbox>
                             </td>
-                            <td>{{ payment.employee.name }}</td>
+                            <td>{{ payment.employee.person.firstName }} {{ payment.employee.person.lastName }}</td>
                             <td>{{ payment.employee.position.name }}</td>
                             <td>{{ payment.employee.wageValue }}</td>
                             <td>{{ payment.employee.wageValue * 0.03}}</td>

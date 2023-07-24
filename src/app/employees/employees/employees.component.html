@@ -41,7 +41,7 @@
             <tr>
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployee(employee)">
-                        {{ employee.name }}
+                        {{ employee.person.firstName }} {{ employee.person.lastName }}
                     </a>
                 </td>
                 <td>{{ employee.position.name }}</td>
@@ -95,12 +95,17 @@
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nome</label>
                     <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
-                        [(ngModel)]="employee.name">
+                        [(ngModel)]="employee.person.firstName">
+                </div>
+                <div class="col-12 p-fluid" style="margin-top: 2%;">
+                    <label>Apelido</label>
+                    <input pInputText type="text" name="lastName" ngModel #lastName="ngModel" required minlength="1"
+                        [(ngModel)]="employee.person.lastName">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Email</label>
                     <input pInputText type="email" name="email" ngModel #email="ngModel" required minlength="1"
-                        [(ngModel)]="employee.email">
+                        [(ngModel)]="employee.person.email">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nationality</label>
@@ -137,7 +142,7 @@
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Genero</label>
                     <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
-                        [(ngModel)]="employee.gender"></p-dropdown>
+                        [(ngModel)]="employee.person.gender"></p-dropdown>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Estado civil</label>
@@ -452,7 +457,7 @@
 </p-dialog>
 
 <!--Show -->
-<p-dialog header="{{selectedEmployeeModal.name}}" [(visible)]="displayModal" [modal]="true"
+<p-dialog header="{{selectedEmployeeModal.person.firstName}}" [(visible)]="displayModal" [modal]="true"
     [style]="{width: '60vw', height: '35vw'}" [draggable]="false" [resizable]="false">
     <!--Employees view-->
     <div class="formgrid grid">
@@ -460,7 +465,7 @@
             <div class="col-12 p-fluid">
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
                             style="color:hsl(252, 30%, 17%);font-weight:bold">Nome</span>: <span
-                            style="color:hsl(252, 30%, 17%)">{{selectedEmployeeModal.name}}</span></i></li>
+                            style="color:hsl(252, 30%, 17%)">{{selectedEmployeeModal.person.firstName}}</span></i></li>
                 <li class="dialog-info-li"><i class="dialog-info-i"><span
                             style="color:hsl(252, 30%, 17%);font-weight:bold">Cargo</span>: <span
                             style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.position.name}}</span></i>
@@ -496,9 +501,9 @@
                 <li class="dialog-info-li">
                     <i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);font-weight:bold">Genero</span>:
-                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.gender==='MASCULINE'">
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.person.gender==='MASCULINE'">
                             Masculino </span>
-                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.gender==='FEMININE'">
+                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.person.gender==='FEMININE'">
                             Feminino </span>
                     </i>
                 </li>

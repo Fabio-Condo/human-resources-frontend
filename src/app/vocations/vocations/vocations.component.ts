@@ -151,7 +151,7 @@ export class VocationsComponent implements OnInit {
       data => {
         this.employees = data.content.map(employee => {
           return  {
-            label: employee.name,
+            label: employee.person.firstName + ' ' + employee.person.lastName,
             value: employee.id
           }
         })

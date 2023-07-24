@@ -28,17 +28,17 @@
               <div class="col-12 p-fluid">
                 <label>Primeiro Nome</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="firstName" ngModel #firstName="ngModel"
-                  required minlength="1" [(ngModel)]="user.firstName">
+                  required minlength="1" [(ngModel)]="user.person.firstName">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Último Nome</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="lastName" ngModel #lastName="ngModel"
-                  required minlength="1" [(ngModel)]="user.lastName">
+                  required minlength="1" [(ngModel)]="user.person.lastName">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Email</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="email" ngModel #email="ngModel" required
-                  minlength="1" [(ngModel)]="user.email">
+                  minlength="1" [(ngModel)]="user.person.email">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Company</label>

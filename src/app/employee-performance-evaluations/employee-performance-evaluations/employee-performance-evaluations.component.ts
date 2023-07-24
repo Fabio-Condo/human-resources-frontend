@@ -87,7 +87,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'employee.name,asc'
+    sort: 'employee.position.firstName,asc'
   }
 
   get editing() {
@@ -172,7 +172,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
       data => {
         this.employees = data.content.map(employee => {
           return {
-            label: employee.name,
+            label: employee.person.firstName + ' ' + employee.person.lastName, 
             value: employee.id
           }
         })
