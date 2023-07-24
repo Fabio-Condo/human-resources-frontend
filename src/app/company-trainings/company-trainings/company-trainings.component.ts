@@ -199,10 +199,6 @@ export class CompanyTrainingsComponent implements OnInit {
 
   getEmployees() {
     this.employeesService.findAllV2().then(dados => {
-      //this.employees2 = dados.map((dado: IEmployee) => ({
-      //  label: dado.name,
-      //  value: dado.id
-      //}));
       this.employees = dados
     })
       .catch(

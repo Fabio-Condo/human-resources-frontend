@@ -142,7 +142,8 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                <a *ngIf="editing" href="javascript:;" (click)="onaddEmployeeToProject()">add +</a>
+                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="name"></p-multiSelect>
+                <br>
                 <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o
                     projeto</span>
                 <p-table [value]="project.team" [responsive]="true" styleClass="p-datatable-sm" #tabela>
@@ -159,7 +160,7 @@
                             <td>{{ employee.position.name }}</td>
                             <td class="col-acoes">
                                 <span class="p-buttonset">
-                                    <a href="javascript:;" (click)="removeEmployeeProjectConfirm(employee.id)"><p-tag
+                                    <a href="javascript:;" (click)="removeMember(rowIndex)"><p-tag
                                             [severity]="'danger'">remove</p-tag></a>
                                 </span>
                             </td>
@@ -188,48 +189,6 @@
 
     </form>
 </p-dialog>
-
-<!--Add New member in project -->
-<p-dialog header="Novo membro" [(visible)]="displayModalAddNewMemberIntoProject" [modal]="true"
-    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
-    <form autocomplete="off" #AddasMemberForm="ngForm"
-        (ngSubmit)="addEmployeeToProject(selectedEmployeeIdToAddasMember)">
-        <div class="col-12 p-fluid">
-            <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel (onChange)="findEmployeeById(selectedEmployeeIdToAddasMember)"
-                [(ngModel)]="selectedEmployeeIdToAddasMember"></p-dropdown>
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Cargo</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="position" ngModel #position="ngModel"
-                required minlength="1" [(ngModel)]="employeeById.position.name">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Departamento</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="department" ngModel
-                #department="ngModel" required minlength="1" [(ngModel)]="employeeById.position.department.name">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <label>Contrato</label>
-            <input disabled pInputText class="p-inputtext-sm" type="text" name="contractType" ngModel
-                #contractType="ngModel" required minlength="1" [(ngModel)]="employeeById.contractType">
-        </div>
-
-        <div class="col-12 p-fluid">
-            <button pButton type="submit" [disabled]="AddasMemberForm.invalid" class="p-button-sm"
-                style="height: 30px;">
-                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
-                <span *ngIf="showLoading">Loading...</span>
-                <span *ngIf="!showLoading">add</span>
-            </button>
-        </div>
-    </form>
-</p-dialog>
-
 
 <!--Filtrar-->
 <p-dialog [header]=" 'Filtros' " [(visible)]="displayModalFilter" [style]="{width: '33vw'}" [modal]="true">

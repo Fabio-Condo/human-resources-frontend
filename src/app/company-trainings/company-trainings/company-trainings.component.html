@@ -186,7 +186,7 @@
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
                 
                 <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="name"></p-multiSelect>
-
+                <br>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
                         <tr>

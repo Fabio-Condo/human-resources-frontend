@@ -30,7 +30,8 @@ export class ProjectsComponent implements OnInit {
   displayModalSave: boolean = false;
 
   departments: any[] = [];
-  employees: any[] = [];
+  employees: IEmployee[] = [];
+  selectedEmployees!: IEmployee[];
 
   selectedEmployeeIdToAddasMember: any;
 
@@ -114,6 +115,8 @@ export class ProjectsComponent implements OnInit {
 
   addNew(projectForm: NgForm) {
     this.showLoading = true;
+    this.project.team = []
+    this.project.team = this.selectedEmployees
     this.projectSerice.add(this.project).subscribe(
       (projectAdded) => {
         this.project = projectAdded;
@@ -130,11 +133,13 @@ export class ProjectsComponent implements OnInit {
 
   update(projectForm: NgForm) {
     this.showLoading = true;
+    this.project.team = this.selectedEmployees
     this.projectSerice.update(this.project).subscribe(
       (project) => {
         this.project = project;
         this.filterProjects();
         this.showLoading = false;
+        //this.selectedEmployees = this.project.team
         this.messageService.add({ severity: 'success', detail: 'Project updated successfully!' });
       },
       (errorResponse: HttpErrorResponse) => {
@@ -143,7 +148,6 @@ export class ProjectsComponent implements OnInit {
       }
     )
   }
-
 
   filterProjects(page: number = 0): void {
     this.showLoading = true;
@@ -179,20 +183,15 @@ export class ProjectsComponent implements OnInit {
   }
 
   getEmployees() {
-    return this.employeesService.findAll().subscribe(
-      data => {
-        this.employees = data.content.map(employee => {
-          return {
-            label: employee.name,
-            value: employee.id
-          }
-        })
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-        this.showLoading = false;
-      }
-    )
+    this.employeesService.findAllV2().then(dados => {
+      this.employees = dados
+    })
+      .catch(
+        (errorResponse: HttpErrorResponse) => {
+          this.sendErrorNotification(errorResponse.error.message);
+          this.showLoading = false;
+        }
+      );
   }
 
   findEmployeeById(id: number) {
@@ -226,21 +225,9 @@ export class ProjectsComponent implements OnInit {
     )
   }
 
-  onaddEmployeeToProject() {
-    this.displayModalAddNewMemberIntoProject = true;
-  }
-
-  addEmployeeToProject(employeeId: number) {
-    this.projectSerice.addEmployeeToProject(employeeId, this.project.id).subscribe(
-      (project) => {
-        this.filterProjects();
-        this.project = project;
-        this.messageService.add({ severity: 'success', detail: 'Employee added successfully!' });
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.error.message);
-      }
-    )
+  removeMember(index: number) {
+    this.project.team.splice(index, 1);
+    this.selectedEmployees = this.project.team
   }
 
   removeEmployeeProject(employeeId: number) {
@@ -282,6 +269,7 @@ export class ProjectsComponent implements OnInit {
   onEditProject(editProject: Project): void {
     this.project = editProject;
     this.project.id = editProject.id
+    this.selectedEmployees = this.project.team
     this.displayModalSave = true;
   }
 
