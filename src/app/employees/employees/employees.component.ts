@@ -339,9 +339,9 @@ export class EmployeesComponent implements OnInit {
 
   getPositionsByDepartmentId() {
     this.positionsService.getPositionsByDepartmentId(this.selectedDepartment!).then(list => {
-      this.positions = list.map(agencia => ({
-        label: agencia.name,
-        value: agencia.id
+      this.positions = list.map(position => ({
+        label: position.name,
+        value: position.id
       }));
       if (this.selectedDepartment !== this.employee.position.department.id) {
         //this.employee.position.id = 0;  

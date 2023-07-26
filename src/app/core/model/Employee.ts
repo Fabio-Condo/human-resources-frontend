@@ -31,8 +31,8 @@ export class Employee implements IEmployee {
     person = new Person;
     birthplace = new Location;
     residenceLocation = new Location;
-    employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     position = new Position;
+    employeePerformanceEvaluations: EmployeePerformanceEvaluation[] = [];
     employeeExperiences: EmployeeExperience[] = [];
     wageHistories: EmployeeWage[] = [];
     employeeTrainings: EmployeeTraining [] = [];
