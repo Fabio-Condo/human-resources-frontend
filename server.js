@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 
 
-app.use(express.static(__dirname + '/dist/wherehouse-ui'));
+app.use(express.static(__dirname + '/dist/humanresources-frontend'));
 
 app.get('/*', function(req, res) {
-  res.sendFile(__dirname + '/dist/wherehouse-ui/index.html');
+  res.sendFile(__dirname + '/dist/humanresources-frontend/index.html');
 });
 
 console.log("Preparando para iniciar o servidor JS...")
