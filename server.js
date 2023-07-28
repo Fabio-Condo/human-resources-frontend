@@ -16,3 +16,7 @@ console.log("Servidor JS escutando a porta configurada...")
 
 // ng build --configuration=production
 // node server.js
+
+// ------ Deploy no github ----------------------
+// https://www.youtube.com/watch?v=F3HbnbT1Maw
+// ng build --output-path docs --base-href /human-resources-frontend
