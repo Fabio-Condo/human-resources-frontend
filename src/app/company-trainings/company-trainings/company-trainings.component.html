@@ -47,6 +47,19 @@
                 </td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="10">
+                    <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+                    <span *ngIf="!showLoading">No trainings found </span>
+                    <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+                    <a href="javascript:;">
+                        <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterTrainings(0)" pTooltip="Refresh"
+                            class="pi pi-refresh"></i>
+                    </a>
+                </td>
+            </tr>
+        </ng-template>
     </p-table>
 </div>
 
