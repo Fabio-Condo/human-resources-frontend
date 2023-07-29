@@ -10,6 +10,8 @@
                     class="p-button-primmary mr-2"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="downloadExcel()"
                     class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="generatePdf()"
+                    class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"

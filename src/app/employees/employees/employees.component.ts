@@ -248,6 +248,20 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
+
+  generatePdf(){
+    this.employeesService.downloadPdf()
+      .then(report => {
+        const url = window.URL.createObjectURL(report);
+
+        window.open(url);
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.message);
+      }
+    );
+  }
+
   addNew(employeeForm: NgForm) {
     this.showLoading = true;
     this.employeesService.add(this.employee).subscribe(
