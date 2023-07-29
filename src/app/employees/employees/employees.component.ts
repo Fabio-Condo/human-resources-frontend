@@ -229,6 +229,25 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
+  downloadExcel() {
+    this.employeesService.downloadExcelFile(this.filter).subscribe(
+      (data: Blob) => {
+        const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'funcionarios.xlsx';
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error occurred while downloading Excel file:', error);
+      }
+    );
+  }
+
   addNew(employeeForm: NgForm) {
     this.showLoading = true;
     this.employeesService.add(this.employee).subscribe(

@@ -62,6 +62,48 @@ export class EmployeesService {
     return this.http.get<IApiResponse<IEmployee>>(`${this.employeesUrl}/filter`, { params });
   }
 
+  downloadExcelFile(filter: IEmployeeFilter): Observable<Blob> {
+    let params = new HttpParams()  
+    .set('page', filter.page)  
+    .set('size', filter.itemsPerPage);  
+
+  if (filter.sort) { 
+    params = params.set('employeeOrderBy', filter.sort); 
+  } 
+
+  if (filter.global) { 
+   params = params.set('global', filter.global); 
+  }
+  if (filter.name) { 
+   params = params.set('name', filter.name); 
+  }
+  if (filter.birthplace) { 
+    params = params.set('birthplace', filter.birthplace); 
+  }
+  if (filter.gender) { 
+    params = params.set('gender', filter.gender); 
+  }
+  if (filter.department) { 
+    params = params.set('department', filter.department); 
+  }
+  if (filter.position) { 
+    params = params.set('position', filter.position); 
+  }
+  if (filter.positionType) { 
+    params = params.set('positionType', filter.positionType); 
+  }
+  if (filter.maritalStatus) { 
+    params = params.set('maritalStatus', filter.maritalStatus); 
+  }
+  if (filter.wageValueBegin) {
+    params = params.set('wageValueBegin', filter.wageValueBegin);
+  }
+  if (filter.wageValueEnd) {
+    params = params.set('wageValueEnd', filter.wageValueEnd);
+  }
+    return this.http.get(`${this.employeesUrl}/funcionarios/excel2`, { responseType: 'blob', params });
+  }
+
   getEmployees(filter: IEmployeeFilter): Observable<IApiResponse<IEmployee>> {  
 
     let params = new HttpParams()  

@@ -6,8 +6,10 @@
 
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewEmployee()" pRipple label="Novo" icon="pi pi-plus"
+                <button pButton (click)="onAddNewEmployee();" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2"></button>
+                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="downloadExcel()"
+                    class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"
@@ -121,7 +123,7 @@
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Departamento</label>
                     <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
-                        [(ngModel)]="selectedDepartment"  name="selectedDepartment" #department="ngModel"
+                        [(ngModel)]="selectedDepartment" name="selectedDepartment" #department="ngModel"
                         (onChange)="getPositionsByDepartmentId()"></p-dropdown>
                 </div>
 
@@ -169,7 +171,8 @@
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Salário</label>
-                    <p-inputNumber [(ngModel)]="employee.wageValue" name="wageValue" #wageValue="ngModel" inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
+                    <p-inputNumber [(ngModel)]="employee.wageValue" name="wageValue" #wageValue="ngModel"
+                        inputId="locale-user" [minFractionDigits]="2"></p-inputNumber>
                 </div>
             </div>
         </div>
@@ -501,9 +504,11 @@
                 <li class="dialog-info-li">
                     <i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);font-weight:bold">Genero</span>:
-                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.person.gender==='MASCULINE'">
+                        <span style="color:hsl(252, 30%, 17%);"
+                            *ngIf="selectedEmployeeModal.person.gender==='MASCULINE'">
                             Masculino </span>
-                        <span style="color:hsl(252, 30%, 17%);" *ngIf="selectedEmployeeModal.person.gender==='FEMININE'">
+                        <span style="color:hsl(252, 30%, 17%);"
+                            *ngIf="selectedEmployeeModal.person.gender==='FEMININE'">
                             Feminino </span>
                     </i>
                 </li>
