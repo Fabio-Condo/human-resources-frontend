@@ -28,6 +28,7 @@ import { EmployeeExperience } from 'src/app/core/model/EmployeeExperience';
 export class EmployeesComponent implements OnInit {
 
   showLoading: boolean = false;
+  showPdfLoading: any;
 
   totalRecords: number = 0
   employees: IEmployee[] = [];
@@ -250,7 +251,7 @@ export class EmployeesComponent implements OnInit {
 
 
   generatePdf(){
-    this.employeesService.downloadPdf()
+    this.employeesService.downloadPdf(this.filter)
       .then(report => {
         const url = window.URL.createObjectURL(report);
 
