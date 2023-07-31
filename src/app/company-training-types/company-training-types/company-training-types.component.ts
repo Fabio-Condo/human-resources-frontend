@@ -47,8 +47,8 @@ export class CompanyTrainingTypesComponent implements OnInit {
   ];
 
   orderPage = [
-    { label: 'Id (crescente)', value: 'id,asc' },
-    { label: 'Id (decrescente)', value: 'id,desc' },
+    { label: 'Nivel (crescente)', value: 'level,asc' },
+    { label: 'Nivel (decrescente)', value: 'level,desc' },
   ];
 
   constructor(
@@ -68,7 +68,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
   filter: ICompanyTrainingTypeFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'id,asc'
+    sort: 'level,asc'
   }
 
   get editing() {

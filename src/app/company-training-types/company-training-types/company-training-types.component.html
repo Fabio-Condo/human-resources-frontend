@@ -22,7 +22,13 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">Nivel</th>
+                <th style="background-color: #fff;">
+                    Nivel
+                    <span *ngIf="filter.sort ==='level,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='level,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th style="background-color: #fff;">Tipo</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
@@ -188,8 +194,8 @@
         <div class="col-12 p-fluid">
             <label>Designation</label>
             <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="designation"
-              [(ngModel)]="goal.designation" minlength="10"></textarea>
-          </div>
+                [(ngModel)]="goal.designation" minlength="10"></textarea>
+        </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmGoal.invalid"
                 style="height: 30px; margin-top: 1%;"></button>

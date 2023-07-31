@@ -64,8 +64,6 @@ export class DepartmentComponent implements OnInit {
   orderPage = [
     { label: 'Nome (crescente)', value: 'name,asc' },
     { label: 'Nome (decrescente)', value: 'name,desc' },
-    { label: 'Id (crescente)', value: 'id,asc' },
-    { label: 'Id (decrescente)', value: 'id,desc' },
   ];
 
   constructor(

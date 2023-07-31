@@ -21,7 +21,13 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">Nome</th>
+                <th style="background-color: #fff;">
+                    Nome
+                    <span *ngIf="filter.sort ==='name,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='name,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th style="background-color: #fff;">Country</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
