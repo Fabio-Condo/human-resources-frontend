@@ -262,14 +262,14 @@
 
 
 <!--Modal add main responsibilities-->
-<p-dialog [header]="editingMainResponsability ? 'Editar principais responsabilidades' : 'Nova responsabilidades'"
+<p-dialog [header]="editingMainResponsability ? 'Editar principais responsabilidades' : 'Nova responsabilidades'" [style]="{width: '40vw'}"
   [(visible)]="showMainResponsibilityForm" [modal]="true" *ngIf="mainResponsibility">
   <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
   <form #frmMainResponsibility="ngForm" (ngSubmit)="confirmMainResponsability(frmMainResponsibility)">
     <div class="col-12 p-fluid">
       <label>Designation</label>
-      <input pInputText type="text" name="designation" required [(ngModel)]="mainResponsibility.designation"
-        #designation="ngModel" />
+      <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="designation"
+        [(ngModel)]="mainResponsibility.designation" minlength="10"></textarea>
     </div>
     <div class="col-12 p-fluid">
       <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"
@@ -279,14 +279,14 @@
 </p-dialog>
 
 <!--Modal add requirements-->
-<p-dialog [header]="editingSpecificRequirement ? 'Editar requisito especifico' : 'Novo'"
+<p-dialog [header]="editingSpecificRequirement ? 'Editar requisito especifico' : 'Novo'" [style]="{width: '40vw'}"
   [(visible)]="showSpecificRequirementForm" [modal]="true" *ngIf="specificRequirement">
   <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
   <form #frmSpecificRequirement="ngForm" (ngSubmit)="confirmSpecificRequirement(frmSpecificRequirement)">
     <div class="col-12 p-fluid">
       <label>Designation</label>
-      <input pInputText type="text" name="designation" required [(ngModel)]="specificRequirement.designation"
-        #designation="ngModel" />
+      <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="designation"
+        [(ngModel)]="specificRequirement.designation" minlength="10"></textarea>
     </div>
     <div class="col-12 p-fluid">
       <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"
@@ -296,13 +296,13 @@
 </p-dialog>
 
 <!--Benefits-->
-<p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm"
+<p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm" [style]="{width: '40vw'}"
   [modal]="true" *ngIf="benefit">
   <form #frmBenefit="ngForm" (ngSubmit)="confirmBenefit(frmBenefit)">
     <div class="col-12 p-fluid">
       <label>Designation</label>
-      <input pInputText type="text" name="designation" required [(ngModel)]="benefit.designation"
-        #designation="ngModel" />
+      <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="designation"
+        [(ngModel)]="benefit.designation" minlength="10"></textarea>
     </div>
     <div class="col-12 p-fluid">
       <button style="margin-top: 10%;" pButton type="button" label="Confirmar" type="submit"

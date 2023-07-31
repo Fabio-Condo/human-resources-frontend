@@ -181,14 +181,15 @@
 </p-dialog>
 
 <!--Goals-->
-<p-dialog [header]="editingGoal ? 'Edição objectivo' : 'Novo objectivo'" [style]="{width: '45vw'}"
+<p-dialog [header]="editingGoal ? 'Edição objectivo' : 'Novo objectivo'" [style]="{width: '40vw'}"
     [(visible)]="showGoalForm" [modal]="true" *ngIf="goal">
     <!--*ngIf="contato" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
     <form #frmGoal="ngForm" (ngSubmit)="confirmGoal(frmGoal)">
         <div class="col-12 p-fluid">
-            <label>Designação</label>
-            <input pInputText type="text" name="name" required [(ngModel)]="goal.designation" #name="ngModel" />
-        </div>
+            <label>Designation</label>
+            <textarea pInputTextarea rows="3" ngModel #coordnates="ngModel" minlength="3" ngModel name="designation"
+              [(ngModel)]="goal.designation" minlength="10"></textarea>
+          </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmGoal.invalid"
                 style="height: 30px; margin-top: 1%;"></button>
