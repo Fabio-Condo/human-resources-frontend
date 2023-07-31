@@ -2,8 +2,8 @@
   <h3>Cargos</h3>
 
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
-    currentPageReportTemplate="Results: {{totalRecords}} of {{totalPositions}}" [showCurrentPageReport]="true" [lazy]="true"
-    [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    currentPageReportTemplate="Results: {{totalRecords}} of {{totalPositions}}" [showCurrentPageReport]="true"
+    [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
         <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus"
@@ -19,7 +19,13 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th style="background-color: #fff;">Nome</th>
+        <th style="background-color: #fff;">
+          Nome
+          <span *ngIf="filter.sort ==='name,desc'" class="pi pi-sort-down"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+          <span *ngIf="filter.sort ==='name,asc'" class="pi pi-sort-up"
+            style="margin-left: 2px; color: #1c80cf;"></span>
+        </th>
         <th style="background-color: #fff;">Tipo</th>
         <th style="background-color: #fff;">Departamento</th>
         <th style="background-color: #fff;">Local</th>
@@ -262,8 +268,8 @@
 
 
 <!--Modal add main responsibilities-->
-<p-dialog [header]="editingMainResponsability ? 'Editar principais responsabilidades' : 'Nova responsabilidades'" [style]="{width: '40vw'}"
-  [(visible)]="showMainResponsibilityForm" [modal]="true" *ngIf="mainResponsibility">
+<p-dialog [header]="editingMainResponsability ? 'Editar principais responsabilidades' : 'Nova responsabilidades'"
+  [style]="{width: '40vw'}" [(visible)]="showMainResponsibilityForm" [modal]="true" *ngIf="mainResponsibility">
   <!--*ngIf="mainResponsibility" exibir o modal se tiver contato. Lembrar que o metodo prepararNovoContato abri o modal e em seguida inicializa o contato-->
   <form #frmMainResponsibility="ngForm" (ngSubmit)="confirmMainResponsability(frmMainResponsibility)">
     <div class="col-12 p-fluid">
@@ -296,8 +302,8 @@
 </p-dialog>
 
 <!--Benefits-->
-<p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm" [style]="{width: '40vw'}"
-  [modal]="true" *ngIf="benefit">
+<p-dialog [header]="editingBenefit ? 'Editar beneficio' : 'Nova beneficio'" [(visible)]="showBenefitsForm"
+  [style]="{width: '40vw'}" [modal]="true" *ngIf="benefit">
   <form #frmBenefit="ngForm" (ngSubmit)="confirmBenefit(frmBenefit)">
     <div class="col-12 p-fluid">
       <label>Designation</label>

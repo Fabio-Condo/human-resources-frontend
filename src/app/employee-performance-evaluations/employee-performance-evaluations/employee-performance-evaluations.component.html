@@ -2,7 +2,9 @@
     <h3>Avaliação de desenpenho</h3>
 
     <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations"
-        [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployeePerformanceEvaluations}}"
+        [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true"
+        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployeePerformanceEvaluations}}"
         [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
@@ -10,7 +12,8 @@
                     (click)="onAddNewEmployeePerformanceEvaluation()"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"></button>
-                <p-dropdown [options]="categories" [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"
+                <p-dropdown [options]="categories"
+                    [disabled]="!selectedEmployeePerformanceEvaluations || !selectedEmployeePerformanceEvaluations.length"
                     placeholder="Status" [style]="{width: '10vw'}" ngModel [(ngModel)]="selectedStatus"
                     (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
                 <span class="p-input-icon-left ml-auto">
@@ -27,10 +30,34 @@
                 <th>
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th style="background-color: #fff;">Funcionário</th>
-                <th style="background-color: #fff;">Cargo</th>
-                <th style="background-color: #fff;">Departamento</th>
-                <th style="background-color: #fff;">Data</th>
+                <th style="background-color: #fff;">
+                    Funcionário
+                    <span *ngIf="filter.sort ==='employee.name,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='employee.name,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
+                <th style="background-color: #fff;">
+                    Cargo
+                    <span *ngIf="filter.sort ==='employee.position.name,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='employee.position.name,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
+                <th style="background-color: #fff;">
+                    Departamento
+                    <span *ngIf="filter.sort ==='employee.position.department.name,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='employee.position.department.name,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
+                <th style="background-color: #fff;">
+                    Data
+                    <span *ngIf="filter.sort ==='date,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='date,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th style="background-color: #fff;">Categoria</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
@@ -70,7 +97,8 @@
                     <span *ngIf="!showLoading">No performance evaluations found </span>
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
                     <a href="javascript:;">
-                        <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterEmployeePerformanceEvaluations(0)" pTooltip="Refresh"
+                        <i *ngIf="!showLoading" style="color: #1c80cf;"
+                            (click)="filterEmployeePerformanceEvaluations(0)" pTooltip="Refresh"
                             class="pi pi-refresh"></i>
                     </a>
                 </td>
@@ -168,25 +196,25 @@
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Cargo</label>
-            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
-                [(ngModel)]="filter.position" name="position"
-                #position="ngModel" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+            <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions" [(ngModel)]="filter.position"
+                name="position" #position="ngModel"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Departamento</label>
             <p-dropdown placeholder="Selecione..." [filter]="true" [options]="departments"
-                [(ngModel)]="filter.department" name="department"
-                #department="ngModel" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+                [(ngModel)]="filter.department" name="department" #department="ngModel"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
 
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy"
-            [inputStyle]="{ 'width': '200px'}" [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)"
-            [inline]="false" [readonlyInput]="false" ngModel #date="ngModel" [required]="true"
-            [(ngModel)]="filter.date" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-calendar>
+            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '200px'}"
+                [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)" [inline]="false"
+                [readonlyInput]="false" ngModel #date="ngModel" [required]="true" [(ngModel)]="filter.date"
+                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">

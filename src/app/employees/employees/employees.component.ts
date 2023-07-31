@@ -165,18 +165,18 @@ export class EmployeesComponent implements OnInit {
   ];
 
   orderPage = [
-    { label: 'Nome (crescente)', value: 'name,asc' },
-    { label: 'Nome (decrescente)', value: 'name,desc' },
+    { label: 'Nome (crescente)', value: 'person.firstName,asc' },
+    { label: 'Nome (decrescente)', value: 'person.firstName,desc' },
     { label: 'Cargo (crescente)', value: 'position,asc' },
     { label: 'Cargo (decrescente)', value: 'position,desc' },
     { label: 'Depart. (crescente)', value: 'department,asc' },
     { label: 'Depart. (decrescente)', value: 'department,desc' },
-    { label: 'Id (crescente)', value: 'id,asc' },
-    { label: 'Id (decrescente)', value: 'id,desc' },
+    //{ label: 'Id (crescente)', value: 'id,asc' },
+    //{ label: 'Id (decrescente)', value: 'id,desc' },
   ];
 
   cols = [
-    { field: 'gender', header: 'Gender' },
+    { field: 'person.gender', header: 'Gender' },
     { field: 'birthday', header: 'Birthday' },
     { field: 'contractType', header: 'Contract Type' },
     { field: 'wageValue', header: 'Wage' },

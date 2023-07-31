@@ -61,8 +61,8 @@ export class VocationsComponent implements OnInit {
   ];
 
   orderPage = [
-    { label: 'Id (crescente)', value: 'id,asc' },
-    { label: 'Id (decrescente)', value: 'id,desc' },
+    { label: 'Employee (crescente)', value: 'employee.name,asc' },
+    { label: 'Employee (decrescente)', value: 'employee.name,desc' },
   ];
 
   constructor(
@@ -82,7 +82,7 @@ export class VocationsComponent implements OnInit {
   filter: IVocationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'id,asc'
+    sort: 'employee.name,asc'
   }
 
   @ViewChild('table') grid: any;

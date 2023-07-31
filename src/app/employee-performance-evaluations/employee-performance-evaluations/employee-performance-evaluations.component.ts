@@ -63,10 +63,14 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   ];
 
   orderPage = [
-    { label: 'Funcionário (crescente)', value: 'employee.name,asc' },
-    { label: 'Funcionário (decrescente)', value: 'employee.name,desc' },
+    { label: 'Funcionário (cres)', value: 'employee.name,asc' },
+    { label: 'Funcionário (decr)', value: 'employee.name,desc' },
+    { label: 'Cargo (crescente)', value: 'employee.position.name,asc' },
+    { label: 'Cargo (decrescente)', value: 'employee.position.name,desc' },
     { label: 'Depart. (crescente)', value: 'employee.position.department.name,asc' },
     { label: 'Depart. (decrescente)', value: 'employee.position.department.name,desc' },
+    { label: 'Data - crescente', value: 'date,asc' },
+    { label: 'Data - decrescente', value: 'date,desc' },
   ];
 
   constructor(
@@ -90,7 +94,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'employee.position.firstName,asc'
+    sort: 'employee.name,asc'
   }
 
   get editing() {

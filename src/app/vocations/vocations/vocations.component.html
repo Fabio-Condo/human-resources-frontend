@@ -2,16 +2,18 @@
     <h3>Pedidos de ausências</h3>
 
     <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true"
-        (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" [showCurrentPageReport]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalVocations}}"
-        styleClass="p-datatable-sm" #table>
+        (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords"
+        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalVocations}}" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2 "></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"
                     [disabled]="!selectedVocations || !selectedVocations.length"></button>
-                <p-dropdown [options]="vocationStatuses" [disabled]="!selectedVocations || !selectedVocations.length" placeholder="Status" [style]="{width: '10vw'}"
-                    ngModel [(ngModel)]="selectedStatus" (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
+                <p-dropdown [options]="vocationStatuses" [disabled]="!selectedVocations || !selectedVocations.length"
+                    placeholder="Status" [style]="{width: '10vw'}" ngModel [(ngModel)]="selectedStatus"
+                    (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Employee name" [(ngModel)]="filter.global"
@@ -26,7 +28,13 @@
                 <th>
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th style="background-color: #fff;">Funcionário</th>
+                <th style="background-color: #fff;">
+                    Funcionário
+                    <span *ngIf="filter.sort ==='employee.name,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='employee.name,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th style="background-color: #fff;">Tipo</th>
                 <th style="background-color: #fff;">Inicio</th>
                 <th style="background-color: #fff;">Fim</th>

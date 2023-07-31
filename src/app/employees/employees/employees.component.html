@@ -2,7 +2,8 @@
     <h3>Funcionários</h3>
 
     <p-table [value]="employees" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
-        [rows]="filter.itemsPerPage" [lazy]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployees}}" styleClass="p-datatable-sm" #table>
+        [rows]="filter.itemsPerPage" [lazy]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployees}}" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
             <div class="flex">
@@ -31,9 +32,27 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>Nome</th>
-                <th>Cargo</th>
-                <th>Departamento</th>
+                <th>
+                    Nome
+                    <span *ngIf="filter.sort ==='person.firstName,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='person.firstName,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
+                <th>
+                    Cargo
+                    <span *ngIf="filter.sort ==='position,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='position,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
+                <th>
+                    Departamento
+                    <span *ngIf="filter.sort ==='department,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='department,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th *ngFor="let col of columns">
                     {{ col.header }}
                 </th>

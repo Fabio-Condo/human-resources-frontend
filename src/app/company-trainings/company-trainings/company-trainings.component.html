@@ -2,8 +2,8 @@
     <h3>Formações</h3>
 
     <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
-        currentPageReportTemplate="Results: {{totalRecords}} of {{totalCompanyTrainings}}" [showCurrentPageReport]="true"
-        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalCompanyTrainings}}"
+        [showCurrentPageReport]="true" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewTraining()" pRipple label="Novo" icon="pi pi-plus"
@@ -21,7 +21,13 @@
             <tr>
                 <th style="background-color: #fff;">Nivel</th>
                 <th style="background-color: #fff;">Tipo</th>
-                <th style="background-color: #fff;">Data</th>
+                <th style="background-color: #fff;">
+                    Data
+                    <span *ngIf="filter.sort ==='date,desc'" class="pi pi-sort-down"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                    <span *ngIf="filter.sort ==='date,asc'" class="pi pi-sort-up"
+                        style="margin-left: 2px; color: #1c80cf;"></span>
+                </th>
                 <th style="background-color: #fff;">Duração</th>
                 <th style="background-color: #fff;">Ações</th>
             </tr>
