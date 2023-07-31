@@ -2,7 +2,8 @@
   <h3>Cargos</h3>
 
   <p-table [value]="positions" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
-    [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    currentPageReportTemplate="Results: {{totalRecords}} of {{totalPositions}}" [showCurrentPageReport]="true" [lazy]="true"
+    [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption">
       <div class="flex">
         <button pButton (click)="onAddNewPosition()" pRipple label="Novo" icon="pi pi-plus"
@@ -49,17 +50,17 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-          <td colspan="10">
-              <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
-              <span *ngIf="!showLoading">No positions found </span>
-              <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
-              <a href="javascript:;">
-                  <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterPositions(0)" pTooltip="Refresh"
-                      class="pi pi-refresh"></i>
-              </a>
-          </td>
+        <td colspan="10">
+          <span *ngIf="showLoading" style="color:#1c80cf;">Loading... </span>
+          <span *ngIf="!showLoading">No positions found </span>
+          <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
+          <a href="javascript:;">
+            <i *ngIf="!showLoading" style="color: #1c80cf;" (click)="filterPositions(0)" pTooltip="Refresh"
+              class="pi pi-refresh"></i>
+          </a>
+        </td>
       </tr>
-  </ng-template>
+    </ng-template>
   </p-table>
 
 </div>

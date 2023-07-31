@@ -49,4 +49,8 @@ export class DepartmentService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.departmentsUrl}/${id}`, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.departmentsUrl}/total`, { });
+  }
 }

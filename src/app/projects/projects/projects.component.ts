@@ -24,6 +24,8 @@ export class ProjectsComponent implements OnInit {
   showLoading: boolean = false;
   totalRecords: number = 0
 
+  totalProjects: number = 0
+
   projects: IProject[] = [];
 
   project: IProject = new Project;
@@ -79,7 +81,7 @@ export class ProjectsComponent implements OnInit {
   ];
 
   constructor(
-    private projectSerice: ProjectsService,
+    private projectService: ProjectsService,
     private departmentService: DepartmentService,
     private employeesService: EmployeesService,
     private messageService: MessageService,
@@ -91,6 +93,7 @@ export class ProjectsComponent implements OnInit {
     this.title.setTitle('Projects page');
     this.getDepartments();
     this.getEmployees();
+    this.getTotalProjects();
   }
 
   filter: IProjectFilter = {
@@ -117,11 +120,12 @@ export class ProjectsComponent implements OnInit {
     this.showLoading = true;
     this.project.team = []
     this.project.team = this.selectedEmployees
-    this.projectSerice.add(this.project).subscribe(
+    this.projectService.add(this.project).subscribe(
       (projectAdded) => {
         this.project = projectAdded;
         this.showLoading = false;
         this.filterProjects();
+        this.getTotalProjects();
         this.messageService.add({ severity: 'success', detail: 'Project added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
@@ -134,7 +138,7 @@ export class ProjectsComponent implements OnInit {
   update(projectForm: NgForm) {
     this.showLoading = true;
     this.project.team = this.selectedEmployees
-    this.projectSerice.update(this.project).subscribe(
+    this.projectService.update(this.project).subscribe(
       (project) => {
         this.project = project;
         this.filterProjects();
@@ -152,7 +156,7 @@ export class ProjectsComponent implements OnInit {
   filterProjects(page: number = 0): void {
     this.showLoading = true;
     this.filter.page = page;
-    this.projectSerice.filter(this.filter).subscribe(
+    this.projectService.filter(this.filter).subscribe(
       (data: IApiResponse<IProject>) => {
         this.projects = data.content;
         this.totalRecords = data.totalElements;
@@ -209,7 +213,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: IProject) {
-    this.projectSerice.delete(project.id).subscribe(
+    this.projectService.delete(project.id).subscribe(
       () => {
         if (this.grid.first === 0) {
           this.filterProjects();
@@ -217,6 +221,7 @@ export class ProjectsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Workplace deleted succefully!' })
+        this.getTotalProjects();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -231,7 +236,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   removeEmployeeProject(employeeId: number) {
-    this.projectSerice.removeEmployeeProject(employeeId, this.project.id).subscribe(
+    this.projectService.removeEmployeeProject(employeeId, this.project.id).subscribe(
       (project) => {
         this.filterProjects();
         this.project = project;
@@ -250,6 +255,20 @@ export class ProjectsComponent implements OnInit {
         this.removeEmployeeProject(employeeId);
       }
     });
+  }
+
+  getTotalProjects(){
+    this.showLoading = true;
+    this.projectService.getTotal().subscribe(
+      (total) => {
+        this.totalProjects =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onSelectProject(selectedProject: IProject): void {

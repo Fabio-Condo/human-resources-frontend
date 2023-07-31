@@ -2,7 +2,7 @@
     <h3>Avaliação de desenpenho</h3>
 
     <p-table [value]="employeePerformanceEvaluations" [(selection)]="selectedEmployeePerformanceEvaluations"
-        [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true"
+        [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployeePerformanceEvaluations}}"
         [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">

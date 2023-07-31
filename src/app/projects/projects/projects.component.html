@@ -2,6 +2,7 @@
     <h3>Projectos</h3>
 
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalProjects}}" [showCurrentPageReport]="true"
         [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
@@ -142,7 +143,8 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
-                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="person.firstName"></p-multiSelect>
+                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees"
+                    optionLabel="person.firstName"></p-multiSelect>
                 <br>
                 <span *ngIf="!editing" style="color: #e96969;">Só poderá adicionar os membros depois de salvar o
                     projeto</span>

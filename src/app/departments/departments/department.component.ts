@@ -25,6 +25,8 @@ export class DepartmentComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalDepartments: number = 0;
+
   totalRecords: number = 0
   departments: IDepartment[] = [];
 
@@ -76,6 +78,7 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Departments page');
+    this.getTotalDepartments();
   }
 
   filter: IDepartmentFilter = {
@@ -105,6 +108,7 @@ export class DepartmentComponent implements OnInit {
         this.department = departmentAdded;
         this.showLoading = false;
         this.getDepartments();
+        this.getTotalDepartments();
         this.messageService.add({ severity: 'success', detail: 'Department added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
@@ -155,6 +159,7 @@ export class DepartmentComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Department deleted succefully!' })
+        this.getTotalDepartments();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -170,6 +175,20 @@ export class DepartmentComponent implements OnInit {
         this.deleteDepartment(department);
       }
     });
+  }
+
+  getTotalDepartments(){
+    this.showLoading = true;
+    this.departmentService.getTotal().subscribe(
+      (total) => {
+        this.totalDepartments =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onAddNewDepartment(): void {

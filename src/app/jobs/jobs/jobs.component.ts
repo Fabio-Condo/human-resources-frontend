@@ -233,7 +233,7 @@ export class JobsComponent implements OnInit {
 
   getTotalJobs(){
     this.showLoading = true;
-    this.jobsService.buscarTotal().subscribe(
+    this.jobsService.getTotal().subscribe(
       (total) => {
         this.totalJobs =  total;
         this.showLoading = false;

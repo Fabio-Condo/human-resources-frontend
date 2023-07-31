@@ -24,6 +24,8 @@ export class CompanyTrainingsComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalCompanyTrainings: number = 0
+
   totalRecords: number = 0
   trainings: ICompanyTraining[] = [];
 
@@ -79,6 +81,7 @@ export class CompanyTrainingsComponent implements OnInit {
     this.title.setTitle('Trainings page');
     this.getCompanyTrainingTypes();
     this.getEmployees();
+    this.getTotalCompanyTraining();
   }
 
   @ViewChild('table') grid: any;
@@ -110,6 +113,7 @@ export class CompanyTrainingsComponent implements OnInit {
         this.companyTraining = companyTrainingAdded;
         this.showLoading = false;
         this.filterTrainings();
+        this.getTotalCompanyTraining();
         this.convertStringsToDates([companyTrainingAdded]);
         this.messageService.add({ severity: 'success', detail: 'Training added successfully' });      
       },
@@ -172,6 +176,7 @@ export class CompanyTrainingsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Training deleted succefully!' })
+        this.getTotalCompanyTraining();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -228,6 +233,20 @@ export class CompanyTrainingsComponent implements OnInit {
     this.employeesService.findById(id).subscribe(
       employee => {
         this.employeeById = employee;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
+  }
+
+  getTotalCompanyTraining(){
+    this.showLoading = true;
+    this.companyTrainingsService.getTotal().subscribe(
+      (total) => {
+        this.totalCompanyTrainings =  total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {

@@ -26,6 +26,8 @@ export class PayrollsComponent implements OnInit {
 
   displayModalSave: boolean = false;
 
+  totalPayrolls: number = 0
+
   totalRecords: number = 0
   payrolls: IPayRoll[] = [];
 
@@ -69,6 +71,7 @@ export class PayrollsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees(0);
+    this.getTotalParolls();
   }
 
   filter: IPayrollFilter = {
@@ -102,6 +105,7 @@ export class PayrollsComponent implements OnInit {
         this.payroll = payrollAdded;
         this.showLoading = false;
         this.filterPayrolls();
+        this.getTotalParolls();
         this.convertStringsToDates([payrollAdded]);
         this.messageService.add({ severity: 'success', detail: 'Payroll added successfully' });      
       },
@@ -163,12 +167,27 @@ export class PayrollsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Payroll deleted succefully!' })
+        this.getTotalParolls();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
     )
+  }
+
+  getTotalParolls(){
+    this.showLoading = true;
+    this.payRollService.getTotal().subscribe(
+      (total) => {
+        this.totalPayrolls =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onSelectPayroll(selectedPayroll: IPayRoll): void {

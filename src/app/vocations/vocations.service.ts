@@ -67,4 +67,8 @@ export class VocationsService {
   severalStatusUpdate(vocationList: IVocation[], status: string): Observable<IVocation[]> {
     return this.http.put<IVocation[]>(`${this.vocationsUrl}/updateStatusAll/${status}`, vocationList, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.vocationsUrl}/total`, { });
+  }
 }

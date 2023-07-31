@@ -2,13 +2,14 @@
     <h3>Formações</h3>
 
     <p-table [value]="trainings" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalCompanyTrainings}}" [showCurrentPageReport]="true"
         [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewTraining()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2"></button>
                 <span class="p-input-icon-left ml-auto">
-                    <i class="pi pi-search"></i> 
+                    <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Level or type" [(ngModel)]="filter.global"
                         (ngModelChange)="filterTrainings()" />
                 </span>
@@ -197,8 +198,9 @@
             </a>
 
             <div *ngIf="showProjectMembers" class="col-12 p-fluid" style="margin-top: 2%; background-color: #fff">
-                
-                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees" optionLabel="person.firstName"></p-multiSelect>
+
+                <p-multiSelect [options]="employees" [(ngModel)]="selectedEmployees" name="employees"
+                    optionLabel="person.firstName"></p-multiSelect>
                 <br>
                 <p-table [value]="companyTraining.employees" [responsive]="true" styleClass="p-datatable-sm" #tabela>
                     <ng-template pTemplate="header">
@@ -215,8 +217,8 @@
                             <td class="col-acoes">
                                 <span class="p-buttonset">
                                     <a style="margin-left: 3px;" href="javascript:;"
-                                    (click)="removeMember(rowIndex)"><p-tag
-                                            [severity]="'danger'"> remove</p-tag></a>
+                                        (click)="removeMember(rowIndex)"><p-tag [severity]="'danger'">
+                                            remove</p-tag></a>
                                 </span>
                             </td>
                         </tr>

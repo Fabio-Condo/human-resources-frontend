@@ -23,6 +23,8 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalEmployeePerformanceEvaluations: number = 0;
+
   totalRecords: number = 0
   employeePerformanceEvaluations: IEmployeePerformanceEvaluation[] = [];
 
@@ -80,6 +82,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.getEmployees();
     this.getPositions();
     this.getDepartments();
+    this.getTotalEmployeesPerformanceEvaluations();
   }
 
   @ViewChild('table') grid: any;
@@ -109,6 +112,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.employeePerformanceEvaluation = employeePerformanceEvaluationAdded;
         this.showLoading = false;
         this.filterEmployeePerformanceEvaluations();
+        this.getTotalEmployeesPerformanceEvaluations();
         this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
@@ -159,6 +163,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Employee performance Evaluation deleted succefully!' })
+        this.getTotalEmployeesPerformanceEvaluations();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -182,6 +187,20 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  getTotalEmployeesPerformanceEvaluations(){
+    this.showLoading = true;
+    this.employeePerformanceEvaluationsService.getTotal().subscribe(
+      (total) => {
+        this.totalEmployeePerformanceEvaluations =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   severalDeleteConfirm(): void {

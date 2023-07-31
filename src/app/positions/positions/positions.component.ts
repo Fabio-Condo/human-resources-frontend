@@ -26,6 +26,8 @@ export class PositionsComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalPositions: number = 0
+
   totalRecords: number = 0
   positions: IPosition[] = [];
 
@@ -122,6 +124,7 @@ export class PositionsComponent implements OnInit {
     this.title.setTitle('Positions page');
     this.getDepartments();
     this.getLocations();
+    this.getTotalPositions();
     //this.getHierarchicalReporter();
   }
 
@@ -152,6 +155,7 @@ export class PositionsComponent implements OnInit {
         this.position = positionAdded;
         this.showLoading = false;
         this.filterPositions();
+        this.getTotalPositions();
         this.messageService.add({ severity: 'success', detail: 'Position added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -202,6 +206,7 @@ export class PositionsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Position deleted succefully!' })
+        this.getTotalPositions();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -259,6 +264,20 @@ export class PositionsComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  getTotalPositions(){
+    this.showLoading = true;
+    this.positionsService.getTotal().subscribe(
+      (total) => {
+        this.totalPositions =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onFilter(): void {

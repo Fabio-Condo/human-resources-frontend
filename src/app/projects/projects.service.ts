@@ -84,4 +84,8 @@ export class ProjectsService {
     return this.http.put<IProject>(`${this.projectsUrl}/${projectId}/employees/${employeeId}`, { });
   }
 
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.projectsUrl}/total`, { });
+  }
+
 }

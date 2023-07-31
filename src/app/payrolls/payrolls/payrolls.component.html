@@ -2,6 +2,7 @@
     <h3>Folhas de salários</h3>
 
     <p-table [value]="payrolls" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        currentPageReportTemplate="Results: {{totalRecords}} of {{totalPayrolls}}" [showCurrentPageReport]="true"
         [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
@@ -111,8 +112,8 @@
             </div>
 
             <div class="col-12 md-12 p-fluid">
-                <p-table [value]="payroll.payments" [scrollable]="true" scrollHeight="400px"  [(selection)]="selectedPayments" [lazy]="true"
-                    styleClass="p-datatable-sm" #table>
+                <p-table [value]="payroll.payments" [scrollable]="true" scrollHeight="400px"
+                    [(selection)]="selectedPayments" [lazy]="true" styleClass="p-datatable-sm" #table>
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="width: 4rem" *ngIf="!payroll.id">
@@ -159,7 +160,8 @@
                             required minlength="1" [(ngModel)]="payroll.description">
                     </div>
                     <div class="field col-12 md:col-2">
-                        <button pButton type="submit" [disabled]="payrollForm.invalid || selectedPayments.length == 0 || payroll.id">save</button>
+                        <button pButton type="submit"
+                            [disabled]="payrollForm.invalid || selectedPayments.length == 0 || payroll.id">save</button>
                     </div>
                 </div>
 

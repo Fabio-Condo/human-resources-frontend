@@ -45,4 +45,8 @@ export class PayRollService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.payrollssUrl}/${id}`, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.payrollssUrl}/total`, { });
+  }
 }

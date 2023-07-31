@@ -55,4 +55,8 @@ export class CompanyTrainingTypesService {
     return this.http.get<ICompanyTrainingType>(`${this.companyTrainingsUrl}/${id}`, {});
   }
 
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.companyTrainingsUrl}/total`, { });
+  }
+
 }

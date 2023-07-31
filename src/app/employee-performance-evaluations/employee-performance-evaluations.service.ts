@@ -82,4 +82,8 @@ export class EmployeePerformanceEvaluationsService {
   severalStatusUpdate(employeePerformanceEvaluationList: IEmployeePerformanceEvaluation[], status: string): Observable<IEmployeePerformanceEvaluation[]> {
     return this.http.put<IEmployeePerformanceEvaluation[]>(`${this.employeePerformanceEvaluation}/updateStatusAll/${status}`, employeePerformanceEvaluationList, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.employeePerformanceEvaluation}/total`, { });
+  }
 }

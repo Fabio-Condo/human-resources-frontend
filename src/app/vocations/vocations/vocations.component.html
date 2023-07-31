@@ -2,7 +2,7 @@
     <h3>Pedidos de ausências</h3>
 
     <p-table [value]="vocations" [(selection)]="selectedVocations" [paginator]="true"
-        (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords"
+        (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" [lazy]="true" [totalRecords]="totalRecords" [showCurrentPageReport]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalVocations}}"
         styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">

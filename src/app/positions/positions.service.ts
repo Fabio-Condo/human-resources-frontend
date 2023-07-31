@@ -92,4 +92,8 @@ export class PositionsService {
   getById(id: number): Observable<IPosition> {
     return this.http.get<IPosition>(`${this.positionsUrl}/${id}`, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.positionsUrl}/total`, { });
+  }
 }

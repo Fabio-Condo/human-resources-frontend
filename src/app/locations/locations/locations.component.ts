@@ -19,6 +19,8 @@ export class LocationsComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalLocations: number = 0;
+
   totalRecords: number = 0
   locations: ILocation[] = [];
 
@@ -56,6 +58,7 @@ export class LocationsComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Locations page');
     this.getCountries();
+    this.getTotalLocations();
   }
 
   filter: ILocationFilter = {
@@ -85,7 +88,8 @@ export class LocationsComponent implements OnInit {
         this.location = locationAdded;
         this.showLoading = false;
         this.getLocations();
-        this.messageService.add({ severity: 'success', detail: 'Location added successfully' });      
+        this.getTotalLocations();
+        this.messageService.add({ severity: 'success', detail: 'Location added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -122,7 +126,7 @@ export class LocationsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteLocation(location: ILocation) {
@@ -134,6 +138,7 @@ export class LocationsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Location deleted succefully!' })
+        this.getTotalLocations();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -153,6 +158,21 @@ export class LocationsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
+  }
+
+  
+  getTotalLocations(){
+    this.showLoading = true;
+    this.locationsService.getTotal().subscribe(
+      (total) => {
+        this.totalLocations =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onAddNewLocation(): void {
@@ -181,10 +201,10 @@ export class LocationsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.getLocations(page);
   }
-  
+
   private sendErrorNotification(message: string): void {
     if (message) {
       this.messageService.add({ severity: 'error', detail: message });

@@ -102,7 +102,7 @@ export class JobsService {
     return this.http.put<IJob>(`${this.jobsUrl}/${jobId}/selected-candidates/${candidateId}`, { });
   }
 
-  buscarTotal(): Observable<number> {
+  getTotal(): Observable<number> {
     return this.http.get<number>(`${this.jobsUrl}/total`, { });
   }
 

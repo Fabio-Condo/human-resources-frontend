@@ -22,6 +22,8 @@ export class VocationsComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalVocations: number = 0;
+
   totalRecords: number = 0
 
   vocations: IVocation[] = [];
@@ -74,6 +76,7 @@ export class VocationsComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Vocations page');
     this.getEmployees();
+    this.getTotalVocations();
   }
 
   filter: IVocationFilter = {
@@ -103,6 +106,7 @@ export class VocationsComponent implements OnInit {
         this.vocation = vocationAdded;
         this.showLoading = false;
         this.getVocations();
+        this.getTotalVocations();
         this.convertStringsToDates([vocationAdded]);
         this.messageService.add({ severity: 'success', detail: 'Vocation added successfully' });      
       },
@@ -172,12 +176,27 @@ export class VocationsComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Vocation deleted succefully!' })
+        this.getTotalVocations();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
     )
+  }
+
+  getTotalVocations(){
+    this.showLoading = true;
+    this.vocationsService.getTotal().subscribe(
+      (total) => {
+        this.totalVocations =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   deletionConfirm(vocation: IVocation): void {

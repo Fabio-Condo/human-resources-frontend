@@ -192,4 +192,8 @@ export class EmployeesService {
   findById(id: number): Observable<IEmployee> {
     return this.http.get<IEmployee>(`${this.employeesUrl}/${id}`, {});
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.employeesUrl}/total`, { });
+  }
 }

@@ -48,4 +48,8 @@ export class LocationsService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.locationsUrl}/${id}`, { });
   }
+
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.locationsUrl}/total`, { });
+  }
 }

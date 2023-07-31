@@ -19,6 +19,8 @@ export class CompanyTrainingTypesComponent implements OnInit {
 
   showLoading: boolean = false;
 
+  totalTrainingTypes: number = 0
+
   totalRecords: number = 0
   trainingTypes: ICompanyTrainingType[] = [];
 
@@ -58,6 +60,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Training types page');
+    this.getTotalTrainingTypes();
   }
 
   @ViewChild('table') grid: any;
@@ -87,6 +90,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
         this.trainingType = trainingTypeAdded;
         this.showLoading = false;
         this.filterTrainingTypes();
+        this.getTotalTrainingTypes();
         this.messageService.add({ severity: 'success', detail: 'Training type added successfully' });      
       },
       (errorResponse: HttpErrorResponse) => {
@@ -137,6 +141,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Training type deleted succefully!' })
+        this.getTotalTrainingTypes();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -152,6 +157,20 @@ export class CompanyTrainingTypesComponent implements OnInit {
           this.deleteTrainingType(trainingType);
       }
     });
+  }
+
+  getTotalTrainingTypes(){
+    this.showLoading = true;
+    this.companyTrainingTypesService.getTotal().subscribe(
+      (total) => {
+        this.totalTrainingTypes =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onAddNewTrainingType(): void {

@@ -30,6 +30,8 @@ export class EmployeesComponent implements OnInit {
   showLoading: boolean = false;
   showPdfLoading: any;
 
+  totalEmployees: number = 0;
+
   totalRecords: number = 0
   employees: IEmployee[] = [];
 
@@ -196,6 +198,7 @@ export class EmployeesComponent implements OnInit {
     this.title.setTitle('employees page');
     this.getDepartments();
     this.getLocations();
+    this.getTotalEmployees();
     this._selectedColumns = [
       //{ field: 'gender', header: 'Gender' }
     ];
@@ -270,6 +273,7 @@ export class EmployeesComponent implements OnInit {
         this.employee = employeeAdded;
         this.showLoading = false;
         this.filterEmployees();
+        this.getTotalEmployees();
         this.convertStringsToDates([employeeAdded]);
         this.messageService.add({ severity: 'success', detail: 'Employee added successfully' });
       },
@@ -317,11 +321,12 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.delete(employee.id).subscribe(
       () => {
         if (this.grid.first === 0) {
-          this.filterEmployees()
+          this.filterEmployees();
         } else {
           this.grid.reset();
         }
         this.messageService.add({ severity: 'success', detail: 'Employee deleted succefully!' })
+        this.getTotalEmployees();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -420,6 +425,20 @@ export class EmployeesComponent implements OnInit {
         this.showLoading = false;
       }
     )
+  }
+
+  getTotalEmployees(){
+    this.showLoading = true;
+    this.employeesService.getTotal().subscribe(
+      (total) => {
+        this.totalEmployees =  total;
+        this.showLoading = false;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    );
   }
 
   onFilter(): void {
