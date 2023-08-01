@@ -218,7 +218,7 @@ export class PositionsComponent implements OnInit {
       data => {
         this.departments = data.content.map(department => {
           return  {
-            label: department.name,
+            label: this.limitarString(department.name, 40),
             value: department.id
           }
         })
@@ -277,6 +277,15 @@ export class PositionsComponent implements OnInit {
       }
     );
   }
+
+  limitarString(texto: string, limite: number): string {
+    if (texto.length <= limite) {
+      return texto;
+    } else {
+      return texto.slice(0, limite);
+    }
+  }
+  
 
   onFilter(): void {
     this.displayModalFilter = true;
