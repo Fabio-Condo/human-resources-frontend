@@ -184,8 +184,6 @@ export class EmployeesComponent implements OnInit {
 
   _selectedColumns = this.cols;
 
-  products: any[] = [];
-
   constructor(
     private employeesService: EmployeesService,
     private locationsService: LocationsService,
@@ -204,9 +202,6 @@ export class EmployeesComponent implements OnInit {
     this._selectedColumns = [
       //{ field: 'gender', header: 'Gender' }
     ];
-
-    this.products = Array.from({ length: 5 }).map((_, i) => `Item #${i}`);
-    
   }
 
   @Input() get selectedColumns(): any[] {
