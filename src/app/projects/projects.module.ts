@@ -15,6 +15,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
 import { TagModule } from 'primeng/tag';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 
@@ -38,6 +39,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DividerModule,
     TagModule,
     MultiSelectModule,
+    InputTextareaModule,
 
     RouterModule,
     AppRoutingModule

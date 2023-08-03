@@ -15,6 +15,7 @@ import { DividerModule } from 'primeng/divider';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 
@@ -40,6 +41,7 @@ import { AppRoutingModule } from '../app-routing.module';
     DialogModule,
     DividerModule,
     MultiSelectModule,
+    InputTextareaModule,
 
     RouterModule,
     AppRoutingModule

@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule } from '../app-routing.module';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 
@@ -34,6 +35,7 @@ import { AppRoutingModule } from '../app-routing.module';
     SelectButtonModule,
     DialogModule,
     DividerModule,
+    InputTextareaModule,
 
     RouterModule,
     AppRoutingModule

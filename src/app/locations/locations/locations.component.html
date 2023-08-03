@@ -70,7 +70,7 @@
 </div>
 
 <p-dialog header="Location {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
-    [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
+    [style]="{width: '45vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #locationForm="ngForm" (ngSubmit)="save(locationForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -87,8 +87,8 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Descrição</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="description" ngModel #description="ngModel"
-                    required minlength="1" [(ngModel)]="location.description">
+                <textarea pInputTextarea rows="4" ngModel #coordnates="ngModel" minlength="3" ngModel name="description"
+                    [(ngModel)]="location.description" minlength="10"></textarea>
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
