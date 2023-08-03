@@ -61,7 +61,13 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee let-columns="columns">
-            <tr>
+            <tr *ngIf="showLoading">
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+            </tr>
+            <tr *ngIf="!showLoading">
                 <td>
                     <a href="javascript:;" (click)="onSelectEmployee(employee)">
                         {{ employee.person.firstName }} {{ employee.person.lastName }}
@@ -105,6 +111,27 @@
             </tr>
         </ng-template>
     </p-table>
+
+<!--
+    <p-table [value]="products" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+                <td><p-skeleton></p-skeleton></td>
+            </tr>
+        </ng-template>
+    </p-table>
+    -->
 
 </div>
 

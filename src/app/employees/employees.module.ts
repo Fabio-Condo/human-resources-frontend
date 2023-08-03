@@ -17,6 +17,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TagModule } from 'primeng/tag';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 
@@ -42,6 +43,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     TagModule,
     MultiSelectModule,
     InputNumberModule, 
+    SkeletonModule,
 
     RouterModule,
     AppRoutingModule
