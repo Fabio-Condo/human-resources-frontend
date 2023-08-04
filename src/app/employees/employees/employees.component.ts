@@ -19,6 +19,7 @@ import { Dependent } from 'src/app/core/model/Depedent';
 import { IdCard } from 'src/app/core/model/IdCard';
 import { LocationsService } from 'src/app/locations/locations.service';
 import { EmployeeExperience } from 'src/app/core/model/EmployeeExperience';
+import { Person } from 'src/app/core/model/Person';
 
 @Component({
   selector: 'app-employees',
@@ -65,6 +66,17 @@ export class EmployeesComponent implements OnInit {
   skillIndex?: number;
 
   dependent?: Dependent;
+  /*
+  dependent: Dependent = {
+    person: {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      birthday: new Date()
+    }
+  };
+  */
+
   dependents: Array<Dependent> = []
   showDependentForm = false;
   dependentIndex?: number;
@@ -202,6 +214,7 @@ export class EmployeesComponent implements OnInit {
     this._selectedColumns = [
       //{ field: 'gender', header: 'Gender' }
     ];
+    
   }
 
   @Input() get selectedColumns(): any[] {
@@ -592,7 +605,7 @@ export class EmployeesComponent implements OnInit {
   // Dependents
   getReadyNewDependent() {
     this.showDependentForm = true;
-    this.dependent = new Dependent();
+    this.dependent = new Dependent(new Person(), undefined, undefined);
     this.dependentIndex = this.employee.dependents.length;
   }
 
@@ -600,6 +613,7 @@ export class EmployeesComponent implements OnInit {
     this.dependent = this.cloneDependent(dependent);
     this.showDependentForm = true;
     this.convertDependentStringsToDates([this.dependent]);
+    this.convertPersonStringsToDates([this.dependent.person]);
     this.dependentIndex = index;
   }
 
@@ -610,7 +624,15 @@ export class EmployeesComponent implements OnInit {
   }
 
   cloneDependent(dependent: Dependent): Dependent {
-    return new Dependent(dependent.id, dependent.name, dependent.gender, dependent.relationship, dependent.birthday);
+
+    const person: Person = {
+      firstName: dependent.person.firstName, 
+      lastName: dependent.person.lastName,
+      gender: dependent.person.gender,
+      birthday: dependent.person.birthday
+    };
+
+    return new Dependent(person, dependent.id, dependent.relationship);
   }
 
   get editingDependent() {
@@ -732,7 +754,7 @@ export class EmployeesComponent implements OnInit {
 
   private convertStringsToDates(employees: any[]) {
     for (const employee of employees) {
-      employee.birthday = new Date(employee.birthday);
+      employee.person.birthday = new Date(employee.person.birthday);
       employee.hiringDate = new Date(employee.hiringDate);
     }
   }
@@ -743,11 +765,18 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
+  private convertPersonStringsToDates(people: any[]) {
+    for (const person of people) {
+      person.birthday = new Date(person.birthday);
+    }
+  }
+
   private convertIdCardsStringsToDates(idCards: any[]) {
     for (const idCard of idCards) {
       idCard.issueDate = new Date(idCard.issueDate);
     }
   }
+
 
   private sendErrorNotification(message: string): void {
     if (message) {

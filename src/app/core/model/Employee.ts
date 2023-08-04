@@ -20,7 +20,6 @@ export class Employee implements IEmployee {
     email!: string;
     gender!: string;
     contractType!: string;
-    birthday!: Date;
     hiringDate!: Date;
     physicalAddress!: string;
     nationality!: string;

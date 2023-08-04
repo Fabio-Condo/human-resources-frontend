@@ -128,7 +128,7 @@
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Email</label>
                     <input pInputText type="email" name="email" ngModel #email="ngModel" required minlength="1"
-                        [(ngModel)]="employee.person.email">
+                        [(ngModel)]="employee.email">
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Nationality</label>
@@ -139,7 +139,7 @@
                     <label>Data de nascimento</label>
                     <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
                         [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
-                        #birthday="ngModel" [required]="true" [(ngModel)]="employee.birthday"></p-calendar>
+                        #birthday="ngModel" [required]="true" [(ngModel)]="employee.person.birthday"></p-calendar>
                 </div>
                 <div class="col-12 p-fluid" style="margin-top: 2%;">
                     <label>Departamento</label>
@@ -434,6 +434,7 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="background-color: #FFF;">Nome</th>
+                            <th style="background-color: #FFF;">Apelido</th>
                             <th style="background-color: #FFF;">Genero</th>
                             <th style="background-color: #FFF;">Parentesco</th>
                             <th style="background-color: #FFF;">Data de nascimento</th>
@@ -442,10 +443,11 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-dependent let-rowIndex="rowIndex">
                         <tr>
-                            <td>{{ dependent.name }}</td>
-                            <td>{{ dependent.gender }}</td>
+                            <td>{{ dependent.person.firstName }}</td>
+                            <td>{{ dependent.person.lastName }}</td>
+                            <td>{{ dependent.person.gender }}</td>
                             <td>{{ dependent.relationship }}</td>
-                            <td>{{ dependent.birthday | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ dependent.person.birthday | date: 'dd/MM/yyyy' }}</td>
                             <td class="col-acoes">
                                 <span class="p-buttonset">
                                     <a href="javascript:;" (click)="getReadyDependentEdit(dependent, rowIndex)"><p-tag
@@ -559,7 +561,7 @@
                 </li>
                 <li class="dialog-info-li"><i class="dialog-info-i">
                         <span style="color:hsl(252, 30%, 17%);font-weight:bold">Data denascimento
-                        </span>: <span style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.birthday |
+                        </span>: <span style="color:hsl(252, 30%, 17%);">{{selectedEmployeeModal.person.birthday |
                             date:'dd/MM/yyyy'}}</span></i></li>
             </div>
         </div>
@@ -1131,13 +1133,17 @@
     [(visible)]="showDependentForm" [modal]="true" *ngIf="dependent">
     <form #frmDependent="ngForm" (ngSubmit)="confirmDependent(frmDependent)">
         <div class="col-12 p-fluid">
-            <label>Nome</label>
-            <input pInputText type="text" name="name" required [(ngModel)]="dependent.name" #name="ngModel" />
+            <label>Primeiro nome</label>
+            <input pInputText type="text" name="firstName" required [(ngModel)]="dependent.person.firstName" #name="ngModel" />
+        </div>
+        <div class="col-12 p-fluid">
+            <label>Apelido</label>
+            <input pInputText type="text" name="lastName" required [(ngModel)]="dependent.person.lastName" #name="ngModel" />
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Genero</label>
             <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
-                [(ngModel)]="dependent.gender"></p-dropdown>
+                [(ngModel)]="dependent.person.gender"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Grau de parentesco</label>
@@ -1148,7 +1154,7 @@
             <label>Data de nascimento</label>
             <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
                 [showOnFocus]="false" name="birthday" [inline]="false" [readonlyInput]="false" ngModel
-                #birthday="ngModel" [required]="true" [(ngModel)]="dependent.birthday"></p-calendar>
+                #birthday="ngModel" [required]="true" [(ngModel)]="dependent.person.birthday"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmDependent.invalid"

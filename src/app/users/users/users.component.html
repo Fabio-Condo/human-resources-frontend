@@ -62,7 +62,7 @@
           style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.person.lastName
           }}</td>
         <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.person.email }}
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}
         </td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
           style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.role }}
@@ -134,7 +134,7 @@
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">User ID</span>:
         <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.userId}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Email</span>: <span
-          style="color:#3f393371;font-weight:bold">{{selectedUserModal.person.email}}</span></i></li>
+          style="color:#3f393371;font-weight:bold">{{selectedUserModal.email}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
@@ -175,7 +175,7 @@
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>
-        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.person.email" required />
+        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.email" required />
       </div>
 
       <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">

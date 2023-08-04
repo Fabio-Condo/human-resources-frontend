@@ -100,7 +100,7 @@ export class UserService {
     formData.append('firstName', user.person.firstName);
     formData.append('lastName', user.person.lastName);
     formData.append('username', user.username);
-    formData.append('email', user.person.email);
+    formData.append('email', user.email);
     formData.append('role', user.role);
     formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.active));

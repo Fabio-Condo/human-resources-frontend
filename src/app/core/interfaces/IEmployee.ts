@@ -20,7 +20,6 @@ export interface IEmployee {
     email: string,
     gender: string,
     contractType: string
-    birthday: Date,
     hiringDate: Date,
     nationality: string,
     physicalAddress: string,

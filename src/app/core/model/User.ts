@@ -12,7 +12,7 @@ export class User {
     //public firstName: string;
     //public lastName: string;
     public username: string;
-    //public email: string;
+    public email: string;
     public bio: string;
     public lastLoginDate: any;  // Date;
     public lastLoginDateDisplay: any; // Date;
@@ -40,7 +40,7 @@ export class User {
       //this.firstName = '';
       //this.lastName = '';
       this.username = '';
-      //this.email = '';
+      this.email = '';
       this.bio = '';
       this.lastLoginDate = '';
       this.lastLoginDateDisplay = '';

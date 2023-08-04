@@ -1,15 +1,13 @@
+import { Person } from "./Person";
+
 export class Dependent {
     id?: number;
-    name?: string;
-    gender?: string;
     relationship?: string;
-    birthday?: Date;
+    person: Person;
 
-    constructor(id?: number, name?: string, gender?: string, relationship?: string, birthday?: Date) {
+    constructor(person: Person, id?: number, relationship?: string) {
         this.id = id;
-        this.name = name;
-        this.gender = gender;
         this.relationship = relationship;
-        this.birthday = birthday;
+        this.person = person;
     }
 }
