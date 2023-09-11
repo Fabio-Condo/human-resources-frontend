@@ -172,7 +172,7 @@ export class UsersComponent implements OnInit {
           this.user = response;
           this.fileName = null;
           this.profileImage = null;
-          this.messageService.add({ severity: 'success', detail: `${response.person.firstName} ${response.person.lastName} updated successfully` });
+          this.messageService.add({ severity: 'success', detail: `${response.profile.person.firstName} ${response.profile.person.lastName} updated successfully` });
           this.showLoading = false;
         },
         (errorResponse: HttpErrorResponse) => {

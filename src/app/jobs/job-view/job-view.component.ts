@@ -42,7 +42,7 @@ export class JobViewComponent implements OnInit {
 
   isAlreadyAplliedToCurrentJob(): boolean {
     if(this.user){
-      return this.user.jobs.some(job => job.id === this.job.id);
+      return this.user.profile.jobs.some(job => job.id === this.job.id);
     }
     return false;
   }

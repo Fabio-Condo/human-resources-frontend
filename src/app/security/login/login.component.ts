@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { AuthenticationService } from 'src/app/users/authentication.service';
 import { User } from 'src/app/core/model/User';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   countries: any[] = [];
   continents: any[] = [];
   selectedContinent?: number;
+
+  user = new User();
 
   constructor(
     private router: Router, 
@@ -61,10 +64,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   }
 
-  public onRegister(user: User): void {
+  public onRegister(user: NgForm): void {
     this.showLoading = true;
     this.subscriptions.push(
-      this.authenticationService.register(user).subscribe(
+      this.authenticationService.register(this.user).subscribe(
         (response: User) => {
           this.showLoading = false;
           this.messageService.add({ severity: 'success', detail: 'A new account was created for ${response.firstName}.Please check your email for password to log in.' })

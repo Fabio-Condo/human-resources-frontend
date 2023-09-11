@@ -54,7 +54,7 @@
 <!--Register-->
 <div class="container" style="max-width: 300px; margin: auto;" *ngIf="!isLogin">
 
-  <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+  <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
     <div class="p-grid" style="margin-top: 60px;">
 
       <div class="col-12 p-fluid" class="text-center">
@@ -62,28 +62,28 @@
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="firstName" placeholder="First name" ngModel
+        <input pInputText type="text" class="form-control" name="firstName" placeholder="First name" ngModel [(ngModel)]="user.profile.person.firstName"
           #firstNameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please
           enter a first name</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="lastName" placeholder="Last name" ngModel
+        <input pInputText type="text" class="form-control" name="lastName" placeholder="Last name" ngModel [(ngModel)]="user.profile.person.lastName"
           #lastNameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="lastNameInput.invalid && lastNameInput.touched">Type last
           name.</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="username" placeholder="Username" ngModel
+        <input pInputText type="text" class="form-control" name="username" placeholder="Username" ngModel [(ngModel)]="user.username"
           #usernameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="usernameInput.invalid && usernameInput.touched">Type the
           password.</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="email" placeholder="Email" ngModel
+        <input pInputText type="text" class="form-control" name="email" placeholder="Email" ngModel [(ngModel)]="user.email" 
           #emailInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="emailInput.invalid && emailInput.touched">Type the
           password.</span>

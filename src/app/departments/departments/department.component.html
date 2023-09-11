@@ -1,5 +1,4 @@
 <div class="container">
-    <h3>Departamentos</h3>
 
     <p-table [value]="departments" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
         currentPageReportTemplate="Results: {{totalRecords}} of {{totalDepartments}}" [showCurrentPageReport]="true"

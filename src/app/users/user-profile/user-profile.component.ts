@@ -90,7 +90,7 @@ export class UserProfileComponent implements OnInit {
     this.refreshing
     this.userService.update(this.user).subscribe(
       (userAdded) => {
-        //this.user = userAdded;
+        this.user = userAdded;
         this.authenticationService.addUserToLocalCache(userAdded);
         this.fileName = null;
         this.profileImage = null;
@@ -168,7 +168,7 @@ export class UserProfileComponent implements OnInit {
   getReadyNewContact() {
     this.showContactForm = true;
     this.contact = new UserContact();
-    this.contactIndex = this.user.userContacts.length;
+    this.contactIndex = this.user.profile.contacts.length;
   }
 
   getReadyContactEdit(contact: UserContact, index: number) {
@@ -178,7 +178,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   confirmContact(frm: NgForm) {
-    this.user.userContacts[this.contactIndex!] = this.cloneContact(this.contact!);
+    this.user.profile.contacts[this.contactIndex!] = this.cloneContact(this.contact!);
     this.showContactForm = false;
     frm.reset();
   }
@@ -192,14 +192,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeContact(index: number) {
-    this.user.userContacts.splice(index, 1);
+    this.user.profile.contacts.splice(index, 1);
   }
 
    // Training
    getReadyNewTraining() {
     this.showTrainingForm = true;
     this.training = new UserTraining();
-    this.trainingIndex = this.user.userTrainings.length;
+    this.trainingIndex = this.user.profile.trainings.length;
   }
 
   getReadyTrainingEdit(training: UserTraining, index: number) {
@@ -210,7 +210,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   confirmTraining(frm: NgForm) {
-    this.user.userTrainings[this.trainingIndex!] = this.cloneTraining(this.training!);
+    this.user.profile.trainings[this.trainingIndex!] = this.cloneTraining(this.training!);
     this.showTrainingForm = false;
     frm.reset();
   }
@@ -224,14 +224,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeTraining(index: number) {
-    this.user.userTrainings.splice(index, 1);
+    this.user.profile.trainings.splice(index, 1);
   }
 
   // Skills
   getReadyNewSkill() {
     this.showSkillForm = true;
     this.skill = new UserSkill();
-    this.skillIndex = this.user.userSkills.length;
+    this.skillIndex = this.user.profile.skills.length;
   }
 
   getReadySkillEdit(skill: UserSkill, index: number) {
@@ -241,7 +241,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   confirmSkill(frm: NgForm) {
-    this.user.userSkills[this.skillIndex!] = this.cloneSkill(this.skill!);
+    this.user.profile.skills[this.skillIndex!] = this.cloneSkill(this.skill!);
     this.showSkillForm = false;
     frm.reset();
   }
@@ -255,14 +255,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeSkill(index: number) {
-    this.user.userSkills.splice(index, 1);
+    this.user.profile.skills.splice(index, 1);
   }
 
   // Professional Experience
   getReadyNewProfessionalExperience() {
     this.showProfessionalExperienceForm = true;
     this.professionalExperience = new ProfessionalExperience();
-    this.professionalExperienceIndex = this.user.professionalExperiences.length;
+    this.professionalExperienceIndex = this.user.profile.professionalExperiences.length;
   }
 
   getReadyProfessionalExperienceEdit(professionalExperience: ProfessionalExperience, index: number) {
@@ -273,7 +273,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   confirmProfessionalExperience(frm: NgForm) {
-    this.user.professionalExperiences[this.professionalExperienceIndex!] = this.cloneProfessionalExperience(this.professionalExperience!);
+    this.user.profile.professionalExperiences[this.professionalExperienceIndex!] = this.cloneProfessionalExperience(this.professionalExperience!);
     this.showProfessionalExperienceForm = false;
     frm.reset();
   }
@@ -287,7 +287,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeProfessionalExperience(index: number) {
-    this.user.professionalExperiences.splice(index, 1);
+    this.user.profile.professionalExperiences.splice(index, 1);
   }
 
   private convertTrainingStringsToDates(training: any[]) {

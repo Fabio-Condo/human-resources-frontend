@@ -28,12 +28,12 @@
               <div class="col-12 p-fluid">
                 <label>Primeiro Nome</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="firstName" ngModel #firstName="ngModel"
-                  required minlength="1" [(ngModel)]="user.person.firstName">
+                  required minlength="1" [(ngModel)]="user.profile.person.firstName">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Último Nome</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="lastName" ngModel #lastName="ngModel"
-                  required minlength="1" [(ngModel)]="user.person.lastName">
+                  required minlength="1" [(ngModel)]="user.profile.person.lastName">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Email</label>
@@ -43,7 +43,7 @@
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Company</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="company" ngModel #company="ngModel" required
-                  minlength="1" [(ngModel)]="user.company">
+                  minlength="1" [(ngModel)]="user.profile.company">
               </div>
             </div>
             <div class="field col-12 md:col-6">
@@ -55,19 +55,19 @@
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Número de Telefone</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="phoneNumber" ngModel #phoneNumber="ngModel"
-                  required minlength="1" [(ngModel)]="user.phoneNumber">
+                  required minlength="1" [(ngModel)]="user.profile.phoneNumber">
               </div>
               <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Designation</label>
                 <input pInputText class="p-inputtext-sm" type="text" name="designation" ngModel #designation="ngModel"
-                  required minlength="1" [(ngModel)]="user.designation">
+                  required minlength="1" [(ngModel)]="user.profile.designation">
               </div>
             </div>
           </div>
           <div *ngIf="showAccount" class="col-12 p-fluid">
             <label>Bio</label>
             <textarea pInputTextarea rows="3" ngModel #bio="ngModel" minlength="3" ngModel name="bio" minlength="10"
-              placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+              placeholder="Bio" [(ngModel)]="user.profile.bio"></textarea>
           </div>
 
           <a *ngIf="isCandidate" href="javascript:;" style="text-decoration: none;" (click)="showContacts = !showContacts">
@@ -80,7 +80,7 @@
 
           <div *ngIf="showContacts" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
             <a href="javascript:;" style="padding: 10px;" (click)="getReadyNewContact()">add new</a>
-            <p-table [value]="user.userContacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <p-table [value]="user.profile.contacts" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -121,7 +121,7 @@
           <div *ngIf="showProfessionalExperiences" class="col-12 p-fluid"
             style="margin-top: 2px; background-color: #fff">
             <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewProfessionalExperience()">add new</a>
-            <p-table [value]="user.professionalExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <p-table [value]="user.profile.professionalExperiences" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
                 <tr>
                   <th style="background-color: #FFF;">Company</th>
@@ -164,7 +164,7 @@
 
           <div *ngIf="showUserTrainings" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
             <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewTraining()">add new</a>
-            <p-table [value]="user.userTrainings" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <p-table [value]="user.profile.trainings" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -203,7 +203,7 @@
           <!--Skills-->
           <div *ngIf="showUserSkills" class="col-12 p-fluid" style="margin-top: 2px; background-color: #fff">
             <a href="javascript:;" style=" padding: 10px;" (click)="getReadyNewSkill()">add new</a>
-            <p-table [value]="user.userSkills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <p-table [value]="user.profile.skills" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -241,7 +241,7 @@
           </a>
 
           <div *ngIf="showJobs" class="col-12 p-fluid" style="margin-bottom: 2px; background-color: #fff">
-            <p-table [value]="user.jobs" [responsive]="true" styleClass="p-datatable-sm" #tabela>
+            <p-table [value]="user.profile.jobs" [responsive]="true" styleClass="p-datatable-sm" #tabela>
               <ng-template pTemplate="header">
                 <tr>
                 </tr>
@@ -260,7 +260,7 @@
               <ng-template pTemplate="emptymessage">
                 <tr>
                   <td colspan="10">
-                    Sem contactos
+                    Sem Jobs
                   </td>
                 </tr>
               </ng-template>
