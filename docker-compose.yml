@@ -1,0 +1,28 @@
+services:
+  humanresourcesui:
+    build: .    
+    image: humanresources-ui:v1
+    ports:
+      - 4205:80
+    expose:
+      - 80
+    networks:
+      - humanresources-ui-net
+
+networks:
+  humanresources-ui-net:
+    driver: bridge
+
+
+# Para levantar usando o docker-compose
+# docker-compose up -d --build
+
+# Usando o DockerFile apenas(Sem usar o docker-compose) :
+# docker build -t sci-humanresources-ui:v1 .
+# docker run -p 4200:80 sci-humanresources-ui:v1
+# docker run -p 4200:80 -d humanresources-ui:v1    #Liberar o terminal
+
+# Para destruir e remover tudo
+# docker compose down
+# docker compose down --volumes
+
