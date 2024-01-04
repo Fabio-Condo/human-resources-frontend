@@ -78,8 +78,8 @@
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Nivel</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
-                    minlength="1" [(ngModel)]="trainingType.level">
+                <p-dropdown [options]="trainingLevel" placeholder="Selecione" name="gender" #gender ngModel
+                    [(ngModel)]="trainingType.level"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Tipo</label>

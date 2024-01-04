@@ -190,7 +190,7 @@ export class CompanyTrainingsComponent implements OnInit {
       data => {
         this.companyTrainingTypes = data.content.map(trainingType => {
           return  {
-            label: trainingType.level,
+            label: trainingType.type,
             value: trainingType.id
           }
         })

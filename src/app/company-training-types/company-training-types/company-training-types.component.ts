@@ -38,6 +38,15 @@ export class CompanyTrainingTypesComponent implements OnInit {
   showTrainingGoals: boolean = false;
   showProjectGoalsView: boolean = false;
 
+  trainingLevel = [
+    { label: 'Básico para Todos os Funcionários', value: 'Básico para Todos os Funcionários' },
+    { label: 'Desenvolvimento Pessoal', value: 'Desenvolvimento Pessoal' },
+    { label: 'Específico para Setores ou Funções', value: 'Específico para Setores ou Funções' },
+    { label: 'Desenvolvimento Pessoal', value: 'Desenvolvimento Pessoal' }, 
+    { label: 'Treinamento Onboarding', value: 'Treinamento Onboarding' },
+    { label: 'Específico para Setores ou Funções', value: 'Específico para Setores ou Funções' },
+  ];
+
   sizePage = [
     { label: '5 itens por página', value: 5 },
     { label: '10 itens por página', value: 10 },
