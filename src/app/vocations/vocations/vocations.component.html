@@ -9,9 +9,8 @@
             <div class="flex">
                 <button pButton (click)="onAddNewVocation()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2 "></button>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"
-                    [disabled]="!selectedVocations || !selectedVocations.length"></button>
-                <p-dropdown [options]="vocationStatuses" [disabled]="!selectedVocations || !selectedVocations.length"
+                <button *ngIf="selectedVocations.length" pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"></button>
+                <p-dropdown *ngIf="selectedVocations.length" [options]="vocationStatuses"
                     placeholder="Status" [style]="{width: '10vw'}" ngModel [(ngModel)]="selectedStatus"
                     (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
                 <span class="p-input-icon-left ml-auto">

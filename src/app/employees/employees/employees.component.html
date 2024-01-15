@@ -7,12 +7,16 @@
 
         <ng-template pTemplate="caption">
             <div class="flex">
-                <button pButton (click)="onAddNewEmployee();" pRipple label="Novo" icon="pi pi-plus"
-                    class="p-button-primmary mr-2"></button>
-                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="downloadExcel()"
-                    class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
-                <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="generatePdf()"
-                    class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+
+                <span class="p-buttonset mr-auto">
+                    <button pButton (click)="onAddNewEmployee();" pRipple label="Novo" icon="pi pi-plus"
+                        class="p-button-primmary"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="downloadExcel()"
+                        class="p-button-success ml-auto" pTooltip="XLS" tooltipPosition="bottom"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="generatePdf()"
+                        class="p-button-warning ml-auto" pTooltip="PDF" tooltipPosition="bottom"></button>
+                </span>
+
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"
@@ -1136,11 +1140,13 @@
     <form #frmDependent="ngForm" (ngSubmit)="confirmDependent(frmDependent)">
         <div class="col-12 p-fluid">
             <label>Primeiro nome</label>
-            <input pInputText type="text" name="firstName" required [(ngModel)]="dependent.person.firstName" #name="ngModel" />
+            <input pInputText type="text" name="firstName" required [(ngModel)]="dependent.person.firstName"
+                #name="ngModel" />
         </div>
         <div class="col-12 p-fluid">
             <label>Apelido</label>
-            <input pInputText type="text" name="lastName" required [(ngModel)]="dependent.person.lastName" #name="ngModel" />
+            <input pInputText type="text" name="lastName" required [(ngModel)]="dependent.person.lastName"
+                #name="ngModel" />
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Genero</label>

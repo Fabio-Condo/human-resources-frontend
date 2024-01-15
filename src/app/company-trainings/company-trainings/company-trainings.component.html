@@ -19,8 +19,8 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th style="background-color: #fff;">Nivel</th>
                 <th style="background-color: #fff;">Tipo</th>
+                <th style="background-color: #fff;">Nivel</th>
                 <th style="background-color: #fff;">
                     Data
                     <span *ngIf="filter.sort ==='date,desc'" class="pi pi-sort-down"
@@ -36,10 +36,10 @@
             <tr>
                 <td>
                     <a href="javascript:;" (click)="onSelectTraining(training)">
-                        {{ training.companyTrainingType.level }}
+                        {{ training.companyTrainingType.type }}
                     </a>
                 </td>
-                <td>{{ training.companyTrainingType.type }}</td>
+                <td>{{ training.companyTrainingType.level }}</td>
                 <td>{{ training.date | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ training.duration }}</td>
                 <td style="width: 180px;">

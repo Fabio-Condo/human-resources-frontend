@@ -28,7 +28,7 @@ export class VocationsComponent implements OnInit {
 
   vocations: IVocation[] = [];
 
-  employees: any[] = [] ;
+  employees: any[] = [];
 
   vocation: IVocation = new Vocation;
   displayModalSave: boolean = false;
@@ -37,6 +37,10 @@ export class VocationsComponent implements OnInit {
   displayModal = false;
 
   displayModalFilter: boolean = false;
+
+  labelTipoPadrao: string = "Todos tipos"
+  labelStatusPadrao: string = "Todos tipos"
+  labelFuncionarioPadrao: string = "Todos funcionários"
 
   vocationTypes = [
     { label: 'Férias', value: 'VOCATIONS' },
@@ -77,12 +81,17 @@ export class VocationsComponent implements OnInit {
     this.title.setTitle('Vocations page');
     this.getEmployees();
     this.getTotalVocations();
+    this.adicionarOpcaoPadrao(this.labelStatusPadrao, this.vocationStatuses);
+    this.adicionarOpcaoPadrao(this.labelTipoPadrao, this.vocationTypes);
   }
 
   filter: IVocationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'employee.name,asc'
+    sort: 'employee.name,asc',
+    vocationStatus: '',
+    vocationType: '',
+    employee: 0
   }
 
   @ViewChild('table') grid: any;
@@ -108,7 +117,7 @@ export class VocationsComponent implements OnInit {
         this.getVocations();
         this.getTotalVocations();
         this.convertStringsToDates([vocationAdded]);
-        this.messageService.add({ severity: 'success', detail: 'Vocation added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Vocation added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -147,18 +156,19 @@ export class VocationsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   getEmployees() {
     return this.employeesService.findAll().subscribe(
       data => {
         this.employees = data.content.map(employee => {
-          return  {
+          return {
             label: employee.person.firstName + ' ' + employee.person.lastName,
             value: employee.id
           }
         })
+        this.adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario();
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -185,11 +195,11 @@ export class VocationsComponent implements OnInit {
     )
   }
 
-  getTotalVocations(){
+  getTotalVocations() {
     this.showLoading = true;
     this.vocationsService.getTotal().subscribe(
       (total) => {
-        this.totalVocations =  total;
+        this.totalVocations = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -203,7 +213,7 @@ export class VocationsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteVocation(vocation);
+        this.deleteVocation(vocation);
       }
     });
   }
@@ -212,7 +222,7 @@ export class VocationsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir os items selecionados?',
       accept: () => {
-          this.severalDelete();
+        this.severalDelete();
       }
     });
   }
@@ -221,12 +231,12 @@ export class VocationsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja atualizar os items selecionados?',
       accept: () => {
-          this.severalStatusUpdate();
+        this.severalStatusUpdate();
       }
     });
   }
 
-  severalDelete(){
+  severalDelete() {
     this.vocationsService.severalDelete(this.selectedVocations).subscribe(
       () => {
         this.showLoading = true;
@@ -246,7 +256,7 @@ export class VocationsComponent implements OnInit {
     )
   }
 
-  severalStatusUpdate(){
+  severalStatusUpdate() {
     this.vocationsService.severalStatusUpdate(this.selectedVocations, this.selectedStatus).subscribe(
       () => {
         this.showLoading = true;
@@ -267,10 +277,16 @@ export class VocationsComponent implements OnInit {
   }
 
   onFilter(): void {
+    this.adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario();
+    this.adicionarOpcaoPadrao(this.labelStatusPadrao, this.vocationStatuses);
+    this.adicionarOpcaoPadrao(this.labelTipoPadrao, this.vocationTypes);
     this.displayModalFilter = true;
   }
 
   onAddNewVocation(): void {
+    this.removerOpcaoDoTipoPorLabel(this.labelTipoPadrao);
+    this.removerOpcaoDoStatusPorLabel(this.labelStatusPadrao);
+    this.removerOpcaoDoFuncionarioPorLabel(this.labelFuncionarioPadrao);
     this.vocation = new Vocation();
     this.displayModalSave = true;
   }
@@ -288,8 +304,55 @@ export class VocationsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.getVocations(page);
+  }
+
+  adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario() {
+    // Verifica se a opção 'Todos funcionários' já existe no array employees
+    const todosFuncionariosOptionExists = this.employees.some(option => option.label === this.labelFuncionarioPadrao);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosFuncionariosOptionExists) {
+      this.employees.unshift({
+        'label': this.labelFuncionarioPadrao,
+        'value': 0
+      });
+    }
+  }
+
+  adicionarOpcaoPadrao(label: string, array: any[]) {
+    // Verifica se a opção padrao 'Todos...' já existe no array
+    const todosOptionExists = array.some(option => option.label === label);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
+        'value': ''
+      });
+    }
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoDoStatusPorLabel(labelToRemove: string) {
+    this.vocationStatuses = this.vocationStatuses.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoDoTipoPorLabel(labelToRemove: string) {
+    this.vocationTypes = this.vocationTypes.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoDoFuncionarioPorLabel(labelToRemove: string) {
+    this.employees = this.employees.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
   }
 
   getVocationStatus(status: string) {
@@ -299,7 +362,7 @@ export class VocationsComponent implements OnInit {
       case 'APPROVED':
         return 'info';
       case 'REJECTED':
-        return 'danger'; 
+        return 'danger';
     }
     return '';
   }
