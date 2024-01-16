@@ -52,14 +52,16 @@
     <ng-template pTemplate="body" let-appUser>
       <tr [pSelectableRow]="appUser">
         <td>
-          <img height="20" width="20" src="{{appUser?.profile.profileImageUrl}}" class="rounded-circle img-fluid img-thumbnail"
-            alt="" style="border-radius: 50%;" />
+          <img height="20" width="20" src="{{appUser?.profile.profileImageUrl}}"
+            class="rounded-circle img-fluid img-thumbnail" alt="" style="border-radius: 50%;" />
         </td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.profile.person.firstName
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{
+          appUser.profile.person.firstName
           }}</td>
         <td pTooltip="Clica para visualizar" tooltipPosition="top"
-          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.profile.person.lastName
+          style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{
+          appUser.profile.person.lastName
           }}</td>
         <td class="col-data-content" pTooltip="Clica para visualizar" tooltipPosition="top"
           style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ appUser.email }}
@@ -94,14 +96,16 @@
           </a>
         </td>
         <td style="width: 180px;">
-          <button pButton pTooltip="View" (click)="onSelectUser(appUser)" tooltipPosition="top" type="button"
-            icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-          <button pButton [disabled]="!isAdmin" pButton pTooltip="Edit" (click)="onEditUser(appUser)"
-            tooltipPosition="top" type="button" icon="pi pi-pencil"
-            style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-          <button pButton pButton [disabled]="!isSuperAdmin" pTooltip="Delete" (click)="confirmarExclusao(appUser)"
-            tooltipPosition="top" type="button" icon="pi pi-trash"
-            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+          <span class="p-buttonset mr-auto">
+            <button pButton pTooltip="View" (click)="onSelectUser(appUser)" tooltipPosition="top" type="button"
+              icon="pi pi-eye" style="height: 30px;"></button>
+            <button pButton [disabled]="!isAdmin" pButton pTooltip="Edit" (click)="onEditUser(appUser)"
+              tooltipPosition="top" type="button" icon="pi pi-pencil"
+              style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>
+            <button pButton pButton [disabled]="!isSuperAdmin" pTooltip="Delete" (click)="confirmarExclusao(appUser)"
+              tooltipPosition="top" type="button" icon="pi pi-trash"
+              style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+          </span>
         </td>
       </tr>
     </ng-template>
@@ -123,8 +127,8 @@
 </div>
 
 
-<p-dialog header="{{selectedUserModal.profile.person.firstName}}" [(visible)]="displayModal" [modal]="true" [draggable]="false"
-  [resizable]="false">
+<p-dialog header="{{selectedUserModal.profile.person.firstName}}" [(visible)]="displayModal" [modal]="true"
+  [draggable]="false" [resizable]="false">
 
   <p-card header="{{selectedUserModal.profile.person.firstName}} {{selectedUserModal.profile.person.lastName}}"
     subheader="Username: {{selectedUserModal.username}}" [style]="{width: '360px'}" styleClass="p-card-shadow">
@@ -138,9 +142,11 @@
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
-        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y, h:mm:ssa'}}</span></i></li>
+        <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y,
+          h:mm:ssa'}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Last Login
-          Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate | date:'dd/MM/y,h:mm:ss a'}}</span></i></li>
+          Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate |
+          date:'dd/MM/y,h:mm:ss a'}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Status</span>:
         <span [style.color]="selectedUserModal.active === true ? '#1c80cf' : '#982F27'">{{ selectedUserModal.active ?
           'active' : 'inactive' }}</span></i></li>
@@ -155,13 +161,13 @@
     <div class="formgrid grid">
       <div class="col-12 p-fluid">
         <label>First name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName" [(ngModel)]="user.profile.person.firstName"
-          required />
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName"
+          [(ngModel)]="user.profile.person.firstName" required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Last name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName" [(ngModel)]="user.profile.person.lastName"
-          required />
+        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName"
+          [(ngModel)]="user.profile.person.lastName" required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Username</label>
@@ -171,7 +177,7 @@
       <div class="col-12 p-fluid" style="margin-top: 2%;">
         <label>Genero</label>
         <p-dropdown [options]="genders" placeholder="Selecione" name="gender" #gender ngModel
-            [(ngModel)]="user.profile.person.gender"></p-dropdown>
+          [(ngModel)]="user.profile.person.gender"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>

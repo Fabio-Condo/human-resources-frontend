@@ -42,14 +42,16 @@
                 </td>
                 <td>{{ dep.description }}</td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top"
-                        type="button" icon="pi pi-eye" style="height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top" type="button"
-                        icon="pi pi-pencil"
-                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top" type="button"
-                        icon="pi pi-trash"
-                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <span class="p-buttonset mr-auto">
+                        <button pButton pTooltip="View" (click)="onSelectDepartment(dep)" tooltipPosition="top"
+                            type="button" icon="pi pi-eye" style="height: 30px;"></button>
+                        <button pButton pTooltip="Edit" (click)="onEditDepartment(dep)" tooltipPosition="top"
+                            type="button" icon="pi pi-pencil"
+                            style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>
+                        <button pButton (click)="deletionConfirm(dep)" pTooltip="Delete" tooltipPosition="top"
+                            type="button" icon="pi pi-trash"
+                            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    </span>
                 </td>
             </tr>
         </ng-template>

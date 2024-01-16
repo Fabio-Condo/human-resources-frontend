@@ -10,7 +10,8 @@
             <div class="flex">
                 <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-primmary mr-2"
                     (click)="onAddNewEmployeePerformanceEvaluation()"></button>
-                <button *ngIf="selectedEmployeePerformanceEvaluations.length" pButton pRipple icon="pi pi-trash" class="p-button-danger mr-2" (click)="severalDeleteConfirm()"></button>
+                <button *ngIf="selectedEmployeePerformanceEvaluations.length" pButton pRipple icon="pi pi-trash"
+                    class="p-button-danger mr-2" (click)="severalDeleteConfirm()"></button>
                 <p-dropdown *ngIf="selectedEmployeePerformanceEvaluations.length" [options]="categories"
                     placeholder="Status" [style]="{width: '10vw'}" ngModel [(ngModel)]="selectedStatus"
                     (ngModelChange)="severalStatusUpdateConfirm()"></p-dropdown>
@@ -77,14 +78,16 @@
                     <p-tag [value]="epe.category" [severity]="getPerfomanceEvaluationStatus(epe.category)"></p-tag>
                 </td>
                 <td style="width: 180px;">
-                    <button pButton pTooltip="View" (click)="onSelectEmployeePerformanceEvaluation(epe)"
-                        tooltipPosition="top" type="button" icon="pi pi-eye" style=" height: 30px;"></button>&nbsp;
-                    <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)"
-                        tooltipPosition="top" type="button" icon="pi pi-pencil"
-                        style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>&nbsp;
-                    <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top" type="button"
-                        icon="pi pi-trash"
-                        style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    <span class="p-buttonset mr-auto">
+                        <button pButton pTooltip="View" (click)="onSelectEmployeePerformanceEvaluation(epe)"
+                            tooltipPosition="top" type="button" icon="pi pi-eye" style=" height: 30px;"></button>
+                        <button pButton pTooltip="Edit" (click)="onEditEmployeePerformanceEvaluation(epe)"
+                            tooltipPosition="top" type="button" icon="pi pi-pencil"
+                            style="background-color: #fff; color: #1c80cf; border-color: #1c80cf; height: 30px;"></button>
+                        <button pButton (click)="deletionConfirm(epe)" pTooltip="Delete" tooltipPosition="top"
+                            type="button" icon="pi pi-trash"
+                            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    </span>
                 </td>
             </tr>
         </ng-template>
