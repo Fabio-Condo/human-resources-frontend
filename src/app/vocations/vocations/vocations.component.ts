@@ -81,8 +81,8 @@ export class VocationsComponent implements OnInit {
     this.title.setTitle('Vocations page');
     this.getEmployees();
     this.getTotalVocations();
-    this.adicionarOpcaoPadrao(this.labelStatusPadrao, this.vocationStatuses);
-    this.adicionarOpcaoPadrao(this.labelTipoPadrao, this.vocationTypes);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelStatusPadrao, this.vocationStatuses);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelTipoPadrao, this.vocationTypes);
   }
 
   filter: IVocationFilter = {
@@ -91,7 +91,7 @@ export class VocationsComponent implements OnInit {
     sort: 'employee.name,asc',
     vocationStatus: '',
     vocationType: '',
-    employee: 0
+    employee: 0 // Opcao Todos Funcionarios
   }
 
   @ViewChild('table') grid: any;
@@ -168,7 +168,8 @@ export class VocationsComponent implements OnInit {
             value: employee.id
           }
         })
-        this.adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario();
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao, this.employees);
+
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -277,9 +278,9 @@ export class VocationsComponent implements OnInit {
   }
 
   onFilter(): void {
-    this.adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario();
-    this.adicionarOpcaoPadrao(this.labelStatusPadrao, this.vocationStatuses);
-    this.adicionarOpcaoPadrao(this.labelTipoPadrao, this.vocationTypes);
+    this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao, this.employees);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelStatusPadrao, this.vocationStatuses);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelTipoPadrao, this.vocationTypes);
     this.displayModalFilter = true;
   }
 
@@ -292,6 +293,9 @@ export class VocationsComponent implements OnInit {
   }
 
   onEditVocation(editVocation: Vocation): void {
+    this.removerOpcaoDoTipoPorLabel(this.labelTipoPadrao);
+    this.removerOpcaoDoStatusPorLabel(this.labelStatusPadrao);
+    this.removerOpcaoDoFuncionarioPorLabel(this.labelFuncionarioPadrao);
     this.vocation = editVocation;
     this.vocation.id = editVocation.id // Not necessary
     this.convertStringsToDates([editVocation]);
@@ -308,20 +312,22 @@ export class VocationsComponent implements OnInit {
     this.getVocations(page);
   }
 
-  adicionarOpcaoTodosFuncionariosNaPrimeiraPosicaoDoSelectFuncionario() {
+  // Para Objectos o value deve ser um numero
+  adicionarOpcaoPadraoDoSelectDosFiltros(label: string, array: any[]) {
     // Verifica se a opção 'Todos funcionários' já existe no array employees
-    const todosFuncionariosOptionExists = this.employees.some(option => option.label === this.labelFuncionarioPadrao);
+    const todosOptionExists = array.some(option => option.label === this.labelFuncionarioPadrao);
 
     // Adiciona a opção apenas se ainda não existir
-    if (!todosFuncionariosOptionExists) {
-      this.employees.unshift({
-        'label': this.labelFuncionarioPadrao,
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
         'value': 0
       });
     }
   }
 
-  adicionarOpcaoPadrao(label: string, array: any[]) {
+  // Para Objectos o value deve ser uma string
+  adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(label: string, array: any[]) {
     // Verifica se a opção padrao 'Todos...' já existe no array
     const todosOptionExists = array.some(option => option.label === label);
 
@@ -365,6 +371,19 @@ export class VocationsComponent implements OnInit {
         return 'danger';
     }
     return '';
+  }
+
+  limparCampos() {
+    this.filter.global = "";
+    this.filter.vocationStatus = "";
+    this.filter.vocationType = "";
+    this.filter.beginDate = undefined;
+    this.filter.endDate = undefined;
+    this.filter.employee = 0;
+    this.filter.page = 0;
+    this.filter.itemsPerPage = 10;
+    this.filter.sort = "employee.name,asc"
+    this.getVocations();
   }
 
   private convertStringsToDates(vocations: any[]) {

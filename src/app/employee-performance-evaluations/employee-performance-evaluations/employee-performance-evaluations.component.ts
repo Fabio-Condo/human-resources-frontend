@@ -41,6 +41,12 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   selectedEmployeePerformanceEvaluationModal: EmployeePerformanceEvaluation = new EmployeePerformanceEvaluation();
   displayModal = false;
 
+  // Para select de filtros
+  labelFuncionarioPadrao: string = "Todos funcionários"
+  labelCategoriaPadrao: string = "Todas categorias"
+  labelDepartamentoPadrao: string = "Todos departamentos"
+  labelCargosPadrao: string = "Todos cargos"
+
   categories = [
     { label: 'YEARLY', value: 'YEARLY' },
     { label: 'MONTHLY', value: 'MONTHLY' },
@@ -87,6 +93,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.getPositions();
     this.getDepartments();
     this.getTotalEmployeesPerformanceEvaluations();
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelCategoriaPadrao, this.categories);
   }
 
   @ViewChild('table') grid: any;
@@ -94,7 +101,11 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'employee.name,asc'
+    sort: 'employee.name,asc',
+    category: "",
+    department: 0,
+    position: 0,
+    employee: 0 // Opcao Todos Funcionarios
   }
 
   get editing() {
@@ -181,10 +192,11 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
       data => {
         this.employees = data.content.map(employee => {
           return {
-            label: employee.person.firstName + ' ' + employee.person.lastName, 
+            label: employee.person.firstName + ' ' + employee.person.lastName,
             value: employee.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao, this.employees);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -193,11 +205,11 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     )
   }
 
-  getTotalEmployeesPerformanceEvaluations(){
+  getTotalEmployeesPerformanceEvaluations() {
     this.showLoading = true;
     this.employeePerformanceEvaluationsService.getTotal().subscribe(
       (total) => {
-        this.totalEmployeePerformanceEvaluations =  total;
+        this.totalEmployeePerformanceEvaluations = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -274,6 +286,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: position.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelCargosPadrao, this.positions);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -291,6 +304,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: department.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelDepartamentoPadrao, this.departments);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -300,6 +314,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   }
 
   onFilter(): void {
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelCategoriaPadrao, this.categories);
     this.displayModalFilter = true;
   }
 
@@ -313,11 +328,15 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   }
 
   onAddNewEmployeePerformanceEvaluation(): void {
+    this.removerOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao);
+    this.removerOpcaoPadraoDoSelectCategoriaDosFiltros(this.labelCategoriaPadrao);
     this.employeePerformanceEvaluation = new EmployeePerformanceEvaluation();
     this.displayModalSave = true;
   }
 
   onEditEmployeePerformanceEvaluation(editEmployeePerformanceEvaluation: EmployeePerformanceEvaluation): void {
+    this.removerOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao);
+    this.removerOpcaoPadraoDoSelectCategoriaDosFiltros(this.labelCategoriaPadrao);
     this.employeePerformanceEvaluation = editEmployeePerformanceEvaluation;
     this.employeePerformanceEvaluation.id = editEmployeePerformanceEvaluation.id;
     this.displayModalSave = true;
@@ -341,6 +360,59 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         return 'info';
     }
     return '';
+  }
+
+  // Para Objectos o value deve ser uma string
+  adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(label: string, array: any[]) {
+    // Verifica se a opção padrao 'Todos...' já existe no array
+    const todosOptionExists = array.some(option => option.label === label);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
+        'value': ''
+      });
+    }
+  }
+
+  // Para Objectos o value deve ser um numero
+  adicionarOpcaoPadraoDoSelectDosFiltros(label: string, array: any[]) {
+    // Verifica se a opção 'Todos funcionários' já existe no array employees
+    const todosOptionExists = array.some(option => option.label === label);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
+        'value': 0
+      });
+    }
+  }
+
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectDosFiltros(labelToRemove: string) {
+    this.employees = this.employees.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectCategoriaDosFiltros(labelToRemove: string) {
+    this.categories = this.categories.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  limparCampos() {
+    this.filter.global = "";
+    this.filter.employee = 0;
+    this.filter.date = undefined;
+    this.filter.page = 0;
+    this.filter.itemsPerPage = 10;
+    this.filter.sort = "employee.name,asc"
+    this.filterEmployeePerformanceEvaluations();
   }
 
   private sendErrorNotification(message: string): void {
