@@ -119,6 +119,14 @@ export class EmployeesComponent implements OnInit {
   showProfessionalExperiencesInfoView: boolean = false;
   showMainResponsibilitiesView: boolean = false;
 
+  // Para select de filtros
+  labelGeneroPadrao: string = "Todos Generos"
+  labelEstadoCivilPadrao: string = "Todos estados"
+  labelTiposCargosPadrao: string = "Todos cargos"
+  labelDepartamentoPadrao: string = "Todos departamentos"
+  labelCargosPadrao: string = "Todos cargos"
+  labelLocationPadrao: string = "Todas localizações"
+
   idCardsTypes = [
     { label: 'BI', value: 'ID_CARD' },
     { label: 'Passaporte', value: 'PASSPORT' },
@@ -211,10 +219,13 @@ export class EmployeesComponent implements OnInit {
     this.getDepartments();
     this.getLocations();
     this.getTotalEmployees();
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelGeneroPadrao, this.genders);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelEstadoCivilPadrao, this.maritalStatuses);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelTiposCargosPadrao, this.positionTypes);
     this._selectedColumns = [
       //{ field: 'gender', header: 'Gender' }
     ];
-    
+
   }
 
   @Input() get selectedColumns(): any[] {
@@ -229,6 +240,11 @@ export class EmployeesComponent implements OnInit {
   @ViewChild('table') grid: any;
 
   filter: IEmployeeFilter = {
+    gender: '',
+    maritalStatus: '',
+    positionType: '',
+    birthplace: 0,
+    department: 0,
     page: 0,
     itemsPerPage: 10,
     sort: 'person.firstName,asc'
@@ -266,17 +282,17 @@ export class EmployeesComponent implements OnInit {
   }
 
 
-  generatePdf(){
+  generatePdf() {
     this.employeesService.downloadPdf(this.filter)
       .then(report => {
         const url = window.URL.createObjectURL(report);
 
         window.open(url);
       },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendErrorNotification(errorResponse.message);
-      }
-    );
+        (errorResponse: HttpErrorResponse) => {
+          this.sendErrorNotification(errorResponse.message);
+        }
+      );
   }
 
   addNew(employeeForm: NgForm) {
@@ -381,6 +397,7 @@ export class EmployeesComponent implements OnInit {
             value: position.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelCargosPadrao, this.positions);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -415,6 +432,7 @@ export class EmployeesComponent implements OnInit {
             value: department.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelDepartamentoPadrao, this.departments);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -432,6 +450,7 @@ export class EmployeesComponent implements OnInit {
             value: location.id
           }
         })
+        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelLocationPadrao, this.locations);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -440,11 +459,11 @@ export class EmployeesComponent implements OnInit {
     )
   }
 
-  getTotalEmployees(){
+  getTotalEmployees() {
     this.showLoading = true;
     this.employeesService.getTotal().subscribe(
       (total) => {
-        this.totalEmployees =  total;
+        this.totalEmployees = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -455,15 +474,33 @@ export class EmployeesComponent implements OnInit {
   }
 
   onFilter(): void {
+    this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelDepartamentoPadrao, this.departments);
+    this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelLocationPadrao, this.locations);
+    this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelCargosPadrao, this.positions);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelGeneroPadrao, this.genders);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelEstadoCivilPadrao, this.maritalStatuses);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelTiposCargosPadrao, this.positionTypes);
     this.displayModalFilter = true;
   }
 
   onAddNewEmployee(): void {
+    this.removerOpcaoPadraoDoSelectDepartamentoDosFiltros(this.labelDepartamentoPadrao);
+    this.removerOpcaoPadraoDoSelectGenerosDosFiltros(this.labelGeneroPadrao);
+    this.removerOpcaoPadraoDoSelectEstadoCivilDosFiltros(this.labelEstadoCivilPadrao);
+    this.removerOpcaoPadraoDoSelectTipoCargoDosFiltros(this.labelTiposCargosPadrao);
+    this.removerOpcaoPadraoDoSelectLocationsDosFiltros(this.labelLocationPadrao);
+
     this.employee = new Employee();
     this.displayModalSave = true;
   }
 
   onEditEmployee(editEmployee: Employee): void {
+    this.removerOpcaoPadraoDoSelectDepartamentoDosFiltros(this.labelDepartamentoPadrao);
+    this.removerOpcaoPadraoDoSelectGenerosDosFiltros(this.labelGeneroPadrao);
+    this.removerOpcaoPadraoDoSelectEstadoCivilDosFiltros(this.labelEstadoCivilPadrao);
+    this.removerOpcaoPadraoDoSelectTipoCargoDosFiltros(this.labelTiposCargosPadrao);
+    this.removerOpcaoPadraoDoSelectLocationsDosFiltros(this.labelLocationPadrao);
+
     this.convertStringsToDates([editEmployee]);
     this.employee = editEmployee;
     this.employee.id = editEmployee.id;
@@ -626,7 +663,7 @@ export class EmployeesComponent implements OnInit {
   cloneDependent(dependent: Dependent): Dependent {
 
     const person: Person = {
-      firstName: dependent.person.firstName, 
+      firstName: dependent.person.firstName,
       lastName: dependent.person.lastName,
       gender: dependent.person.gender,
       birthday: dependent.person.birthday
@@ -686,6 +723,19 @@ export class EmployeesComponent implements OnInit {
     this.employee.employeeExperiences.splice(index, 1);
   }
 
+  limparCampos() {
+    this.filter.global = "";
+    this.filter.birthplace = 0;
+    this.filter.department = 0;
+    this.filter.position = 0;
+    this.filter.gender = "";
+    this.filter.maritalStatus = "";
+    this.filter.positionType = "";
+    this.filter.page = 0;
+    this.filter.itemsPerPage = 10;
+    this.filter.sort = "person.firstName,asc"
+    this.filterEmployees();
+  }
 
   getStatus(status: boolean) {
     switch (status) {
@@ -777,6 +827,68 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
+  // Para Objectos o value deve ser uma string
+  adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(label: string, array: any[]) {
+    // Verifica se a opção padrao 'Todos...' já existe no array
+    const todosOptionExists = array.some(option => option.label === label);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
+        'value': ''
+      });
+    }
+  }
+
+  // Para Objectos o value deve ser um numero
+  adicionarOpcaoPadraoDoSelectDosFiltros(label: string, array: any[]) {
+    // Verifica se a opção 'Todos funcionários' já existe no array employees
+    const todosOptionExists = array.some(option => option.label === label);
+
+    // Adiciona a opção apenas se ainda não existir
+    if (!todosOptionExists) {
+      array.unshift({
+        'label': label,
+        'value': 0
+      });
+    }
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectGenerosDosFiltros(labelToRemove: string) {
+    this.genders = this.genders.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectEstadoCivilDosFiltros(labelToRemove: string) {
+    this.maritalStatuses = this.maritalStatuses.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectTipoCargoDosFiltros(labelToRemove: string) {
+    this.positionTypes = this.positionTypes.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectDepartamentoDosFiltros(labelToRemove: string) {
+    this.departments = this.departments.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
+
+  // Função para remover uma opção no array com base no label
+  removerOpcaoPadraoDoSelectLocationsDosFiltros(labelToRemove: string) {
+    this.locations = this.locations.filter(function (opcao) {
+      return opcao.label !== labelToRemove;
+    });
+  }
 
   private sendErrorNotification(message: string): void {
     if (message) {

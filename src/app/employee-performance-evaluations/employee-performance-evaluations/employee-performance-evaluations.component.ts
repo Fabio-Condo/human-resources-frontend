@@ -408,6 +408,9 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   limparCampos() {
     this.filter.global = "";
     this.filter.employee = 0;
+    this.filter.position = 0;
+    this.filter.department = 0;
+    this.filter.category = ""
     this.filter.date = undefined;
     this.filter.page = 0;
     this.filter.itemsPerPage = 10;
