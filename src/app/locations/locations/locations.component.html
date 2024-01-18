@@ -77,14 +77,14 @@
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Country</label>
-                <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="countries"
+                <p-dropdown placeholder="Selecione..." [filter]="true" [options]="countries"
                     [(ngModel)]="location.country.id" name="country" #country="ngModel" [required]=true>
                 </p-dropdown>
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
+                <input pInputText type="text" name="name" ngModel #name="ngModel" required
                     minlength="1" [(ngModel)]="location.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -94,8 +94,7 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <button pButton type="submit" [disabled]="locationForm.invalid" class="p-button-sm"
-                    style="height: 30px;">
+                <button pButton type="submit" [disabled]="locationForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>

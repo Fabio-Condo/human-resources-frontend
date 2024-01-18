@@ -79,7 +79,7 @@
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
-                <input pInputText class="p-inputtext-sm" type="text" name="name" ngModel #name="ngModel" required
+                <input pInputText type="text" name="name" ngModel #name="ngModel" required
                     minlength="1" [(ngModel)]="department.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -89,8 +89,7 @@
             </div>
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <button pButton type="submit" [disabled]="departmentForm.invalid" class="p-button-sm"
-                    style="height: 30px;">
+                <button pButton type="submit" [disabled]="departmentForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>

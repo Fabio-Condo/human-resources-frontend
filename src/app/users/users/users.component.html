@@ -141,9 +141,11 @@
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.email}}</span></i></li>
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Role</span>: <span
           style="color:#3f393371;font-weight:bold">{{selectedUserModal.role}}</span></i></li>
+    <!--
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Join Date</span>:
         <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.joinDate | date:'dd/MM/y,
           h:mm:ssa'}}</span></i></li>
+    -->
     <li class="dialog-info-li"><i class="dialog-info-i"><span style="color:#6a6b6b;font-weight:bold">Last Login
           Date</span>: <span style="color:#3f393371;font-weight:bold">{{selectedUserModal.lastLoginDate |
           date:'dd/MM/y,h:mm:ss a'}}</span></i></li>
@@ -161,17 +163,17 @@
     <div class="formgrid grid">
       <div class="col-12 p-fluid">
         <label>First name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="firstName"
+        <input pInputText type="text" ngModel name="firstName"
           [(ngModel)]="user.profile.person.firstName" required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Last name</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="lastName"
+        <input pInputText type="text" ngModel name="lastName"
           [(ngModel)]="user.profile.person.lastName" required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Username</label>
-        <input pInputText type="text" class="p-inputtext-sm" ngModel name="username" [(ngModel)]="user.username"
+        <input pInputText type="text" ngModel name="username" [(ngModel)]="user.username"
           required />
       </div>
       <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -181,12 +183,12 @@
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Email</label>
-        <input pInputText type="email" class="p-inputtext-sm" ngModel name="email" [(ngModel)]="user.email" required />
+        <input pInputText type="email" ngModel name="email" [(ngModel)]="user.email" required />
       </div>
 
       <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
         <label>Role</label>
-        <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Selecione" #role [required]="true" name="role"
+        <p-dropdown  [options]="roles" placeholder="Selecione" #role [required]="true" name="role"
           ngModel="ROLE_USER" [(ngModel)]="user.role"></p-dropdown>
       </div>
 
@@ -254,7 +256,7 @@
 
       <div class="col-12 md-6 p-fluid" style="margin-top: 1%;">
         <label>Role</label>
-        <p-dropdown class="p-inputtext-sm" [options]="roles" placeholder="Select..." #role name="role"
+        <p-dropdown [options]="roles" placeholder="Select..." #role name="role"
           [(ngModel)]="filter.role" (onChange)="filterAll()"></p-dropdown>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">

@@ -271,39 +271,39 @@
     <div class="formgrid grid">
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Cargo</label>
-        <p-dropdown class="p-inputtext-sm" placeholder="Selecione..." [filter]="true" [options]="positions"
+        <p-dropdown placeholder="Selecione..." [filter]="true" [options]="positions"
           [(ngModel)]="job.position.id" name="position" (onChange)="findPositionById(job.position.id)"
           #position="ngModel">
         </p-dropdown>
       </div>
       <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
         <label>Data de expiração</label>
-        <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+        <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
           [showOnFocus]="false" name="expirationDate" [inline]="false" [readonlyInput]="false" ngModel
           #expirationDate="ngModel" [required]="true" [(ngModel)]="job.expirationDate"></p-calendar>
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Missão</label>
-        <input pInputText disabled class="p-inputtext-sm" type="text" name="mission" ngModel #mission="ngModel" required
+        <input pInputText disabled type="text" name="mission" ngModel #mission="ngModel" required
           minlength="1" [(ngModel)]="positionById.mission">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Grupo funcional</label>
-        <input pInputText disabled class="p-inputtext-sm" type="text" name="functionalGroup" ngModel
+        <input pInputText disabled type="text" name="functionalGroup" ngModel
           #functionalGroup="ngModel" required minlength="1" [(ngModel)]="positionById.functionalGroup">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Departmento</label>
-        <input pInputText disabled class="p-inputtext-sm" type="text" name="department" ngModel #department="ngModel"
+        <input pInputText disabled type="text" name="department" ngModel #department="ngModel"
           required minlength="1" [(ngModel)]="positionById.department.name">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 1%;">
         <label>Local</label>
-        <input pInputText disabled class="p-inputtext-sm" type="text" name="workplace" ngModel #workplace="ngModel"
+        <input pInputText disabled type="text" name="workplace" ngModel #workplace="ngModel"
           required minlength="1" [(ngModel)]="positionById.location.name">
       </div>
       <div class="col-12 p-fluid" style="margin-top: 2%;">
-        <button pButton type="submit" [disabled]="jobForm.invalid" class="p-button-sm" style="height: 30px;">
+        <button pButton type="submit" [disabled]="jobForm.invalid">
           <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
           <span *ngIf="showLoading">Loading...</span>
           <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
