@@ -1056,7 +1056,7 @@
     <form #frmIdCard="ngForm" (ngSubmit)="confirmIdCard(frmIdCard)">
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de documento</label>
-            <p-dropdown class="p-inputtext-sm" [options]="idCardsTypes" placeholder="Selecione" name="type" #type
+            <p-dropdown [options]="idCardsTypes" placeholder="Selecione" name="type" #type
                 ngModel [(ngModel)]="idCard.type"></p-dropdown>
         </div>
         <div class="col-12 p-fluid">
@@ -1065,7 +1065,7 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Data de expiração</label>
-            <p-calendar class="p-inputtext-sm" name="issueDate" view="month" dateFormat="d/mm/yy"
+            <p-calendar name="issueDate" view="month" dateFormat="d/mm/yy"
                 placeholder="dia/mês/ano - 15/04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #issueDate="ngModel" [required]="true"
                 [(ngModel)]="idCard.issueDate"></p-calendar>
@@ -1246,16 +1246,16 @@
         <div class="col-12" style="margin-top: 2%;">
             <label style="display: block">Salário</label>
             <input pInputText style="width: 205px;" placeholder="Begin" type="number" name="wageValueBegin"
-                [(ngModel)]="filter.wageValueBegin" class="p-inputtext-sm" (ngModelChange)="filterEmployees()">
+                [(ngModel)]="filter.wageValueBegin" (ngModelChange)="filterEmployees()">
 
             <label class="label">até</label>
 
             <input pInputText style="width: 205px;" placeholder="End" type="number" name="wageValueEnd"
-                [(ngModel)]="filter.wageValueEnd" class="p-inputtext-sm" (ngModelChange)="filterEmployees()">
+                [(ngModel)]="filter.wageValueEnd" (ngModelChange)="filterEmployees()">
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <button pButton type="submit" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+            <button pButton type="submit" label="Reset" style="margin-top: 1%;"></button>
         </div>
 
     </div>
@@ -1278,14 +1278,14 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Início</label>
-            <p-calendar class="p-inputtext-sm" name="beginDate" view="month" dateFormat="mm/yy"
+            <p-calendar name="beginDate" view="month" dateFormat="mm/yy"
                 placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #beginDate="ngModel" [required]="true"
                 [(ngModel)]="professionalExperience.beginDate"></p-calendar>
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Fim</label>
-            <p-calendar class="p-inputtext-sm" name="endDate" view="month" dateFormat="mm/yy"
+            <p-calendar name="endDate" view="month" dateFormat="mm/yy"
                 placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
                 [inline]="false" [readonlyInput]="false" ngModel #endDate="ngModel" [required]="true"
                 [(ngModel)]="professionalExperience.endDate"></p-calendar>

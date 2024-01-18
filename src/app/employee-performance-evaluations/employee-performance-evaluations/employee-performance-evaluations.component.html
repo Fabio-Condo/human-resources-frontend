@@ -110,37 +110,34 @@
 </div>
 
 <p-dialog header="Avaliação {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
-    [style]="{height: '39vw', width: '35vw'}" [draggable]="false" [resizable]="false">
+    [style]="{height: '41vw', width: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm"
         (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Funcionário</label>
-                <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
-                    name="employee" #employee ngModel
-                    [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
+                <p-dropdown [options]="employees" placeholder="Selecione" [filter]="true" name="employee" #employee
+                    ngModel [(ngModel)]="employeePerformanceEvaluation.employee.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Categoria</label>
-                <p-dropdown class="p-inputtext-sm" [options]="categories" placeholder="Selecione" name="category"
-                    #category ngModel [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
+                <p-dropdown [options]="categories" placeholder="Selecione" name="category" #category ngModel
+                    [(ngModel)]="employeePerformanceEvaluation.category"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Trabalho em equipe - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione" name="teamWork"
-                    #teamWork ngModel [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
+                <p-dropdown [options]="evaluationLevels" placeholder="Selecione" name="teamWork" #teamWork ngModel
+                    [(ngModel)]="employeePerformanceEvaluation.teamWork"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comunicação - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione"
-                    name="communication" #communication ngModel
-                    [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
+                <p-dropdown [options]="evaluationLevels" placeholder="Selecione" name="communication" #communication
+                    ngModel [(ngModel)]="employeePerformanceEvaluation.communication"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Pensamento estratégico - <span style="color: #1c80cf;">Pontuação [1-5]</span></label>
-                <p-dropdown class="p-inputtext-sm" [options]="evaluationLevels" placeholder="Selecione"
-                    name="strategicThought" #strategicThought ngModel
-                    [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
+                <p-dropdown [options]="evaluationLevels" placeholder="Selecione" name="strategicThought"
+                    #strategicThought ngModel [(ngModel)]="employeePerformanceEvaluation.strategicThought"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Comentário do avaliador</label>
@@ -149,8 +146,7 @@
                     minlength="10" placeholder="Sem comments"></textarea>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid" class="p-button-sm"
-                    style="height: 30px;">
+                <button pButton type="submit" [disabled]="employeePerformanceEvaluationForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
@@ -183,16 +179,14 @@
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Categoria</label>
-            <p-dropdown class="p-inputtext-sm" [options]="categories" placeholder="Selecione" name="category" #category
-                ngModel [(ngModel)]="filter.category"
-                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+            <p-dropdown [options]="categories" placeholder="Selecione" name="category" #category ngModel
+                [(ngModel)]="filter.category" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
-                name="employee" #employee ngModel [(ngModel)]="filter.employee"
-                (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
+            <p-dropdown [options]="employees" placeholder="Selecione" [filter]="true" name="employee" #employee ngModel
+                [(ngModel)]="filter.employee" (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
@@ -212,14 +206,14 @@
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
 
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '200px'}"
-                [showIcon]="true" [showOnFocus]="false" placeholder="Date (dd/MM/y)" [inline]="false"
-                [readonlyInput]="false" ngModel #date="ngModel" [required]="true" [(ngModel)]="filter.date"
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '200px'}" [showIcon]="true"
+                [showOnFocus]="false" placeholder="Date (dd/MM/y)" [inline]="false" [readonlyInput]="false" ngModel
+                #date="ngModel" [required]="true" [(ngModel)]="filter.date"
                 (ngModelChange)="filterEmployeePerformanceEvaluations()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <button pButton type="submit" (click)="limparCampos()" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+            <button pButton type="submit" (click)="limparCampos()" label="Reset" style="margin-top: 1%;"></button>
         </div>
     </div>
 

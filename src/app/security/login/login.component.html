@@ -1,5 +1,5 @@
 <!--Login-->
-<div class="container" style="max-width: 300px; margin: auto;" *ngIf="isLogin">
+<div class="container" style="max-width: 350px; margin: auto;" *ngIf="isLogin">
 
   <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
     <div class="p-grid" style="margin-top: 60px;">
@@ -28,31 +28,47 @@
       <div class="col-12 p-fluid">
         <!--<button pButton type="submit" label="Login"></button>-->
 
-        <button pButton type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn"
-          style="background-color: #1c80cf; border: none;">
-          <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+        <button pButton type="submit" label="Entrar" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn">
+          <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>
           <span *ngIf="showLoading">Loading...</span>
-          <span *ngIf="!showLoading">Login</span>
         </button>
-      </div>
-      <div class="col-12 p-fluid text-center">
-        <span>Don't have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #1c80cf;"
-            (click)="isLogin = !isLogin">&nbsp;&nbsp;Sign Up</a></span>
       </div>
     </div>
   </form>
 
+  <p-divider align="center" type="dotted">
+    <b>ou</b>
+  </p-divider>
+
   <div class="col-12 p-fluid">
-    <button pButton routerLink="/v1/jobs" name="button" class="btn login_btn"
-      style="background-color: #1c80cf; border: none;">
+    <button pButton pRipple (click)="isLogin = !isLogin" label="Criar nova conta" style="background-color: black; border-color: black;">
+    </button>
+  </div>
+  <div class="col-12 p-fluid">
+    <p-button label="Ver vagas" routerLink="/v1/jobs" styleClass="p-button-outlined p-button-secondary"></p-button>
+  </div>
+
+  <!--
+  <p-divider align="center" type="dotted">
+    <b>ou</b>
+  </p-divider>
+
+  <div class="col-12 p-fluid text-center">
+    <span>Don't have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #1c80cf;"
+        (click)="isLogin = !isLogin">&nbsp;&nbsp;Sign Up</a></span>
+  </div>
+
+  <div class="col-12 p-fluid">
+    <button pButton routerLink="/v1/jobs" name="button" class="btn login_btn">
       Voltar para vagas
     </button>
   </div>
+  -->
 
 </div>
 
 <!--Register-->
-<div class="container" style="max-width: 300px; margin: auto;" *ngIf="!isLogin">
+<div class="container" style="max-width: 350px; margin: auto;" *ngIf="!isLogin">
 
   <form autocomplete="off" #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
     <div class="p-grid" style="margin-top: 60px;">
@@ -62,45 +78,57 @@
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="firstName" placeholder="First name" ngModel [(ngModel)]="user.profile.person.firstName"
-          #firstNameInput="ngModel" required>
+        <input pInputText type="text" class="form-control" name="firstName" placeholder="First name" ngModel
+          [(ngModel)]="user.profile.person.firstName" #firstNameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="firstNameInput.invalid && firstNameInput.touched">Please
           enter a first name</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="lastName" placeholder="Last name" ngModel [(ngModel)]="user.profile.person.lastName"
-          #lastNameInput="ngModel" required>
+        <input pInputText type="text" class="form-control" name="lastName" placeholder="Last name" ngModel
+          [(ngModel)]="user.profile.person.lastName" #lastNameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="lastNameInput.invalid && lastNameInput.touched">Type last
           name.</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="username" placeholder="Username" ngModel [(ngModel)]="user.username"
-          #usernameInput="ngModel" required>
+        <input pInputText type="text" class="form-control" name="username" placeholder="Username" ngModel
+          [(ngModel)]="user.username" #usernameInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="usernameInput.invalid && usernameInput.touched">Type the
           password.</span>
       </div>
 
       <div class="col-12 p-fluid">
-        <input pInputText type="text" class="form-control" name="email" placeholder="Email" ngModel [(ngModel)]="user.email" 
-          #emailInput="ngModel" required>
+        <input pInputText type="text" class="form-control" name="email" placeholder="Email" ngModel
+          [(ngModel)]="user.email" #emailInput="ngModel" required>
         <span class="help-block" style="color:red;" *ngIf="emailInput.invalid && emailInput.touched">Type the
           password.</span>
       </div>
 
       <div class="col-12 p-fluid">
         <button pButton type="submit" [disabled]="registerForm.invalid || showLoading" name="button"
-          class="btn login_btn" style="background-color: #1c80cf; border: none;">
+          class="btn login_btn">
           <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
           <span *ngIf="showLoading">Loading...</span>
           <span *ngIf="!showLoading">Register</span>
         </button>
       </div>
+
+      <p-divider align="center" type="dotted">
+        <b>ou</b>
+      </p-divider>
+    
+      <div class="col-12 p-fluid">
+        <button pButton pRipple (click)="isLogin = !isLogin" label="Login" style="background-color: black; border-color: black;">
+        </button>
+      </div>
+      
+      <!--
       <div class="col-12 p-fluid text-center">
         <span>Already have an account?</span><span><a href="javascript:;" style="text-decoration: none; color: #1c80cf;"
             (click)="isLogin = !isLogin">&nbsp;&nbsp;Log In</a></span>
       </div>
+      -->
 
     </div>
   </form>

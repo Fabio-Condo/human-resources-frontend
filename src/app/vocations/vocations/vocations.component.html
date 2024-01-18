@@ -103,37 +103,36 @@
 
             <div class="col-12 p-fluid">
                 <label>Funcionário</label>
-                <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+                <p-dropdown [options]="employees" placeholder="Selecione" [filter]="true"
                     name="employee" #employee ngModel [(ngModel)]="vocation.employee.id"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Tipo de ausência</label>
-                <p-dropdown class="p-inputtext-sm" [options]="vocationTypes" placeholder="Selecione" name="vocationType"
+                <p-dropdown [options]="vocationTypes" placeholder="Selecione" name="vocationType"
                     #vocationType ngModel [(ngModel)]="vocation.vocationType"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Status</label>
-                <p-dropdown class="p-inputtext-sm" [options]="vocationStatuses" placeholder="Selecione"
+                <p-dropdown [options]="vocationStatuses" placeholder="Selecione"
                     name="vocationStatus" #vocationStatus ngModel [(ngModel)]="vocation.vocationStatus"></p-dropdown>
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Inicio</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
                     [showOnFocus]="false" name="beginDate" [inline]="false" [readonlyInput]="false" ngModel
                     #beginDate="ngModel" [required]="true" [(ngModel)]="vocation.beginDate"></p-calendar>
             </div>
 
             <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
                 <label>Fim</label>
-                <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+                <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
                     [showOnFocus]="false" name="endDate" [inline]="false" [readonlyInput]="false" ngModel
                     #endDate="ngModel" [required]="true" [(ngModel)]="vocation.endDate"></p-calendar>
             </div>
 
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
-                <button pButton type="submit" [disabled]="vocationForm.invalid" class="p-button-sm"
-                    style="height: 30px;">
+                <button pButton type="submit" [disabled]="vocationForm.invalid">
                     <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
                     <span *ngIf="showLoading">Loading...</span>
                     <span *ngIf="!showLoading">{{ editing ? 'save changes' : 'save' }}</span>
@@ -165,27 +164,27 @@
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Funcionário</label>
-            <p-dropdown class="p-inputtext-sm" [options]="employees" placeholder="Selecione" [filter]="true"
+            <p-dropdown [options]="employees" placeholder="Selecione" [filter]="true"
                 name="employee" #employee ngModel [(ngModel)]="filter.employee"
                 (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Tipo</label>
-            <p-dropdown class="p-inputtext-sm" [options]="vocationTypes" placeholder="Selecione" name="vocationType"
+            <p-dropdown [options]="vocationTypes" placeholder="Selecione" name="vocationType"
                 #vocationType ngModel [(ngModel)]="filter.vocationType" (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Status</label>
-            <p-dropdown class="p-inputtext-sm" [options]="vocationStatuses" placeholder="Selecione"
+            <p-dropdown [options]="vocationStatuses" placeholder="Selecione"
                 name="vocationStatus" #vocationStatus ngModel [(ngModel)]="filter.vocationStatus"
                 (ngModelChange)="getVocations()"></p-dropdown>
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Inicio</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
                 [showOnFocus]="false" name="beginDate" [inline]="false" [readonlyInput]="false" ngModel
                 #beginDate="ngModel" [required]="true" [(ngModel)]="filter.beginDate"
                 (ngModelChange)="getVocations()"></p-calendar>
@@ -193,13 +192,13 @@
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Fim</label>
-            <p-calendar class="p-inputtext-sm" name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
                 [showOnFocus]="false" name="endDate" [inline]="false" [readonlyInput]="false" ngModel #endDate="ngModel"
                 [required]="true" [(ngModel)]="filter.endDate" (ngModelChange)="getVocations()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
-            <button pButton type="submit" (click)="limparCampos()" label="Reset" style="height: 30px; margin-top: 1%;"></button>
+            <button pButton type="submit" (click)="limparCampos()" label="Reset" style="margin-top: 1%;"></button>
         </div>
     </div>
 

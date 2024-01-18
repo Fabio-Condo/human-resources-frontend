@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
+import { DividerModule } from 'primeng/divider';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
 
     InputTextModule,
     ButtonModule,
+    DividerModule,
     ProgressSpinnerModule,
     DropdownModule,
     RouterModule,
