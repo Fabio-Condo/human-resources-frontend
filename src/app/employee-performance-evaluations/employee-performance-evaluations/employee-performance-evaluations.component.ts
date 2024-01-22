@@ -101,7 +101,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'employee.name,asc',
+    sort: 'firstName,asc',
     category: "",
     department: 0,
     position: 0,
@@ -315,6 +315,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
 
   onFilter(): void {
     this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelCategoriaPadrao, this.categories);
+    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelFuncionarioPadrao, this.employees);
     this.displayModalFilter = true;
   }
 
