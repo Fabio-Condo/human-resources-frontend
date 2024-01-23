@@ -101,7 +101,7 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   filter: IEmployeePerformanceEvaluationFilter = {
     page: 0,
     itemsPerPage: 10,
-    sort: 'firstName,asc',
+    sort: 'employee.name,asc',
     category: "",
     department: 0,
     position: 0,
