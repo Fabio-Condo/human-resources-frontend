@@ -682,7 +682,7 @@ export class EmployeesComponent implements OnInit {
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;
-    //this.getEmployees(page);
+    this.filter.itemsPerPage = event!.rows!; // actualize a quantidade de itens por página de acordo com a opcao rowsPerPageOptions
     this.filterEmployees(page);
   }
 

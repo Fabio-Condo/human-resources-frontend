@@ -2,7 +2,8 @@
     <h3>Funcionários</h3>
 
     <p-table [value]="employees" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
-        [rows]="filter.itemsPerPage" [lazy]="true" [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        [rows]="filter.itemsPerPage" [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true"
+        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
         currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployees}}" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
@@ -1056,8 +1057,8 @@
     <form #frmIdCard="ngForm" (ngSubmit)="confirmIdCard(frmIdCard)">
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Tipo de documento</label>
-            <p-dropdown [options]="idCardsTypes" placeholder="Selecione" name="type" #type
-                ngModel [(ngModel)]="idCard.type"></p-dropdown>
+            <p-dropdown [options]="idCardsTypes" placeholder="Selecione" name="type" #type ngModel
+                [(ngModel)]="idCard.type"></p-dropdown>
         </div>
         <div class="col-12 p-fluid">
             <label>Número</label>
@@ -1065,10 +1066,9 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Data de expiração</label>
-            <p-calendar name="issueDate" view="month" dateFormat="d/mm/yy"
-                placeholder="dia/mês/ano - 15/04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-                [inline]="false" [readonlyInput]="false" ngModel #issueDate="ngModel" [required]="true"
-                [(ngModel)]="idCard.issueDate"></p-calendar>
+            <p-calendar name="issueDate" view="month" dateFormat="d/mm/yy" placeholder="dia/mês/ano - 15/04/2023"
+                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false"
+                ngModel #issueDate="ngModel" [required]="true" [(ngModel)]="idCard.issueDate"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmIdCard.invalid"
@@ -1278,17 +1278,16 @@
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Início</label>
-            <p-calendar name="beginDate" view="month" dateFormat="mm/yy"
-                placeholder="mês/ano - 04/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-                [inline]="false" [readonlyInput]="false" ngModel #beginDate="ngModel" [required]="true"
+            <p-calendar name="beginDate" view="month" dateFormat="mm/yy" placeholder="mês/ano - 04/2023"
+                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false"
+                ngModel #beginDate="ngModel" [required]="true"
                 [(ngModel)]="professionalExperience.beginDate"></p-calendar>
         </div>
         <div class="col-12 md-12 p-fluid">
             <label>Fim</label>
-            <p-calendar name="endDate" view="month" dateFormat="mm/yy"
-                placeholder="mês/ano - 05/2023" [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false"
-                [inline]="false" [readonlyInput]="false" ngModel #endDate="ngModel" [required]="true"
-                [(ngModel)]="professionalExperience.endDate"></p-calendar>
+            <p-calendar name="endDate" view="month" dateFormat="mm/yy" placeholder="mês/ano - 05/2023"
+                [inputStyle]="{ 'width': '100px'}" [showOnFocus]="false" [inline]="false" [readonlyInput]="false"
+                ngModel #endDate="ngModel" [required]="true" [(ngModel)]="professionalExperience.endDate"></p-calendar>
         </div>
         <div class="col-12 p-fluid">
             <button pButton type="submit" label="Confirmar" [disabled]="frmProfessionalExperience.invalid"
