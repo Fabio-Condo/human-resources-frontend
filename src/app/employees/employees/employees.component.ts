@@ -87,7 +87,7 @@ export class EmployeesComponent implements OnInit {
   showContacts: boolean = false;
 
   employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
-  selectedEmployeeModal: Employee = new Employee();
+  selectedEmployeeModal: IEmployee = new Employee;
   displayModal = false;
 
   displayModalFilter: boolean = false;
