@@ -368,7 +368,7 @@ export class EmployeesComponent implements OnInit {
     const novoStatus = !employee.status;
     this.employeesService.changeStatus(employee.id, novoStatus).subscribe(
       () => {
-        const acao = novoStatus ? 'Activado' : 'Inactivo';
+        const acao = novoStatus ? 'Activo' : 'Inactivo';
         employee.status = novoStatus;
         this.messageService.add({ severity: 'success', detail: `Funcionário ${acao} com sucesso!` });
       },
@@ -747,6 +747,36 @@ export class EmployeesComponent implements OnInit {
     return '';
   }
 
+  getStatusValue(status: boolean) {
+    switch (status) {
+      case true:
+        return 'Activo';
+      case false:
+        return 'Inactivo';
+    }
+    return '';
+  }
+
+  getGenderValue(status: string) {
+    switch (status) {
+      case 'MASCULINE':
+        return 'Masculino';
+      case 'FEMININE':
+        return 'Feminino';
+    }
+    return '';
+  }
+
+  getGender(status: string) {
+    switch (status) {
+      case 'MASCULINE':
+        return 'primmary';
+      case 'FEMININE':
+        return 'info';
+    }
+    return '';
+  }
+
   getProjectStatus(status: string) {
     switch (status) {
       case 'IN_PROGRESS':
@@ -889,6 +919,7 @@ export class EmployeesComponent implements OnInit {
       return opcao.label !== labelToRemove;
     });
   }
+
 
   private sendErrorNotification(message: string): void {
     if (message) {

@@ -19,33 +19,30 @@
 
 .mega-menu li a {
   /*color: #333;*/
-  color: #eee7e7;
+  color: #fff;
   text-decoration: none;
   padding: 5px;
 }
 
 .mega-menu li a:hover {
-  background-color: #eee7e7;
-  color: #53595c;
+  background-color: #fff;
+  color: black;
 }
 
 .mega-menu select {
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 4px;
 }
 
 .mega-menu li.active a {
   /* Estilos para o item de menu ativo */
   font-weight: bold;
-  background-color: #eee7e7;
-  color: #53595c;
+  background-color: #1c80cf;
+  color: #fff;
 }
 
 /*Mega Menu FIM*/
-
-
-
 
 
 
@@ -66,7 +63,7 @@
 
 /*------Navbar(Menu) lateral----------*/
 .navbar-menu {
-  position: fixed;  /*Fixando o elemento na pagina, mesmo que exista muito conteudo e tendo usando um scrol(rolagem) da pagina, o menu ficara fixo*/
+  position: fixed;  /*Fivando o elemento na pagina, mesmo que exista muito conteudo e tendo usando um scrol(rolagem) da pagina, o menu ficara fixo*/
   top: 0;
   bottom: 0; /*Para o menu ficar colodo em baixo*/
   right: 0; /*Para ficar colodo do lado direito*/
@@ -75,7 +72,7 @@
   padding: 0; /*Tirando o espacamento interno*/
   z-index: 9998; /*z-index indica uma prioridade, quem fica em cima do outro. Entao colocaremos um numero muito alto para garantir que o menu fique em cima de todo conteudo da tela principal*/
 
-  background-color: #323333;  /*Dancor cinza escuro ao menu lateral*/
+  background-color: #35454c;  /*Dancor cinza escuro ao menu lateral*/
 
   list-style: none;  /*Tirando as bolinhas da lista de itens*/
 }
@@ -112,7 +109,3 @@
 }
 
 /*--------------------------------------*/
-
-
-
-

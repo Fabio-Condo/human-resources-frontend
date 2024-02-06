@@ -1,159 +1,159 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    margin: 0;    /*Para nao ter margens nas leterais, em cima e em baixo*/
-    font-family: Arial, Helvetica, sans-serif;    /* Todos osestilos terao essas fonts */
-    color: #404C51;     /*Cinza escuro*/
+  margin: 0;    /*Para nao ter margens nas leterais, em cima e em baixo*/
+  font-family: Arial, Helvetica, sans-serif;    /* Todos osestilos terao essas fonts */
+  color: #404C51;     /*Cinza escuro*/
+}
+
+label {
+  font-weight: bold;  /*Peso da font dos lebals em negrito*/
+}
+
+@media (min-width: 1200px) {  /*Para responsividade, o seja, quando a largura do navegador estiver no minimo 1200px, aplica essas regras que estão dentro da classe, coloca o container com 1170px*/
+  .container {
+      /*width: 1170px;*/
+      width: 1350px;  /*Delimitando o container de acordo com a tela do despositivo*/
+      margin: 0 auto; /*Criando uma margem de zero em cima/baixo e automatica nas laterais. Nota: Primeiro deve criar o width: 1170px para funcionar*/
   }
-  
-  label {
-    font-weight: bold;  /*Peso da font dos lebals em negrito*/
-  }
-  
-  @media (min-width: 1200px) {  /*Para responsividade, o seja, quando a largura do navegador estiver no minimo 1200px, aplica essas regras que estão dentro da classe, coloca o container com 1170px*/
-    .container {
-        width: 1170px;  /*Delimitando o container de acordo com a tela do despositivo*/
-        margin: 0 auto; /*Criando uma margem de zero em cima/baixo e automatica nas laterais. Nota: Primeiro deve criar o width: 1170px para funcionar*/
-    }
-  }
-  
-  .label {
-    margin: 0.5em;
-  }
-  
-  
-  /*-------------TABELA*--------------*/
-  
+}
+
+.label {
+  margin: 0.5em;
+}
+
+
+/*-------------TABELA*--------------*/
+
+.col-valor-header {
+  width: 120px;
+}
+
+.col-valor-content {
+  text-align: right;  /*Alinhando o valor a direita*/
+}
+
+.col-data-header {
+  width: 120px;
+}
+
+.col-data-content {
+  text-align: center;  /*Alinhando a data ao centro*/
+}
+
+/*-------------Butoes das accoes--------------*/
+.col-acoes-header {
+  width: 115px;
+}
+
+.col-acoes {
+  width: 115px; /*Dando largura a coluna*/
+  text-align: center !important; /*Centralizando o conteudo(buttoes) da coluna accoes*/
+}
+
+.col-acoes .p-button {
+  height: 20px; /*Altura dos botoes*/
+  margin: 1px;  /*Margem laterais dos botoes de acoes*/
+}
+
+
+
+/*-------------Responsividade da tabela-------------*/
+/*
+  ajustar nossas regras CSS para tabelas para que elas não sejam aplicadas em dispositivos de menor resolução,
+  pois não precisamos, por exemplo, centralizar informações da tabela, pois todas elas serão exibidas com
+  alinhamento à esquerda. Para ajustar o CSS faremos uso de media query com min-width: 40em, que é o valor de
+  resolução que o PrimeNG utiliza para alterar o layout da tabela para dispositivos de menor resolução.
+*/
+@media (min-width: 40em) {
   .col-valor-header {
     width: 120px;
   }
-  
-  .col-valor-content {
-    text-align: right;  /*Alinhando o valor a direita*/
+
+  .col-valor {
+    text-align: right !important;
   }
-  
+
   .col-data-header {
     width: 120px;
   }
-  
-  .col-data-content {
-    text-align: center;  /*Alinhando a data ao centro*/
+
+  .col-data {
+    text-align: center !important;
   }
-  
-  /*-------------Butoes das accoes--------------*/
+
   .col-acoes-header {
     width: 115px;
   }
-  
+
   .col-acoes {
-    width: 200px; /*Dando largura a coluna*/
-    text-align: center !important; /*Centralizando o conteudo(buttoes) da coluna accoes*/
+    width: 115px;
+    text-align: center !important;
   }
-  
+
   .col-acoes .p-button {
+    margin: 1px;
+  }
+
+  .col-acoes-atm .p-button {
     height: 20px; /*Altura dos botoes*/
     margin: 1px;  /*Margem laterais dos botoes de acoes*/
   }
-  
-  
-  
-  /*-------------Responsividade da tabela-------------*/
-  /*
-    ajustar nossas regras CSS para tabelas para que elas não sejam aplicadas em dispositivos de menor resolução,
-    pois não precisamos, por exemplo, centralizar informações da tabela, pois todas elas serão exibidas com
-    alinhamento à esquerda. Para ajustar o CSS faremos uso de media query com min-width: 40em, que é o valor de
-    resolução que o PrimeNG utiliza para alterar o layout da tabela para dispositivos de menor resolução.
-  */
-  @media (min-width: 40em) {
-    .col-valor-header {
-      width: 120px;
-    }
-  
-    .col-valor {
-      text-align: right !important;
-    }
-  
-    .col-data-header {
-      width: 120px;
-    }
-  
-    .col-data {
-      text-align: center !important;
-    }
-  
-    .col-acoes-header {
-      width: 115px;
-    }
-  
-    .col-acoes {
-      width: 115px;
-      text-align: center !important;
-    }
-  
-    .col-acoes .p-button {
-      margin: 1px;
-    }
-  
-    .col-acoes-atm .p-button {
-      height: 20px; /*Altura dos botoes*/
-      margin: 1px;  /*Margem laterais dos botoes de acoes*/
-    }
-  
-    .col-acoes-atm-header {
-      width: 300px;
-    }
-  
-    .col-acoes-atm {
-      width: 150px;
-      text-align: center !important;
-    }
-  
-    .col-acoes-atm .p-button {
-      margin: 1px;
-    }
-    
-  }
-  
-  /*---------Cadstro do pais*/
-  a {
-    color: #337ab7; /*Dando uma cor azul bonita no link*/
-    text-decoration: none;
-  }
-  
-  a:hover, a:focus {
-    text-decoration: underline; /*Colocar uma linha, como se fosse um link ao passar o mouse no link*/
-  }
-  
-  a.p-button:hover,
-  a.p-button:focus {
-    text-decoration: none;
-  }
-  
-  .p-button {
-    margin-right: 0.25em !important;  /*Colocando uma margem no lado esquerdo para separ os butoes salvar, novo e o link(voltar para pesquisa)*/
-  }
-  
-  
-  .dialog-info-li {
-    color: #212121;
-    list-style: none;  /*Tirando as bolinhas da lista de itens*/
-  }
-  
-  .dialog-info-i {
-    font-size: 1rem;
-    font-weight: 500;
-    font-style:normal;
-    text-decoration: none;
-  
-  }
-  
-  .sort-icon i:hover {  /*Estizar quando o mouse passar por cima dos links dos icons de ordenamento das tabelas*/
-    color: black;  /*Dando cor preta quando mouse passar por cima*/
-  }
-  
-  /*html { background-color: #F4F6F6; }*/
-  html { background-color: #fff; }
-  
 
+  .col-acoes-atm-header {
+    width: 300px;
+  }
+
+  .col-acoes-atm {
+    width: 185px;
+    text-align: center !important;
+  }
+
+  .col-acoes-atm .p-button {
+    margin: 1px;
+  }
   
-  
-  
+}
+
+/*---------Cadstro do pais*/
+a {
+  color: #337ab7; /*Dando uma cor azul bonita no link*/
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline; /*Colocar uma linha, como se fosse um link ao passar o mouse no link*/
+}
+
+a.p-button:hover,
+a.p-button:focus {
+  text-decoration: none;
+}
+
+.p-button {
+  margin-right: 0.25em !important;  /*Colocando uma margem no lado esquerdo para separ os butoes salvar, novo e o link(voltar para pesquisa)*/
+}
+
+
+.dialog-info-li {
+  color: #212121;
+  list-style: none;  /*Tirando as bolinhas da lista de itens*/
+}
+
+.dialog-info-i {
+  font-size: 1rem;
+  font-weight: 500;
+  font-style:normal;
+  text-decoration: none;
+
+}
+
+.sort-icon i:hover {  /*Estizar quando o mouse passar por cima dos links dos icons de ordenamento das tabelas*/
+  color: black;  /*Dando cor preta quando mouse passar por cima*/
+}
+
+/*html { background-color: #F4F6F6; }*/
+/*html { background-color: #eff0f0; }*/
+html { background-color: #fff; }
+
+
+

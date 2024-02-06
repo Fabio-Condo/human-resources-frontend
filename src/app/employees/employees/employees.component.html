@@ -3,7 +3,8 @@
 
     <p-table [value]="employees" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
         [rows]="filter.itemsPerPage" [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true"
-        [showCurrentPageReport]="true" [totalRecords]="totalRecords"
+        [showCurrentPageReport]="true" [totalRecords]="totalRecords" selectionMode="single"
+        [(selection)]="selectedEmployeeModal"
         currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployees}}" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
@@ -20,7 +21,7 @@
 
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Name, position or dept" [(ngModel)]="filter.global"
+                    <input pInputText type="text" placeholder="Pesquisa" [(ngModel)]="filter.global"
                         (ngModelChange)="filterEmployees()" />
                 </span>
 
@@ -66,11 +67,14 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee let-columns="columns">
-            <tr>
+            <tr [pSelectableRow]="employee">
+                <!--<td style="color: #404C51; font-weight: bold;" (click)="onSelectEmployee(employee)">-->
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ employee.person.firstName }} {{ employee.person.lastName }}
+                </td>
                 <td>
-                    <a href="javascript:;" (click)="onSelectEmployee(employee)">
-                        {{ employee.person.firstName }} {{ employee.person.lastName }}
-                    </a>
+                    <p-tag [value]="getGenderValue(employee.person.gender)"
+                        [severity]="getGender(employee.person.gender)"></p-tag>
                 </td>
                 <td>{{ employee.position.name }}</td>
                 <td>{{ employee.position.department.name }}</td>
@@ -81,7 +85,9 @@
                 <td>
                     <a href="javascript:;" (click)="changeStatus(employee)"
                         [pTooltip]="employee.status ? 'Click to deactivate' : 'click to activate'">
-                        <p-tag [value]="employee.status" [severity]="getStatus(employee.status)"></p-tag>
+                        <p-tag [value]="getStatusValue(employee.status)"
+                            [severity]="getStatus(employee.status)"></p-tag>
+
                     </a>
                 </td>
                 <td style="width: 180px;">
