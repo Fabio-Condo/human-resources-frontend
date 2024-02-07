@@ -37,7 +37,10 @@
         <td style="color: #404C51; font-weight: bold;">
           {{ position.name }}
         </td>
-        <td>{{ position.positionType }}</td>
+        <td>
+          <p-tag [value]="getPositioValue(position.positionType)"
+            [severity]="getPosition(position.positionType)"></p-tag>
+        </td>
         <td>{{ position.department.name }}</td>
         <td>{{ position.location.name }}, {{ position.location.country.name }}</td>
         <td style="width: 180px;">

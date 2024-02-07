@@ -41,15 +41,9 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   selectedEmployeePerformanceEvaluationModal: EmployeePerformanceEvaluation = new EmployeePerformanceEvaluation();
   displayModal = false;
 
-  // Para select de filtros
-  labelFuncionarioPadrao: string = "Todos funcionários"
-  labelCategoriaPadrao: string = "Todas categorias"
-  labelDepartamentoPadrao: string = "Todos departamentos"
-  labelCargosPadrao: string = "Todos cargos"
-
   categories = [
-    { label: 'YEARLY', value: 'YEARLY' },
-    { label: 'MONTHLY', value: 'MONTHLY' },
+    { label: 'Anual', value: 'YEARLY' },
+    { label: 'Mensal', value: 'MONTHLY' },
   ];
 
   evaluationLevels = [
@@ -93,7 +87,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.getPositions();
     this.getDepartments();
     this.getTotalEmployeesPerformanceEvaluations();
-    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelCategoriaPadrao, this.categories);
   }
 
   @ViewChild('table') grid: any;
@@ -196,7 +189,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: employee.id
           }
         })
-        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao, this.employees);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -286,7 +278,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: position.id
           }
         })
-        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelCargosPadrao, this.positions);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -304,7 +295,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
             value: department.id
           }
         })
-        this.adicionarOpcaoPadraoDoSelectDosFiltros(this.labelDepartamentoPadrao, this.departments);
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -314,8 +304,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   }
 
   onFilter(): void {
-    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelCategoriaPadrao, this.categories);
-    this.adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(this.labelFuncionarioPadrao, this.employees);
     this.displayModalFilter = true;
   }
 
@@ -329,15 +317,11 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
   }
 
   onAddNewEmployeePerformanceEvaluation(): void {
-    this.removerOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao);
-    this.removerOpcaoPadraoDoSelectCategoriaDosFiltros(this.labelCategoriaPadrao);
     this.employeePerformanceEvaluation = new EmployeePerformanceEvaluation();
     this.displayModalSave = true;
   }
 
   onEditEmployeePerformanceEvaluation(editEmployeePerformanceEvaluation: EmployeePerformanceEvaluation): void {
-    this.removerOpcaoPadraoDoSelectDosFiltros(this.labelFuncionarioPadrao);
-    this.removerOpcaoPadraoDoSelectCategoriaDosFiltros(this.labelCategoriaPadrao);
     this.employeePerformanceEvaluation = editEmployeePerformanceEvaluation;
     this.employeePerformanceEvaluation.id = editEmployeePerformanceEvaluation.id;
     this.displayModalSave = true;
@@ -372,49 +356,6 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
         return 'info';
     }
     return '';
-  }
-
-  // Para Objectos o value deve ser uma string
-  adicionarOpcaoPadraoDoSelectDosFiltrosParaEnums(label: string, array: any[]) {
-    // Verifica se a opção padrao 'Todos...' já existe no array
-    const todosOptionExists = array.some(option => option.label === label);
-
-    // Adiciona a opção apenas se ainda não existir
-    if (!todosOptionExists) {
-      array.unshift({
-        'label': label,
-        'value': ''
-      });
-    }
-  }
-
-  // Para Objectos o value deve ser um numero
-  adicionarOpcaoPadraoDoSelectDosFiltros(label: string, array: any[]) {
-    // Verifica se a opção 'Todos funcionários' já existe no array employees
-    const todosOptionExists = array.some(option => option.label === label);
-
-    // Adiciona a opção apenas se ainda não existir
-    if (!todosOptionExists) {
-      array.unshift({
-        'label': label,
-        'value': 0
-      });
-    }
-  }
-
-
-  // Função para remover uma opção no array com base no label
-  removerOpcaoPadraoDoSelectDosFiltros(labelToRemove: string) {
-    this.employees = this.employees.filter(function (opcao) {
-      return opcao.label !== labelToRemove;
-    });
-  }
-
-  // Função para remover uma opção no array com base no label
-  removerOpcaoPadraoDoSelectCategoriaDosFiltros(labelToRemove: string) {
-    this.categories = this.categories.filter(function (opcao) {
-      return opcao.label !== labelToRemove;
-    });
   }
 
   limparCampos() {

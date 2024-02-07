@@ -34,9 +34,9 @@ export class PositionsComponent implements OnInit {
   position: IPosition = new Position;
   displayModalSave: boolean = false;
 
-  departments: any[] = [] ;
-  administrativeClusters: any[] = [] ;
-  locations: any[] = [] ;
+  departments: any[] = [];
+  administrativeClusters: any[] = [];
+  locations: any[] = [];
   employees: any[] = [];
 
   mainResponsibilities: Array<MainResponsibility> = []
@@ -87,12 +87,12 @@ export class PositionsComponent implements OnInit {
   ];
 
   positionTypes = [
-    { label: 'FULL_TIME', value: 'FULL_TIME' },
-    { label: 'PART_TIME', value: 'PART_TIME' },
-    { label: 'FREELANCER', value: 'FREELANCER' },
-    { label: 'REMOTE', value: 'REMOTE' },
-    { label: 'HYBRID', value: 'HYBRID' },
-    { label: 'INTERNSHIP', value: 'INTERNSHIP' },
+    { label: 'Tempo inteiro', value: 'FULL_TIME' },
+    { label: 'Tempo parcial', value: 'PART_TIME' },
+    { label: 'Freelancer', value: 'FREELANCER' },
+    { label: 'Remoto', value: 'REMOTE' },
+    { label: 'Hibrida', value: 'HYBRID' },
+    { label: 'Estágio', value: 'INTERNSHIP' },
   ];
 
   sizePage = [
@@ -102,7 +102,7 @@ export class PositionsComponent implements OnInit {
     { label: '50 itens por página', value: 50 },
     { label: '100 itens por página', value: 100 },
   ];
-  
+
   orderPage = [
     { label: 'Nome (crescente)', value: 'name,asc' },
     { label: 'Nome (decrescente)', value: 'name,desc' },
@@ -154,7 +154,7 @@ export class PositionsComponent implements OnInit {
         this.showLoading = false;
         this.filterPositions();
         this.getTotalPositions();
-        this.messageService.add({ severity: 'success', detail: 'Position added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Position added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -192,7 +192,7 @@ export class PositionsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deletePosition(position: IPosition) {
@@ -217,7 +217,7 @@ export class PositionsComponent implements OnInit {
     return this.departmentService.findAll().subscribe(
       data => {
         this.departments = data.content.map(department => {
-          return  {
+          return {
             label: this.limitarString(department.name, 30),
             value: department.id
           }
@@ -234,7 +234,7 @@ export class PositionsComponent implements OnInit {
     return this.locationsService.findAll().subscribe(
       data => {
         this.locations = data.content.map(location => {
-          return  {
+          return {
             label: location.name + ", (" + location.country.name + ")",
             value: location.id
           }
@@ -251,7 +251,7 @@ export class PositionsComponent implements OnInit {
     return this.employeesService.findAll().subscribe(
       data => {
         this.employees = data.content.map(employee => {
-          return  {
+          return {
             label: employee.name,
             value: employee.id
           }
@@ -264,11 +264,11 @@ export class PositionsComponent implements OnInit {
     )
   }
 
-  getTotalPositions(){
+  getTotalPositions() {
     this.showLoading = true;
     this.positionsService.getTotal().subscribe(
       (total) => {
-        this.totalPositions =  total;
+        this.totalPositions = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -285,7 +285,7 @@ export class PositionsComponent implements OnInit {
       return texto.slice(0, limite) + "...";
     }
   }
-  
+
 
   onFilter(): void {
     this.displayModalFilter = true;
@@ -322,7 +322,7 @@ export class PositionsComponent implements OnInit {
     this.position.mainResponsibilities[this.mainResponsibilityIndex!] = this.cloneMainResponsability(this.mainResponsibility!);
     this.showMainResponsibilityForm = false;
     frm.reset();
-  }     
+  }
 
   cloneMainResponsability(mainResponsability: MainResponsibility): MainResponsibility {
     return new MainResponsibility(mainResponsability.id, mainResponsability.designation);
@@ -354,7 +354,7 @@ export class PositionsComponent implements OnInit {
     this.position.specificRequirements[this.specificRequirementIndex!] = this.cloneSpecificRequirement(this.specificRequirement!);
     this.showSpecificRequirementForm = false;
     frm.reset();
-  }     
+  }
 
   cloneSpecificRequirement(specificRequirement: SpecificRequirement): SpecificRequirement {
     return new SpecificRequirement(specificRequirement.id, specificRequirement.designation);
@@ -381,31 +381,31 @@ export class PositionsComponent implements OnInit {
     this.benefit = new Benefit();
     this.benefitIndex = this.position.benefits.length;
   }
-  
+
   confirmBenefit(frm: NgForm) {
     this.position.benefits[this.benefitIndex!] = this.cloneBenefit(this.benefit!);
     this.showBenefitsForm = false;
     frm.reset();
-  }     
-  
+  }
+
   cloneBenefit(benefit: Benefit): Benefit {
     return new Benefit(benefit.id, benefit.designation);
   }
-  
+
   get editingBenefit() {  // show the title in modal
     return this.benefit && this.benefit?.id;
   }
-  
+
   removeBenefit(index: number) {
     this.position.benefits.splice(index, 1);
     console.log("removing: " + index);
   }
-  
+
   getReadBenefit(benefit: Benefit, index: number) {
     this.benefit = this.cloneBenefit(benefit);
     this.showBenefitsForm = true;
     this.benefitIndex = index;
-  }       
+  }
 
   //
   onSelectPosition(selectedPosition: IPosition): void {
@@ -414,8 +414,44 @@ export class PositionsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.filterPositions(page);
+  }
+
+  getPositioValue(status: string) {
+    switch (status) {
+      case 'FULL_TIME':
+        return 'Tempo inteiro';
+      case 'PART_TIME':
+        return 'Tempo parcial';
+      case 'FREELANCER':
+        return 'Freelancer';
+      case 'REMOTE':
+        return 'Remoto';
+      case 'HYBRID':
+        return 'Hibrida';
+      case 'INTERNSHIP':
+        return 'Estágio';
+    }
+    return '';
+  }
+
+  getPosition(status: string) {
+    switch (status) {
+      case 'FULL_TIME':
+        return 'primmary';
+      case 'PART_TIME':
+        return 'success';
+      case 'FREELANCER':
+        return 'info';
+      case 'REMOTE':
+        return 'primmary';
+      case 'HYBRID':
+        return 'success';
+      case 'INTERNSHIP':
+        return 'info';
+    }
+    return '';
   }
 
   private sendErrorNotification(message: string): void {
