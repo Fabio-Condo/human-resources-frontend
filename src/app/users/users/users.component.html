@@ -11,7 +11,7 @@
         <button pButton (click)="onUserSettings()" pRipple label="Pass reset" icon="pi pi-plus"></button>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" placeholder="firstName, lastName or email" [(ngModel)]="filter.global"
+          <input pInputText type="text" placeholder="Pesquisa" [(ngModel)]="filter.global"
             (ngModelChange)="filterAll()" />
         </span>
         <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
