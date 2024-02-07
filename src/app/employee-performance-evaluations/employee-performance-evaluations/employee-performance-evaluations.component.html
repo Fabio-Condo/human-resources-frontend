@@ -109,7 +109,7 @@
 </div>
 
 <p-dialog header="Avaliação {{ editing ? '(editando)' : '(novo)' }}" [(visible)]="displayModalSave" [modal]="true"
-    [style]="{height: '41vw', width: '35vw'}" [draggable]="false" [resizable]="false">
+    [style]="{width: '35vw'}" [draggable]="false" [resizable]="false">
     <form autocomplete="off" #employeePerformanceEvaluationForm="ngForm"
         (ngSubmit)="save(employeePerformanceEvaluationForm)">
         <div class="formgrid grid">
