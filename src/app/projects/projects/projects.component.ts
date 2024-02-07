@@ -362,9 +362,9 @@ export class ProjectsComponent implements OnInit {
       case 'CONCLUDED':
         return 'info';
       case 'APPROVED':
-        return 'info';
+        return 'success';
       case 'PENDING':
-        return 'primmary';
+        return 'warning';
       case 'CANCELED':
         return 'danger';
       case 'SUSPENDED':

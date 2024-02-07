@@ -447,7 +447,7 @@ export class PositionsComponent implements OnInit {
       case 'REMOTE':
         return 'primmary';
       case 'HYBRID':
-        return 'success';
+        return 'warning';
       case 'INTERNSHIP':
         return 'info';
     }

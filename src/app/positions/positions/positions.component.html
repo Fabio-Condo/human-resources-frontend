@@ -10,7 +10,7 @@
           class="p-button-primmary mr-2"></button>
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" placeholder="Nome, department or loc" [(ngModel)]="filter.global"
+          <input pInputText type="text" placeholder="Pesquisa" [(ngModel)]="filter.global"
             (ngModelChange)="filterPositions()" />
         </span>
         <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter" class="ml-auto"
