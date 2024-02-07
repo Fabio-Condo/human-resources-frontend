@@ -1,7 +1,7 @@
 <div class="container">
     <h3>Funcionários</h3>
 
-    <p-table [value]="employees" [columns]="selectedColumns" [paginator]="true" (onLazyLoad)="onChangePage($event)"
+    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)"
         [rows]="filter.itemsPerPage" [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true"
         [showCurrentPageReport]="true" [totalRecords]="totalRecords" selectionMode="single"
         [(selection)]="selectedEmployeeModal"
@@ -46,6 +46,10 @@
                         style="margin-left: 2px; color: #1c80cf;"></span>
                 </th>
                 <th>
+                    Gênero
+                </th>
+                
+                <th>
                     Cargo
                     <span *ngIf="filter.sort ==='position,desc'" class="pi pi-sort-down"
                         style="margin-left: 2px; color: #1c80cf;"></span>
@@ -69,7 +73,7 @@
         <ng-template pTemplate="body" let-employee let-columns="columns">
             <tr [pSelectableRow]="employee">
                 <!--<td style="color: #404C51; font-weight: bold;" (click)="onSelectEmployee(employee)">-->
-                <td style="color: #404C51; font-weight: bold;">
+                <td (click)="onSelectEmployee(employee)" style="color: #404C51; font-weight: bold;">
                     {{ employee.person.firstName }} {{ employee.person.lastName }}
                 </td>
                 <td>

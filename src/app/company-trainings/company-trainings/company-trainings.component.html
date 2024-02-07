@@ -34,10 +34,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-training>
             <tr>
-                <td>
-                    <a href="javascript:;" (click)="onSelectTraining(training)">
-                        {{ training.companyTrainingType.type }}
-                    </a>
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ training.companyTrainingType.type }}
                 </td>
                 <td>{{ training.companyTrainingType.level }}</td>
                 <td>{{ training.date | date: 'dd/MM/yyyy'}}</td>
@@ -174,26 +172,25 @@
         <div>
             <div class="col-12 p-fluid">
                 <label>Tipo</label>
-                <p-dropdown [options]="companyTrainingTypes" placeholder="Selecione"
-                    name="companyTrainingType" #companyTrainingType ngModel
-                    (onChange)="findTrainingById(companyTraining.companyTrainingType.id)"
+                <p-dropdown [options]="companyTrainingTypes" placeholder="Selecione" name="companyTrainingType"
+                    #companyTrainingType ngModel (onChange)="findTrainingById(companyTraining.companyTrainingType.id)"
                     [(ngModel)]="companyTraining.companyTrainingType.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 1%;">
                 <label>Nivel</label>
-                <input pInputText disabled type="text" name="type" ngModel #type="ngModel"
-                    required minlength="1" [(ngModel)]="companyTrainingTypeById.level">
+                <input pInputText disabled type="text" name="type" ngModel #type="ngModel" required minlength="1"
+                    [(ngModel)]="companyTrainingTypeById.level">
             </div>
             <div class="col-12 md-12 p-fluid" style="margin-top: 1%;">
                 <label>Data</label>
-                <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
-                    [showIcon]="true" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel
-                    #date="ngModel" [required]="true" [(ngModel)]="companyTraining.date"></p-calendar>
+                <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
+                    [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel #date="ngModel"
+                    [required]="true" [(ngModel)]="companyTraining.date"></p-calendar>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 1%;">
                 <label>Duração</label>
-                <input pInputText type="text" name="duration" ngModel #duration="ngModel"
-                    required minlength="1" [(ngModel)]="companyTraining.duration">
+                <input pInputText type="text" name="duration" ngModel #duration="ngModel" required minlength="1"
+                    [(ngModel)]="companyTraining.duration">
             </div>
 
             <a href="javascript:;" style="text-decoration: none; margin-top: 4%;"
@@ -276,23 +273,23 @@
 
         <div class="col-12 p-fluid">
             <label>Nivel</label>
-            <p-dropdown [options]="companyTrainingTypes" placeholder="Selecione"
-                name="companyTrainingType" #companyTrainingType ngModel [(ngModel)]="filter.companyTrainingTypeLevel"
+            <p-dropdown [options]="companyTrainingTypes" placeholder="Selecione" name="companyTrainingType"
+                #companyTrainingType ngModel [(ngModel)]="filter.companyTrainingTypeLevel"
                 (onChange)="findTrainingById(filter.companyTrainingTypeLevel)"
                 (onChange)="filterTrainings()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Tipo</label>
-            <input pInputText disabled type="text" name="type" ngModel #type="ngModel" required
-                minlength="1" [(ngModel)]="companyTrainingTypeById.type">
+            <input pInputText disabled type="text" name="type" ngModel #type="ngModel" required minlength="1"
+                [(ngModel)]="companyTrainingTypeById.type">
         </div>
 
         <div class="col-12 md-12 p-fluid" style="margin-top: 2%;">
             <label>Data</label>
-            <p-calendar  name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}"
-                [showIcon]="true" [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel #date="ngModel"
-                [required]="true" [(ngModel)]="filter.date" (ngModelChange)="filterTrainings()"></p-calendar>
+            <p-calendar name="date" dateFormat="dd/mm/yy" [inputStyle]="{ 'width': '100px'}" [showIcon]="true"
+                [showOnFocus]="false" [inline]="false" [readonlyInput]="false" ngModel #date="ngModel" [required]="true"
+                [(ngModel)]="filter.date" (ngModelChange)="filterTrainings()"></p-calendar>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">

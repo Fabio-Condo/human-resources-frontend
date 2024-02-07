@@ -21,19 +21,19 @@ import { UserService } from '../user.service';
 export class UsersComponent implements OnInit {
 
 
-  displayModalSave= false;
-  displayModalSettingsUser= false;
+  displayModalSave = false;
+  displayModalSettingsUser = false;
 
-  users: User[] = []; 
-  fileName: any; 
-  currentUsername: string = ''; 
-  profileImage: any; 
+  users: User[] = [];
+  fileName: any;
+  currentUsername: string = '';
+  profileImage: any;
   subscriptions: Subscription[] = [];
 
   showLoading: any;
   user = new User();
-  selectedUserView: User =  new User;
-  selectedUserModal: User =  new User;
+  selectedUserView: User = new User;
+  selectedUserModal: User = new User;
   displayModal: boolean = false;
 
   displayModalFilter: boolean = false;
@@ -83,13 +83,13 @@ export class UsersComponent implements OnInit {
   ];
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService, 
+    private userService: UserService,
     private messageService: MessageService,
     private title: Title,
     private confirmationService: ConfirmationService,
-    ) {   
+  ) {
   }
 
   ngOnInit(): void {
@@ -115,14 +115,14 @@ export class UsersComponent implements OnInit {
   save(userForm: NgForm) {
     if (this.editing) {
       console.log("Editing")
-      this.onUpdateUser(userForm) 
+      this.onUpdateUser(userForm)
     } else {
       console.log("New")
       this.onAddNewUser(userForm)
     }
   }
 
-  filterAll(page: number = 0){
+  filterAll(page: number = 0) {
     this.showLoading = true;
     this.filter.page = page;
     this.userService.filter(this.filter).subscribe(
@@ -149,7 +149,7 @@ export class UsersComponent implements OnInit {
           this.displayModalSave = false;
           this.fileName = null;
           this.profileImage = null;
-          this.messageService.add({ severity: 'success', detail: `${response.firstName} ${response.lastName} added successfully`});
+          this.messageService.add({ severity: 'success', detail: `${response.firstName} ${response.lastName} added successfully` });
           this.filterAll();
           this.showLoading = false;
         },
@@ -226,7 +226,7 @@ export class UsersComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.onDeleteUder(user.username);
+        this.onDeleteUder(user.username);
       }
     });
   }
@@ -262,7 +262,7 @@ export class UsersComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
     this.filterAll(page);
   }
 
@@ -272,12 +272,12 @@ export class UsersComponent implements OnInit {
     this.displayModalSave = true;
   }
 
-  onAddNewUserModal() {  
+  onAddNewUserModal() {
     this.user = new User();
     this.displayModalSave = true;
   }
 
-  onUserSettings() {  
+  onUserSettings() {
     this.displayModalSettingsUser = true;
   }
 
@@ -290,8 +290,8 @@ export class UsersComponent implements OnInit {
     this.displayModal = true;
   }
 
-  onProfileImageChange(fileName: any, profileImage: any): void {    
-    this.fileName =  fileName.target.files[0].name;
+  onProfileImageChange(fileName: any, profileImage: any): void {
+    this.fileName = fileName.target.files[0].name;
     this.profileImage = profileImage.target.files[0];
   }
 
@@ -318,8 +318,32 @@ export class UsersComponent implements OnInit {
       this.messageService.add({ severity: 'error', detail: 'An error occurred. Please try again.' });
     }
   }
-  
-  resetFields(){
+
+  getRoleValue(status: string) {
+    switch (status) {
+      case 'ROLE_SUPER_ADMIN':
+        return 'Super admin';
+      case 'ROLE_CANDIDATE':
+        return 'Candidate';
+      case 'ROLE_ADMIN':
+        return 'Admin';
+    }
+    return '';
+  }
+
+  getRole(status: string) {
+    switch (status) {
+      case 'ROLE_SUPER_ADMIN':
+        return 'primmary';
+      case 'ROLE_ADMIN':
+        return 'success';
+      case 'ROLE_CANDIDATE':
+        return 'info';
+    }
+    return '';
+  }
+
+  resetFields() {
     this.filter.name = "";
     this.filter.firstName = ""
     this.filter.lastName = ""

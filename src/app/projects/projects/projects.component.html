@@ -35,15 +35,14 @@
         </ng-template>
         <ng-template pTemplate="body" let-project>
             <tr>
-                <td>
-                    <a href="javascript:;" (click)="onSelectProject(project)">
-                        {{ project.name }}
-                    </a>
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ project.name }}
                 </td>
                 <td>{{ project.description }}</td>
                 <td>{{ project.department.name }}</td>
                 <td>
-                    <p-tag [value]="project.projectStatus" [severity]="getProjectStatus(project.projectStatus)"></p-tag>
+                    <p-tag [value]="getProject(project.projectStatus)"
+                        [severity]="getProjectStatus(project.projectStatus)"></p-tag>
                 </td>
                 <td style="width: 180px;">
                     <span class="p-buttonset mr-auto">
@@ -82,8 +81,8 @@
         <div>
             <div class="col-12 p-fluid">
                 <label>Name</label>
-                <input pInputText type="text" name="name" ngModel #name="ngModel" required
-                    minlength="1" [(ngModel)]="project.name">
+                <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
+                    [(ngModel)]="project.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2px;">
                 <label>Descrição</label>
@@ -92,13 +91,13 @@
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2px;">
                 <label>Departamento</label>
-                <p-dropdown [options]="departments" placeholder="Selecione" name="department"
-                    #department ngModel [(ngModel)]="project.department.id"></p-dropdown>
+                <p-dropdown [options]="departments" placeholder="Selecione" name="department" #department ngModel
+                    [(ngModel)]="project.department.id"></p-dropdown>
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2px;">
                 <label>Status</label>
-                <p-dropdown [options]="projectStatuses" placeholder="Selecione"
-                    name="projectStatus" #projectStatus ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
+                <p-dropdown [options]="projectStatuses" placeholder="Selecione" name="projectStatus" #projectStatus
+                    ngModel [(ngModel)]="project.projectStatus"></p-dropdown>
             </div>
 
             <a href="javascript:;" style="text-decoration: none;" (click)="showTasks = !showTasks">
@@ -221,9 +220,8 @@
 
         <div class="col-12 p-fluid" style="margin-top: 1%;">
             <label>Status</label>
-            <p-dropdown [options]="projectStatuses" placeholder="Selecione" name="projectStatus"
-                #projectStatus ngModel [(ngModel)]="filter.projectStatus"
-                (ngModelChange)="filterProjects()"></p-dropdown>
+            <p-dropdown [options]="projectStatuses" placeholder="Selecione" name="projectStatus" #projectStatus ngModel
+                [(ngModel)]="filter.projectStatus" (ngModelChange)="filterProjects()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
@@ -237,9 +235,8 @@
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">
             <label>Departmento</label>
-            <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true"
-                name="department" #department ngModel [(ngModel)]="filter.department"
-                (ngModelChange)="filterProjects()"></p-dropdown>
+            <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true" name="department" #department
+                ngModel [(ngModel)]="filter.department" (ngModelChange)="filterProjects()"></p-dropdown>
         </div>
 
         <div class="col-12 p-fluid" style="margin-top: 2%;">

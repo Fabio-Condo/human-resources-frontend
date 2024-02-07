@@ -34,9 +34,9 @@ export class EmployeesComponent implements OnInit {
   totalEmployees: number = 0;
 
   totalRecords: number = 0
-  employees: IEmployee[] = [];
+  employees: Employee[] = [];
 
-  employee: IEmployee = new Employee;
+  employee: Employee = new Employee;
   displayModalSave: boolean = false;
 
   locations: any[] = [];
@@ -87,7 +87,7 @@ export class EmployeesComponent implements OnInit {
   showContacts: boolean = false;
 
   employeePerformanceEvaluations: Array<EmployeePerformanceEvaluation> = [];
-  selectedEmployeeModal: IEmployee = new Employee;
+  selectedEmployeeModal: Employee = new Employee;
   displayModal = false;
 
   displayModalFilter: boolean = false;

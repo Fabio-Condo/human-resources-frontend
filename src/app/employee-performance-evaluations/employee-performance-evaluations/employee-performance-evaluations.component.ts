@@ -354,6 +354,16 @@ export class EmployeePerformanceEvaluationsComponent implements OnInit {
     this.filterEmployeePerformanceEvaluations(page);
   }
 
+  getPerfomanceEvaluation(status: string) {
+    switch (status) {
+      case 'YEARLY':
+        return 'Anual';
+      case 'MONTHLY':
+        return 'Mensal';
+    }
+    return '';
+  }
+
   getPerfomanceEvaluationStatus(status: string) {
     switch (status) {
       case 'YEARLY':

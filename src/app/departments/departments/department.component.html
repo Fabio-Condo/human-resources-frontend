@@ -35,10 +35,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-dep>
             <tr>
-                <td>
-                    <a href="javascript:;" (click)="onSelectDepartment(dep)">
-                        {{ dep.name }}
-                    </a>
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ dep.name }}
                 </td>
                 <td>{{ dep.description }}</td>
                 <td style="width: 180px;">
@@ -79,8 +77,8 @@
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
-                <input pInputText type="text" name="name" ngModel #name="ngModel" required
-                    minlength="1" [(ngModel)]="department.name">
+                <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
+                    [(ngModel)]="department.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Descrição</label>

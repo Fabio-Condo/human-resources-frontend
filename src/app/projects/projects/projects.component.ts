@@ -255,11 +255,11 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  getTotalProjects(){
+  getTotalProjects() {
     this.showLoading = true;
     this.projectService.getTotal().subscribe(
       (total) => {
-        this.totalProjects =  total;
+        this.totalProjects = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -333,6 +333,26 @@ export class ProjectsComponent implements OnInit {
 
   removeTask(index: number) {
     this.project.tasks.splice(index, 1);
+  }
+
+  getProject(status: string) {
+    switch (status) {
+      case 'IN_PROGRESS':
+        return 'Em progresso';
+      case 'IN_TEST':
+        return 'Em teste';
+      case 'CONCLUDED':
+        return 'Concluido';
+      case 'APPROVED':
+        return 'Aprovado';
+      case 'PENDING':
+        return 'Pendente';
+      case 'CANCELED':
+        return 'Cancelado';
+      case 'SUSPENDED':
+        return 'Suspendido';
+    }
+    return '';
   }
 
   getProjectStatus(status: string) {

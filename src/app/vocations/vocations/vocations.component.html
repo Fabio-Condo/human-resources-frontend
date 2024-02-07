@@ -47,10 +47,8 @@
                 <td>
                     <p-tableCheckbox [value]="vocation"></p-tableCheckbox>
                 </td>
-                <td>
-                    <a href="javascript:;" (click)="onSelectVocation(vocation)">
-                        {{ vocation.employee.person.firstName }} {{ vocation.employee.person.lastName }}
-                    </a>
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ vocation.employee.person.firstName }} {{ vocation.employee.person.lastName }}
                 </td>
                 <td>
                     <span *ngIf="vocation.vocationType==='VOCATIONS'">Férias</span>
@@ -63,7 +61,7 @@
                 <td>{{ vocation.beginDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{ vocation.endDate | date: 'dd/MM/yyyy'}}</td>
                 <td>
-                    <p-tag [value]="vocation.vocationStatus"
+                    <p-tag [value]="getVocation(vocation.vocationStatus)"
                         [severity]="getVocationStatus(vocation.vocationStatus)"></p-tag>
                 </td>
                 <td style="width: 170px;">

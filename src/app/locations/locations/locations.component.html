@@ -34,10 +34,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-location>
             <tr>
-                <td>
-                    <a href="javascript:;" (click)="onSelectLocation(location)">
-                        {{ location.name }}
-                    </a>
+                <td style="color: #404C51; font-weight: bold;">
+                    {{ location.name }}
                 </td>
                 <td>{{ location.country.name }}</td>
                 <td style="width: 180px;">
@@ -84,8 +82,8 @@
 
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Name</label>
-                <input pInputText type="text" name="name" ngModel #name="ngModel" required
-                    minlength="1" [(ngModel)]="location.name">
+                <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
+                    [(ngModel)]="location.name">
             </div>
             <div class="col-12 p-fluid" style="margin-top: 2%;">
                 <label>Descrição</label>

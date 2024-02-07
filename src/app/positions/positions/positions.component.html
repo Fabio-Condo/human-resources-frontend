@@ -34,10 +34,8 @@
     </ng-template>
     <ng-template pTemplate="body" let-position>
       <tr>
-        <td>
-          <a href="javascript:;" (click)="onSelectPosition(position)">
-            {{ position.name }}
-          </a>
+        <td style="color: #404C51; font-weight: bold;">
+          {{ position.name }}
         </td>
         <td>{{ position.positionType }}</td>
         <td>{{ position.department.name }}</td>
@@ -81,8 +79,8 @@
       <div class="field col-12 md:col-6">
         <div class="col-12 p-fluid" style="margin-top: 2%;">
           <label>Nome</label>
-          <input pInputText type="text" name="name" ngModel #name="ngModel" required
-            minlength="1" [(ngModel)]="position.name">
+          <input pInputText type="text" name="name" ngModel #name="ngModel" required minlength="1"
+            [(ngModel)]="position.name">
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
           <label>Missão</label>
@@ -91,39 +89,39 @@
         </div>
         <div class="col-12 p-fluid" style="margin-top: 1%;">
           <label>Grupo funcional</label>
-          <p-dropdown [options]="functionalGroups" placeholder="Selecione" name="functionalGroup"
-            #functionalGroup ngModel [(ngModel)]="position.functionalGroup"></p-dropdown>
+          <p-dropdown [options]="functionalGroups" placeholder="Selecione" name="functionalGroup" #functionalGroup
+            ngModel [(ngModel)]="position.functionalGroup"></p-dropdown>
         </div>
       </div>
       <div class="field col-12 md:col-6">
         <div class="col-12 p-fluid" style="margin-top: 2%;">
           <label>Job Type</label>
-          <p-dropdown [options]="positionTypes" placeholder="Selecione" name="positionType"
-            #positionType ngModel [(ngModel)]="position.positionType"></p-dropdown>
+          <p-dropdown [options]="positionTypes" placeholder="Selecione" name="positionType" #positionType ngModel
+            [(ngModel)]="position.positionType"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 2%;">
           <label>Departmento</label>
-          <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true"
-            name="department" #department ngModel [(ngModel)]="position.department.id"></p-dropdown>
+          <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true" name="department" #department
+            ngModel [(ngModel)]="position.department.id"></p-dropdown>
         </div>
         <div class="col-12 p-fluid" style="margin-top: 3%;">
           <label>Local</label>
-          <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true"
-            name="location" #location ngModel [(ngModel)]="position.location.id"></p-dropdown>
+          <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="location" #location ngModel
+            [(ngModel)]="position.location.id"></p-dropdown>
         </div>
         <div class="formgrid grid" style="margin-top: 2%;">
           <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid">
               <label>Salário Minimo</label>
-              <input pInputText type="number" name="minimumWage" ngModel #minimumWage="ngModel"
-                required minlength="1" [(ngModel)]="position.minimumWage">
+              <input pInputText type="number" name="minimumWage" ngModel #minimumWage="ngModel" required minlength="1"
+                [(ngModel)]="position.minimumWage">
             </div>
           </div>
           <div class="field col-12 md:col-6">
             <div class="col-12 p-fluid">
               <label>Salário Máximo</label>
-              <input pInputText type="number" name="maximumWage" ngModel #maximumWage="ngModel"
-                required minlength="1" [(ngModel)]="position.maximumWage">
+              <input pInputText type="number" name="maximumWage" ngModel #maximumWage="ngModel" required minlength="1"
+                [(ngModel)]="position.maximumWage">
             </div>
           </div>
         </div>
@@ -527,26 +525,25 @@
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">
       <label>Job Type</label>
-      <p-dropdown [options]="positionTypes" placeholder="Selecione" name="positionType"
-        #positionType ngModel [(ngModel)]="filter.positionType" (ngModelChange)="filterPositions()"></p-dropdown>
+      <p-dropdown [options]="positionTypes" placeholder="Selecione" name="positionType" #positionType ngModel
+        [(ngModel)]="filter.positionType" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">
       <label>Grupo funcional</label>
-      <p-dropdown [options]="functionalGroups" placeholder="Selecione" name="functionalGroup"
-        #functionalGroup ngModel [(ngModel)]="filter.functionalGroup" (ngModelChange)="filterPositions()"></p-dropdown>
+      <p-dropdown [options]="functionalGroups" placeholder="Selecione" name="functionalGroup" #functionalGroup ngModel
+        [(ngModel)]="filter.functionalGroup" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">
       <label>Departmento</label>
-      <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true"
-        name="department" #department ngModel [(ngModel)]="filter.department"
-        (ngModelChange)="filterPositions()"></p-dropdown>
+      <p-dropdown [options]="departments" placeholder="Selecione" [filter]="true" name="department" #department ngModel
+        [(ngModel)]="filter.department" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
     <div class="col-12 p-fluid" style="margin-top: 2%;">
       <label>Local</label>
-      <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="location"
-        #location ngModel [(ngModel)]="filter.location" (ngModelChange)="filterPositions()"></p-dropdown>
+      <p-dropdown [options]="locations" placeholder="Selecione" [filter]="true" name="location" #location ngModel
+        [(ngModel)]="filter.location" (ngModelChange)="filterPositions()"></p-dropdown>
     </div>
 
     <div class="col-12 p-fluid" style="margin-top: 2%;">

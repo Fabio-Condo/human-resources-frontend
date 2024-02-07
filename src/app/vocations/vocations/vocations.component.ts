@@ -362,6 +362,18 @@ export class VocationsComponent implements OnInit {
     });
   }
 
+  getVocation(status: string) {
+    switch (status) {
+      case 'PENDING':
+        return 'Pendente';
+      case 'APPROVED':
+        return 'Aprovado';
+      case 'REJECTED':
+        return 'Rejeitado';
+    }
+    return '';
+  }
+
   getVocationStatus(status: string) {
     switch (status) {
       case 'PENDING':
