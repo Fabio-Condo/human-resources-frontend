@@ -3,7 +3,7 @@
 
   <p-table [value]="jobs" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
     [lazy]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalJobs}}"
-    [showCurrentPageReport]="true" styleClass="p-datatable-sm" #table>
+    [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [showCurrentPageReport]="true" styleClass="p-datatable-sm" #table>
     <ng-template pTemplate="caption" *ngIf="isUserLoggedIn && isSuperAdmin">
       <div class="flex">
         <button pButton (click)="onAddNewJob()" pRipple label="Novo" icon="pi pi-plus"

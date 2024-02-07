@@ -34,11 +34,11 @@ export class JobsComponent implements OnInit {
   selectedJobModal: Job = new Job();
   displayModal = false;
 
-  positions: any[] = [] ;
+  positions: any[] = [];
 
   positionById: IPosition = new Position();
 
-  user: User = new User; 
+  user: User = new User;
   isUserLoggedIn: boolean = false;
 
   totalJobs: number = 0;
@@ -64,7 +64,7 @@ export class JobsComponent implements OnInit {
 
   constructor(
     private jobsService: JobsService,
-    private authenticationService: AuthenticationService, 
+    private authenticationService: AuthenticationService,
     private positionsService: PositionsService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -76,7 +76,7 @@ export class JobsComponent implements OnInit {
     this.user = this.authenticationService.getUserFromLocalCache();
     this.title.setTitle('Jobs page');
     this.getTotalJobs();
-    if(this.isUserLoggedIn){
+    if (this.isUserLoggedIn) {
       this.getPositions();
     }
   }
@@ -109,7 +109,7 @@ export class JobsComponent implements OnInit {
         this.showLoading = false;
         this.getTotalJobs();
         this.filterJobs();
-        this.messageService.add({ severity: 'success', detail: 'Job added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Job added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -148,7 +148,7 @@ export class JobsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteJob(job: IJob) {
@@ -177,7 +177,7 @@ export class JobsComponent implements OnInit {
     return this.positionsService.findAll().subscribe(
       data => {
         this.positions = data.content.map(position => {
-          return  {
+          return {
             label: position.name,
             value: position.id
           }
@@ -190,7 +190,7 @@ export class JobsComponent implements OnInit {
     )
   }
 
-  findPositionById(id: number ) { // number
+  findPositionById(id: number) { // number
     this.showLoading = true;
     this.positionsService.getById(id).subscribe(
       position => {
@@ -231,11 +231,11 @@ export class JobsComponent implements OnInit {
     });
   }
 
-  getTotalJobs(){
+  getTotalJobs() {
     this.showLoading = true;
     this.jobsService.getTotal().subscribe(
       (total) => {
-        this.totalJobs =  total;
+        this.totalJobs = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -246,7 +246,8 @@ export class JobsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
+    this.filter.itemsPerPage = event!.rows!; // actualize a quantidade de itens por página de acordo com a opcao rowsPerPageOptions
     this.filterJobs(page);
   }
 

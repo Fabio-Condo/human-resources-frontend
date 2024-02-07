@@ -42,7 +42,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
     { label: 'Básico para Todos os Funcionários', value: 'Básico para Todos os Funcionários' },
     { label: 'Desenvolvimento Pessoal', value: 'Desenvolvimento Pessoal' },
     { label: 'Específico para Setores ou Funções', value: 'Específico para Setores ou Funções' },
-    { label: 'Desenvolvimento Pessoal', value: 'Desenvolvimento Pessoal' }, 
+    { label: 'Desenvolvimento Pessoal', value: 'Desenvolvimento Pessoal' },
     { label: 'Treinamento Onboarding', value: 'Treinamento Onboarding' },
     { label: 'Específico para Setores ou Funções', value: 'Específico para Setores ou Funções' },
   ];
@@ -100,7 +100,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
         this.showLoading = false;
         this.filterTrainingTypes();
         this.getTotalTrainingTypes();
-        this.messageService.add({ severity: 'success', detail: 'Training type added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Training type added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -138,7 +138,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deleteTrainingType(trainingType: ICompanyTrainingType) {
@@ -163,16 +163,16 @@ export class CompanyTrainingTypesComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteTrainingType(trainingType);
+        this.deleteTrainingType(trainingType);
       }
     });
   }
 
-  getTotalTrainingTypes(){
+  getTotalTrainingTypes() {
     this.showLoading = true;
     this.companyTrainingTypesService.getTotal().subscribe(
       (total) => {
-        this.totalTrainingTypes =  total;
+        this.totalTrainingTypes = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -221,7 +221,7 @@ export class CompanyTrainingTypesComponent implements OnInit {
     return new CompanyTrainingTypeGoal(goal.id, goal.designation);
   }
 
-  get editingGoal() { 
+  get editingGoal() {
     return this.goal && this.goal?.id;
   }
 
@@ -231,7 +231,8 @@ export class CompanyTrainingTypesComponent implements OnInit {
   //
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
+    this.filter.itemsPerPage = event!.rows!; // actualize a quantidade de itens por página de acordo com a opcao rowsPerPageOptions
     this.filterTrainingTypes(page);
   }
 

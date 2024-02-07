@@ -2,7 +2,8 @@
   <h5 style="text-align: center;">Usuários</h5>
 
   <p-table [value]="users" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
-    [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+    [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm"
+    #table>
     <ng-template pTemplate="caption">
       <div class="flex">
         <button pButton (click)="onAddNewUserModal()" pRipple label="Novo" icon="pi pi-plus"

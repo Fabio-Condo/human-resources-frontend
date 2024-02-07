@@ -32,7 +32,7 @@ export class CompanyTrainingsComponent implements OnInit {
   selectedCompanyTrainingModal: CompanyTraining = new CompanyTraining();
   displayModal = false;
 
-  companyTrainingTypes: any[] = [] ;
+  companyTrainingTypes: any[] = [];
 
   companyTraining: ICompanyTraining = new CompanyTraining;
   displayModalSave: boolean = false;
@@ -44,8 +44,8 @@ export class CompanyTrainingsComponent implements OnInit {
   employeeById: IEmployee = new Employee();
   selectedEmployeeIdToAddasMember: any;
 
-  employees: IEmployee[] = [] ;
-  employees2: IEmployee[] = [] ;
+  employees: IEmployee[] = [];
+  employees2: IEmployee[] = [];
   selectedEmployees!: IEmployee[];
 
   displayModalFilter: boolean = false;
@@ -115,7 +115,7 @@ export class CompanyTrainingsComponent implements OnInit {
         this.filterTrainings();
         this.getTotalCompanyTraining();
         this.convertStringsToDates([companyTrainingAdded]);
-        this.messageService.add({ severity: 'success', detail: 'Training added successfully' });      
+        this.messageService.add({ severity: 'success', detail: 'Training added successfully' });
       },
       (errorResponse: HttpErrorResponse) => {
         this.sendErrorNotification(errorResponse.error.message);
@@ -155,14 +155,14 @@ export class CompanyTrainingsComponent implements OnInit {
         this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
-    );   
+    );
   }
 
   deletionConfirm(training: ICompanyTraining): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete?',
       accept: () => {
-          this.deleteTraining(training);
+        this.deleteTraining(training);
       }
     });
   }
@@ -189,7 +189,7 @@ export class CompanyTrainingsComponent implements OnInit {
     return this.companyTrainingTypesService.findAll().subscribe(
       data => {
         this.companyTrainingTypes = data.content.map(trainingType => {
-          return  {
+          return {
             label: trainingType.type,
             value: trainingType.id
           }
@@ -214,7 +214,7 @@ export class CompanyTrainingsComponent implements OnInit {
       );
   }
 
-  findTrainingById(id: any ) { // number
+  findTrainingById(id: any) { // number
     this.showLoading = true;
     this.companyTrainingTypesService.findById(id).subscribe(
       companyTrainingType => {
@@ -242,11 +242,11 @@ export class CompanyTrainingsComponent implements OnInit {
     );
   }
 
-  getTotalCompanyTraining(){
+  getTotalCompanyTraining() {
     this.showLoading = true;
     this.companyTrainingsService.getTotal().subscribe(
       (total) => {
-        this.totalCompanyTrainings =  total;
+        this.totalCompanyTrainings = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -256,7 +256,7 @@ export class CompanyTrainingsComponent implements OnInit {
     );
   }
 
-  onAddEmployeeToTraining(){
+  onAddEmployeeToTraining() {
     this.displayModalAddNewMemberIntoTraining = true;
   }
 
@@ -290,7 +290,8 @@ export class CompanyTrainingsComponent implements OnInit {
   }
 
   onChangePage(event: LazyLoadEvent) {
-    const page = event!.first! / event!.rows!;  
+    const page = event!.first! / event!.rows!;
+    this.filter.itemsPerPage = event!.rows!; // actualize a quantidade de itens por página de acordo com a opcao rowsPerPageOptions
     this.filterTrainings(page);
   }
 

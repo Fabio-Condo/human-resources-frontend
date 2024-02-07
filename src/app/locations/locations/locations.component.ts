@@ -158,12 +158,12 @@ export class LocationsComponent implements OnInit {
       }
   }
 
-  
-  getTotalLocations(){
+
+  getTotalLocations() {
     this.showLoading = true;
     this.locationsService.getTotal().subscribe(
       (total) => {
-        this.totalLocations =  total;
+        this.totalLocations = total;
         this.showLoading = false;
       },
       (errorResponse: HttpErrorResponse) => {
@@ -200,6 +200,7 @@ export class LocationsComponent implements OnInit {
 
   onChangePage(event: LazyLoadEvent) {
     const page = event!.first! / event!.rows!;
+    this.filter.itemsPerPage = event!.rows!; // actualize a quantidade de itens por página de acordo com a opcao rowsPerPageOptions
     this.getLocations(page);
   }
 

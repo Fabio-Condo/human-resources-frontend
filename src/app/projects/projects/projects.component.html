@@ -3,7 +3,8 @@
 
     <p-table [value]="projects" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
         currentPageReportTemplate="Results: {{totalRecords}} of {{totalProjects}}" [showCurrentPageReport]="true"
-        [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>
+        [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true" [totalRecords]="totalRecords"
+        styleClass="p-datatable-sm" #table>
         <ng-template pTemplate="caption">
             <div class="flex">
                 <button pButton (click)="onAddNewProject()" pRipple label="Novo" icon="pi pi-plus"
