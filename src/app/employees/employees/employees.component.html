@@ -1,10 +1,9 @@
 <div class="container">
-    <h3>Funcionários</h3>
+    <h5 style="text-align: center;">Funcionários</h5>
 
-    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)"
-        [rows]="filter.itemsPerPage" [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true"
-        [showCurrentPageReport]="true" [totalRecords]="totalRecords" selectionMode="single"
-        [(selection)]="selectedEmployeeModal"
+    <p-table [value]="employees" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
+        [rowsPerPageOptions]="[5, 10, 25, 50, 100]" [lazy]="true" [showCurrentPageReport]="true"
+        [totalRecords]="totalRecords" selectionMode="single" [(selection)]="selectedEmployeeModal"
         currentPageReportTemplate="Results: {{totalRecords}} of {{totalEmployees}}" styleClass="p-datatable-sm" #table>
 
         <ng-template pTemplate="caption">
@@ -19,16 +18,15 @@
                         class="p-button-warning ml-auto" pTooltip="PDF" tooltipPosition="bottom"></button>
                 </span>
 
-                <span class="p-input-icon-left ml-auto">
+                <span class="p-input-icon-left ml-auto mr-auto">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" placeholder="Pesquisa" [(ngModel)]="filter.global"
                         (ngModelChange)="filterEmployees()" />
                 </span>
 
                 <span class="ml-auto">
-                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-                        selectedItemsLabel="{0} columns selected" 
-                        [style]="{'min-width': '20vw'}" 
+                    <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header" class="mr-2"
+                        selectedItemsLabel="{0} columns selected" [style]="{'min-width': '20vw'}"
                         placeholder="Choose Columns"></p-multiSelect>
                     <button type="button" (click)="onFilter()" pButton pRipple icon="pi pi-filter"
                         pTooltip="Selection Only" tooltipPosition="bottom"></button>
@@ -48,7 +46,7 @@
                 <th>
                     Gênero
                 </th>
-                
+
                 <th>
                     Cargo
                     <span *ngIf="filter.sort ==='position,desc'" class="pi pi-sort-down"

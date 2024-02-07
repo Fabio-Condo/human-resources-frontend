@@ -1,6 +1,5 @@
 <div class="container">
-
-  <h3>Usuários</h3>
+  <h5 style="text-align: center;">Usuários</h5>
 
   <p-table [value]="users" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
     [lazy]="true" [totalRecords]="totalRecords" styleClass="p-datatable-sm" #table>

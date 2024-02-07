@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Vagas</h3>
+  <h5 style="text-align: center;">Vagas</h5>
 
   <p-table [value]="jobs" [paginator]="true" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage"
     [lazy]="true" [totalRecords]="totalRecords" currentPageReportTemplate="Results: {{totalRecords}} of {{totalJobs}}"
