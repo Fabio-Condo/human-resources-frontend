@@ -43,6 +43,8 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LocationsRoutingModule } from './locations/locations-routing.module';
 import { LocationsModule } from './locations/locations.module';
+import { DashBoardRoutingModule } from './dashboard/dashboard-routing.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -71,6 +73,7 @@ import { LocationsModule } from './locations/locations.module';
     UserProfileRoutingModule,
     JobsRoutingModule,
     SecurityRoutingModule,
+    DashBoardRoutingModule,
     DepartmentModule,
     LocationsModule,
     SkillsModule,
@@ -85,6 +88,7 @@ import { LocationsModule } from './locations/locations.module';
     UsersModule,
     JobsModule,
     SecurityModule,
+    DashboardModule,
 
     CoreModule
   ],
