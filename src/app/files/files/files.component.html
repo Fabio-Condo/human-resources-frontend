@@ -1,0 +1,66 @@
+<h5 class="text-center">Files</h5>
+
+<div class="container">
+
+    <p-table [value]="filesList" (onLazyLoad)="onChangePage($event)" [rows]="filter.itemsPerPage" responsiveLayout="scroll" [paginator]="true"
+        [rowsPerPageOptions]="[5,10,25,50,100]" styleClass="p-datatable-sm" #table>
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <button pButton pRipple label="Novo" (click)="onAddNewFile()" icon="pi pi-plus"
+                    class="p-button-primmary mr-2"></button>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input [(ngModel)]="filter.nome" name="nome" pInputText type="text" placeholder="Pesquisa" (ngModelChange)="getFiles()"/>
+                </span>
+                <button type="button" disabled pButton pRipple icon="pi pi-filter" class="ml-auto"
+                    pTooltip="Selection Only" tooltipPosition="bottom"></button>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Caminho do arquivo</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ficheiro>
+            <tr>
+                <td style="color: #404C51; font-weight: bold;">{{ ficheiro.nome }}</td>
+                <td>{{ficheiro.caminho}}</td>
+                <td style="width: 180px;">
+                    <span class="p-buttonset mr-auto">
+                        <button (click)="download(ficheiro.nome)" pTooltip="Download" tooltipPosition="top" pButton type="button" icon="pi pi-download"
+                            style="height: 30px;"></button>
+                        <button pButton pTooltip="Delete" (click)="deletionConfirm(ficheiro)" tooltipPosition="top"
+                            type="button" icon="pi pi-trash"
+                            style="background-color: #fff; color: #e96969; border-color: #e96969; height: 30px;"></button>
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>
+
+<p-dialog header="Departmento" [(visible)]="displayModalSave" [modal]="true" [style]="{width: '45vw'}"
+    [draggable]="false" [resizable]="false">
+    <form enctype="multipart/form-data">
+        <div>
+            <fieldset>
+                <div class="form-group">
+                    <div>
+                        <input type="file" (change)="onFileSelected($event)" name="files" multiple
+                            class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="col-12 p-fluid" style="margin-top: 15px;">
+            <button (click)="uploadFiles()" pButton type="button" label="Salvar">
+                <i *ngIf="showLoading" class="pi pi-spin pi-spinner"></i>&nbsp;&nbsp;
+                <span *ngIf="showLoading">Loading...</span>
+            </button>
+        </div>
+    </form>
+</p-dialog>

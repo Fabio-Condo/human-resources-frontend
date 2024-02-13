@@ -135,12 +135,12 @@ export class EmployeesComponent implements OnInit {
   ];
 
   positionTypes = [
-    { label: 'FULL_TIME', value: 'FULL_TIME' },
-    { label: 'PART_TIME', value: 'PART_TIME' },
-    { label: 'FREELANCER', value: 'FREELANCER' },
-    { label: 'REMOTE', value: 'REMOTE' },
-    { label: 'HYBRID', value: 'HYBRID' },
-    { label: 'INTERNSHIP', value: 'INTERNSHIP' },
+    { label: 'Tempo inteiro', value: 'FULL_TIME' },
+    { label: 'Tempo parcial', value: 'PART_TIME' },
+    { label: 'Freelancer', value: 'FREELANCER' },
+    { label: 'Remoto', value: 'REMOTE' },
+    { label: 'Hibrida', value: 'HYBRID' },
+    { label: 'Estágio', value: 'INTERNSHIP' },
   ];
 
   genders = [

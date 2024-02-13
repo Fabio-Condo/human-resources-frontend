@@ -2,8 +2,9 @@
   <div class="container">
     <ul>
       <span style="display:inline; float: right;">
-        <li><a
-          routerLink="/v1/dashboard">Dashboard</a></li>
+        <li><a routerLink="/v1/dashboard">Dashboard</a></li>
+        <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/files')"><a
+            routerLink="/v1/files">Arquivos</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/employees')"><a
             routerLink="/v1/employees">Funcionários</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/employee-performance-evaluations')"><a
@@ -25,7 +26,7 @@
         <!--
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/payrolls')"><a
             routerLink="/v1/payrolls">F. Salários</a></li>
-        -->        
+        -->
         <li [class.active]="isActive('/v1/jobs')"><a routerLink="/v1/jobs">Vagas</a></li>
         <!--<li [class.active]="isActive('/v1/jobs-page')"><a routerLink="/v1/jobs-page">Vagas</a></li>-->
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/users')"><a

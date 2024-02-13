@@ -45,6 +45,8 @@ import { LocationsRoutingModule } from './locations/locations-routing.module';
 import { LocationsModule } from './locations/locations.module';
 import { DashBoardRoutingModule } from './dashboard/dashboard-routing.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { FilesRoutingModule } from './files/files-routing.module';
+import { FilesModule } from './files/files.module';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     JobsRoutingModule,
     SecurityRoutingModule,
     DashBoardRoutingModule,
+    FilesRoutingModule,
+    FilesModule,
     DepartmentModule,
     LocationsModule,
     SkillsModule,

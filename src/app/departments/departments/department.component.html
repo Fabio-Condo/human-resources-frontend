@@ -9,15 +9,19 @@
             <div class="flex">
                 <button pButton (click)="onAddNewDepartment()" pRipple label="Novo" icon="pi pi-plus"
                     class="p-button-primmary mr-2"></button>
-                <span class="p-input-icon-left">
+                <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input [(ngModel)]="filter.name" name="name" pInputText type="text" placeholder="Pesquisa"
                         (ngModelChange)="getDepartments()" />
                 </span>
+                <p-dropdown class="ml-auto" [options]="orderPage" placeholder="Sort by..." [style]="{width: '13vw'}"
+                    ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
+                <!--
                 <p-dropdown style="margin-left: 2%; margin-right: 2%;" [options]="orderPage" placeholder="Sort by..."
                     ngModel name="sort" [(ngModel)]="filter.sort" (onChange)="getDepartments()"></p-dropdown>
                 <p-dropdown style="margin-right: 2%;" [options]="sizePage" placeholder="Sort by..." ngModel
                     name="itemsPerPage" [(ngModel)]="filter.itemsPerPage" (onChange)="getDepartments()"></p-dropdown>
+                -->
             </div>
         </ng-template>
         <ng-template pTemplate="header">
