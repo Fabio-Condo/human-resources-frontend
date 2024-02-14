@@ -55,5 +55,9 @@ export class FilesService {
 
     return this.http.get<IApiResponse<Arquivo>>(`${this.arquivosUrl}`, { params });
   }
+
+  delete(filename: string): Observable<void> {
+    return this.http.delete<void>(`${this.arquivosUrl}/${filename}`, { });
+  }
   
 }

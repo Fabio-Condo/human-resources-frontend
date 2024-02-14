@@ -72,8 +72,8 @@ export class FilesComponent implements OnInit {
         console.log(event);
         this.getFiles();
       },
-      (error: HttpErrorResponse) => {
-        console.log(error);
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
         this.showLoading = false;
       }
     );
@@ -83,17 +83,17 @@ export class FilesComponent implements OnInit {
   download(filename: string): void {
     this.filesService.downloadFile(filename).subscribe((data: Blob) => {
       const blob = new Blob([data], { type: 'application/octet-stream' });
-      
+
       // Criar um link temporário para o Blob
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
-      
+
       // Definir o atributo "download" com o nome do arquivo
       link.download = filename;
-      
+
       // Simular um clique no link para iniciar o download
       link.click();
-      
+
       // Limpar o link após o download iniciar
       window.URL.revokeObjectURL(link.href);
     });
@@ -131,6 +131,22 @@ export class FilesComponent implements OnInit {
   }
 
   deleteFile(arquivo: Arquivo) {
+    console.log("File: " + arquivo.nome)
+    this.filesService.delete(arquivo.nome).subscribe(
+      () => {
+        if (this.grid.first === 0) {
+          this.getFiles();
+        } else {
+          this.grid.reset();
+        }
+        this.messageService.add({ severity: 'success', detail: 'File deleted succefully!' })
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendErrorNotification(errorResponse.error.message);
+        this.showLoading = false;
+      }
+    )
+
   }
 
   private sendErrorNotification(message: string): void {
