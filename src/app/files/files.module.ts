@@ -8,12 +8,15 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { AwsS3FilesComponent } from './aws-s3-files/aws-s3-files.component';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 
 @NgModule({
   declarations: [
-    FilesComponent
+    FilesComponent,
+    AwsS3FilesComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,7 @@ import { TooltipModule } from 'primeng/tooltip';
     DropdownModule,
     DialogModule,
     TooltipModule,
+    ProgressBarModule
   ],
 
 })

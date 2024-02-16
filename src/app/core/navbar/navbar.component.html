@@ -3,8 +3,12 @@
     <ul>
       <span style="display:inline; float: right;">
         <li><a routerLink="/v1/dashboard">Dashboard</a></li>
+        <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/s3-files')"><a
+            routerLink="/v1/s3-files">Ficheiros</a></li>
+        <!--
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/files')"><a
             routerLink="/v1/files">Arquivos</a></li>
+        -->
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/employees')"><a
             routerLink="/v1/employees">Funcionários</a></li>
         <li *ngIf="isUserLoggedIn && isSuperAdmin" [class.active]="isActive('/v1/employee-performance-evaluations')"><a
