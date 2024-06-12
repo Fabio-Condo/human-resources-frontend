@@ -160,7 +160,7 @@ export class EmployeesService {
       params = params.set('wageValueEnd', filter.wageValueEnd);
     }
 
-    return firstValueFrom(this.http.get(`${this.employeesUrl}/pdf`,{ responseType: 'blob' , params}));
+    return firstValueFrom(this.http.get(`${this.employeesUrl}/pdf`, { responseType: 'blob', params }));
   }
 
 
@@ -194,6 +194,6 @@ export class EmployeesService {
   }
 
   getTotal(): Observable<number> {
-    return this.http.get<number>(`${this.employeesUrl}/total`, { });
+    return this.http.get<number>(`${this.employeesUrl}/total`, {});
   }
 }
